@@ -1,0 +1,10 @@
+[appendix]
+== (normative) Transitional provisions
+
+Clause <<normative_references>> of this specification normatively references
+specifications under development and, hence, not yet available. For each such
+specification, therefore, WCS 1.1 Corrigendum 2 [OGC 07-065r7] *shall* apply
+until the respective specification gets adopted as an official OGC document.
+
+NOTE: This requirement is not subject to conformance testing as WCS 1.1 does not
+follow OGC's core/extension paradigm.

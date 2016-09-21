@@ -48,4 +48,6 @@ in the change request form will help the SWG adjudicate and prioritize the reque
 
 ## Usages
 1. Install [asciidoctor](http://asciidoctor.org)
-2. On command line: asciidoctor index.adoc
+2. On command line: asciidoctor -a stylesheet=./example.css index.adoc
+
+[Document rendering example](https://ksookim.github.io/mf-json)

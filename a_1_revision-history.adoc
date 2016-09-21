@@ -1,0 +1,9 @@
+[appendix]
+== Revision History
+
+[#revision_history,reftext='{table-caption} {counter:table-num}']
+[cols="2,1,4,1,3",options="header"]
+|===============================================================================
+|Date       |Release |Author                    |Paragraph modified |Description
+|2016-08-dd |r1   |Kyoung-Sook KIM, Hirotaka OGAWA |All     |Created
+|===============================================================================
