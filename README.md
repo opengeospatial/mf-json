@@ -1,6 +1,6 @@
 ![OGC Logo](http://portal.opengeospatial.org/files/?artifact_id=11976&format=gif "OGC Logo")
 
-# Moving Features JSON Encodings - First Draft
+# Moving Features JSON Encodings 
 
 This draft proposes a JSON encoding representation of movement of geographic features specified by OGC Moving Features ([OGC 14 083r2](http://docs.opengeospatial.org/is/14-083r2/14-083r2.html) and [OGC 14 084r2](http://docs.opengeospatial.org/is/14-084r2/14-084r2.html)).
 A moving feature can be express as a dynamic geomtry whose location continouly changes over time. Also it can contain dynamic non-spatial attributes of features whose value varies with time. 
@@ -45,3 +45,7 @@ For more general comments (that don't include actual text changes to the specifi
 
 Complex changes and feature requests must go throught the [change request](http://portal.opengeospatial.org/public_ogc/change_request.php) process. The details entered
 in the change request form will help the SWG adjudicate and prioritize the request.
+
+## Usages
+1. Install [asciidoctor](http://asciidoctor.org)
+2. On command line: asciidoctor index.adoc
