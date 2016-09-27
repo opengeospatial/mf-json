@@ -157,7 +157,13 @@ Document language:      English<br></p>
 <li><a href="#_body">7.1.6. Body</a></li>
 </ul>
 </li>
-<li><a href="#resources">7.2. Resources</a></li>
+<li><a href="#resources">7.2. Resources</a>
+<ul class="sectlevel3">
+<li><a href="#_resource_types">7.2.1. Resource Types</a></li>
+<li><a href="#_resource_path_patterns">7.2.2. Resource Path Patterns</a></li>
+<li><a href="#_resource_path_examples">7.2.3. Resource Path Examples</a></li>
+</ul>
+</li>
 <li><a href="#queries">7.3. Access Interfaces</a>
 <ul class="sectlevel3">
 <li><a href="#_query_option_code_select_code">7.3.1. Query Option <code>$select</code></a></li>
@@ -294,7 +300,7 @@ Moving Feature JSON encoding basically refers to the abstract data model of movi
 </div>
 <div id="conceptual_model" class="imageblock">
 <div class="content">
-<img src="images/moving-features.png" alt="Conceptual Moving Feature" width="60%">
+<img src="./images/moving-features.png" alt="Conceptual Moving Feature" width="60%">
 </div>
 <div class="title">Figure 1. Conceptual Model of a Moving Feature: Foliation, Prism, Leaf, and Trajectory</div>
 </div>
@@ -695,7 +701,7 @@ MF-JSON defines several types of JSON objects to represent movements about movin
 </div>
 <div id="mf_overview" class="imageblock">
 <div class="content">
-<img src="images/mf-overview.png" alt="Overview" width="60%">
+<img src="./images/mf-overview.png" alt="Overview" width="60%">
 </div>
 <div class="title">Figure 2. JSON Objects in the Moving Features JSON format</div>
 </div>
@@ -975,17 +981,17 @@ Here, there are two expressions for an interpolation instance as follows:</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Discrete</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><span class="image"><img src="images/discrete.png" alt="Discrete" width="60%"></span></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><span class="image"><img src="./images/discrete.png" alt="Discrete" width="60%"></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>There is no interpolation position between two successive positions.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Stepwise</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><span class="image"><img src="images/stepwise.png" alt="Stepwise" width="60%"></span></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><span class="image"><img src="./images/stepwise.png" alt="Stepwise" width="60%"></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>The interpolation position between two successive positions equals to the first position.</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Linear</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock"><span class="image"><img src="images/linear.png" alt="Linear" width="60%"></span></p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock"><span class="image"><img src="./images/linear.png" alt="Linear" width="60%"></span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>The new position is found from the linear interpolation formula with the two successive positions. Default</em></p></td>
 </tr>
 </tbody>
@@ -1283,7 +1289,7 @@ The server replies with a response message consisting of the protocol version fo
 </div>
 <div id="protocol" class="imageblock">
 <div class="content">
-<img src="images/protocol.png" alt="Protocol" width="70%">
+<img src="./images/protocol.png" alt="Protocol" width="70%">
 </div>
 <div class="title">Figure 3. Client/Server Communication based on RESTful API</div>
 </div>
@@ -1463,10 +1469,12 @@ The Host request-header field specifies the Internet host and port number of the
 </div>
 <div id="resource_type" class="imageblock">
 <div class="content">
-<img src="images/restresources.png" alt="REST Resources" width="90%">
+<img src="./images/restresources.png" alt="REST Resources" width="90%">
 </div>
 <div class="title">Figure 4. REST Resource Types of a Moving Feature Service</div>
 </div>
+<div class="sect3">
+<h4 id="_resource_types">7.2.1. Resource Types</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1478,9 +1486,9 @@ The Host request-header field specifies the Internet host and port number of the
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 30%;">
+<col style="width: 30%;">
 <col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 10%;">
 </colgroup>
 <thead>
 <tr>
@@ -1495,28 +1503,28 @@ The Host request-header field specifies the Internet host and port number of the
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">It is the unique and system-generated identifier. Clients cannot edit its value.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">temporalGeometry</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A JSON object representing a temporal geometry.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A resource representing a temporal geometry.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object&lt;TemporalGeometry&gt; (Null is not allowed)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">temporalProperties</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A JSON array containing temporal properties or a JSON null value.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A resource containing temporal properties.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;TemporalProperty&gt; or Null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">properties</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A JSON Object containing static properties as key-value pairs or a JSON null value.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A resource containing static properties as name-value pairs.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;Property&gt; or Null</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
@@ -1533,9 +1541,9 @@ The Host request-header field specifies the Internet host and port number of the
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 30%;">
+<col style="width: 30%;">
 <col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 10%;">
 </colgroup>
 <thead>
 <tr>
@@ -1550,36 +1558,36 @@ The Host request-header field specifies the Internet host and port number of the
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Its value is one of "MovingPoint", "MovingLineString", "MovingPolygon", "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CharacterString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">coordinates</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A collection of lists of sampled coordinates to represent spatial movements or a JSON null value (for collection).</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One-to-many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A collection of geometries represented by lists of sampled positions.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;Geometry&gt; or Null (only for collection types)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one (mandatory for simple types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">datetimes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A collection of datetimes when the coordinates are sampled or a JSON null value (for collection).</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One-to-many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A collection of datetimes when the coordinates are sampled.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;DateTime&gt; or Null (only for collection types)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one (mandatory for simple types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">members</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A Navigation property to address temporal-geometry elements of the collection types such as "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection". A simple case is a JSON null value.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address temporal-geometry elements of the collection types such as "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TemporalGeometry or Null (for simple types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-many</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES/NO</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">interpolations</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A Navigation property to address the interpolation information.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object/Array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One-to-many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address the interpolation methods.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-many (mandatory for simple types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
 </tr>
 </tbody>
@@ -1595,9 +1603,9 @@ The Host request-header field specifies the Internet host and port number of the
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 30%;">
+<col style="width: 30%;">
 <col style="width: 20%;">
-<col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 10%;">
 </colgroup>
 <thead>
 <tr>
@@ -1612,36 +1620,36 @@ The Host request-header field specifies the Internet host and port number of the
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A name of dynamic attribute of feature.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CharacterString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES (but, no duplication within a moving feature.)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">uom</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A symbol or URI to address the unit of measurement.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON String or Null</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">values</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A collection of sampled values to represent dynamic changes of feature attribute.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One-to-many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;Number/String&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">datetimes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A collection of datetimes when the values are sampled.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One-to-many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;DateTime&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">interpolations</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A Navigation property to address the interpolation information.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object/Array</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">One-to-many</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address the interpolation methods.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One-to-many (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
 </tr>
 </tbody>
@@ -1649,7 +1657,7 @@ The Host request-header field specifies the Internet host and port number of the
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Property Class</strong>: It is a type for accessing the static properties of moving features. A Property resource is optional to be implemeted in a moving-feature service. The minimum properties for the implementation are defined by:</p>
+<p><strong>Interpolation Class</strong>: It is a type for accessing an interpolation method. An Interpolation resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
 </li>
 </ul>
 </div>
@@ -1657,9 +1665,61 @@ The Host request-header field specifies the Internet host and port number of the
 <colgroup>
 <col style="width: 10%;">
 <col style="width: 30%;">
+<col style="width: 30%;">
 <col style="width: 20%;">
+<col style="width: 10%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Data type</th>
+<th class="tableblock halign-left valign-top">Multiplicity and use</th>
+<th class="tableblock halign-left valign-top">Editable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is the unique and system-generated identifier.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A name of interpolation.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">formulas</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A collection of formulas to estimate arbitrary values at time.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>For pre-defined methods such as Discrete, Stepwise, and Linear, the client cannot edit the names of methods.
+This practice assumes that the name of a user-defined interpolation formula is automatically assigned by the service when moving features are inserted.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Property Class</strong>: It is a type for accessing the static properties of moving features. A Property resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 30%;">
+<col style="width: 30%;">
 <col style="width: 20%;">
-<col style="width: 20%;">
+<col style="width: 10%;">
 </colgroup>
 <thead>
 <tr>
@@ -1674,33 +1734,19 @@ The Host request-header field specifies the Internet host and port number of the
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A name of feature attribute.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CharacterString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES (but, no duplication within a moving feature.)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">value</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A value of feature attribute.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>Each resource in the service has at least one URL.
-The recommendation pattern of resource URL paths to address a collection of MovingFeature entities, a MovingFeature entity, and its properties will be formed as:</p>
-</div>
-<div class="listingblock">
-<div class="title">URL patterns without a FeatureLayer resource</div>
-<div class="content">
-<pre class="CodeRay highlight"><code> - SERVICE_ROOT/MovingFeatures
- - SERVICE_ROOT/MovingFeatures(@id)
- - SERVICE_ROOT/MovingFeatures(@id)/temporalGeometry
- - SERVICE_ROOT/MovingFeatures(@id)/temporalProperties
- - SERVICE_ROOT/MovingFeatures(@id)/properties</code></pre>
-</div>
-</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1708,7 +1754,8 @@ The recommendation pattern of resource URL paths to address a collection of Movi
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-@id is the identifier of moving feature; therefore, the server needs to return its identifier when a client inserts a new feature or provide a way to access each identifier.
+JSON Any = False / Null / True / Object / Array / Number / String<br>
+A resource whose type is specifically named, such as Geometry, DateTime, TemporalGeometry, TemporalProperty, Property, and so on, is a JSON Object.
 </td>
 </tr>
 </table>
@@ -1716,7 +1763,7 @@ The recommendation pattern of resource URL paths to address a collection of Movi
 <div class="ulist">
 <ul>
 <li>
-<p><strong>FeatureLayer Class</strong>: It is a collection of moving features to manage data in a distinct (physical or logical) space; however, it is an optional resource and can be replaced by an Application-dependent feature.
+<p><strong>FeatureLayer Class</strong>: It is a resource type for a collection of moving features to manage data in a distinct (physical or logical) space; however, it is an optional resource and can be replaced by an Application-dependent feature.
 When the service considers the implementation, the following properties may be required:</p>
 </li>
 </ul>
@@ -1762,7 +1809,7 @@ When the service considers the implementation, the following properties may be r
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">features</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A Navigation property to address each moving feature</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address each moving feature</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MovingFeature</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-many</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
@@ -1781,6 +1828,35 @@ The moving-feature service needs to manage the connectivity of features' movemen
 </tr>
 </table>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_resource_path_patterns">7.2.2. Resource Path Patterns</h4>
+<div class="paragraph">
+<p>Each resource in the service has at least one URL.
+The recommendation pattern of resource URL paths to address a collection of MovingFeature entities, a MovingFeature entity, and its properties will be formed as:</p>
+</div>
+<div class="listingblock">
+<div class="title">URL patterns without a FeatureLayer resource</div>
+<div class="content">
+<pre class="CodeRay highlight"><code> - SERVICE_ROOT/MovingFeatures
+ - SERVICE_ROOT/MovingFeatures(@id)
+ - SERVICE_ROOT/MovingFeatures(@id)/temporalGeometry
+ - SERVICE_ROOT/MovingFeatures(@id)/temporalProperties
+ - SERVICE_ROOT/MovingFeatures(@id)/properties</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+@id is the identifier of moving feature; therefore, the server needs to return its identifier when a client inserts a new feature or provide a way to access each identifier.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>If the server implements the FeatureLayer resource, it is recommend that the path pattern of resource be formed as:</p>
 </div>
@@ -1795,12 +1871,21 @@ The moving-feature service needs to manage the connectivity of features' movemen
  - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)/properties</code></pre>
 </div>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre>[NOTE]
-$NAME is replaced by a string of layer name.</pre>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+ $NAME is replaced by a string of layer name.
+</td>
+</tr>
+</table>
 </div>
 </div>
+<div class="sect3">
+<h4 id="_resource_path_examples">7.2.3. Resource Path Examples</h4>
 <div class="paragraph">
 <p>A client can make a request against the resources via URL using various HTTP methods: POST, GET, PUT/PATCH, and DELTE.</p>
 </div>
@@ -1891,6 +1976,7 @@ PUT  SERVICE_ROOT/MovingFeatures('mf0001')/properties#name='title'   HTTP1.1
 204 NO CONTENT
 </pre>
 </div>
+</div>
 <div class="sect2">
 <h3 id="queries">7.3. Access Interfaces</h3>
 <div class="paragraph">
@@ -1913,7 +1999,7 @@ An example of these operations is to calculate a distance of the nearest approac
 </ul>
 </div>
 <div class="paragraph">
-<p>OGC Moving Feature Access provides the implementation specification as a common design to support moving feature data into a database, data service, or application using various programming languages or protocols (e.g., SQL, Java, and HTTP).
+<p>OGC Moving Feature Access provides the implementation specification as a common design to support moving feature data into a database, data service, or an application using various programming languages or protocols (e.g., SQL, Java, and HTTP).
 This sub-clause exemplifies how to realize those operations using RESTful API based on a resource URL, followed by the query option parts.
 The client is able to retrieve a resource representation using a GET request.</p>
 </div>
@@ -1937,16 +2023,36 @@ Interface <strong>GeoSpatial</strong> and <strong>Temporal</strong> are addition
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-The figure omits the information of parameters and return types not to bring misunderstanding the OGC Moving Feature Access specification and ambiguous type definition. The detail specification of each operation is described by the OGC Moving Feature Access. The GeoSpatial and Temporal interfaces (gray color) are not related to the specification.
+The figure omits the information of parameters and return types of Type A, B, and C operations not to bring misunderstanding the OGC Moving Feature Access specification and ambiguous type definition. The detail specification of each operation in Type A, B, and C (gray color boxes) is described by the OGC Moving Feature Access.
+The other interfaces (yellow color boxes) are not related to the OGC Moving Feature Access specification.
 </td>
 </tr>
 </table>
 </div>
 <div id="interfaces" class="imageblock">
 <div class="content">
-<img src="images/restinterfaces.png" alt="Moving Feature Interfaces" width="75%">
+<img src="./images/restinterfaces.png" alt="Moving Feature Interfaces" width="100%">
 </div>
 <div class="title">Figure 5. Interface Types of RESTful API</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Harvest Interface</strong>: Retrieval of feature attribute<br></p>
+</li>
+<li>
+<p><strong>Relation Interface</strong>: Retrieval of feature attribute<br></p>
+</li>
+<li>
+<p><strong>Analysis Interface</strong>: Retrieval of feature attribute<br></p>
+</li>
+<li>
+<p><strong>GeoSpatial Interface</strong>: Retrieval of feature attribute<br></p>
+</li>
+<li>
+<p><strong>Temporal Interface</strong>: Retrieval of feature attribute<br></p>
+</li>
+</ul>
 </div>
 <div class="sect3">
 <h4 id="_query_option_code_select_code">7.3.1. Query Option <code>$select</code></h4>
@@ -2354,7 +2460,7 @@ For example,</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-21 11:15:43 EDT
+Last updated 2016-09-22 00:32:11 JST
 </div>
 </div>
 <script type="text/x-mathjax-config">

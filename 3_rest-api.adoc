@@ -93,50 +93,86 @@ A request URI is constructed with the resource path for a corresponding resource
 .REST Resource Types of a Moving Feature Service
 image::restresources.png[REST Resources, pdfwidth=100%, width=90%]
 
+==== Resource Types
+
 - *MovingFeature Class*: It is a type for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is *mandatory* to be implemented with the following properties in a moving-feature service:
 
-[width="99%", cols="1,3,2, 2, 2", options="header"]
+[width="99%", cols="1,3,3,2,1", options="header"]
 |===========================================================
 |Name |Description | Data type | Multiplicity and use | Editable
-|@id	| It is the unique and system-generated identifier. Clients cannot edit its value. | Any | One (mandatory) | NO
-|temporalGeometry | A JSON object representing a temporal geometry. | JSON Object |  One (mandatory) |YES
-|temporalProperties | A JSON array containing temporal properties or a JSON null value. |  JSON Array | Zero-to-many | YES
-|properties | A JSON Object containing static properties as key-value pairs or a JSON null value. | JSON Object | Zero-to-one | YES
+|@id	| It is the unique and system-generated identifier. Clients cannot edit its value. | JSON Any | One (mandatory) | NO
+|temporalGeometry | A resource representing a temporal geometry. | JSON Object<TemporalGeometry> (Null is not allowed)|  One (mandatory) |YES
+|temporalProperties | A resource containing temporal properties. | JSON Array<TemporalProperty> or Null | Zero-to-one | YES
+|properties | A resource containing static properties as name-value pairs. | JSON Array<Property> or Null | Zero-to-one | YES
 |===========================================================
 
 - *TemporalGeometry Class*: It is a type for accessing the temporal geometry of moving features. A TemporalGeometry resource is *mandatory* to be implemented with the following properties in a moving-feature service:
 
-[width="99%", cols="1,3,2, 2, 2", options="header"]
+[width="99%", cols="1,3,3,2,1", options="header"]
 |===========================================================
 |Name |Description | Data type | Multiplicity and use | Editable
-|type	|Its value is one of "MovingPoint", "MovingLineString", "MovingPolygon", "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection". | CharacterString | One (mandatory) | NO
-|coordinates | A collection of lists of sampled coordinates to represent spatial movements or a JSON null value (for collection). | JSON Array |  One-to-many | YES
-|datetimes | A collection of datetimes when the coordinates are sampled or a JSON null value (for collection). |  JSON Array | One-to-many | YES
-|members | A Navigation property to address temporal-geometry elements of the collection types such as "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection". A simple case is a JSON null value. |  JSON Array | Zero-to-many | YES/NO
-|interpolations| A Navigation property to address the interpolation information. | JSON Object/Array | One-to-many | NO
+|type	|Its value is one of "MovingPoint", "MovingLineString", "MovingPolygon", "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection". | JSON String | One (mandatory) | NO
+|coordinates | A collection of geometries represented by lists of sampled positions. | JSON Array<Geometry> or Null (only for collection types)|  Zero-to-one (mandatory for simple types) | YES
+|datetimes | A collection of datetimes when the coordinates are sampled. |  JSON Array<DateTime> or Null (only for collection types)| Zero-to-one (mandatory for simple types) | YES
+|members | A navigation property to address temporal-geometry elements of the collection types such as "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection". |  TemporalGeometry or Null (for simple types)| Zero-to-many | YES/NO
+|interpolations| A navigation property to address the interpolation methods. | JSON Object | Zero-to-many (mandatory for simple types) | NO
 |===========================================================
 
 - *TemporalProperty Class*: It is a type for accessing the temporal properties of moving features. A TemporalProperty resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:
 
-[width="99%", cols="1,3,2, 2, 2", options="header"]
+[width="99%", cols="1,3,3,2,1", options="header"]
 |===========================================================
 |Name |Description | Data type | Multiplicity and use | Editable
-|name	| A name of dynamic attribute of feature. | CharacterString | One (mandatory) | YES (but, no duplication within a moving feature.)
-|uom | A symbol or URI to address the unit of measurement. | URI | Zero-to-one | YES
-|values | A collection of sampled values to represent dynamic changes of feature attribute. | Any | One-to-many | YES
-|datetimes | A collection of datetimes when the values are sampled. | JSON Array | One-to-many | YES
-|interpolations| A Navigation property to address the interpolation information. | JSON Object/Array | One-to-many | NO
+|name	| A name of dynamic attribute of feature. | JSON String | One (mandatory) | YES (but, no duplication within a moving feature.)
+|uom | A symbol or URI to address the unit of measurement. | JSON String or Null | Zero-to-one | YES
+|values | A collection of sampled values to represent dynamic changes of feature attribute. | JSON Array<Number/String> | One (mandatory) | YES
+|datetimes | A collection of datetimes when the values are sampled. | JSON Array<DateTime> | One (mandatory) | YES
+|interpolations| A navigation property to address the interpolation methods. | JSON Object | One-to-many (mandatory) | NO
 |===========================================================
 
-- *Property Class*: It is a type for accessing the static properties of moving features. A Property resource is optional to be implemeted in a moving-feature service. The minimum properties for the implementation are defined by:
+- *Interpolation Class*: It is a type for accessing an interpolation method. An Interpolation resource is *mandatory* to be implemented with the following properties in a moving-feature service:
 
-[width="99%", cols="1,3,2, 2, 2", options="header"]
+[width="99%", cols="1,3,3,2,1", options="header"]
 |===========================================================
 |Name |Description | Data type | Multiplicity and use | Editable
-|name	| A name of feature attribute. | CharacterString | One (mandatory) | YES (but, no duplication within a moving feature.)
-|value | A value of feature attribute. | Any | One (mandatory) | YES
+|@id	| It is the unique and system-generated identifier. | JSON Any | One (mandatory) | NO
+|name	| A name of interpolation. | JSON String | One (mandatory) | NO
+|formulas | A collection of formulas to estimate arbitrary values at time. | JSON Any | Zero-to-one | YES
 |===========================================================
 
+For pre-defined methods such as Discrete, Stepwise, and Linear, the client cannot edit the names of methods.
+This practice assumes that the name of a user-defined interpolation formula is automatically assigned by the service when moving features are inserted.
+
+- *Property Class*: It is a type for accessing the static properties of moving features. A Property resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:
+
+[width="99%", cols="1,3,3,2,1", options="header"]
+|===========================================================
+|Name |Description | Data type | Multiplicity and use | Editable
+|name	| A name of feature attribute. | JSON String | One (mandatory) | YES (but, no duplication within a moving feature.)
+|value | A value of feature attribute. | JSON Any | One (mandatory) | YES
+|===========================================================
+
+[NOTE]
+JSON Any = False / Null / True / Object / Array / Number / String +
+A resource whose type is specifically named, such as Geometry, DateTime, TemporalGeometry, TemporalProperty, Property, and so on, is a JSON Object.
+
+
+- *FeatureLayer Class*: It is a resource type for a collection of moving features to manage data in a distinct (physical or logical) space; however, it is an optional resource and can be replaced by an Application-dependent feature.
+When the service considers the implementation, the following properties may be required:
+
+[width="99%", cols="1,3,2, 1, 3", options="header"]
+|===========================================================
+|Name		|Description | Data type | Multiplicity and use | Editable
+|name	|A property indicates the label of a FeatureLayer resource | CharacterString  | One (mandatory) | YES (but, no duplication.)
+|description | A property describes a short comment about the layer | CharacterString | One (mandatory) |YES
+|updateFrequency | A property provides the connectivity of movement within a time interval (second) | Integer | One (mandatory) | YES (but, the previous data are not affected.)
+|features | A navigation property to address each moving feature | MovingFeature | Zero-to-many | YES
+|===========================================================
+
+[NOTE]
+The moving-feature service needs to manage the connectivity of features' movement by using the updateFrequency interval.
+
+==== Resource Path Patterns
 
 Each resource in the service has at least one URL.
 The recommendation pattern of resource URL paths to address a collection of MovingFeature entities, a MovingFeature entity, and its properties will be formed as:
@@ -151,21 +187,6 @@ The recommendation pattern of resource URL paths to address a collection of Movi
 [NOTE]
 @id is the identifier of moving feature; therefore, the server needs to return its identifier when a client inserts a new feature or provide a way to access each identifier.
 
-- *FeatureLayer Class*: It is a collection of moving features to manage data in a distinct (physical or logical) space; however, it is an optional resource and can be replaced by an Application-dependent feature.
-When the service considers the implementation, the following properties may be required:
-
-[width="99%", cols="1,3,2, 1, 3", options="header"]
-|===========================================================
-|Name		|Description | Data type | Multiplicity and use | Editable
-|name	|A property indicates the label of a FeatureLayer resource | CharacterString  | One (mandatory) | YES (but, no duplication.)
-|description | A property describes a short comment about the layer | CharacterString | One (mandatory) |YES
-|updateFrequency | A property provides the connectivity of movement within a time interval (second) | Integer | One (mandatory) | YES (but, the previous data are not affected.)
-|features | A Navigation property to address each moving feature | MovingFeature | Zero-to-many | YES
-|===========================================================
-
-[NOTE]
-The moving-feature service needs to manage the connectivity of features' movement by using the updateFrequency interval.
-
 
 If the server implements the FeatureLayer resource, it is recommend that the path pattern of resource be formed as:
 [source]
@@ -177,8 +198,10 @@ If the server implements the FeatureLayer resource, it is recommend that the pat
  - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)/temporalProperties
  - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)/properties
 
- [NOTE]
+[NOTE]
  $NAME is replaced by a string of layer name.
+
+==== Resource Path Examples
 
 A client can make a request against the resources via URL using various HTTP methods: POST, GET, PUT/PATCH, and DELTE.
 
@@ -297,7 +320,7 @@ An example of these operations is “intersection” between a geometry object a
 - Type C: Operations between two trajectory objects +
 An example of these operations is to calculate a distance of the nearest approach of a trajectory to another trajectory. The case studies are distance between a criminal agent and a police agent for predicting crime patterns or distance between soccer players for making proper tactics.
 
-OGC Moving Feature Access provides the implementation specification as a common design to support moving feature data into a database, data service, or application using various programming languages or protocols (e.g., SQL, Java, and HTTP).
+OGC Moving Feature Access provides the implementation specification as a common design to support moving feature data into a database, data service, or an application using various programming languages or protocols (e.g., SQL, Java, and HTTP).
 This sub-clause exemplifies how to realize those operations using RESTful API based on a resource URL, followed by the query option parts.
 The client is able to retrieve a resource representation using a GET request.
 
@@ -311,11 +334,22 @@ In order to make a simple rule of the query options, the abstract operations of 
 Interface *GeoSpatial* and *Temporal* are additionally defined to access derived properties from a TemporalGeometry and TemporalProperty resource.
 
 [WARNING]
-The figure omits the information of parameters and return types not to bring misunderstanding the OGC Moving Feature Access specification and ambiguous type definition. The detail specification of each operation is described by the OGC Moving Feature Access. The GeoSpatial and Temporal interfaces (gray color) are not related to the specification.
+The figure omits the information of parameters and return types of Type A, B, and C operations not to bring misunderstanding the OGC Moving Feature Access specification and ambiguous type definition. The detail specification of each operation in Type A, B, and C (gray color boxes) is described by the OGC Moving Feature Access.
+The other interfaces (yellow color boxes) are not related to the OGC Moving Feature Access specification.
 
 [#interfaces,reftext='{figure-caption} {counter:figure-num}']
 .Interface Types of RESTful API
-image::restinterfaces.png[Moving Feature Interfaces, pdfwidth=100%, width=75%]
+image::restinterfaces.png[Moving Feature Interfaces, pdfwidth=100%, width=100%]
+
+- *Harvest Interface*: Retrieval of feature attribute +
+
+- *Relation Interface*: Retrieval of feature attribute +
+
+- *Analysis Interface*: Retrieval of feature attribute +
+
+- *GeoSpatial Interface*: Retrieval of feature attribute +
+
+- *Temporal Interface*: Retrieval of feature attribute +
 
 
 ==== Query Option `$select`
