@@ -159,7 +159,7 @@ Document language:      English<br></p>
 </li>
 <li><a href="#resources">7.2. Resources</a>
 <ul class="sectlevel3">
-<li><a href="#_resource_types">7.2.1. Resource Types</a></li>
+<li><a href="#_resource_classes">7.2.1. Resource Classes</a></li>
 <li><a href="#_resource_path_patterns">7.2.2. Resource Path Patterns</a></li>
 <li><a href="#_resource_path_examples">7.2.3. Resource Path Examples</a></li>
 </ul>
@@ -1465,20 +1465,20 @@ The Host request-header field specifies the Internet host and port number of the
 <div class="sect2">
 <h3 id="resources">7.2. Resources</h3>
 <div class="paragraph">
-<p>A request URI is constructed with the resource path for a corresponding resource item. Resources are the fundamental elements of the RESTful API. This API is designed by the resource types and their relationships as shown in <a href="#resource_type">Figure 4</a>.</p>
+<p>A request URI is constructed with a resource path for a corresponding resource item. Resources are the fundamental elements of the RESTful API. This API is designed by the resource classes and their relationships as shown in <a href="#resource_type">Figure 4</a>.</p>
 </div>
 <div id="resource_type" class="imageblock">
 <div class="content">
 <img src="./images/restresources.png" alt="REST Resources" width="90%">
 </div>
-<div class="title">Figure 4. REST Resource Types of a Moving Feature Service</div>
+<div class="title">Figure 4. REST Resource Classes of a Moving Feature Service</div>
 </div>
 <div class="sect3">
-<h4 id="_resource_types">7.2.1. Resource Types</h4>
+<h4 id="_resource_classes">7.2.1. Resource Classes</h4>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>MovingFeature Class</strong>: It is a type for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
+<p><strong>MovingFeature Class</strong>: It is for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
 </li>
 </ul>
 </div>
@@ -1503,7 +1503,7 @@ The Host request-header field specifies the Internet host and port number of the
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">@id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">It is the unique and system-generated identifier. Clients cannot edit its value.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Any</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Any (Null is not allowed)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
 </tr>
@@ -1533,7 +1533,7 @@ The Host request-header field specifies the Internet host and port number of the
 <div class="ulist">
 <ul>
 <li>
-<p><strong>TemporalGeometry Class</strong>: It is a type for accessing the temporal geometry of moving features. A TemporalGeometry resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
+<p><strong>TemporalGeometry Class</strong>: It is for accessing the temporal geometry of moving features. A TemporalGeometry resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
 </li>
 </ul>
 </div>
@@ -1565,37 +1565,37 @@ The Host request-header field specifies the Internet host and port number of the
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">coordinates</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A collection of geometries represented by lists of sampled positions.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;Geometry&gt; or Null (only for collection types)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;Geometry&gt; (or Null for collection types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one (mandatory for simple types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">datetimes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A collection of datetimes when the coordinates are sampled.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;DateTime&gt; or Null (only for collection types)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;DateTime&gt; (or Null for collection types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one (mandatory for simple types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">members</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address temporal-geometry elements of the collection types such as "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TemporalGeometry or Null (for simple types)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TemporalGeometry (or Null for simple types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-many</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">YES/NO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">interpolations</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address the interpolation methods.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interpolation (or Null for collection types)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-many (mandatory for simple types)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 </tbody>
 </table>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>TemporalProperty Class</strong>: It is a type for accessing the temporal properties of moving features. A TemporalProperty resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:</p>
+<p><strong>TemporalProperty Class</strong>: It is for accessing the temporal properties of moving features. A TemporalProperty resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:</p>
 </li>
 </ul>
 </div>
@@ -1648,16 +1648,16 @@ The Host request-header field specifies the Internet host and port number of the
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">interpolations</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address the interpolation methods.</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interpolation</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One-to-many (mandatory)</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 </tbody>
 </table>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Interpolation Class</strong>: It is a type for accessing an interpolation method. An Interpolation resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
+<p><strong>Interpolation Class</strong>: It is for accessing an interpolation method. An Interpolation resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
 </li>
 </ul>
 </div>
@@ -1687,7 +1687,7 @@ The Host request-header field specifies the Internet host and port number of the
 <td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">@name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A name of interpolation.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JSON String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
@@ -1698,7 +1698,7 @@ The Host request-header field specifies the Internet host and port number of the
 <td class="tableblock halign-left valign-top"><p class="tableblock">A collection of formulas to estimate arbitrary values at time.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JSON Any</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
 </tr>
 </tbody>
 </table>
@@ -1709,7 +1709,7 @@ This practice assumes that the name of a user-defined interpolation formula is a
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Property Class</strong>: It is a type for accessing the static properties of moving features. A Property resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:</p>
+<p><strong>Property Class</strong>: It is for accessing the static properties of moving features. A Property resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:</p>
 </li>
 </ul>
 </div>
@@ -1755,7 +1755,7 @@ This practice assumes that the name of a user-defined interpolation formula is a
 </td>
 <td class="content">
 JSON Any = False / Null / True / Object / Array / Number / String<br>
-A resource whose type is specifically named, such as Geometry, DateTime, TemporalGeometry, TemporalProperty, Property, and so on, is a JSON Object.
+A resource instance whose type is specified, such as Geometry, DateTime, TemporalGeometry, TemporalProperty, Property, and so on, is a JSON Object.
 </td>
 </tr>
 </table>
@@ -1763,7 +1763,7 @@ A resource whose type is specifically named, such as Geometry, DateTime, Tempora
 <div class="ulist">
 <ul>
 <li>
-<p><strong>FeatureLayer Class</strong>: It is a resource type for a collection of moving features to manage data in a distinct (physical or logical) space; however, it is an optional resource and can be replaced by an Application-dependent feature.
+<p><strong>FeatureLayer Class</strong>: It is for a collection of moving features to manage data in a distinct (physical or logical) space; however, it is an optional resource and can be replaced by an Application-dependent feature.
 When the service considers the implementation, the following properties may be required:</p>
 </li>
 </ul>
@@ -1789,14 +1789,14 @@ When the service considers the implementation, the following properties may be r
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A property indicates the label of a FeatureLayer resource</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CharacterString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES (but, no duplication.)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A property describes a short comment about the layer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CharacterString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
@@ -2001,7 +2001,7 @@ An example of these operations is to calculate a distance of the nearest approac
 <div class="paragraph">
 <p>OGC Moving Feature Access provides the implementation specification as a common design to support moving feature data into a database, data service, or an application using various programming languages or protocols (e.g., SQL, Java, and HTTP).
 This sub-clause exemplifies how to realize those operations using RESTful API based on a resource URL, followed by the query option parts.
-The client is able to retrieve a resource representation using a GET request.</p>
+The client is able to retrieve a resource representation using a HTTP GET request.</p>
 </div>
 <div class="exampleblock">
 <div class="content">
@@ -2011,8 +2011,9 @@ The client is able to retrieve a resource representation using a GET request.</p
 </div>
 </div>
 <div class="paragraph">
-<p>The OGC SensorThings API shows an adaptation of OData protocols [OData-Part1] and extension of geospatial query functions.
-This document basically follows the usage of query options ($filter, $count, $orderby, $skip, $top, and $select) to be considered in OGC SensorThings API, especially, the <code>$select</code>, <code>$filter</code>, and <code>$search</code> options are applied to moving feature operations.
+<p>This document basically follows the usage of query options ($filter, $count, $orderby, $skip, $top, $select, and $search) to be considered in OGC SensorThings API standard [OGC 15-078r6].
+The OGC SensorThings API shows a good example of adaptation in OData protocols [OData-Part1] and extension of geospatial query functions.
+This practice employs the <code>$select</code>, <code>$filter</code>, and <code>$search</code> options in moving feature operations.
 In order to make a simple rule of the query options, the abstract operations of moving features as identified in [OGC 16-120r1] are re-categorized into three interfaces as shown in <a href="#interfaces">Figure 5</a>: <strong>Harvest</strong>, <strong>Relation</strong>, and <strong>Analysis</strong>.
 Interface <strong>GeoSpatial</strong> and <strong>Temporal</strong> are additionally defined to access derived properties from a TemporalGeometry and TemporalProperty resource.</p>
 </div>
@@ -2038,31 +2039,55 @@ The other interfaces (yellow color boxes) are not related to the OGC Moving Feat
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Harvest Interface</strong>: Retrieval of feature attribute<br></p>
+<p><strong>Harvest Interface</strong>: This interface mostly implements the Type A operations to retrieve feature attributes. The practice uses <code>geometryAtTime</code> and <code>timeAtGeometry</code> to extend the geometry types not only 0-dimensional geometry objects but also 1- and 2-dimensional geometry objects instead of <em>pointAtTime</em> and <em>timeAtPoint</em> in the specification.
+In addition, operation <code>stBoundedBy</code> is added to return the boundary object containing moving features in a spatiotemporal domain.</p>
 </li>
 <li>
-<p><strong>Relation Interface</strong>: Retrieval of feature attribute<br></p>
+<p><strong>Relation Interface</strong>: This interface implements the topological relationship operations in Type B (between trajectory and geometry objects) and Type C (between two trajectory objects), such as <em>disjoint</em> and <em>intersects</em>. The practice changes the name of <em>distanceWithin</em> to <code>within</code> to exclude the distance parameter. Moreover, new relations of <code>enters</code>, <code>leaves</code>, and <code>passes</code> are defined to clarify its temporal order of topological changes of relation from <em>intersects</em>.<br>
+<a href="#relations">Figure 6</a> shows the examples of each relation.<br></p>
+</li>
+</ul>
+</div>
+<div id="relations" class="imageblock">
+<div class="content">
+<img src="./images/mfrelations.png" alt="Moving Feature Relations" width="50%">
+</div>
+<div class="title">Figure 6. Specialized Relations of Moving Features from <em>intersects</em> (\(t_i &lt; t_j &lt; t_k\) for time instant \(t_i, t_j, t_k\))</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Analysis Interface</strong>: This interface implements the analysis operations in Type B (between trajectory and geometry objects) and Type C (between two trajectory objects), such as <em>nearestApproach</em> and <em>difference</em>. The operations return a new object as a computation result. For example, operation "nearestApproach" with geometric object calculates the distance between a trajectory and the geometry or between two trajectories, and returns a distance in time. This practice additionally defines two more operations: <code>buffer</code> and <code>convoy</code>.
+The <code>buffer</code> operation returns a temporal geometry (simple or collection) covering all points within a given distance from a target temporal geometry. The <code>convoy</code> operation returns a temporal geometry (simple or collection) covering a group of moving features such that these features are consecutively closed each other during a given time period.
+<a href="#analysis">Figure 7</a> shows the result examples of <code>buffer</code> and <code>convoy</code> operations.<br></p>
+</li>
+</ul>
+</div>
+<div id="analysis" class="imageblock">
+<div class="content">
+<img src="./images/mfanalysis.png" alt="Moving Feature Analysis" width="60%">
+</div>
+<div class="title">Figure 7. Examples of Analysis Operations</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>GeoSpatial Interface</strong>: This interface provides function <code>dimension</code> that returns the maximum dimension of leaf geometry objects and <code>boundary</code> that returns the closure of the combinatorial geospatial boundary of all leaves (a foliation) for a temporal geometry resource.</p>
 </li>
 <li>
-<p><strong>Analysis Interface</strong>: Retrieval of feature attribute<br></p>
-</li>
-<li>
-<p><strong>GeoSpatial Interface</strong>: Retrieval of feature attribute<br></p>
-</li>
-<li>
-<p><strong>Temporal Interface</strong>: Retrieval of feature attribute<br></p>
+<p><strong>Temporal Interface</strong>: This interface provides function <code>snapshot</code> and <code>slice</code> that returns a sub-object of a temporal geometry/property at a given time instant and time period, respectively. The <code>boundedBy</code> function returns the temporal range covering its prism.</p>
 </li>
 </ul>
 </div>
 <div class="sect3">
 <h4 id="_query_option_code_select_code">7.3.1. Query Option <code>$select</code></h4>
 <div class="paragraph">
-<p>The <code>$select</code> query option requests the service to harvest the properties or return a value derived from properties. The operations of Type A in [OGC 16-120r1] (Harvest Interface) will be realized with the <code>$select</code> query option corresponding to a MovingFeature or FeatureLayer resource.</p>
+<p>The <code>$select</code> query option requests the service to harvest the properties or return a value derived from properties. The operations of Harvest, GeoSpatial, Temporal will be realized with the <code>$select</code> query option corresponding to a MovingFeature or FeatureLayer resource.</p>
 </div>
 <pre class="http">
-// <b>Example Request/Response: pointAtTime of a moving feature with ID.</b>
+// <b>Example Request/Response: geometryAtTime of a moving feature with ID.</b>
 // <i>.Request</i>
-GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=pointAtTime(2008-02-04T00:00:00Z)  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=geometryAtTime(2008-02-04T00:00:00Z)  HTTP1.1
 
 // <i>.Response</i>
 200 OK
@@ -2075,9 +2100,9 @@ Content_Type: application/geo+json
 }
 </pre>
 <pre class="http">
-// <b>Example Request/Response: pointAtTime of all moving features.</b>
+// <b>Example Request/Response: geometryAtTime of all moving features.</b>
 // <i>.Request</i>
-GET  SERVICE_ROOT/MovingFeatures?$select=pointAtTime(2008-02-04T00:00:00Z)  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures?$select=geometryAtTime(2008-02-04T00:00:00Z)  HTTP1.1
 
 // <i>.Response</i>
 200 OK
@@ -2100,9 +2125,9 @@ Content_Type: application/geo+json
 ]
 </pre>
 <pre class="http">
-// <b>Example Request/Response: timeAtPoint of a moving feature with ID.</b>
+// <b>Example Request/Response: timeAtGeometry of a moving feature with ID.</b>
 // <i>.Request</i>
-GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=timeAtPoint(POINT(116.4%2039.8))  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=timeAtGeometry(POINT(116.4%2039.8))  HTTP1.1
 
 // <i>.Response</i>
 200 OK
@@ -2112,9 +2137,9 @@ Content_Type: application/geo+json
 }
 </pre>
 <pre class="http">
-// <b>Example Request/Response: timeAtPoint of all moving features.</b>
+// <b>Example Request/Response: timeAtGeometry of all moving features.</b>
 // <i>.Request</i>
-GET  SERVICE_ROOT/MovingFeatures?$select=timeAtPoint(POINT(116.4%2039.8))  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures?$select=timeAtGeometry(POINT(116.4%2039.8))  HTTP1.1
 
 // <i>.Response</i>
 200 OK
@@ -2254,7 +2279,7 @@ Content_Type: application/geo+json
 <div class="sect3">
 <h4 id="_query_option_code_filter_code">7.3.2. Query Option <code>$filter</code></h4>
 <div class="paragraph">
-<p>The <code>$filter</code> query option allows clients to filter a collection of moving features that are addressed by a request URL. It can be applied to a specific moving feature and a collection of moving features. The <code>$filter</code> option is evaluated for each moving features in the collection, and returns the features where the expression of the Relation interface is <code>true</code> in the response. For a specific feature, it returns <code>true</code> or <code>false</code>. Some operations of Type B (between trajectroy and geometry objects) and C (between two trajectory objects) in [OGC 16-120r1] that are related to topological relationships such as Disjoint, Equals, and Intersects will be realized with the <code>$filter</code> query option.</p>
+<p>The <code>$filter</code> query option allows clients to filter a collection of moving features that are addressed by a request URL. It can be applied to a specific moving feature and a collection of moving features. The <code>$filter</code> option is evaluated for each moving features in the collection, and returns the features where the expression of the Relation interface is <code>true</code> in the response. For a specific feature, it returns <code>true</code> or <code>false</code>. The Relation interface will be realized with the <code>$filter</code> query option.</p>
 </div>
 <pre class="http">
 // <b>Example Request/Response: disjoint returns true or false corresponding to a moving feature.</b>
@@ -2308,8 +2333,7 @@ The operations of Type C between two trajectory objects provide spatiotemporal r
 <div class="sect3">
 <h4 id="_query_option_code_search_code">7.3.3. Query Option <code>$search</code></h4>
 <div class="paragraph">
-<p>The <code>$search</code> query option allows clients to analyze moving features or a specific moving feature, and returns a new object as a computation result.
-For example, operation "nearestApproach" with geometric object calculates the distance between a trajectory and the geometry or between two trajectories, and returns a distance in time.</p>
+<p>The <code>$search</code> query option allows clients to analyze moving features or a specific moving feature, and returns a new object as a computation result. The Analysis interface will be realized with the <code>$search</code> query option.</p>
 </div>
 <pre class="http">
 // <b>Example Request/Response: search the nearest approach point with ID.</b>
@@ -2431,8 +2455,8 @@ For example,</p>
 <col style="width: 18.1818%;">
 <col style="width: 9.0909%;">
 <col style="width: 36.3636%;">
-<col style="width: 9.0909%;">
-<col style="width: 27.2728%;">
+<col style="width: 27.2727%;">
+<col style="width: 9.091%;">
 </colgroup>
 <thead>
 <tr>
@@ -2445,11 +2469,18 @@ For example,</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2016-08-dd</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2016-08-29</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">r1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Kyoung-Sook KIM, Hirotaka OGAWA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Created</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2016-09-27</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kyoung-Sook KIM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RESTful APIs: Resource types and interfaces</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Revised</p></td>
 </tr>
 </tbody>
 </table>

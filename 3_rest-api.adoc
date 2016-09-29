@@ -87,38 +87,38 @@ The entity-body (if any) sent with an request or response is in the JSON format.
 
 [#resources,reftext='7.2']
 === Resources
-A request URI is constructed with the resource path for a corresponding resource item. Resources are the fundamental elements of the RESTful API. This API is designed by the resource types and their relationships as shown in <<resource_type>>.
+A request URI is constructed with a resource path for a corresponding resource item. Resources are the fundamental elements of the RESTful API. This API is designed by the resource classes and their relationships as shown in <<resource_type>>.
 
 [#resource_type,reftext='{figure-caption} {counter:figure-num}']
-.REST Resource Types of a Moving Feature Service
+.REST Resource Classes of a Moving Feature Service
 image::restresources.png[REST Resources, pdfwidth=100%, width=90%]
 
-==== Resource Types
+==== Resource Classes
 
-- *MovingFeature Class*: It is a type for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is *mandatory* to be implemented with the following properties in a moving-feature service:
+- *MovingFeature Class*: It is for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is *mandatory* to be implemented with the following properties in a moving-feature service:
 
 [width="99%", cols="1,3,3,2,1", options="header"]
 |===========================================================
 |Name |Description | Data type | Multiplicity and use | Editable
-|@id	| It is the unique and system-generated identifier. Clients cannot edit its value. | JSON Any | One (mandatory) | NO
+|@id	| It is the unique and system-generated identifier. Clients cannot edit its value. | JSON Any (Null is not allowed)| One (mandatory) | NO
 |temporalGeometry | A resource representing a temporal geometry. | JSON Object<TemporalGeometry> (Null is not allowed)|  One (mandatory) |YES
 |temporalProperties | A resource containing temporal properties. | JSON Array<TemporalProperty> or Null | Zero-to-one | YES
 |properties | A resource containing static properties as name-value pairs. | JSON Array<Property> or Null | Zero-to-one | YES
 |===========================================================
 
-- *TemporalGeometry Class*: It is a type for accessing the temporal geometry of moving features. A TemporalGeometry resource is *mandatory* to be implemented with the following properties in a moving-feature service:
+- *TemporalGeometry Class*: It is for accessing the temporal geometry of moving features. A TemporalGeometry resource is *mandatory* to be implemented with the following properties in a moving-feature service:
 
 [width="99%", cols="1,3,3,2,1", options="header"]
 |===========================================================
 |Name |Description | Data type | Multiplicity and use | Editable
 |type	|Its value is one of "MovingPoint", "MovingLineString", "MovingPolygon", "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection". | JSON String | One (mandatory) | NO
-|coordinates | A collection of geometries represented by lists of sampled positions. | JSON Array<Geometry> or Null (only for collection types)|  Zero-to-one (mandatory for simple types) | YES
-|datetimes | A collection of datetimes when the coordinates are sampled. |  JSON Array<DateTime> or Null (only for collection types)| Zero-to-one (mandatory for simple types) | YES
-|members | A navigation property to address temporal-geometry elements of the collection types such as "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection". |  TemporalGeometry or Null (for simple types)| Zero-to-many | YES/NO
-|interpolations| A navigation property to address the interpolation methods. | JSON Object | Zero-to-many (mandatory for simple types) | NO
+|coordinates | A collection of geometries represented by lists of sampled positions. | JSON Array<Geometry> (or Null for collection types)|  Zero-to-one (mandatory for simple types) | YES
+|datetimes | A collection of datetimes when the coordinates are sampled. |  JSON Array<DateTime> (or Null for collection types)| Zero-to-one (mandatory for simple types) | YES
+|members | A navigation property to address temporal-geometry elements of the collection types such as "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection". |  TemporalGeometry (or Null for simple types)| Zero-to-many | NO
+|interpolations| A navigation property to address the interpolation methods. | Interpolation (or Null for collection types)| Zero-to-many (mandatory for simple types) | YES
 |===========================================================
 
-- *TemporalProperty Class*: It is a type for accessing the temporal properties of moving features. A TemporalProperty resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:
+- *TemporalProperty Class*: It is for accessing the temporal properties of moving features. A TemporalProperty resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:
 
 [width="99%", cols="1,3,3,2,1", options="header"]
 |===========================================================
@@ -127,23 +127,23 @@ image::restresources.png[REST Resources, pdfwidth=100%, width=90%]
 |uom | A symbol or URI to address the unit of measurement. | JSON String or Null | Zero-to-one | YES
 |values | A collection of sampled values to represent dynamic changes of feature attribute. | JSON Array<Number/String> | One (mandatory) | YES
 |datetimes | A collection of datetimes when the values are sampled. | JSON Array<DateTime> | One (mandatory) | YES
-|interpolations| A navigation property to address the interpolation methods. | JSON Object | One-to-many (mandatory) | NO
+|interpolations| A navigation property to address the interpolation methods. | Interpolation | One-to-many (mandatory) | YES
 |===========================================================
 
-- *Interpolation Class*: It is a type for accessing an interpolation method. An Interpolation resource is *mandatory* to be implemented with the following properties in a moving-feature service:
+- *Interpolation Class*: It is for accessing an interpolation method. An Interpolation resource is *mandatory* to be implemented with the following properties in a moving-feature service:
 
 [width="99%", cols="1,3,3,2,1", options="header"]
 |===========================================================
 |Name |Description | Data type | Multiplicity and use | Editable
 |@id	| It is the unique and system-generated identifier. | JSON Any | One (mandatory) | NO
-|name	| A name of interpolation. | JSON String | One (mandatory) | NO
-|formulas | A collection of formulas to estimate arbitrary values at time. | JSON Any | Zero-to-one | YES
+|@name	| A name of interpolation. | JSON String | One (mandatory) | NO
+|formulas | A collection of formulas to estimate arbitrary values at time. | JSON Any | Zero-to-one | NO
 |===========================================================
 
 For pre-defined methods such as Discrete, Stepwise, and Linear, the client cannot edit the names of methods.
 This practice assumes that the name of a user-defined interpolation formula is automatically assigned by the service when moving features are inserted.
 
-- *Property Class*: It is a type for accessing the static properties of moving features. A Property resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:
+- *Property Class*: It is for accessing the static properties of moving features. A Property resource is optional to be implemented in a moving-feature service. The minimum properties for the implementation are defined by:
 
 [width="99%", cols="1,3,3,2,1", options="header"]
 |===========================================================
@@ -154,17 +154,16 @@ This practice assumes that the name of a user-defined interpolation formula is a
 
 [NOTE]
 JSON Any = False / Null / True / Object / Array / Number / String +
-A resource whose type is specifically named, such as Geometry, DateTime, TemporalGeometry, TemporalProperty, Property, and so on, is a JSON Object.
+A resource instance whose type is specified, such as Geometry, DateTime, TemporalGeometry, TemporalProperty, Property, and so on, is a JSON Object.
 
-
-- *FeatureLayer Class*: It is a resource type for a collection of moving features to manage data in a distinct (physical or logical) space; however, it is an optional resource and can be replaced by an Application-dependent feature.
+- *FeatureLayer Class*: It is for a collection of moving features to manage data in a distinct (physical or logical) space; however, it is an optional resource and can be replaced by an Application-dependent feature.
 When the service considers the implementation, the following properties may be required:
 
 [width="99%", cols="1,3,2, 1, 3", options="header"]
 |===========================================================
 |Name		|Description | Data type | Multiplicity and use | Editable
-|name	|A property indicates the label of a FeatureLayer resource | CharacterString  | One (mandatory) | YES (but, no duplication.)
-|description | A property describes a short comment about the layer | CharacterString | One (mandatory) |YES
+|name	|A property indicates the label of a FeatureLayer resource | JSON String  | One (mandatory) | YES (but, no duplication.)
+|description | A property describes a short comment about the layer | JSON String | One (mandatory) |YES
 |updateFrequency | A property provides the connectivity of movement within a time interval (second) | Integer | One (mandatory) | YES (but, the previous data are not affected.)
 |features | A navigation property to address each moving feature | MovingFeature | Zero-to-many | YES
 |===========================================================
@@ -322,14 +321,15 @@ An example of these operations is to calculate a distance of the nearest approac
 
 OGC Moving Feature Access provides the implementation specification as a common design to support moving feature data into a database, data service, or an application using various programming languages or protocols (e.g., SQL, Java, and HTTP).
 This sub-clause exemplifies how to realize those operations using RESTful API based on a resource URL, followed by the query option parts.
-The client is able to retrieve a resource representation using a GET request.
+The client is able to retrieve a resource representation using a HTTP GET request.
 
 ======
 "GET"  _SERVICE_ROOT_ "/" _RESOURCE_PATH_ "?" _QUERY_OPTIONS_  "HTTP/1.1"
 ======
 
-The OGC SensorThings API shows an adaptation of OData protocols [OData-Part1] and extension of geospatial query functions.
-This document basically follows the usage of query options ($filter, $count, $orderby, $skip, $top, and $select) to be considered in OGC SensorThings API, especially, the `$select`, `$filter`, and `$search` options are applied to moving feature operations.
+This document basically follows the usage of query options ($filter, $count, $orderby, $skip, $top, $select, and $search) to be considered in OGC SensorThings API standard [OGC 15-078r6].
+The OGC SensorThings API shows a good example of adaptation in OData protocols [OData-Part1] and extension of geospatial query functions.
+This practice employs the `$select`, `$filter`, and `$search` options in moving feature operations.
 In order to make a simple rule of the query options, the abstract operations of moving features as identified in [OGC 16-120r1] are re-categorized into three interfaces as shown in <<interfaces>>: *Harvest*, *Relation*, and *Analysis*.
 Interface *GeoSpatial* and *Temporal* are additionally defined to access derived properties from a TemporalGeometry and TemporalProperty resource.
 
@@ -341,26 +341,37 @@ The other interfaces (yellow color boxes) are not related to the OGC Moving Feat
 .Interface Types of RESTful API
 image::restinterfaces.png[Moving Feature Interfaces, pdfwidth=100%, width=100%]
 
-- *Harvest Interface*: Retrieval of feature attribute +
+- *Harvest Interface*: This interface mostly implements the Type A operations to retrieve feature attributes. The practice uses `geometryAtTime` and `timeAtGeometry` to extend the geometry types not only 0-dimensional geometry objects but also 1- and 2-dimensional geometry objects instead of _pointAtTime_ and _timeAtPoint_ in the specification.
+In addition, operation `stBoundedBy` is added to return the boundary object containing moving features in a spatiotemporal domain.
 
-- *Relation Interface*: Retrieval of feature attribute +
+- *Relation Interface*: This interface implements the topological relationship operations in Type B (between trajectory and geometry objects) and Type C (between two trajectory objects), such as _disjoint_ and _intersects_. The practice changes the name of _distanceWithin_ to `within` to exclude the distance parameter. Moreover, new relations of `enters`, `leaves`, and `passes` are defined to clarify its temporal order of topological changes of relation from _intersects_. +
+<<relations>> shows the examples of each relation. +
 
-- *Analysis Interface*: Retrieval of feature attribute +
+[#relations,reftext='{figure-caption} {counter:figure-num}']
+.Specialized Relations of Moving Features from _intersects_ (latexmath:[t_i < t_j < t_k] for time instant latexmath:[t_i, t_j, t_k])
+image::mfrelations.png[Moving Feature Relations, pdfwidth=80%, width=50%]
 
-- *GeoSpatial Interface*: Retrieval of feature attribute +
+- *Analysis Interface*: This interface implements the analysis operations in Type B (between trajectory and geometry objects) and Type C (between two trajectory objects), such as _nearestApproach_ and _difference_. The operations return a new object as a computation result. For example, operation "nearestApproach" with geometric object calculates the distance between a trajectory and the geometry or between two trajectories, and returns a distance in time. This practice additionally defines two more operations: `buffer` and `convoy`.
+The `buffer` operation returns a temporal geometry (simple or collection) covering all points within a given distance from a target temporal geometry. The `convoy` operation returns a temporal geometry (simple or collection) covering a group of moving features such that these features are consecutively closed each other during a given time period.
+<<analysis>> shows the result examples of `buffer` and `convoy` operations. +
 
-- *Temporal Interface*: Retrieval of feature attribute +
+[#analysis,reftext='{figure-caption} {counter:figure-num}']
+.Examples of Analysis Operations
+image::mfanalysis.png[Moving Feature Analysis, pdfwidth=100%, width=60%]
 
+- *GeoSpatial Interface*: This interface provides function `dimension` that returns the maximum dimension of leaf geometry objects and `boundary` that returns the closure of the combinatorial geospatial boundary of all leaves (a foliation) for a temporal geometry resource.
+
+- *Temporal Interface*: This interface provides function `snapshot` and `slice` that returns a sub-object of a temporal geometry/property at a given time instant and time period, respectively. The `boundedBy` function returns the temporal range covering its prism.
 
 ==== Query Option `$select`
 
-The `$select` query option requests the service to harvest the properties or return a value derived from properties. The operations of Type A in [OGC 16-120r1] (Harvest Interface) will be realized with the `$select` query option corresponding to a MovingFeature or FeatureLayer resource.
+The `$select` query option requests the service to harvest the properties or return a value derived from properties. The operations of Harvest, GeoSpatial, Temporal will be realized with the `$select` query option corresponding to a MovingFeature or FeatureLayer resource.
 
 ++++
 <pre class="http">
-// <b>Example Request/Response: pointAtTime of a moving feature with ID.</b>
+// <b>Example Request/Response: geometryAtTime of a moving feature with ID.</b>
 // <i>.Request</i>
-GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=pointAtTime(2008-02-04T00:00:00Z)  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=geometryAtTime(2008-02-04T00:00:00Z)  HTTP1.1
 
 // <i>.Response</i>
 200 OK
@@ -376,9 +387,9 @@ Content_Type: application/geo+json
 
 ++++
 <pre class="http">
-// <b>Example Request/Response: pointAtTime of all moving features.</b>
+// <b>Example Request/Response: geometryAtTime of all moving features.</b>
 // <i>.Request</i>
-GET  SERVICE_ROOT/MovingFeatures?$select=pointAtTime(2008-02-04T00:00:00Z)  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures?$select=geometryAtTime(2008-02-04T00:00:00Z)  HTTP1.1
 
 // <i>.Response</i>
 200 OK
@@ -404,9 +415,9 @@ Content_Type: application/geo+json
 
 ++++
 <pre class="http">
-// <b>Example Request/Response: timeAtPoint of a moving feature with ID.</b>
+// <b>Example Request/Response: timeAtGeometry of a moving feature with ID.</b>
 // <i>.Request</i>
-GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=timeAtPoint(POINT(116.4%2039.8))  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=timeAtGeometry(POINT(116.4%2039.8))  HTTP1.1
 
 // <i>.Response</i>
 200 OK
@@ -419,9 +430,9 @@ Content_Type: application/geo+json
 
 ++++
 <pre class="http">
-// <b>Example Request/Response: timeAtPoint of all moving features.</b>
+// <b>Example Request/Response: timeAtGeometry of all moving features.</b>
 // <i>.Request</i>
-GET  SERVICE_ROOT/MovingFeatures?$select=timeAtPoint(POINT(116.4%2039.8))  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures?$select=timeAtGeometry(POINT(116.4%2039.8))  HTTP1.1
 
 // <i>.Response</i>
 200 OK
@@ -580,7 +591,7 @@ Content_Type: application/geo+json
 
 ==== Query Option `$filter`
 
-The `$filter` query option allows clients to filter a collection of moving features that are addressed by a request URL. It can be applied to a specific moving feature and a collection of moving features. The `$filter` option is evaluated for each moving features in the collection, and returns the features where the expression of the Relation interface is `true` in the response. For a specific feature, it returns `true` or `false`. Some operations of Type B (between trajectroy and geometry objects) and C (between two trajectory objects) in [OGC 16-120r1] that are related to topological relationships such as Disjoint, Equals, and Intersects will be realized with the `$filter` query option.
+The `$filter` query option allows clients to filter a collection of moving features that are addressed by a request URL. It can be applied to a specific moving feature and a collection of moving features. The `$filter` option is evaluated for each moving features in the collection, and returns the features where the expression of the Relation interface is `true` in the response. For a specific feature, it returns `true` or `false`. The Relation interface will be realized with the `$filter` query option.
 
 
 ++++
@@ -633,8 +644,7 @@ The operations of Type C between two trajectory objects provide spatiotemporal r
 
 ==== Query Option `$search`
 
-The `$search` query option allows clients to analyze moving features or a specific moving feature, and returns a new object as a computation result.
-For example, operation "nearestApproach" with geometric object calculates the distance between a trajectory and the geometry or between two trajectories, and returns a distance in time.
+The `$search` query option allows clients to analyze moving features or a specific moving feature, and returns a new object as a computation result. The Analysis interface will be realized with the `$search` query option.
 
 ++++
 <pre class="http">
