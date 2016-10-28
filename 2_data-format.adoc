@@ -207,9 +207,9 @@ The new position is differently derived by each method. For the predefine method
 [width="99%", cols="1,^5,3", options="header"]
 |=========
 | Types | Descriptions | _Comments_
-| Discrete | image:discrete.png[Discrete, pdfwidth=70%, width=80%] | _There is no interpolation position between two successive positions._
-| Stepwise | image:stepwise.png[Stepwise,  pdfwidth=70%, width=80%] | _The interpolation position between two successive positions equals to the first position._
-| Linear   | image:linear.png[Linear,  pdfwidth=70%, width=80%] | _The new position is found from the linear interpolation formula with the two successive positions. Default_
+| Discrete | image:discrete.png[Discrete, pdfwidth=60%, width=70%] | _There is no interpolation position between two successive positions._
+| Stepwise | image:stepwise.png[Stepwise,  pdfwidth=60%, width=70%] | _The interpolation position between two successive positions equals to the first position._
+| Linear   | image:linear.png[Linear,  pdfwidth=60%, width=70%] | _The new position is found from the linear interpolation formula with the two successive positions. Default_
 |=========
 
 +
