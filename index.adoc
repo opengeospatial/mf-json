@@ -1,46 +1,49 @@
 :doctype: book
-:linkcss: 
+:doctitle: OGC® Moving Features Encoding Extension - JSON
+:authors: Kyoungsook Kim; Hirotaka OGAWA;
+:notitle:
+:linkcss:
 :lang: en
-:toc:
-:toclevels: 3
-:toc-position: left
-:toc-placement!:
-:toc-title: Contents
 :appendix-caption: Annex
 :requirement-caption: Requirement
 :icons: font
 :source-highlighter: coderay
 :numbered!:
-:math: 
+:math:
 :imagesdir: ./images
 :stem: latexmath
+:toc:
+:toclevels: 2
+:toc-position: left
+:toc-placement!:
+:toc-title: Contents
 
-[id="ogcname"]
-Open Geospatial Consortium +
-[id="ogcheading"]
+
+[.title, id="ogcname"]
+Open Geospatial Consortium
+[abstract, id="ogcheading"]
 Publication Date: 2016-mm-dd +
 Approval Date: 2016-mm-dd +
 Submission Date: 2016-mm-dd +
 Reference number of this Document: OGC 16-((NNNrN)) +
 Reference URL for this document: http://www.opengis.net/doc/((DOC-TYPE))/((xxx))/((m.n)) +
-Version: 0.2 +
-Category: OGC® Best Practice +
+Version: 0.3 +
+Category: OGC Best Practice +
 Editor: Kyoung-Sook Kim
 
-[title]
-= OGC Moving Features Encoding Extension - JSON
+= {doctitle}
 
-Copyright© 2016 Open Geospatial Consortium. +
+Copyright&#169; 2016 Open Geospatial Consortium. +
 To obtain additional rights of use, visit http://www.opengeospatial.org/legal/ +
 
 *Warning*
 
-This document is not an OGC Standard. This document is distributed for review and comment. 
+This document is not an OGC Standard. This document is distributed for review and comment.
 This document is subject to change without notice and may not be referred to as an OGC Standard.
 
 Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation.
 
-Document type:          OGC® Best Practice +
+Document type:          OGC&#174; Best Practice +
 Document subtype:       if applicable +
 Document stage:         Draft +
 Document language:      English +

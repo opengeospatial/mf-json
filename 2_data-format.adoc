@@ -13,7 +13,7 @@ MF-JSON defines several types of JSON objects to represent movements about movin
 
 [#mf_overview,reftext='{figure-caption} {counter:figure-num}']
 .JSON Objects in the Moving Features JSON format
-image::mf-overview.png[Overview, pdfwidth=100%, width=60%]
+image::mf-overview.png[Overview, pdfwidth=55%, width=55%, align="center"]
 
 
 [source, javascript]
@@ -126,7 +126,7 @@ A collection of moving features may contain a `"stBoundedBy"` field for the spat
 
 ==== Temporal Geometry Types
 
-The movement of a moving feature is represented as a JSON object where the type members value shall be one of the following strings: "_MovingPoint_", "_MovingLineString_", "_MovingPolygon_", "_MultiMovingPoint_", "_MultiMovingLineString_", "_MultiMovingPolygon_", or "_MovingGeometryCollection_".
+The movement of a moving feature is represented as a JSON object where the type members value shall be one of the following strings: "_MovingPoint_", "_MovingLineString_", "_MovingPolygon_", "_MultiMovingPoint_", "_MultiMovingLineString_", "_MultiMovingPolygon_", or "_MovingGeometryCollection_".
 It is modeled as function [red]_temporalGeometry: timePosition -> Geometry_ (http://geojson.org/geojson-spec.html#point[Point], http://geojson.org/geojson-spec.html#linestring[LineString], http://geojson.org/geojson-spec.html#polygon[Polygon],
 http://geojson.org/geojson-spec.html#multipoint[MultiPoint], http://geojson.org/geojson-spec.html#multilinestring[MultiLineString], http://geojson.org/geojson-spec.html#multipolygon#polygon[MultiPolygon], or http://geojson.org/geojson-spec.html#geometry-collection[GeometryCollection]).
 
@@ -204,12 +204,12 @@ The new position is differently derived by each method. For the predefine method
 
 +
 
-[width="99%", cols="1,^4,4", options="header"]
+[width="99%", cols="1,^5,3", options="header"]
 |=========
 | Types | Descriptions | _Comments_
-| Discrete | image:discrete.png[Discrete, width=60%] | _There is no interpolation position between two successive positions._
-| Stepwise | image:stepwise.png[Stepwise, width=60%] | _The interpolation position between two successive positions equals to the first position._
-| Linear   | image:linear.png[Linear, width=60%] | _The new position is found from the linear interpolation formula with the two successive positions. Default_
+| Discrete | image:discrete.png[Discrete, pdfwidth=70%, width=80%] | _There is no interpolation position between two successive positions._
+| Stepwise | image:stepwise.png[Stepwise,  pdfwidth=70%, width=80%] | _The interpolation position between two successive positions equals to the first position._
+| Linear   | image:linear.png[Linear,  pdfwidth=70%, width=80%] | _The new position is found from the linear interpolation formula with the two successive positions. Default_
 |=========
 
 +
@@ -225,18 +225,27 @@ The new position is differently derived by each method. For the predefine method
 +
 
 .[Interpolation Formulas]
-A temporal geometry may have a several interpolation formulas within its temporal domain. An element of interpolation formulas is represented by field `"coefficients"` and `"period"`. The new position at a given time position is derived from a `"coefficients"` instance as a multidimensional array of *polynomial interpolation formulas* of latexmath:[(x, y, z)] coordinates during a particular time period. If the time position does not belong to any time period of the elements of formula, there is no interpolation position at that time. The order of each formula array SHALL follow latexmath:[x] (longitude), latexmath:[y] (latitude), latexmath:[z] (altitude) order. The number of elements in each formula during a particular time period is the same. The time periods between any two elements of formulas only allows empty or 0-dimensional intersection.
-
-+
+A temporal geometry may have a several interpolation formulas within its temporal domain. An element of interpolation formulas is represented by field `"coefficients"` and `"period"`.
+The new position at a given time position is derived from a `"coefficients"` instance as a multidimensional array of *polynomial interpolation formulas* of latexmath:[(x, y, z)] coordinates during a particular time period.
+If the time position does not belong to any time period of the elements of formula, there is no interpolation position at that time.
+The order of each formula array SHALL follow latexmath:[x] (longitude), latexmath:[y] (latitude), latexmath:[z] (altitude) order.
+The number of elements in each formula during a particular time period is the same.
+The time periods between any two elements of formulas only allows empty or 0-dimensional intersection.
+In order to compute a value of each axis of coordinates at an arbitrary time position formatted by a character string of [ISO 8601],
+this practice converts the time position to a signed 64-bit integer(long) value to represent milliseconds.
 
 [latexmath]
 +++++++++++
 \[x(t) = a_{n-1}t^{n-1} + a_{n-2}t^{n-2} + ... + a_0t^0\]
++++++++++++
+[latexmath]
++++++++++++
 \[y(t) = b_{n-1}t^{n-1} + b_{n-2}t^{n-2} + ... + b_0t^0\]
++++++++++++
+[latexmath]
++++++++++++
 \[z(t) = c_{n-1}t^{n-1} + c_{n-2}t^{n-2} + ... + c_0t^0\]
 +++++++++++
-
-+
 
 [source, javascript]
 {
@@ -263,7 +272,6 @@ A temporal geometry may have a several interpolation formulas within its tempora
    ]
 }
 
-+
 
 [source, javascript]
 {
@@ -396,7 +404,7 @@ The temporal boundary is a temporal period of `"begin"` and `"end"` expressed in
 
 MF-JSON uses annotations to represent foreign members which are not described in this document and their semantics are dependent on a domain or application specific requirement.
 It is the reason why MF-JSON defines their elements by extending the foreign member of GeoJSON.
-On the name/value pair of a foreign member, the name always starts with the at sign (@), such as `"@id"`, `"@context"`, and so on.
+On the name/value pair of a foreign member, the name always starts with the at sign (@), such as `"@id"`, `"@context"`, and so on.
 
 === Discussions
 [NOTE]

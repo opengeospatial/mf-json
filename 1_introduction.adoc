@@ -7,7 +7,7 @@ Moving Feature JSON encoding basically refers to the abstract data model of movi
 
 [#conceptual_model,reftext='{figure-caption} {counter:figure-num}']
 .Conceptual Model of a Moving Feature: Foliation, Prism, Leaf, and Trajectory
-image::moving-features.png[Conceptual Moving Feature, pdfwidth=100%, width=60%]
+image::moving-features.png[Conceptual Moving Feature, pdfwidth=60%, width=60%, align="center"]
 
 In this illustration, a 2D rectangle moves and rotates. Each representation of the rectangle at a given time is a leaf.
 The path traced by each corner point of the rectangle (and by each of its other points) is a trajectory.

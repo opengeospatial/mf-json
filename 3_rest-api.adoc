@@ -14,7 +14,7 @@ The server replies with a response message consisting of the protocol version fo
 
 [#protocol,reftext='{figure-caption} {counter:figure-num}']
 .Client/Server Communication based on RESTful API
-image::protocol.png[Protocol, pdfwidth=100%, width=70%]
+image::protocol.png[Protocol,  pdfwidth=70%, width=70%, align="center"]
 
 ==== Verb
 
@@ -91,7 +91,7 @@ A request URI is constructed with a resource path for a corresponding resource i
 
 [#resource_type,reftext='{figure-caption} {counter:figure-num}']
 .REST Resource Classes of a Moving Feature Service
-image::restresources.png[REST Resources, pdfwidth=100%, width=90%]
+image::restresources.png[REST Resources,  pdfwidth=100%, width=90%, align="center"]
 
 ==== Resource Classes
 
@@ -174,7 +174,7 @@ The moving-feature service needs to manage the connectivity of features' movemen
 ==== Resource Path Patterns
 
 Each resource in the service has at least one URL.
-The recommendation pattern of resource URL paths to address a collection of MovingFeature entities, a MovingFeature entity, and its properties will be formed as:
+The recommendation pattern of resource URL paths to address a collection of MovingFeature entities, a MovingFeature entity, and its properties may be formed as:
 [source]
 .URL patterns without a FeatureLayer resource
  - SERVICE_ROOT/MovingFeatures
@@ -204,10 +204,10 @@ If the server implements the FeatureLayer resource, it is recommend that the pat
 
 A client can make a request against the resources via URL using various HTTP methods: POST, GET, PUT/PATCH, and DELTE.
 
-++++
-<pre class="http">
-// <b>Example Request/Response: Insert a moving feature data into the service.</b>
-// <i>.Request</i>
+[source]
+.Example: To insert a moving feature data into the service.
+----
+>>> Request
 POST  SERVICE_ROOT/MovingFeatures   HTTP1.1
 Content-Type: application/geo+json
 {
@@ -228,20 +228,18 @@ Content-Type: application/geo+json
       ]
 }
 
-// <i>.Response</i>
+<<< Response
 201 CREATED
 {
     “@id”: “mf0001",
     “@created”: "2012-07-14T22:01:01" // Application-defined property
 }
-</pre>
-++++
+----
 
-
-++++
-<pre class="http">
-// <b>Example Request/Response: Add new trajectory data into a stored moving feature.</b>
-// <i>.Request</i>
+[source]
+.Example: To add new trajectory data into a stored moving feature.
+----
+>>> Request
 POST  SERVICE_ROOT/MovingFeatures('mf0001')/temporalGeometry   HTTP1.1
 Content-Type: application/geo+json
 {
@@ -251,21 +249,20 @@ Content-Type: application/geo+json
     "interpolation": "Linear", // an interpolation method
 }
 
-// <i>.Response</i>
+<<< Response
 201 CREATED
 {
     “@modified”: "2012-07-14T22:01:01" // Application-defined property
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: Get the list of all the temporal property information.</b>
-// <i>.Request</i>
+[source]
+.Example: To get the list of all the temporal property information.
+----
+>>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties   HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 [{
      "name":"length",
@@ -274,16 +271,15 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties   HTTP1.1
      "datetimes" : ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
      "interpolations": "Stepwise"
 }]
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: Retrieve a temporal property information whose name(key) is 'dose'.</b>
-// <i>.Request</i>
+[source]
+.Example: To retrieve a temporal property information whose name(key) is 'dose'.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('dose')   HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 {
      "name":"dose",
@@ -292,20 +288,17 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('dose')   HTTP1.1
      "datetimes" : ["2011-07-14T22:32:00Z", "2011-07-15T10:15:00Z"],
      "interpolations": "Discrete"
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: Modify the name of a property.</b>
-// <i>.Request</i>
+[source]
+.Example: To modify the name of a property.
+----
+>>> Request
 PUT  SERVICE_ROOT/MovingFeatures('mf0001')/properties#name='title'   HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 204 NO CONTENT
-</pre>
-++++
-
+----
 
 [#queries,reftext='7.3']
 === Access Interfaces
@@ -324,7 +317,7 @@ This sub-clause exemplifies how to realize those operations using RESTful API ba
 The client is able to retrieve a resource representation using a HTTP GET request.
 
 ======
-"GET"  _SERVICE_ROOT_ "/" _RESOURCE_PATH_ "?" _QUERY_OPTIONS_  "HTTP/1.1"
+*"GET"  _SERVICE_ROOT_ "/" _RESOURCE_PATH_ "?" _QUERY_OPTIONS_  "HTTP/1.1"*
 ======
 
 This document basically follows the usage of query options ($filter, $count, $orderby, $skip, $top, $select, and $search) to be considered in OGC SensorThings API standard [OGC 15-078r6].
@@ -339,41 +332,43 @@ The other interfaces (yellow color boxes) are not related to the OGC Moving Feat
 
 [#interfaces,reftext='{figure-caption} {counter:figure-num}']
 .Interface Types of RESTful API
-image::restinterfaces.png[Moving Feature Interfaces, pdfwidth=100%, width=100%]
+image::restinterfaces.png[Moving Feature Interfaces, pdfwidth=100%, width=100%, align="center"]
 
 - *Harvest Interface*: This interface mostly implements the Type A operations to retrieve feature attributes. The practice uses `geometryAtTime` and `timeAtGeometry` to extend the geometry types not only 0-dimensional geometry objects but also 1- and 2-dimensional geometry objects instead of _pointAtTime_ and _timeAtPoint_ in the specification.
-In addition, operation `stBoundedBy` is added to return the boundary object containing moving features in a spatiotemporal domain.
+In addition, operation `stBoundedBy` is added to return the boundary object containing moving features in a spatiotemporal domain. This interface is realized with <<select_query>>.
 
 - *Relation Interface*: This interface implements the topological relationship operations in Type B (between trajectory and geometry objects) and Type C (between two trajectory objects), such as _disjoint_ and _intersects_. The practice changes the name of _distanceWithin_ to `within` to exclude the distance parameter. Moreover, new relations of `enters`, `leaves`, and `passes` are defined to clarify its temporal order of topological changes of relation from _intersects_. +
-<<relations>> shows the examples of each relation. +
+<<relations>> shows the examples of each relation. This interface is realized with <<filter_query>>. +
 
 [#relations,reftext='{figure-caption} {counter:figure-num}']
 .Specialized Relations of Moving Features from _intersects_ (latexmath:[t_i < t_j < t_k] for time instant latexmath:[t_i, t_j, t_k])
-image::mfrelations.png[Moving Feature Relations, pdfwidth=80%, width=50%]
+image::mfrelations.png[Moving Feature Relations, pdfwidth=50%, width=50%, align="center"]
 
 - *Analysis Interface*: This interface implements the analysis operations in Type B (between trajectory and geometry objects) and Type C (between two trajectory objects), such as _nearestApproach_ and _difference_. The operations return a new object as a computation result. For example, operation "nearestApproach" with geometric object calculates the distance between a trajectory and the geometry or between two trajectories, and returns a distance in time. This practice additionally defines two more operations: `buffer` and `convoy`.
-The `buffer` operation returns a temporal geometry (simple or collection) covering all points within a given distance from a target temporal geometry. The `convoy` operation returns a temporal geometry (simple or collection) covering a group of moving features such that these features are consecutively closed each other during a given time period.
-<<analysis>> shows the result examples of `buffer` and `convoy` operations. +
+The `buffer` operation returns a temporal geometry (simple or collection) covering all points within a given distance from a target temporal geometry (simple or collection).
+The `convoy` operation returns the minimum bounding temporal geometry enclosing a group of moving features such that these features are consecutively closed each other (the k-nearest neighbors from a target) during a given time period.
+<<analysis>> shows the result examples of `buffer` and `convoy` operations. This interface is realized with <<search_query>>. +
 
 [#analysis,reftext='{figure-caption} {counter:figure-num}']
 .Examples of Analysis Operations
-image::mfanalysis.png[Moving Feature Analysis, pdfwidth=100%, width=60%]
+image::mfanalysis.png[Moving Feature Analysis, pdfwidth=60%, width=60%, align="center"]
 
-- *GeoSpatial Interface*: This interface provides function `dimension` that returns the maximum dimension of leaf geometry objects and `boundary` that returns the closure of the combinatorial geospatial boundary of all leaves (a foliation) for a temporal geometry resource.
+- *GeoSpatial Interface*: This interface provides function `dimension` that returns the maximum dimension of leaf geometry objects and `boundary` that returns the closure of the combinatorial geospatial boundary of all leaves (a foliation) for a temporal geometry resource. This interface is realized with <<select_query>>.
 
-- *Temporal Interface*: This interface provides function `snapshot` and `slice` that returns a sub-object of a temporal geometry/property at a given time instant and time period, respectively. The `boundedBy` function returns the temporal range covering its prism.
+- *Temporal Interface*: This interface provides function `snapshot` and `slice` that returns a sub-object of a temporal geometry/property at a given time instant and time period, respectively. The `boundedBy` function returns the temporal range covering its prism. This interface is realized with <<select_query>>.
 
+[#select_query]
 ==== Query Option `$select`
 
-The `$select` query option requests the service to harvest the properties or return a value derived from properties. The operations of Harvest, GeoSpatial, Temporal will be realized with the `$select` query option corresponding to a MovingFeature or FeatureLayer resource.
+The `$select` query option requests the service to harvest the properties or return a value derived from properties. The operations of *Harvest*, *GeoSpatial*, and *Temporal* are realized with the `$select` query option corresponding to a MovingFeature or FeatureLayer resource.
 
-++++
-<pre class="http">
-// <b>Example Request/Response: geometryAtTime of a moving feature with ID.</b>
-// <i>.Request</i>
+[source]
+.Example: geometryAtTime of a moving feature with ID.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=geometryAtTime(2008-02-04T00:00:00Z)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
@@ -382,16 +377,15 @@ Content_Type: application/geo+json
         "coordinates" : [ 116.35072, 39.96354 ]
     }
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: geometryAtTime of all moving features.</b>
-// <i>.Request</i>
+[source]
+.Example: geometryAtTime of all moving features.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures?$select=geometryAtTime(2008-02-04T00:00:00Z)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 [
@@ -410,31 +404,29 @@ Content_Type: application/geo+json
         }
     }
 ]
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: timeAtGeometry of a moving feature with ID.</b>
-// <i>.Request</i>
+[source]
+.Example: timeAtGeometry of a moving feature with ID.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=timeAtGeometry(POINT(116.4%2039.8))  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
 　　　　"timeAtPoint" : [ "2008-02-07T13:00:37Z", "2008-02-07T13:00:51Z", "2008-02-08T13:35:57Z", "2008-02-08T13:36:06Z", "2008-02-06T13:08:32Z", "2008-02-06T13:08:29Z", "2008-02-07T23:04:51Z", "2008-02-07T23:04:55Z", "2008-02-06T23:09:41Z", "2008-02-06T23:09:56Z", "2008-02-04T00:36:14Z", "2008-02-04T00:36:23Z", "2008-02-05T13:17:28Z", "2008-02-05T13:17:39Z" ]
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: timeAtGeometry of all moving features.</b>
-// <i>.Request</i>
+[source]
+.Example: timeAtGeometry of all moving features.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures?$select=timeAtGeometry(POINT(116.4%2039.8))  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 [
@@ -447,16 +439,15 @@ Content_Type: application/geo+json
         "timeAtPoint": ["2013-05-01T10:33:45Z"]
     }
 ]
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: velocity of the all moving feature.</b>
-// <i>.Request</i>
+[source]
+.Example: velocity of the all moving feature.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures?$select=velocity(2008-02-04T00:00:00Z)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 [
@@ -469,31 +460,29 @@ Content_Type: application/geo+json
         "velocity" : [ -5.42125853725347E-4, 1.0906301588750913E-4 ]
     }
 ]
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: timeAtCummulativeDistance of a moving feature with ID.</b>
-// <i>.Request</i>
+[source]
+.Example: timeAtCummulativeDistance of a moving feature with ID.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=timeAtCummulativeDistance(1,%22km%22)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
     "timeAtCummulativeDistance" : "2008-02-02T22:35:04Z"
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: subTrajectory of a moving feature with ID.</b>
-// <i>.Request</i>
+[source]
+.Example: subTrajectory of a moving feature with ID.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=subTrajectory(2008-02-03T23:00:00Z,2008-02-03T23:05:00Z)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
@@ -504,17 +493,16 @@ Content_Type: application/geo+json
         "interpolations" : "Linear"
     }
 }
-</pre>
-++++
-
+----
 The subTrajectory operation can also be realized by using the slice interface of temporal geometry as follows:
-++++
-<pre class="http">
-// <b>Example Request/Response: slice of the temporal geometry of the moving feature whose identifier is 'mf0001'.</b>
-// <i>.Request</i>
+
+[source]
+.Example: slice of the temporal geometry of the moving feature whose identifier is 'mf0001'.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalGeometry?$select=slice(2008-02-03T23:00:00Z,2008-02-03T23:05:00Z)   HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
@@ -525,18 +513,18 @@ Content_Type: application/geo+json
         "interpolations" : "Linear"
     }
 }
-</pre>
-++++
+----
 
 However, the slice operation is for only one MovingFeature resource. This practice restricts the use of GeoSpatial and Temporal interface to only TemporalGeometry or/and TemporalProperty resource type.
 The following examples show the use cases of each operation.
-++++
-<pre class="http">
-// <b>Example Request/Response: snapshot of the temporal property whose name is 'length' of the moving feature whose identifier is 'mf0001'. </b>
-// <i>.Request</i>
-GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties(name=@title)?$select=snapshot(2013-05-01T10:33:41Z)&@title='length'   HTTP1.1
 
-// <i>.Response</i>
+[source]
+.Example: snapshot of the temporal property whose name is 'length' of the moving feature whose identifier is 'mf0001'.
+----
+>>> Request
+GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties(name=@title)?$select=snapshot(2013-05-01T10:33:41Z)&#169;@title='length'   HTTP1.1
+
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
@@ -548,16 +536,15 @@ Content_Type: application/geo+json
         "interpolations": "Discrete"
     }
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: boundedBy of the temporal geometry of the moving feature whose identifier is 'mf0001'.</b>
-// <i>.Request</i>
+[source]
+.Example: boundedBy of the temporal geometry of the moving feature whose identifier is 'mf0001'.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalGeometry?$select=boundedBy()   HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
@@ -566,16 +553,15 @@ Content_Type: application/geo+json
         "end" : "2008-02-03T23:05:00Z"
     }
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: boundary of the temporal geometry of the moving feature whose identifier is 'mf0001'.</b>
-// <i>.Request</i>
+[source]
+.Example: boundary of the temporal geometry of the moving feature whose identifier is 'mf0001'.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalGeometry?$select=boundary()   HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
@@ -584,75 +570,124 @@ Content_Type: application/geo+json
        "coordinates": [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0] ]
     }
 }
-</pre>
-++++
+----
 
-
-
+[#filter_query]
 ==== Query Option `$filter`
 
-The `$filter` query option allows clients to filter a collection of moving features that are addressed by a request URL. It can be applied to a specific moving feature and a collection of moving features. The `$filter` option is evaluated for each moving features in the collection, and returns the features where the expression of the Relation interface is `true` in the response. For a specific feature, it returns `true` or `false`. The Relation interface will be realized with the `$filter` query option.
+The `$filter` query option allows clients to filter a collection of moving features that are addressed by a request URL. It can be applied to a specific moving feature and a collection of moving features. The `$filter` option is evaluated for each moving features in the collection, and returns the features where the expression of the Relation interface is `true` in the response. For a specific feature, it returns `true` or `false`. The *Relation* interface is realized with the `$filter` query option.
 
-
-++++
-<pre class="http">
-// <b>Example Request/Response: disjoint returns true or false corresponding to a moving feature.</b>
-// <i>.Request</i>
+[source]
+.Example: The disjoint operation returns true or false corresponding to a moving feature.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$filter=disjoint(LINESTRING(1%202,3%204,5%206),2008-02-02T22:31:00Z,2008-02-02T22:40:00Z)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
     "disjoint": true
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: intersects  returns the identifiers of moving features whose trajectory intersects with the parameter geometry object for a particular period of time in the collection.</b>
-// <i>.Request</i>
+[source]
+.Example: The intersects operation returns the identifiers of moving features whose trajectory intersects with the parameter geometry object for a particular period of time in the collection.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures?$filter=intersects(POLYGON((30%2010%2C40%2040%2C20%2040%2C10%2020%2C30%2010)),2013-05-01T10:33:50Z,2013-05-01T10:36:41Z)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
     "intersects": [ "mf0001", "mf0003"]
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: DistanceWithin returns the identifiers of moving features which are located within 100km from the given position during the parameter time period.</b>
-// <i>.Request</i>
+[source]
+.Example: The distanceWithin operation returns the identifiers of moving features which are located within 100km from the given position during the parameter time period.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures?$filter=distanceWithin(POINT(103%201.0),2013-05-01T10:33:50Z,2013-05-01T10:36:41Z,100;km) HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
     "distanceWithin ": null
 }
-</pre>
-++++
+----
 
 [NOTE]
-The operations of Type C between two trajectory objects provide spatiotemporal relations (e.g., intersects); however, the current API excludes them from the implementation interfaces until the expression way for parameter moving features becomes clear in a request URL, such as the Well-Known Text (WKT) format for a geometry object.
+==========
+The operations of Type C between two trajectory objects provide spatiotemporal relations (e.g., intersects).
+The current API tries to realize the Type C operation by a temporary method until the expression way for parameter moving features becomes clear in a request URL, such as the Well-Known Text (WKT) format for a geometry object.
 
+.(1) Create a temporal resource of FeatureLayer as follows:
+-----
+>>> Request
+POST  SERVICE_ROOT/FeatureLayers   HTTP1.1
+Content-Type: application/geo+json
+{
+  "name": "queryfeatures",
+  "description": "temporal feature layer for query parameters"
+  "updateFrequency": 0
+}
+
+<<< Response
+201 CREATED
+{
+  “@id”: "queryfeatures",
+  “@created”: "2012-07-14T22:01:01"
+}
+-----
+.(2) Insert a query object into the feature layer as follows:
+-----
+>>> Request
+POST  SERVICE_ROOT/FeatureLayers('queryfeatures')/features   HTTP1.1
+Content-Type: application/geo+json
+{
+  "type": "MovingFeature",
+  "temporalGeometry": {
+  ....
+  }
+}
+<<< Response
+201 CREATED
+{
+  “@id”: "mf9999999",
+  “@created”: "2012-07-14T23:01:01"
+}
+-----
+.(3) Search intersected moving features from the bus layer with the query feature.
+-----
+>>> Request
+GET  SERVICE_ROOT/FeatureLayers('bus')/features?$filter=intersects(@id)&@id='mf9999999'  HTTP1.1
+
+<<< Response
+200 OK
+Content_Type: application/geo+json
+{
+  "intersects": [ "mf0001", "mf0003"]
+}
+-----
+==========
+
+
+
+[#search_query]
 ==== Query Option `$search`
 
-The `$search` query option allows clients to analyze moving features or a specific moving feature, and returns a new object as a computation result. The Analysis interface will be realized with the `$search` query option.
+The `$search` query option allows clients to analyze moving features or a specific moving feature, and returns a new object as a computation result. The *Analysis* interface is realized with the `$search` query option.
 
-++++
-<pre class="http">
-// <b>Example Request/Response: search the nearest approach point with ID.</b>
-// <i>.Request</i>
+[source]
+.Example: To search the nearest approach point with ID.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$search=nearestApproachPoint(LINESTRING(116.35%2039.8,116.36%2040),2008-02-04T00:00:00Z,2008-02-04T00:10:00Z)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 {
@@ -663,16 +698,15 @@ Content_Type: application/geo+json
           "interpolations" : "Linear"
       }
 }
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: search the nearest approach distance for all moving features</b>
-// <i>.Request</i>
+[source]
+.Example: To search the nearest approach distance for all moving features.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures?$search=nearestApproach(LINESTRING(116.35%2039.8,116.36%2040),2008-02-04T00:00:00Z,2008-02-04T00:10:00Z)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 [
@@ -687,16 +721,15 @@ Content_Type: application/geo+json
          }
      }
  ]
-</pre>
-++++
+----
 
-++++
-<pre class="http">
-// <b>Example Request/Response: Intersection returns a temporal geometry that intersects with the parameter geometry object for a particular period of time from the collection.</b>
-// <i>.Request</i>
+[source]
+.Example: To compute each intersection object of the temporal geometry from a collection of moving features with a parameter geometry object for a particular period of time.
+----
+>>> Request
 GET  SERVICE_ROOT/MovingFeatures?$search=intersection(POLYGON((30%2010%2C40%2040%2C20%2040%2C10%2020%2C30%2010)),2013-05-01T10:33:50Z,2013-05-01T10:36:41Z)  HTTP1.1
 
-// <i>.Response</i>
+<<< Response
 200 OK
 Content_Type: application/geo+json
 [
@@ -716,9 +749,7 @@ Content_Type: application/geo+json
         }
     }
 ]
-
-</pre>
-++++
+----
 
 
 [NOTE]
@@ -726,6 +757,6 @@ Content_Type: application/geo+json
 In the OData protocol, the `$search` query option is used to restrict the result to include only those entities matching the specified search expression. +
 For example,
 
-- pass:[<u>http://host/service/Products?$search=bike</u>] //return all Products that match the search term "bike"
-- pass:[<u>http://host/service/Products?$search=(mountain OR bike) AND NOT clothing</u>] //return all Products that match either "mountain" or "bike" and do not match clothing
+- [underline]#http://host/service/Products?$search=bike# //return all Products that match the search term "bike"
+- [underline]#http://host/service/Products?$search=(mountain%20OR%20bike)%20AND%20NOT%20clothing# //return all Products that match either "mountain" or "bike" and do not match clothing
 ==========

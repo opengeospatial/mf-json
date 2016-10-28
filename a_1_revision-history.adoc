@@ -7,4 +7,5 @@
 |Date       |Release |Author                    |Paragraph modified |Description
 |2016-08-29 |r1   |Kyoung-Sook KIM, Hirotaka OGAWA |All     |Created
 |2016-09-27 |r2   |Kyoung-Sook KIM |RESTful APIs: Resource types and interfaces |Revised
+|2016-10-23 |r3   |Kyoung-Sook KIM |Interpolation formulas, RESTful APIs|Revised
 |===============================================================================
