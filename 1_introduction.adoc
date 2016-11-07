@@ -24,7 +24,7 @@ This document also describes based on the data format:
 
 * _RESTful APIs_ for handling moving feature data over HTTP: Create, Read, Update, and Delete (CRUD) operations.
 
-This version of this Best Practice document has left many issues out of its scope.
+This Best Practice document has left many issues out of its scope.
 Design issues with complex interpolation methods and service capabilities were not considered.
 
 == Conformance
@@ -43,7 +43,9 @@ to, or revisions of, any of these publications do not apply. For undated referen
 *	http://www.opengeospatial.org/standards/sensorthings[OGC 15-078r6], _OGC SensorThings API Part 1: Sensing_. 2016
 * http://isotc.iso.org/livelink/livelink?func=ll&objId=4230456&objAction=browse&sort=subtype[ISO/IEC Directives], _Part 2. Rules for the structure and drafting of International Standards_
 * http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601:2004], _Data elements and interchange formats - Information interchange - Representation of dates and time_
-* http://www.iso.org/iso/catalogue_detail.htm?csnumber=26012[ISO 19107:2003] _Geographic Information - Spatial schema_
+* http://www.iso.org/iso/catalogue_detail?csnumber=59164[ISO 19101:2014], _Geographic information — Reference model — Part 1: Fundamentals_
+* http://www.iso.org/iso/catalogue_detail?csnumber=56734[ISO 19103:2015], _Geographic information — Conceptual schema language_
+* http://www.iso.org/iso/catalogue_detail?csnumber=26012[ISO 19107:2003] _Geographic Information - Spatial schema_
 * http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=59221[ISO 19119:2006], _Geographic information - Services_
 * http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008], _Geographic information - Schema for moving features_
 * https://www.ietf.org/rfc/rfc3986.txt[IETF RFC 3986], _Uniform Resource Identifier (URI): Generic Syntax_.
@@ -57,7 +59,7 @@ to, or revisions of, any of these publications do not apply. For undated referen
 Additionally the following informative documents are addressed:
 
 * OGC 15-052r1, _OGC Testbed 11 REST Interface Engineering Report_
-* OGC 16-120r1, _OGC Moving Features Access_
+* OGC 16-120r2, _OGC Moving Features Access_ [candidate standard]
 
 == Terms and definitions
 
@@ -80,7 +82,7 @@ characteristic of a feature in which its value varies with time
 
 === feature
 abstraction of real world phenomena +
- [ ISO 19101:2002 ]
+ [ ISO 19101:2014 ]
 
 === foliation
 one parameter set of geometries such that each point in the prism of the set is in one and only one
@@ -121,7 +123,8 @@ one-dimensional geometric primitive representing extent in time +
 
 === prism
 <one parameter set of geometries> set of points in the union of the geometries (or the union of the
-trajectories) of a one parameter set of geometries
+trajectories) of a one parameter set of geometries +
+[ ISO 19141:2008 ]
 
 === request
 invocation of an operation by a client +
@@ -129,7 +132,7 @@ invocation of an operation by a client +
 
 === resource
 any addressable unit of information or service +
- [ IETF RFC 2396 ]
+ [ IETF RFC 3986 ]
 
 === response
 result of an operation, returned from a server to a client +
