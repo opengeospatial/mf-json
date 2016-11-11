@@ -1,0 +1,195 @@
+== Scope
+
+This Best Practice provides a format for encoding moving features using JavaScript Object Notation (JSON) [IETF RFC7159] and an example of interfaces of the RESTful service of moving features.
+The format defined this document is an alternative to the OGC(R) Moving Features Encodings: XML [OGC 14 083r2] and Simple Comma Separated Values (CSV) [OGC 14 084r2] standards.
+Even though this document uses different terms from the expression in the OGC Moving Features Encodings ([OGC 14 083r2] and [OGC 14 084r2]),
+Moving Feature JSON encoding basically refers to the abstract data model of moving features is defined in ISO 19141:2008 [ISO 19141:2008] as shown in <<conceptual_model>> with the concepts of foliation, prism, trajectory, and leaf.
+
+[#conceptual_model,reftext='{figure-caption} {counter:figure-num}']
+.Conceptual Model of a Moving Feature: Foliation, Prism, Leaf, and Trajectory
+image::moving-features.png[Conceptual Moving Feature, pdfwidth=60%, width=60%, align="center"]
+
+In this illustration, a 2D rectangle moves and rotates. Each representation of the rectangle at a given time is a leaf.
+The path traced by each corner point of the rectangle (and by each of its other points) is a trajectory.
+The set of points contained in all of the leaves, and in all of the trajectories, forms a prism.
+The set of leaves also forms a foliation, meaning that there is a complete and separate representation of the geometry of the feature for each specific time.
+The prism of the moving feature can be viewed as a bundle of trajectories of points on the local engineering representation of the feature's geometry.
+
+In general, Moving Feature JSON encoding applies to representations and formats of IETF GeoJSON [draft-ietf-geojson-04]; however, new terms are added to specify dynamic attributes of moving features:
+
+* _Temporal geometric objects_ whose location changes over time: Movements of 0-dimensional, 1-dimensional, 2-dimensional geometric primitives, and their collections.
+* _Dynamic non-spatial attributes_ whose value varies with time: Changes of a quantity.
+
+This document also describes based on the data format:
+
+* _RESTful APIs_ for handling moving feature data over HTTP: Create, Read, Update, and Delete (CRUD) operations.
+
+This Best Practice document has left many issues out of its scope.
+Design issues with complex interpolation methods and service capabilities were not considered.
+
+== Conformance
+
+Not applicable for this Best Practice document.
+
+[#references,reftext='3']
+== References
+
+The following normative documents contain provisions that, through reference in this text, constitute provisions of this document. For dated references, subsequent amendments
+to, or revisions of, any of these publications do not apply. For undated references, the latest edition of the normative document referred to applies.
+
+* http://www.opengeospatial.org/standards/common[OGC 06-121r9], _OGC Web Services Common Standard_, version 2.0.0
+*	http://www.opengeospatial.org/standards/movingfeatures[OGC 14-083r2], _Moving Features Encoding Part I: XML Core_. 2015
+*	http://www.opengeospatial.org/standards/movingfeatures[OGC 14-084r2], _Moving Features Encoding Extension: Simple Comma Separated Values (CSV)_. 2015
+*	http://www.opengeospatial.org/standards/sensorthings[OGC 15-078r6], _OGC SensorThings API Part 1: Sensing_. 2016
+* http://isotc.iso.org/livelink/livelink?func=ll&objId=4230456&objAction=browse&sort=subtype[ISO/IEC Directives], _Part 2. Rules for the structure and drafting of International Standards_
+* http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601:2004], _Data elements and interchange formats - Information interchange - Representation of dates and time_
+* http://www.iso.org/iso/catalogue_detail?csnumber=59164[ISO 19101:2014], _Geographic information — Reference model — Part 1: Fundamentals_
+* http://www.iso.org/iso/catalogue_detail?csnumber=56734[ISO 19103:2015], _Geographic information — Conceptual schema language_
+* http://www.iso.org/iso/catalogue_detail?csnumber=26012[ISO 19107:2003] _Geographic Information - Spatial schema_
+* http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=59221[ISO 19119:2006], _Geographic information - Services_
+* http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008], _Geographic information - Schema for moving features_
+* https://www.ietf.org/rfc/rfc3986.txt[IETF RFC 3986], _Uniform Resource Identifier (URI): Generic Syntax_.
+* https://www.ietf.org/rfc/rfc2616.txt[IETF RFC 2616], _Hypertext Transfer Protocol -- HTTP/1.1_.
+* https://www.ietf.org/rfc/rfc7159.txt[IETF RFC 7159], _The JavaScript Object Notation (JSON) Data Interchange Format_.
+* https://www.ietf.org/rfc/rfc7464.txt[IETF RFC 7464], _JavaScript Object Notation (JSON) Text Sequences_.
+* https://www.rfc-editor.org/info/rfc7946[IETF RFC 7946], _The GeoJSON Format_.
+* http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html[OData-Part1], _OData Version 4.0. Part 1: Protocol Plus Errata 03._ Edited by Michael Pizzo, Ralf Handl, and Martin Zurmuehl. 02 June 2016. OASIS Standard incorporating Approved Errata 03.
+
+
+Additionally the following informative documents are addressed:
+
+* OGC 15-052r1, _OGC Testbed 11 REST Interface Engineering Report_
+* OGC 16-120r2, _OGC Moving Features Access_ [candidate standard]
+
+== Terms and definitions
+
+This document uses the specification terms defined in Subclause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards.
+In particular:
+- SHALL is the verb form used to indicate a requirement to be strictly followed to conform to this specification, from which no deviation is permitted
+- MAY is the verb form used to indicate an action permissible within the limits of this specification
+
+For the purposes of this document, the following additional terms and definitions apply.
+
+=== API
+An interface that is defined in terms of a set of functions and procedures, and enables a program to gain access to facilities within an application. (Definition from Dictionary of Computer Science - Oxford Quick Reference, 2016)
+
+=== client
+software component that can invoke an operation from a server +
+ [ OGC 06-121r9 ]
+
+=== dynamic attributes
+characteristic of a feature in which its value varies with time
+
+=== feature
+abstraction of real world phenomena +
+ [ ISO 19101:2014 ]
+
+=== foliation
+one parameter set of geometries such that each point in the prism of the set is in one and only one
+trajectory and in one and only one leaf +
+ [ ISO 19141:2008 ]
+
+=== geometric object
+spatial object representing a geometric set +
+ [ ISO 19107:2003 ]
+
+=== geometric primitive
+geometric object representing a single, connected, homogeneous element of space +
+ [ ISO 19107:2003 ]
+
+=== interface
+named set of operations that characterize the behaviour of an entity +
+ [ ISO 19119:2006 ]
+
+=== leaf
+<one parameter set of geometries> geometry at a particular value of the parameter +
+ [ ISO 19141:2008 ]
+
+=== moving feature
+feature whose location changes over time +
+ [ ISO 19141:2008 ] +
+NOTE &#160;&#160; Its base representation uses a local origin and local coordinate vectors, of a geometric object at a given reference time.
+
+=== one parameter set of geometries
+function f from an interval t latexmath:[\in ] [a, b] such that f(t) is a geometry and for each point P latexmath:[\in ] f(a) there is a one
+parameter set of points (called the trajectory of P) P(t):[a,b] -> P(t) such that P(t) latexmath:[\in ] f(t) +
+ [ ISO 19141:2008 ] +
+EXAMPLE &#160;&#160; A curve C with constructive parameter t is a one parameter set of points c(t).
+
+
+=== period
+one-dimensional geometric primitive representing extent in time +
+ [ ISO 19141:2008 ]
+
+=== prism
+<one parameter set of geometries> set of points in the union of the geometries (or the union of the
+trajectories) of a one parameter set of geometries +
+[ ISO 19141:2008 ]
+
+=== request
+invocation of an operation by a client +
+ [ OGC 06-121r9 ]
+
+=== resource
+any addressable unit of information or service +
+ [ IETF RFC 3986 ]
+
+=== response
+result of an operation, returned from a server to a client +
+ [ OGC 06-121r9 ]
+
+=== server
+a particular instance of a service +
+ [ OGC 06-121r9 ]
+
+=== service
+distinct part of the functionality that is provided by an entity through interfaces +
+ [ ISO 19119:2006 ]
+
+=== temporal geometry
+one parameter set of geometries in which the parameter is time
+
+=== trajectory
+path of a moving point described by a one parameter set of points +
+ [ ISO 19141:2008 ]
+
+== Conventions
+
+This sections provides details and examples for conventions used in the document. All examples illustrated by gray or orange boxes are informative only.
+
+=== JSON notation
+
+The notation of JSON in this document is based on the specification of [RFC 7159].
+
+The ordering of the members of any JSON object MUST be considered irrelevant. Some examples use a JavaScript single line comment (//) and an ellipsis (...) as placeholder notation for a specific JSON instance.
+Whitespace is used in the examples inside this document to help illustrate the data structures, but is not required. Unquoted whitespace is not significant in JSON.
+
+=== UML notation
+
+Unified Modeling Language (UML) static structure diagrams appearing in this document are used as described in Subclause 5.2 of OGC Web Services Common [OGC 06-121r9].
+
+=== Abbreviated terms
+
+The following symbols and abbreviated terms are used in this best practice paper:
+
+[width="99%", cols="2,8"]
+|=========
+|API	| Application Program Interface
+|CRS	| Coordinate Reference Systems
+|CRUD | Create, Read, Update, Delete
+|CSV	| Comma Separated Values
+|HTTP	| Hypertext Transfer Protocol
+|IETF | Internet Engineering Task Force
+|ISO	| International Organization for Standardization
+|JSON | JavaScript Object Notation
+|OASIS|	Organization for the Advancement of Structured Information Standards
+|OGC	| Open Geospatial Consortium
+|REST | Representational State Transfer
+|UML  | Unified Modeling Language
+|URI  | Uniform Resource Identifiers
+|URL  | Uniform Resource Locators
+|WKT  |	Well Known Text
+|XML	| Extensible Markup Language
+|1D   | One Dimensional
+|2D	  | Two Dimensional
+|=========
