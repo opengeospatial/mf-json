@@ -1,6 +1,0 @@
-== Bibliography
-
-[bibliography]
-- [[[1]]] Unified Code for Units of Measure (UCUM), unitsofmeasure.org
-- [[[2]]] EPSG Geodetic Parameter Dataset, www.epsg.org
-- [[[3]]] The GeoJSON Format Specification. 2008, geojson.org
