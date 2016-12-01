@@ -180,9 +180,10 @@ It is Best Practice to share moving feature data based on JSON and GeoJSON (a JS
 <h2 id="_iii_preface">iii. Preface</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This best practice document basically follows the abstract data model defined in ISO 19141:2008 [ISO 19141:2008]; however, the encoding method refers to the expression of IETF GeoJSON Format [draft-ietf-geojson-04].
-The draft format covers the movements of 0-dimensional Point, 1-dimensional curve LineString, and 2-dimensional surface Polygon due to the application requirements (disaster risk management, traffic information services, geo-fencing services, etc.) to represent various spatiotemporal geometries for moving features
-considered from OGC Moving Features Encoding: XML Core [OGC 14 083r2] and Simple CSV [OGC 14 084r2] that have focused on the movement of 0-dimensional geometric primitive (Point), called trajectories.</p>
+<p>This best practice document basically follows the abstract data model defined in ISO 19141:2008 [ISO 19141:2008], and
+the encoding method refers to the expression of IETF GeoJSON Format [draft-ietf-geojson-04].
+OGC Moving Features Encoding: XML Core [OGC 14 083r2] and Simple CSV [OGC 14 084r2] have focused on the movement of 0-dimensional geometric primitive (Point), called trajectories.
+However, the draft format of this document covers the movements of 0-dimensional Point, 1-dimensional curve LineString, and 2-dimensional surface Polygon based on the application requirements such as disaster risk management, traffic information services, and geo-fencing services.</p>
 </div>
 <div class="paragraph">
 <p>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights.
@@ -247,7 +248,7 @@ The Open Geospatial Consortium shall not be held responsible for identifying any
 <div class="ulist">
 <ul>
 <li>
-<p>Implementation of RESTful API</p>
+<p>Testing RESTful API implementation</p>
 </li>
 <li>
 <p>Moving features in an indoor space</p>
@@ -264,9 +265,8 @@ The Open Geospatial Consortium shall not be held responsible for identifying any
 <div class="sectionbody">
 <div class="paragraph">
 <p>This Best Practice provides a format for encoding moving features using JavaScript Object Notation (JSON) [IETF RFC7159] and an example of interfaces of the RESTful service of moving features.
-The format defined this document is an alternative to the OGC&#174; Moving Features Encodings: XML [OGC 14 083r2] and Simple Comma Separated Values (CSV) [OGC 14 084r2] standards.
-Even though this document uses different terms from the expression in the OGC Moving Features Encodings ([OGC 14 083r2] and [OGC 14 084r2]),
-Moving Feature JSON encoding basically refers to the abstract data model of moving features is defined in ISO 19141:2008 [ISO 19141:2008] as shown in <a href="#conceptual_model">Figure 1</a> with the concepts of foliation, prism, trajectory, and leaf.</p>
+Moving Feature JSON encoding defined in this document is an alternative to the OGC&#174; Moving Features Encodings: XML [OGC 14 083r2] and Simple Comma Separated Values (CSV) [OGC 14 084r2] standards.
+The data format of Moving Feature JSON is correspondingly designed to implement the abstract model of moving features is defined in ISO 19141:2008 [ISO 19141:2008] as shown in <a href="#conceptual_model">Figure 1</a> with the concepts of foliation, prism, trajectory, and leaf.</p>
 </div>
 <div id="conceptual_model" class="imageblock" style="text-align: center">
 <div class="content">
@@ -275,7 +275,7 @@ Moving Feature JSON encoding basically refers to the abstract data model of movi
 <div class="title">Figure 1. Conceptual Model of a Moving Feature: Foliation, Prism, Leaf, and Trajectory</div>
 </div>
 <div class="paragraph">
-<p>In this illustration, a 2D rectangle moves and rotates. Each representation of the rectangle at a given time is a leaf.
+<p>In the illustration, a 2D rectangle moves and rotates. Each representation of the rectangle at a given time is a leaf.
 The path traced by each corner point of the rectangle (and by each of its other points) is a trajectory.
 The set of points contained in all of the leaves, and in all of the trajectories, forms a prism.
 The set of leaves also forms a foliation, meaning that there is a complete and separate representation of the geometry of the feature for each specific time.
@@ -295,7 +295,7 @@ The prism of the moving feature can be viewed as a bundle of trajectories of poi
 </ul>
 </div>
 <div class="paragraph">
-<p>This document also describes based on the data format:</p>
+<p>This document also describes interfaces for accessing moving features based on the data format:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -389,7 +389,7 @@ to, or revisions of, any of these publications do not apply. For undated referen
 <p>OGC 15-052r1, <em>OGC Testbed 11 REST Interface Engineering Report</em></p>
 </li>
 <li>
-<p>OGC 16-120r2, <em>OGC Moving Features Access</em> [candidate standard]</p>
+<p>OGC 16-120r3, <em>OGC Moving Features Access</em> [candidate standard]</p>
 </li>
 </ul>
 </div>
@@ -664,13 +664,13 @@ Whitespace is used in the examples inside this document to help illustrate the d
 <h2 id="data_format">6. JSON Encoding</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This clause specifies the data format for encoding moving features by using the JSON objects.</p>
+<p>This clause specifies the data format for encoding moving features by using JSON objects.</p>
 </div>
 <div class="sect2">
 <h3 id="_overview">6.1. Overview</h3>
 <div class="paragraph">
-<p>Moving Features JSON (MF-JSON) is designed by extending "foreign members" of GeoJSON [draft-ietf-geojson-04].
-MF-JSON defines several types of JSON objects to represent movements about moving features, their dynamic properties, and their spatiotemporal extents based on the coordinate reference system of World Geodetic System 1984 (WGS84) and Coordinated Universal Time (UTC).</p>
+<p>Moving Features JSON (MF-JSON) defines new fields by extending "foreign members" of GeoJSON [draft-ietf-geojson-04].
+MF-JSON provides several types of JSON objects to represent movements about moving features, their dynamic properties, and their spatiotemporal extents based on two reference systems of World Geodetic System 1984 (WGS84) and Coordinated Universal Time (UTC).</p>
 </div>
 <div class="paragraph">
 <p><a href="#mf_overview">Figure 2</a> compares the difference of members between GeoJSON and MF-JSON.</p>
@@ -705,14 +705,14 @@ MF-JSON defines several types of JSON objects to represent movements about movin
                 <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>],
                 <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [
                     {
-                        <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">3.0</span>, <span class="float">4.1</span>], <span class="comment">// v = at^2 + bt + c</span>
+                        <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">3.0</span>, <span class="float">4.1</span>], <span class="comment">// v = 1.0t^2 + 3.0t + 4.1</span>
                         <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
                                 <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>,
                                 <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>
                         }
                     },
                     {
-                        <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">5.0</span>, <span class="float">8.0</span>], <span class="comment">// v = at + b</span>
+                        <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">5.0</span>, <span class="float">8.2</span>], <span class="comment">// v = 5.0t + 8.2</span>
                         <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
                                 <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>,
                                 <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>
@@ -753,7 +753,7 @@ Even though the type extension occurs contravention of GeoJSON, this document ex
 <div class="sect3">
 <h4 id="_moving_feature_types">6.2.1. Moving Feature Types</h4>
 <div class="paragraph">
-<p>In this format, two moving feature types are added as follows:</p>
+<p>In the MF-JSON format, two moving feature types are added as follows:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -774,8 +774,8 @@ Even though the type extension occurs contravention of GeoJSON, this document ex
 </div>
 </div>
 <div class="paragraph">
-<p>A moving feature instance shall contain a <code>"temporalGeometry"</code> field as described in the Temporal Geometries section.
-A moving feature may contain a <code>"temporalProperties"</code>, <code>"stBoundedBy"</code>, <code>"properties"</code> fields depending on the application requirements.</p>
+<p>A moving feature instance SHALL has the JSON string of "<em>MovingFeature</em>" for the <code>"type"</code> field and contain a <code>"temporalGeometry"</code> field as described in the Temporal Geometries section.
+A moving feature MAY contain a <code>"temporalProperties"</code>, <code>"stBoundedBy"</code>, <code>"properties"</code> fields depending on the application requirements.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -807,28 +807,28 @@ A moving feature may contain a <code>"temporalProperties"</code>, <code>"stBound
 </div>
 </div>
 <div class="paragraph">
-<p>A collection of moving features shall contain a <code>"features"</code> field as an array object of moving features.
-A collection of moving features may contain a <code>"stBoundedBy"</code> field for the spatiotemporal bounding box to cover all of features.</p>
+<p>A collection of moving features SHALL has the JSON string of "<em>MovingFeatureCollection</em>" for the <code>"type"</code> field and contain a <code>"features"</code> field as an array object of moving feature instances.
+It MAY contain a <code>"stBoundedBy"</code> field for the spatiotemporal bounding box to cover all of features.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_temporal_geometry_types">6.2.2. Temporal Geometry Types</h4>
 <div class="paragraph">
-<p>The movement of a moving feature is represented as a JSON object where the type members value shall be one of the following strings: "<em>MovingPoint</em>", "<em>MovingLineString</em>", "<em>MovingPolygon</em>", "<em>MultiMovingPoint</em>", "<em>MultiMovingLineString</em>", "<em>MultiMovingPolygon</em>", or "<em>MovingGeometryCollection</em>".
-It is modeled as a mapping function from time to a geometric object: <em class="red">temporalGeometry: timePosition &#8594; Geometry</em> (<a href="http://geojson.org/geojson-spec.html#point">Point</a>, <a href="http://geojson.org/geojson-spec.html#linestring">LineString</a>, <a href="http://geojson.org/geojson-spec.html#polygon">Polygon</a>,
+<p>The movement of a moving feature is represented as a JSON object where the type members value SHALL be one of the following strings: "<em>MovingPoint</em>", "<em>MovingLineString</em>", "<em>MovingPolygon</em>", "<em>MultiMovingPoint</em>", "<em>MultiMovingLineString</em>", "<em>MultiMovingPolygon</em>", or "<em>MovingGeometryCollection</em>".
+It is modeled as a mapping function from time to a geometric object: <code>temporalGeometry: timePosition &#8594; Geometry</code> (<a href="http://geojson.org/geojson-spec.html#point">Point</a>, <a href="http://geojson.org/geojson-spec.html#linestring">LineString</a>, <a href="http://geojson.org/geojson-spec.html#polygon">Polygon</a>,
 <a href="http://geojson.org/geojson-spec.html#multipoint">MultiPoint</a>, <a href="http://geojson.org/geojson-spec.html#multilinestring">MultiLineString</a>, <a href="http://geojson.org/geojson-spec.html#multipolygon#polygon">MultiPolygon</a>, or <a href="http://geojson.org/geojson-spec.html#geometry-collection">GeometryCollection</a>).
 It represents time-varying locations of a moving feature.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>MovingPoint</strong>: A temporal geometry represents a trajectory of a time-parametered 0-dimensional geometric primitive (Point), representing a single geographic position at a time position (instant) within its temporal domain. Intuitively this type depicts a set of curves in a spatiotemporal domain. It is used to express <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html#78">mf:AbstractTrajectory</a> in the OGC&#174; Moving Features standard. For example, the movement information of people, vehicles, or hurricanes can be shared by instances of the MovingPoint type.</p>
+<p><strong>MovingPoint</strong>: A temporal geometry represents a trajectory of a time-parametered 0-dimensional geometric primitive (Point), representing a single geographic position at a time position (instant) within its temporal domain. Intuitively this type depicts a set of curves in a spatiotemporal domain. It is used to express <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html#78">mf:AbstractTrajectory</a> in the OGC&#174; Moving Features standard. For example, the movement information of people, vehicles, or hurricanes can be shared by instances of the "<em>MovingPoint</em>" type.</p>
 </li>
 <li>
-<p><strong>MovingLineString</strong>: A temporal geometry represents the prism of a time-parametered 1-dimensional (1D) geometric primitive (LineString), whose leaf at a time position is 1-dimensional linear object in a particular time period. Intuitively this type depicts a set of surfaces in a spatiotemporal domain. For example, the movement information of weather fronts or traffic congestion on roads can be shared by instances of the MovingLineString type.</p>
+<p><strong>MovingLineString</strong>: A temporal geometry represents the prism of a time-parametered 1-dimensional (1D) geometric primitive (LineString), whose leaf at a time position is 1-dimensional linear object in a particular time period. Intuitively this type depicts a set of surfaces in a spatiotemporal domain. For example, the movement information of weather fronts or traffic congestion on roads can be shared by instances of the "<em>MovingLineString</em>" type.</p>
 </li>
 <li>
-<p><strong>MovingPolygon</strong>: A temporal geometry represents the prism of a time-parametered 2-dimensional (2D) geometric primitive (Polygon), whose leaf at a time position is 2-dimensional polygonal object in a particular time period. Intuitively this type depicts a set of polyhedrons that are the convex hulls of two congruent polygons in a spatiotemporal domain. For example, the changes of flooding areas or the movement information of air pollution can be shared by instances of the MovingPolygon type.</p>
+<p><strong>MovingPolygon</strong>: A temporal geometry represents the prism of a time-parametered 2-dimensional (2D) geometric primitive (Polygon), whose leaf at a time position is 2-dimensional polygonal object in a particular time period. Intuitively this type depicts a set of polyhedrons that are the convex hulls of two congruent polygons in a spatiotemporal domain. For example, the changes of flooding areas or the movement information of air pollution can be shared by instances of the "<em>MovingPolygon</em>" type.</p>
 </li>
 <li>
 <p><strong>MultiMovingPoint</strong>: A temporal geometry represents a set of moving points.</p>
@@ -851,14 +851,16 @@ It represents time-varying locations of a moving feature.</p>
 <div class="paragraph">
 <p>A moving feature has only one temporal geometry whose type is one of "MovingPoint", "MovingLineString", "MovingPolygon", "MultiMovingPoint", "MultiMovingLineString",  "MultiMovingPolygon", and "MovingGeometryCollection".
 The temporal geometry is conceptualized as a prism of the set of points contained in all of the leaves (a foliation) and trajectories.
-In this draft, a temporal geometry is represented by a sequence of pairs \((g, t)\), where \(g\) is a leaf geometry and \(t\) is a sampling time position, with an interpolation method. The leaves of simple geometries is described by the same number of elements in the lists of <code>"coordinates"</code> and <code>"datetimes"</code> which ordered sets that preserves the given order.
-The interpolation approximates geographic positions at non sampling time instants for constructing the trajectory or prism of the moving feature in a spatiotemporal domain. A collection of temporal geometries consists of several prisms of geometry primitives in the <code>"members"</code> field.</p>
+In this document, a temporal geometry instance is represented by a simple or collection type.</p>
 </div>
 <div class="sect3">
 <h4 id="_simple">6.3.1. Simple</h4>
 <div class="paragraph">
-<p>A simple temporal geometry represents the movement of one geometric primitive that is non-decomposed objects. There are three types of temporal geometry: a moving point, moving linestring, and moving polygon.
-If viewed in a 4-dimensional spatio-temporal coordinate system, the simple temporal geometry is a single continuum. A moving point, linestring, polygon is a spatio-temporal curve, surface, solid, respectively.</p>
+<p>A simple temporal geometry represents the movement of one geometric primitive that is non-decomposed objects.
+There are three types of temporal geometry: a moving point, moving linestring, and moving polygon.
+If viewed in a 4-dimensional spatio-temporal coordinate system, the simple temporal geometry is a single continuum.
+A moving point, linestring, polygon is a spatio-temporal curve, surface, solid, respectively.
+Their JSON representation is as follows.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -877,7 +879,29 @@ If viewed in a 4-dimensional spatio-temporal coordinate system, the simple tempo
 <div class="ulist">
 <ul>
 <li>
-<p><code>"coordinates"</code>: The object SHALL be an array of geographic positions to construct a leaf geometry at a time position.</p>
+<p><code>"type"</code>: A case-sensitive string that is one of "MovingPoint", "MovingLineString", and "MovingPolygon" in the term "temporal geometry type".</p>
+</li>
+<li>
+<p><code>"coordinates"</code>: The object SHALL be a list of leaf geometric primitives (points, linestrings, polygons) at times.
+For type "MovingPoint", the "coordinates" member is a list of points composed of one position.
+For type "MovingLineString", the "coordinates" member is a list of linestrings composed of an array of positions.
+The elements of the "coordinates" member have the same number of the elements of the "datetimes" member with a temporal order.
+There is an one-to-one correspondence between the elements of "coordinates" and "datetimes" as a temporal sequemce of pairs \((g,t)\), where \(g\) is a leaf geometry and \(t\) is its sampling time.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="https://www.rfc-editor.org/info/rfc7946">[IETF GeoJSON format</a>] A position is represented by an array of numbers, where must be two or more elements. The first two elements are longitude/easting (x) and latitude/northing (y), precisely in that order and using decimal numbers. Altitude/elevation (z) MAY be included as an optional third element.
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
 <col style="width: 20%;">
@@ -894,24 +918,25 @@ If viewed in a 4-dimensional spatio-temporal coordinate system, the simple tempo
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MovingPoint</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">[ [x1, y1], [x2, y2], &#8230;&#8203; ]</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">[ [x1,y1(,z1)], [x2,y2(,z2)], &#8230;&#8203; ]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>a list of points at each leaf, increasing time order</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MovingLineString</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">[ [[x11, y11], [x12, y12], &#8230;&#8203;], [[x21, y21], [x22, y22], &#8230;&#8203;], &#8230;&#8203; ]</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">[ [[x11,y11(,z11)], [x12,y12(,z12)], &#8230;&#8203;], [[x21,y21(,z21)], [x22,y22(,z22)], &#8230;&#8203;], &#8230;&#8203; ]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>a list of linestrings at each leaf, increasing time order</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MovingPolygon</p></td>
-<td class="tableblock halign-center valign-top"><p class="tableblock">[ [[[ox11, oy11], [ox12, oy12], &#8230;&#8203;], [[ix11, iy11],[ix12, iy12], &#8230;&#8203;],&#8230;&#8203;], [[[ox21, oy21], [ox22, oy22], &#8230;&#8203;], [[ix21, iy21],[ix22, iy22], &#8230;&#8203;], &#8230;&#8203;], &#8230;&#8203; ]</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">[ [[[ox11,oy11(,oz11)], [ox12,oy12(,oz12)], &#8230;&#8203;], [[ix11,iy11(,iz11)],[ix12,iy12(,iz12)], &#8230;&#8203;],&#8230;&#8203;], [[[ox21,oy21(,oz21)], [ox22,oy22(,oz22)], &#8230;&#8203;], [[ix21,iy21(,iz21)],[ix22,iy22(,iz22)], &#8230;&#8203;], &#8230;&#8203;], &#8230;&#8203; ]</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>a list of polygons at each leaf, increasing time order</em></p></td>
 </tr>
 </tbody>
 </table>
-</li>
+<div class="ulist">
+<ul>
 <li>
-<p><code>"datetimes"</code>: The object SHALL be an array of instants of time encoded as a character string of [ISO 8601:2004](<a href="http://www.iso.org/iso/home/standards/iso8601.htm" class="bare">http://www.iso.org/iso/home/standards/iso8601.htm</a>) date-time formatter.</p>
+<p><code>"datetimes"</code>: The object SHALL be an array of instants of time encoded as a character string of [ISO 8601:2004](<a href="http://www.iso.org/iso/home/standards/iso8601.htm" class="bare">http://www.iso.org/iso/home/standards/iso8601.htm</a>) date-time formatter in monotonically increasing order.</p>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
 <col style="width: 20%;">
@@ -935,17 +960,14 @@ If viewed in a 4-dimensional spatio-temporal coordinate system, the simple tempo
 </table>
 </li>
 <li>
-<p><code>"interpolations"</code>: The object SHALL be a character string of pre-defined interpolation methods or an array object of interpolation formulas in time. <a href="http://mathworld.wolfram.com/Interpolation.html">Interpolation</a> is a method of finding new values for any function using the given set of values. The unknown position at a particular point can be found using many interpolation methods.
-Here, there are two expressions for an interpolation instance as follows:</p>
-<div class="literalblock">
-<div class="content">
-<pre>  --- Predefined Interpolation Methods
-  --- Interpolation Formulas</pre>
-</div>
-</div>
+<p><code>"interpolations"</code>: The object SHALL be a character string of pre-defined interpolation methods or an array object of interpolation formulas in time.
+<a href="http://mathworld.wolfram.com/Interpolation.html">Interpolation</a> is a method of finding new values for any function using the given set of values.
+The unknown position at a particular point can be found using many interpolation methods.
+Here, the interpolation object approximates geographic positions at non sampling time instants for constructing the trajectory or prism of a moving feature in a spatiotemporal domain.
+There are two expressions for an interpolation instance: Predefined Interpolation Methods and Interpolation Formulas.</p>
 <div class="paragraph">
 <div class="title">[Predefined Interpolation Methods]</div>
-<p>The new position is differently derived by each method. For the predefine method, there is the restriction to have the same number of positions of each leaf geometry.</p>
+<p>The new position is differently derived by each method. For the predefine method, there is the restriction of the same number positions of all leaf geometries.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
@@ -995,11 +1017,10 @@ Here, there are two expressions for an interpolation instance as follows:</p>
 </div>
 <div class="paragraph">
 <div class="title">[Interpolation Formulas]</div>
-<p>A temporal geometry may have a several interpolation formulas within its temporal domain. An element of interpolation formulas is represented by field <code>"coefficients"</code> and <code>"period"</code>.
-The new position at a given time position is derived from a <code>"coefficients"</code> instance as a multidimensional array of <strong>polynomial interpolation formulas</strong> of \((x, y, z)\) coordinates during a particular time period.
-If the time position does not belong to any time period of the elements of formula, there is no interpolation position at that time.
+<p>A temporal geometry MAY have a several interpolation formulas within its temporal domain. An element of interpolation formulas is represented by field <code>"coefficients"</code> and <code>"period"</code>.
+The new geographical position at a given time position is derived from a <code>"coefficients"</code> instance as a multidimensional array of <strong>polynomial interpolation formulas</strong> of \((x, y, z)\) coordinates during a particular time period.
+If a time position does not belong to any time period of the elements of formula, there is no interpolation position at that time.
 The order of each formula array SHALL follow \(x\) (longitude), \(y\) (latitude), \(z\) (altitude) order.
-The number of elements in each formula during a particular time period is the same.
 The time periods between any two elements of formulas only allows empty or 0-dimensional intersection.
 In order to compute a value of each axis of coordinates at an arbitrary time position formatted by a character string of [ISO 8601:2004],
 this practice converts the time position to a signed 64-bit integer(long) value to represent milliseconds.</p>
@@ -1009,17 +1030,17 @@ this practice converts the time position to a signed 64-bit integer(long) value 
 </div>
 <div class="stemblock">
 <div class="content">
-\[x(t) = a_{n-1}t^{n-1} + a_{n-2}t^{n-2} + ... + a_0t^0\]
+\[[x(t) = a_{n-1}t^{n-1} + a_{n-2}t^{n-2} + ... + a_0t^0]\]
 </div>
 </div>
 <div class="stemblock">
 <div class="content">
-\[y(t) = b_{n-1}t^{n-1} + b_{n-2}t^{n-2} + ... + b_0t^0\]
+\[[y(t) = b_{n-1}t^{n-1} + b_{n-2}t^{n-2} + ... + b_0t^0]\]
 </div>
 </div>
 <div class="stemblock">
 <div class="content">
-\[z(t) = c_{n-1}t^{n-1} + c_{n-2}t^{n-2} + ... + c_0t^0\]
+\[[z(t) = c_{n-1}t^{n-1} + c_{n-2}t^{n-2} + ... + c_0t^0]\]
 </div>
 </div>
 <div class="listingblock">
@@ -1161,7 +1182,7 @@ If a property has a static value, it is represented with the member "properties"
 <div class="ulist">
 <ul>
 <li>
-<p><code>"name"</code>: The name of property is always a string.</p>
+<p><code>"name"</code>: The name of property is always a string. Duplicate names' temporal properties are not allowed in a moving feature.</p>
 </li>
 <li>
 <p><code>"uom"</code>: A unit of measure is a quantity adopted as a standard of measurement [ISO 19103:2015]. The unit of a temporal property is represented as a URI denoting a unit-of-measure defined in a web resource or a string of print symbol from the Unified Code for Units of Measure (UCUM)<a href="#1">[1]</a>.</p>
@@ -1469,7 +1490,7 @@ The Host request-header field specifies the Internet host and port number of the
 <div class="ulist">
 <ul>
 <li>
-<p><strong>MovingFeature Class</strong>: It is for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
+<p><strong>MovingFeature Class</strong>: It is for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is the minimum requirement to be implemented with the following properties in a moving-feature service:</p>
 </li>
 </ul>
 </div>
@@ -1537,7 +1558,7 @@ A resource instance whose type is specified, such as Geometry, DateTime, Tempora
 <div class="ulist">
 <ul>
 <li>
-<p><strong>TemporalGeometry Class</strong>: It is for accessing the temporal geometry of moving features. A TemporalGeometry resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
+<p><strong>TemporalGeometry Class</strong>: It is for accessing the temporal geometry of moving features. A TemporalGeometry resource is the minimum requirement to be implemented with the following properties in a moving-feature service:</p>
 </li>
 </ul>
 </div>
@@ -1606,10 +1627,10 @@ A resource instance whose type is specified, such as Geometry, DateTime, Tempora
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
 <col style="width: 15.3846%;">
-<col style="width: 30.7692%;">
+<col style="width: 23.0769%;">
 <col style="width: 23.0769%;">
 <col style="width: 15.3846%;">
-<col style="width: 15.3847%;">
+<col style="width: 23.077%;">
 </colgroup>
 <thead>
 <tr>
@@ -1661,17 +1682,17 @@ A resource instance whose type is specified, such as Geometry, DateTime, Tempora
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Interpolation Class</strong>: It is for accessing an interpolation method. An Interpolation resource is <strong>mandatory</strong> to be implemented with the following properties in a moving-feature service:</p>
+<p><strong>Interpolation Class</strong>: It is for accessing an interpolation method. An Interpolation resource is the minimum requirement to be implemented with the following properties in a moving-feature service:</p>
 </li>
 </ul>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
 <col style="width: 15.3846%;">
-<col style="width: 30.7692%;">
+<col style="width: 23.0769%;">
 <col style="width: 23.0769%;">
 <col style="width: 15.3846%;">
-<col style="width: 15.3847%;">
+<col style="width: 23.077%;">
 </colgroup>
 <thead>
 <tr>
@@ -1720,10 +1741,10 @@ This practice assumes that the name of a user-defined interpolation formula is a
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
 <col style="width: 15.3846%;">
-<col style="width: 30.7692%;">
+<col style="width: 23.0769%;">
 <col style="width: 23.0769%;">
 <col style="width: 15.3846%;">
-<col style="width: 15.3847%;">
+<col style="width: 23.077%;">
 </colgroup>
 <thead>
 <tr>
@@ -1762,10 +1783,10 @@ When the service considers the implementation, the following properties may be r
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
 <col style="width: 15.3846%;">
-<col style="width: 30.7692%;">
+<col style="width: 23.0769%;">
 <col style="width: 23.0769%;">
 <col style="width: 15.3846%;">
-<col style="width: 15.3847%;">
+<col style="width: 23.077%;">
 </colgroup>
 <thead>
 <tr>
@@ -1981,7 +2002,7 @@ PUT  SERVICE_ROOT/MovingFeatures('mf0001')/properties#name='title'   HTTP1.1
 <div class="sect2">
 <h3 id="queries">7.3. Access Interfaces</h3>
 <div class="paragraph">
-<p>The OGC Moving Feature Access [OGC 16-120r2] document requires three types of operations for accessing moving feature data: Type A, Type B, and Type C as follows:</p>
+<p>The OGC Moving Feature Access [OGC 16-120r3] document requires three types of operations for accessing moving feature data: Type A, Type B, and Type C as follows:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -2015,7 +2036,7 @@ The client is able to retrieve a resource representation using a HTTP GET reques
 <p>This document basically follows the usage of query options ($filter, $count, $orderby, $skip, $top, $select, and $search) to be considered in OGC SensorThings API standard [OGC 15-078r6].
 The OGC SensorThings API shows a good example of adaptation in OData protocols [OData-Part1] and extension of geospatial query functions.
 This practice employs the <code>$select</code>, <code>$filter</code>, and <code>$search</code> options in moving feature operations.
-In order to make a simple rule of the query options, the abstract operations of moving features as identified in [OGC 16-120r2] are re-categorized into three interfaces as shown in <a href="#interfaces">Figure 5</a>: <strong>Harvest</strong>, <strong>Relation</strong>, and <strong>Analysis</strong>.
+In order to make a simple rule of the query options, the abstract operations of moving features as identified in [OGC 16-120r3] are re-categorized into three interfaces as shown in <a href="#interfaces">Figure 5</a>: <strong>Harvest</strong>, <strong>Relation</strong>, and <strong>Analysis</strong>.
 Interface <strong>GeoSpatial</strong> and <strong>Temporal</strong> are additionally defined to access derived properties from a TemporalGeometry and TemporalProperty resource.</p>
 </div>
 <div class="admonitionblock warning">
@@ -2249,7 +2270,7 @@ The following examples show the use cases of each operation.</p>
 <div class="title">Example: snapshot of the temporal property whose name is 'length' of the moving feature whose identifier is 'mf0001'.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
-GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties(name=@title)?$select=snapshot(2013-05-01T10:33:41Z)&amp;@title='length'   HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('length')?$select=snapshot(2013-05-01T10:33:41Z)   HTTP1.1
 
 &lt;&lt;&lt; Response
 200 OK
@@ -2588,7 +2609,7 @@ For example,</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-07 19:59:30 JST
+Last updated 2016-11-07 19:59:27 JST
 </div>
 </div>
 <script type="text/x-mathjax-config">
