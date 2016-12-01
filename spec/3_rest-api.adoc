@@ -95,7 +95,7 @@ image::restresources.png[REST Resources,  pdfwidth=100%, width=90%, align="cente
 
 ==== Resource Classes
 
-- *MovingFeature Class*: It is for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is *mandatory* to be implemented with the following properties in a moving-feature service:
+- *MovingFeature Class*: It is for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is the minimum requirement to be implemented with the following properties in a moving-feature service:
 
 [width="99%", cols="2,5,3,2,1", options="header"]
 |===========================================================
@@ -110,7 +110,7 @@ image::restresources.png[REST Resources,  pdfwidth=100%, width=90%, align="cente
 JSON Any = False / Null / True / Object / Array / Number / String +
 A resource instance whose type is specified, such as Geometry, DateTime, TemporalGeometry, TemporalProperty, Property, and so on, is a JSON Object.
 
-- *TemporalGeometry Class*: It is for accessing the temporal geometry of moving features. A TemporalGeometry resource is *mandatory* to be implemented with the following properties in a moving-feature service:
+- *TemporalGeometry Class*: It is for accessing the temporal geometry of moving features. A TemporalGeometry resource is the minimum requirement to be implemented with the following properties in a moving-feature service:
 
 [width="99%", cols="2,5,3,2,1", options="header"]
 |===========================================================
@@ -134,7 +134,7 @@ A resource instance whose type is specified, such as Geometry, DateTime, Tempora
 |interpolations| A navigation property to address the interpolation methods. | Interpolation | One-to-many (mandatory) | YES
 |===========================================================
 
-- *Interpolation Class*: It is for accessing an interpolation method. An Interpolation resource is *mandatory* to be implemented with the following properties in a moving-feature service:
+- *Interpolation Class*: It is for accessing an interpolation method. An Interpolation resource is the minimum requirement to be implemented with the following properties in a moving-feature service:
 
 [width="99%", cols="2,3,3,2,3", options="header"]
 |===========================================================
@@ -303,7 +303,7 @@ PUT  SERVICE_ROOT/MovingFeatures('mf0001')/properties#name='title'   HTTP1.1
 [#queries,reftext='7.3']
 === Access Interfaces
 
-The OGC Moving Feature Access [OGC 16-120r2] document requires three types of operations for accessing moving feature data: Type A, Type B, and Type C as follows:
+The OGC Moving Feature Access [OGC 16-120r3] document requires three types of operations for accessing moving feature data: Type A, Type B, and Type C as follows:
 
 - Type A: Retrieval of feature attribute +
 For example, these operations retrieve positions, trajectories, and velocities of a moving feature such as a car, a person, a vessel, an aircraft, and a hurricane.
@@ -323,7 +323,7 @@ The client is able to retrieve a resource representation using a HTTP GET reques
 This document basically follows the usage of query options ($filter, $count, $orderby, $skip, $top, $select, and $search) to be considered in OGC SensorThings API standard [OGC 15-078r6].
 The OGC SensorThings API shows a good example of adaptation in OData protocols [OData-Part1] and extension of geospatial query functions.
 This practice employs the `$select`, `$filter`, and `$search` options in moving feature operations.
-In order to make a simple rule of the query options, the abstract operations of moving features as identified in [OGC 16-120r2] are re-categorized into three interfaces as shown in <<interfaces>>: *Harvest*, *Relation*, and *Analysis*.
+In order to make a simple rule of the query options, the abstract operations of moving features as identified in [OGC 16-120r3] are re-categorized into three interfaces as shown in <<interfaces>>: *Harvest*, *Relation*, and *Analysis*.
 Interface *GeoSpatial* and *Temporal* are additionally defined to access derived properties from a TemporalGeometry and TemporalProperty resource.
 
 [WARNING]
@@ -522,7 +522,7 @@ The following examples show the use cases of each operation.
 .Example: snapshot of the temporal property whose name is 'length' of the moving feature whose identifier is 'mf0001'.
 ----
 >>> Request
-GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties(name=@title)?$select=snapshot(2013-05-01T10:33:41Z)&@title='length'   HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('length')?$select=snapshot(2013-05-01T10:33:41Z)   HTTP1.1
 
 <<< Response
 200 OK

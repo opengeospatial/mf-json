@@ -1,15 +1,14 @@
 == Scope
 
 This Best Practice provides a format for encoding moving features using JavaScript Object Notation (JSON) [IETF RFC7159] and an example of interfaces of the RESTful service of moving features.
-The format defined this document is an alternative to the OGC(R) Moving Features Encodings: XML [OGC 14 083r2] and Simple Comma Separated Values (CSV) [OGC 14 084r2] standards.
-Even though this document uses different terms from the expression in the OGC Moving Features Encodings ([OGC 14 083r2] and [OGC 14 084r2]),
-Moving Feature JSON encoding basically refers to the abstract data model of moving features is defined in ISO 19141:2008 [ISO 19141:2008] as shown in <<conceptual_model>> with the concepts of foliation, prism, trajectory, and leaf.
+Moving Feature JSON encoding defined in this document is an alternative to the OGC(R) Moving Features Encodings: XML [OGC 14 083r2] and Simple Comma Separated Values (CSV) [OGC 14 084r2] standards.
+The data format of Moving Feature JSON is correspondingly designed to implement the abstract model of moving features is defined in ISO 19141:2008 [ISO 19141:2008] as shown in <<conceptual_model>> with the concepts of foliation, prism, trajectory, and leaf.
 
 [#conceptual_model,reftext='{figure-caption} {counter:figure-num}']
 .Conceptual Model of a Moving Feature: Foliation, Prism, Leaf, and Trajectory
 image::moving-features.png[Conceptual Moving Feature, pdfwidth=60%, width=60%, align="center"]
 
-In this illustration, a 2D rectangle moves and rotates. Each representation of the rectangle at a given time is a leaf.
+In the illustration, a 2D rectangle moves and rotates. Each representation of the rectangle at a given time is a leaf.
 The path traced by each corner point of the rectangle (and by each of its other points) is a trajectory.
 The set of points contained in all of the leaves, and in all of the trajectories, forms a prism.
 The set of leaves also forms a foliation, meaning that there is a complete and separate representation of the geometry of the feature for each specific time.
@@ -20,7 +19,7 @@ In general, Moving Feature JSON encoding applies to representations and formats 
 * _Temporal geometric objects_ whose location changes over time: Movements of 0-dimensional, 1-dimensional, 2-dimensional geometric primitives, and their collections.
 * _Dynamic non-spatial attributes_ whose value varies with time: Changes of a quantity.
 
-This document also describes based on the data format:
+This document also describes interfaces for accessing moving features based on the data format:
 
 * _RESTful APIs_ for handling moving feature data over HTTP: Create, Read, Update, and Delete (CRUD) operations.
 
@@ -59,7 +58,7 @@ to, or revisions of, any of these publications do not apply. For undated referen
 Additionally the following informative documents are addressed:
 
 * OGC 15-052r1, _OGC Testbed 11 REST Interface Engineering Report_
-* OGC 16-120r2, _OGC Moving Features Access_ [candidate standard]
+* OGC 16-120r3, _OGC Moving Features Access_ [candidate standard]
 
 == Terms and definitions
 
@@ -115,7 +114,6 @@ function f from an interval t latexmath:[\in ] [a, b] such that f(t) is a geomet
 parameter set of points (called the trajectory of P) P(t):[a,b] -> P(t) such that P(t) latexmath:[\in ] f(t) +
  [ ISO 19141:2008 ] +
 EXAMPLE &#160;&#160; A curve C with constructive parameter t is a one parameter set of points c(t).
-
 
 === period
 one-dimensional geometric primitive representing extent in time +

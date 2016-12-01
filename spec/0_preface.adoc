@@ -13,9 +13,10 @@ ogcdoc, OGC document, moving features, encoding, JSON, REST
 
 == iii. Preface
 
-This best practice document basically follows the abstract data model defined in ISO 19141:2008 [ISO 19141:2008]; however, the encoding method refers to the expression of IETF GeoJSON Format [draft-ietf-geojson-04].
-The draft format covers the movements of 0-dimensional Point, 1-dimensional curve LineString, and 2-dimensional surface Polygon due to the application requirements (disaster risk management, traffic information services, geo-fencing services, etc.) to represent various spatiotemporal geometries for moving features
-considered from OGC Moving Features Encoding: XML Core [OGC 14 083r2] and Simple CSV [OGC 14 084r2] that have focused on the movement of 0-dimensional geometric primitive (Point), called trajectories.
+This best practice document basically follows the abstract data model defined in ISO 19141:2008 [ISO 19141:2008], and
+the encoding method refers to the expression of IETF GeoJSON Format [draft-ietf-geojson-04].
+OGC Moving Features Encoding: XML Core [OGC 14 083r2] and Simple CSV [OGC 14 084r2] have focused on the movement of 0-dimensional geometric primitive (Point), called trajectories.
+However, the draft format of this document covers the movements of 0-dimensional Point, 1-dimensional curve LineString, and 2-dimensional surface Polygon based on the application requirements such as disaster risk management, traffic information services, and geo-fencing services.
 
 Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights.
 The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
@@ -45,6 +46,6 @@ All questions regarding this submission should be directed to the editor or the 
 
 Among the topics for future development are the following items:
 
-- Implementation of RESTful API
+- Testing RESTful API implementation
 - Moving features in an indoor space
 - Representation of three-dimensional moving features
