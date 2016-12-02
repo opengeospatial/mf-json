@@ -51,3 +51,4 @@ in the change request form will help the SWG adjudicate and prioritize the reque
 2. On command line: asciidoctor -a stylesheet=./example.css index.adoc
 
 [Document rendering example](https://ksookim.github.io/mf-json)
+[API test example] (https://ksookim.github.io/mf-access/)
