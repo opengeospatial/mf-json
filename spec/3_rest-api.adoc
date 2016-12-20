@@ -822,7 +822,7 @@ title
 ----
 
 [source]
-.Example: To get a value of a static property.
+.Example: To get a list of values of an element of TemporalProperties.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/TemporalProperties/name/$value  HTTP1.1
@@ -830,5 +830,13 @@ GET  SERVICE_ROOT/MovingFeatures('m0001')/TemporalProperties/name/$value  HTTP1.
 <<< Response
 200 OK
 Content_Type: text/plain
-length, weight
+length, dose
+
+>>> Request
+GET  SERVICE_ROOT/MovingFeatures('m0001')/TemporalProperties/uom/$value  HTTP1.1
+
+<<< Response
+200 OK
+Content_Type: text/plain
+http://www.qudt.org/qudt/owl/1.0.0/quantity/Length, http://www.qudt.org/qudt/owl/1.0.0/quantity/AbsorbedDose
 ----
