@@ -1916,11 +1916,12 @@ Content-Type: application/geo+json
              "interpolations": "Linear", // an interpolation method
        },
       "temporalProperties": [  //(optional)
-             { "name":"length",
+             {
+                "name":"length",
                 "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length", // a URL denoting a unit-of-measure
                 "values": [1.0, 2.4, 1.0],
-                 "datetimes" : ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
-                 "interpolations": "Stepwise"
+                "datetimes" : ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
+                "interpolations": "Stepwise"
              }
       ]
 }
@@ -2537,6 +2538,79 @@ For example,</p>
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="addressing">7.3.4. Addressing Entities: <code>$ref</code>, <code>$value</code></h4>
+<div class="paragraph">
+<p>This practice uses the symbolic resource <code>$ref</code>, located at the service root or a FeatureLayer entity, to get the URL for addressing all entities.
+The symbolic resource <code>$value</code> is allowed to resolve to a single property value or to get a list of values of TemporalProperties' elements of a MovingFeatures resource in text/plain form.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example: To get the URLs of all MovingFeatures entities if the service does not have any resource of FeatureLayer.</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/$ref  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: application/geo+json
+{
+    "url": ["MovingFeatures('m0001')", "MovingFeatures('m0002')"]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: To get the URLs of all FeatureLayer entities if the service manages resources of FeatureLayer.</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/$ref  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: application/geo+json
+{
+    "url": ["FeatureLayers('bus')", "FeatureLayers('typhoon')"]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: To get the URLs of all MovingFeatures entities in a FeatureLayer entity.</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/FeatureLayers('typhoon')/$ref  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: application/geo+json
+{
+    "url": ["features('m0001')", "features('m0002')"]
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: To get a value of a static property.</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/MovingFeatures('m0001')/properties/name/$value  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: text/plain
+title</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: To get a value of a static property.</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/MovingFeatures('m0001')/TemporalProperties/name/$value  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: text/plain
+length, weight</code></pre>
+</div>
 </div>
 </div>
 </div>
