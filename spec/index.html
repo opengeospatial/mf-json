@@ -2601,7 +2601,7 @@ title</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get a value of a static property.</div>
+<div class="title">Example: To get a list of values of an element of TemporalProperties.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/TemporalProperties/name/$value  HTTP1.1
@@ -2609,7 +2609,15 @@ GET  SERVICE_ROOT/MovingFeatures('m0001')/TemporalProperties/name/$value  HTTP1.
 &lt;&lt;&lt; Response
 200 OK
 Content_Type: text/plain
-length, weight</code></pre>
+length, dose
+
+&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/MovingFeatures('m0001')/TemporalProperties/uom/$value  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: text/plain
+http://www.qudt.org/qudt/owl/1.0.0/quantity/Length, http://www.qudt.org/qudt/owl/1.0.0/quantity/AbsorbedDose</code></pre>
 </div>
 </div>
 </div>
