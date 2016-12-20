@@ -13,7 +13,7 @@ With this repository the OGC invites collaboration and comments directed at the 
 Pull requests for fixes are appreciated, and new functionality will still be considered until fixing the encoding format. 
 The specification is done in asciidoc a format supported by GitHub, similar to markdown but with some features that make it better for specifications, like automatic section numbering.
 
-**Editor: Kyoung-Sook KIM**
+**Editor: Kyoung-Sook KIM, Hirotaka Ogawa**
 
 ## Contributing
 
@@ -51,3 +51,6 @@ in the change request form will help the SWG adjudicate and prioritize the reque
 2. On command line: asciidoctor -a stylesheet=./example.css index.adoc
 
 [Document rendering example](https://ksookim.github.io/mf-json)
+
+
+[API test example] (https://ksookim.github.io/mf-access/)
