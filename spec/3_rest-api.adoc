@@ -765,7 +765,7 @@ For example,
 [#addressing]
 ==== Addressing Entities: `$ref`, `$value`
 This practice uses the symbolic resource `$ref`, located at the service root or a FeatureLayer entity, to get the URL for addressing all entities.
-The symbolic resource `$value` is allowed to resolve to a single property value or to get a list of values of TemporalProperties' elements of a MovingFeatures resource in text/plain form.
+The symbolic resource `$value` is allowed to resolve to a single property value or to get a list of values of TemporalProperty elements of a MovingFeatures resource in text/plain form.
 
 [source]
 .Example: To get the URLs of all MovingFeatures entities if the service does not have any resource of FeatureLayer.
@@ -777,7 +777,8 @@ GET  SERVICE_ROOT/$ref  HTTP1.1
 200 OK
 Content_Type: application/geo+json
 {
-    "url": ["MovingFeatures('m0001')", "MovingFeatures('m0002')"]
+    "url": ["MovingFeatures('m0001')", "MovingFeatures('m0002')"],
+    "@id" : ["m0001", "m0002"]
 }
 ----
 
@@ -791,7 +792,8 @@ GET  SERVICE_ROOT/$ref  HTTP1.1
 200 OK
 Content_Type: application/geo+json
 {
-    "url": ["FeatureLayers('bus')", "FeatureLayers('typhoon')"]
+    "url": ["FeatureLayers('bus')", "FeatureLayers('typhoon')"],
+    "@id" : ["bus", "typhoon"]
 }
 ----
 
@@ -805,7 +807,8 @@ GET  SERVICE_ROOT/FeatureLayers('typhoon')/$ref  HTTP1.1
 200 OK
 Content_Type: application/geo+json
 {
-    "url": ["features('m0001')", "features('m0002')"]
+    "url": ["features('m0001')", "features('m0002')"],
+    "@id" : ["m0001", "m0002"]
 }
 ----
 
@@ -825,7 +828,7 @@ title
 .Example: To get a list of values of an element of TemporalProperties.
 ----
 >>> Request
-GET  SERVICE_ROOT/MovingFeatures('m0001')/TemporalProperties/name/$value  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties/name/$value  HTTP1.1
 
 <<< Response
 200 OK
@@ -833,7 +836,7 @@ Content_Type: text/plain
 length, dose
 
 >>> Request
-GET  SERVICE_ROOT/MovingFeatures('m0001')/TemporalProperties/uom/$value  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties/uom/$value  HTTP1.1
 
 <<< Response
 200 OK
