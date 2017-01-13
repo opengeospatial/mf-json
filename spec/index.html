@@ -2546,31 +2546,6 @@ For example,</p>
 <p>This practice uses the symbolic resource <code>$ref</code>, located at the service root or a FeatureLayer entity, to get the URL for addressing all entities.
 The symbolic resource <code>$value</code> is allowed to resolve to a single property value or to get a list of values of TemporalProperty elements of a MovingFeatures resource in text/plain form.</p>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>In the OData protocol, the <code>$search</code> query option is used to restrict the result to include only those entities matching the specified search expression.<br>
-For example,</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><span class="underline"><a href="http://host/service/Products?$search=bike" class="bare">http://host/service/Products?$search=bike</a></span> //return all Products that match the search term "bike"</p>
-</li>
-<li>
-<p><span class="underline"><a href="http://host/service/Products?$search=(mountain%20OR%20bike)%20AND%20NOT%20clothing" class="bare">http://host/service/Products?$search=(mountain%20OR%20bike)%20AND%20NOT%20clothing</a></span> //return all Products that match either "mountain" or "bike" and do not match clothing</p>
-</li>
-</ul>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <div class="listingblock">
 <div class="title">Example: To get the URLs of all MovingFeatures entities if the service does not have any resource of FeatureLayer.</div>
 <div class="content">
@@ -2581,8 +2556,7 @@ GET  SERVICE_ROOT/$ref  HTTP1.1
 200 OK
 Content_Type: application/geo+json
 {
-    "url": ["MovingFeatures('m0001')", "MovingFeatures('m0002')"],
-    "@id" : ["m0001", "m0002"]
+    "url": ["MovingFeatures('m0001')", "MovingFeatures('m0002')"]
 }</code></pre>
 </div>
 </div>
@@ -2596,8 +2570,7 @@ GET  SERVICE_ROOT/$ref  HTTP1.1
 200 OK
 Content_Type: application/geo+json
 {
-    "url": ["FeatureLayers('bus')", "FeatureLayers('typhoon')"],
-    "@id" : ["bus", "typhoon"]
+    "url": ["FeatureLayers('bus')", "FeatureLayers('typhoon')"]
 }</code></pre>
 </div>
 </div>
@@ -2611,8 +2584,7 @@ GET  SERVICE_ROOT/FeatureLayers('typhoon')/$ref  HTTP1.1
 200 OK
 Content_Type: application/geo+json
 {
-    "url": ["features('m0001')", "features('m0002')"],
-    "@id" : ["m0001", "m0002"]
+    "url": ["features('m0001')", "features('m0002')"]
 }</code></pre>
 </div>
 </div>

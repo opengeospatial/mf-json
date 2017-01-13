@@ -777,8 +777,7 @@ GET  SERVICE_ROOT/$ref  HTTP1.1
 200 OK
 Content_Type: application/geo+json
 {
-    "url": ["MovingFeatures('m0001')", "MovingFeatures('m0002')"],
-    "@id" : ["m0001", "m0002"]
+    "url": ["MovingFeatures('m0001')", "MovingFeatures('m0002')"]
 }
 ----
 
@@ -792,8 +791,7 @@ GET  SERVICE_ROOT/$ref  HTTP1.1
 200 OK
 Content_Type: application/geo+json
 {
-    "url": ["FeatureLayers('bus')", "FeatureLayers('typhoon')"],
-    "@id" : ["bus", "typhoon"]
+    "url": ["FeatureLayers('bus')", "FeatureLayers('typhoon')"]
 }
 ----
 
@@ -807,8 +805,7 @@ GET  SERVICE_ROOT/FeatureLayers('typhoon')/$ref  HTTP1.1
 200 OK
 Content_Type: application/geo+json
 {
-    "url": ["features('m0001')", "features('m0002')"],
-    "@id" : ["m0001", "m0002"]
+    "url": ["features('m0001')", "features('m0002')"]
 }
 ----
 
