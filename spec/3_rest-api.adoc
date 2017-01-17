@@ -200,6 +200,11 @@ If the server implements the FeatureLayer resource, it is recommend that the pat
 [NOTE]
  $NAME is replaced by a string of layer name.
 
+[WARNING]
+==========
+ For the root type of resources, a server should take one resource type of MovingFeatures or FeatureLayers. Any MovingFeatures and FeatureLayers resource cannot exist at the same level.
+==========
+
 ==== Resource Path Examples
 
 A client can make a request against the resources via URL using various HTTP methods: POST, GET, PUT/PATCH, and DELTE.

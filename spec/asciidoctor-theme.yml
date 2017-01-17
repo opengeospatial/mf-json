@@ -236,6 +236,6 @@ header:
   border_color: dddddd
   border_width: 0.25
   recto_content:
-    left: 'OGC 16-140'
+    left: 'OGC 16-140r1'
   verso_content:
-    right: 'OGC 16-140'
+    right: 'OGC 16-140r1'
