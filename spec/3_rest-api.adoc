@@ -18,7 +18,7 @@ image::protocol.png[Protocol,  pdfwidth=70%, width=70%, align="center"]
 
 ==== Verb
 
-Verb is an HTTP method: POST, GET, PUT/PATCH, and DELTE corresponding to create, read, update, and delete (CRUD) operations, respectively. A client make a request with one of the following method to be applied to the resource.
+Verb is an HTTP method: POST, GET, PUT/PATCH, and DELETE corresponding to create, read, update, and delete (CRUD) operations, respectively. A client make a request with one of the following method to be applied to the resource.
 
 [width="99%", cols="2,8"]
 |=========
@@ -169,7 +169,7 @@ When the service considers the implementation, the following properties may be r
 |===========================================================
 
 [NOTE]
-The moving-feature service needs to manage the connectivity of features' movement by using the updateFrequency interval.
+The moving-feature service needs to manage the connectivity of features' movement by using the updateFrequency interval. If the updateFrequency interval is 0, the server does not manage the connectivity of movements.
 
 ==== Resource Path Patterns
 
@@ -207,7 +207,7 @@ If the server implements the FeatureLayer resource, it is recommend that the pat
 
 ==== Resource Path Examples
 
-A client can make a request against the resources via URL using various HTTP methods: POST, GET, PUT/PATCH, and DELTE.
+A client can make a request against the resources via URL using various HTTP methods: POST, GET, PUT/PATCH, and DELETE.
 
 [source]
 .Example: To insert a moving feature data into the service.
