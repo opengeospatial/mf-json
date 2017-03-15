@@ -709,7 +709,7 @@ Even though the type extension occurs contravention of GeoJSON, this document ex
 <div class="title">Figure 2. JSON Objects in the Moving Features JSON format</div>
 </div>
 <div class="listingblock">
-<div class="title">Example:</div>
+<div class="title">Example 6.1:</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
     <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingFeature</span><span class="delimiter">&quot;</span></span>,  <span class="comment">//(REQUIRED) Moving Feature Type</span>
@@ -923,47 +923,16 @@ Their JSON representation is as follows.</p>
 <li>
 <p><code>"coordinates"</code>: The object SHALL be a list of leaf geometric primitives (points, linestrings, polygons) at times. The number of elements is same as the <code>"datetimes"</code> ones with a temporal order.
 There is an one-to-one correspondence between the elements of <code>"coordinates"</code> and <code>"datetimes"</code> as a temporal sequence of pairs \((g,t)\), where \(g\) is a leaf geometry and \(t\) is its sampling time.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>MovingPoint</strong>: The <code>"coordinates"</code> object is a list of points composed of one position.</p>
-</li>
-<li>
-<p><strong>MovingLineString</strong>: The <code>"coordinates"</code> object is a list of linestrings composed of an array of positions.</p>
-</li>
-<li>
-<p><strong>MovingPolygon</strong>: The <code>"coordinates"</code> object is a list of polygons composed of an array of linearrings.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<a href="https://www.rfc-editor.org/info/rfc7946">[IETF GeoJSON format</a>] A position is represented by an array of numbers, where must be two or more elements. The first two elements are longitude/easting (x) and latitude/northing (y), precisely in that order and using decimal numbers. Altitude/elevation (z) MAY be included as an optional third element.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>+</p>
-</div>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
-<col style="width: 20%;">
-<col style="width: 60%;">
+<col style="width: 10%;">
+<col style="width: 70%;">
 <col style="width: 20%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Types</th>
-<th class="tableblock halign-center valign-top">Formats</th>
+<th class="tableblock halign-center valign-top">Formats of the <code>"coordinates"</code> object</th>
 <th class="tableblock halign-left valign-top"><em>Comments</em></th>
 </tr>
 </thead>
@@ -985,20 +954,35 @@ There is an one-to-one correspondence between the elements of <code>"coordinates
 </tr>
 </tbody>
 </table>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="https://www.rfc-editor.org/info/rfc7946">[IETF GeoJSON format</a>] A position is represented by an array of numbers, where must be two or more elements. The first two elements are longitude/easting (x) and latitude/northing (y), precisely in that order and using decimal numbers. Altitude/elevation (z) MAY be included as an optional third element.
+</td>
+</tr>
+</table>
+</div>
 <div class="ulist">
 <ul>
 <li>
 <p><code>"datetimes"</code>: The object SHALL be a list of time instants encoded as a character string of [ISO 8601:2004](<a href="http://www.iso.org/iso/home/standards/iso8601.htm" class="bare">http://www.iso.org/iso/home/standards/iso8601.htm</a>) date-time formatter in chronological order, which does not allow duplicates.</p>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
-<col style="width: 20%;">
+<col style="width: 10%;">
 <col style="width: 60%;">
-<col style="width: 20%;">
+<col style="width: 30%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Types</th>
-<th class="tableblock halign-center valign-top">Formats</th>
+<th class="tableblock halign-center valign-top">Formats the <code>"datetimes"</code> object</th>
 <th class="tableblock halign-left valign-top"><em>Comments</em></th>
 </tr>
 </thead>
@@ -1341,6 +1325,7 @@ The object SHALL be a JSON array of interpolation methods whose instance is a pr
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json">{
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>,
   <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span> : [
     {
       <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [ <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T01:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T02:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T03:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T04:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T05:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T06:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T07:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T08:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T09:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T10:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T11:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T12:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T13:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T14:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T15:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T16:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T17:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T18:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T19:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T20:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T21:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T22:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T23:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T24:00:00Z</span><span class="delimiter">&quot;</span></span> ],
@@ -1382,7 +1367,8 @@ The object SHALL be a JSON array of interpolation methods whose instance is a pr
           }
       },
     }
-  ]
+  ],
+  <span class="error">.</span><span class="error">.</span><span class="error">.</span>
 }</code></pre>
 </div>
 </div>
@@ -2114,7 +2100,7 @@ The recommendation pattern of resource URL paths to address a collection of Movi
 <p>A client can make a request against the resources via URL using various HTTP methods: POST, GET, PUT/PATCH, and DELETE.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example: To insert a moving feature data into the service.</div>
+<div class="title">Example 7.1: To insert a moving feature data into the service.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 POST  SERVICE_ROOT/MovingFeatures   HTTP1.1
@@ -2148,7 +2134,7 @@ Content-Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To insert a list of moving feature data into the service with the "application/geo+json-seq" content type.</div>
+<div class="title">Example 7.2: To insert a list of moving feature data into the service with the "application/geo+json-seq" content type.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 POST  SERVICE_ROOT/MovingFeatures   HTTP1.1
@@ -2166,7 +2152,7 @@ Content-Type: application/geo+json-seq
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To add new trajectory data into a stored moving feature.</div>
+<div class="title">Example 7.3: To add new trajectory data into a stored moving feature.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 POST  SERVICE_ROOT/MovingFeatures('mf0001')/temporalGeometry   HTTP1.1
@@ -2186,7 +2172,7 @@ Content-Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get the list of all the temporal property information.</div>
+<div class="title">Example 7.4: To get the list of all the temporal property information.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties   HTTP1.1
@@ -2206,7 +2192,7 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties   HTTP1.1
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To retrieve a temporal property information whose name is 'dose'.</div>
+<div class="title">Example 7.5: To retrieve a temporal property information whose name is 'dose'.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('dose')   HTTP1.1
@@ -2224,7 +2210,7 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('dose')   HTTP1.1
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To modify the name of a property.</div>
+<div class="title">Example 7.6: To modify the name of a property.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 PUT  SERVICE_ROOT/MovingFeatures('mf0001')/properties#name='title'   HTTP1.1
@@ -2344,7 +2330,7 @@ The <code>convoy</code> operation returns the minimum bounding temporal geometry
 <p>The <code>$select</code> query option requests the service to harvest the properties or return a value derived from properties. The operations of <strong>Harvest</strong>, <strong>GeoSpatial</strong>, and <strong>Temporal</strong> are realized with the <code>$select</code> query option corresponding to a MovingFeature or FeatureLayer resource.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example: geometryAtTime of a moving feature with ID.</div>
+<div class="title">Example 7.7: geometryAtTime of a moving feature with ID.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=geometryAtTime(2008-02-04T00:00:00Z)  HTTP1.1
@@ -2361,7 +2347,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: geometryAtTime of all moving features.</div>
+<div class="title">Example 7.8: geometryAtTime of all moving features.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures?$select=geometryAtTime(2008-02-04T00:00:00Z)  HTTP1.1
@@ -2388,7 +2374,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: timeAtGeometry of a moving feature with ID.</div>
+<div class="title">Example 7.9: timeAtGeometry of a moving feature with ID.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=timeAtGeometry(POINT(116.4%2039.8))  HTTP1.1
@@ -2402,7 +2388,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: timeAtGeometry of all moving features.</div>
+<div class="title">Example 7.10: timeAtGeometry of all moving features.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures?$select=timeAtGeometry(POINT(116.4%2039.8))  HTTP1.1
@@ -2423,7 +2409,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: velocity of the all moving feature.</div>
+<div class="title">Example 7.11: velocity of the all moving feature.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures?$select=velocity(2008-02-04T00:00:00Z)  HTTP1.1
@@ -2444,7 +2430,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: timeAtCummulativeDistance of a moving feature with ID.</div>
+<div class="title">Example 7.12: timeAtCummulativeDistance of a moving feature with ID.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=timeAtCummulativeDistance(1,%22km%22)  HTTP1.1
@@ -2458,7 +2444,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: stBoundedBy of moving features.</div>
+<div class="title">Example 7.13: stBoundedBy of moving features.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures?$select=stBoundedBy()  HTTP1.1
@@ -2488,7 +2474,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: subTrajectory of a moving feature with ID.</div>
+<div class="title">Example 7.14: subTrajectory of a moving feature with ID.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=subTrajectory(2008-02-03T23:00:00Z,2008-02-03T23:05:00Z)  HTTP1.1
@@ -2510,7 +2496,7 @@ Content_Type: application/geo+json
 <p>The subTrajectory operation can also be realized by using the slice interface of temporal geometry as follows:</p>
 </div>
 <div class="listingblock">
-<div class="title">Example: slice of the temporal geometry of the moving feature whose identifier is 'mf0001'.</div>
+<div class="title">Example 7.15: slice of the temporal geometry of the moving feature whose identifier is 'mf0001'.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalGeometry?$select=slice(2008-02-03T23:00:00Z,2008-02-03T23:05:00Z)   HTTP1.1
@@ -2533,7 +2519,7 @@ Content_Type: application/geo+json
 The following examples show the use cases of each operation.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example: snapshot of the temporal property whose name is 'length' of the moving feature whose identifier is 'mf0001'.</div>
+<div class="title">Example 7.16: snapshot of the temporal property whose name is 'length' of the moving feature whose identifier is 'mf0001'.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('length')?$select=snapshot(2013-05-01T10:33:41Z)   HTTP1.1
@@ -2553,7 +2539,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: boundedBy of the temporal geometry of the moving feature whose identifier is 'mf0001'.</div>
+<div class="title">Example 7.17: boundedBy of the temporal geometry of the moving feature whose identifier is 'mf0001'.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalGeometry?$select=boundedBy()   HTTP1.1
@@ -2570,7 +2556,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: boundary of the temporal geometry of the moving feature whose identifier is 'mf0001'.</div>
+<div class="title">Example 7.18: boundary of the temporal geometry of the moving feature whose identifier is 'mf0001'.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalGeometry?$select=boundary()   HTTP1.1
@@ -2593,7 +2579,7 @@ Content_Type: application/geo+json
 <p>The <code>$filter</code> query option allows clients to filter a collection of moving features that are addressed by a request URL. It can be applied to a specific moving feature and a collection of moving features. The <code>$filter</code> option is evaluated for each moving features in the collection, and returns the features where the expression of the Relation interface is <code>true</code> in the response. For a specific feature, it returns <code>true</code> or <code>false</code>. The <strong>Relation</strong> interface is realized with the <code>$filter</code> query option.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example: The disjoint operation returns true or false corresponding to a moving feature.</div>
+<div class="title">Example 7.19: The disjoint operation returns true or false corresponding to a moving feature.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$filter=disjoint(LINESTRING(1%202,3%204,5%206),2008-02-02T22:31:00Z,2008-02-02T22:40:00Z)  HTTP1.1
@@ -2607,7 +2593,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: The intersects operation returns the identifiers of moving features whose trajectory intersects with the parameter geometry object for a particular period of time in the collection.</div>
+<div class="title">Example 7.20: The intersects operation returns the identifiers of moving features whose trajectory intersects with the parameter geometry object for a particular period of time in the collection.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures?$filter=intersects(POLYGON((30%2010%2C40%2040%2C20%2040%2C10%2020%2C30%2010)),2013-05-01T10:33:50Z,2013-05-01T10:36:41Z)  HTTP1.1
@@ -2621,7 +2607,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: The distanceWithin operation returns the identifiers of moving features which are located within 100km from the given position during the parameter time period.</div>
+<div class="title">Example 7.21: The distanceWithin operation returns the identifiers of moving features which are located within 100km from the given position during the parameter time period.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures?$filter=distanceWithin(POINT(103%201.0),2013-05-01T10:33:50Z,2013-05-01T10:36:41Z,100;km) HTTP1.1
@@ -2710,7 +2696,7 @@ Content_Type: application/geo+json
 <p>The <code>$search</code> query option allows clients to analyze moving features or a specific moving feature, and returns a new object as a computation result. The <strong>Analysis</strong> interface is realized with the <code>$search</code> query option.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example: To search the nearest approach point with ID.</div>
+<div class="title">Example 7.22: To search the nearest approach point with ID.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$search=nearestApproachPoint(LINESTRING(116.35%2039.8,116.36%2040),2008-02-04T00:00:00Z,2008-02-04T00:10:00Z)  HTTP1.1
@@ -2729,7 +2715,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To search the nearest approach distance for all moving features.</div>
+<div class="title">Example 7.23: To search the nearest approach distance for all moving features.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures?$search=nearestApproach(LINESTRING(116.35%2039.8,116.36%2040),2008-02-04T00:00:00Z,2008-02-04T00:10:00Z)  HTTP1.1
@@ -2753,7 +2739,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To compute each intersection object of the temporal geometry from a collection of moving features with a parameter geometry object for a particular period of time.</div>
+<div class="title">Example 7.24: To compute each intersection object of the temporal geometry from a collection of moving features with a parameter geometry object for a particular period of time.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures?$search=intersection(POLYGON((30%2010%2C40%2040%2C20%2040%2C10%2020%2C30%2010)),2013-05-01T10:33:50Z,2013-05-01T10:36:41Z)  HTTP1.1
@@ -2813,7 +2799,7 @@ For example,</p>
 The symbolic resource <code>$value</code> is allowed to resolve to a single property value or to get a list of values of TemporalProperty and Property elements of a MovingFeatures resource in text/plain form.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get the URLs of all MovingFeatures entities if the service does not have any resource of FeatureLayer.</div>
+<div class="title">Example 7.25: To get the URLs of all MovingFeatures entities if the service does not have any resource of FeatureLayer.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/$ref  HTTP1.1
@@ -2827,7 +2813,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get the URLs of all FeatureLayer entities if the service manages resources of FeatureLayer.</div>
+<div class="title">Example 7.26: To get the URLs of all FeatureLayer entities if the service manages resources of FeatureLayer.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/$ref  HTTP1.1
@@ -2841,7 +2827,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get the URLs of all MovingFeatures entities in a FeatureLayer entity.</div>
+<div class="title">Example 7.27: To get the URLs of all MovingFeatures entities in a FeatureLayer entity.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/FeatureLayers('typhoon')/$ref  HTTP1.1
@@ -2855,7 +2841,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get a list of names of FeatureLayer.</div>
+<div class="title">Example 7.28: To get a list of names of FeatureLayer.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/FeatureLayers/name/$value  HTTP1.1
@@ -2867,7 +2853,7 @@ bus, typhoon</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get a list of static properties' name.</div>
+<div class="title">Example 7.29: To get a list of static properties' name.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/properties/name/$value  HTTP1.1
@@ -2879,7 +2865,7 @@ title, author</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get a value of a static properties.</div>
+<div class="title">Example 7.30: To get a value of a static properties.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/properties('title')/$value  HTTP1.1
@@ -2891,7 +2877,7 @@ Test Title</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get a list of temporal properties' name.</div>
+<div class="title">Example 7.31: To get a list of temporal properties' name.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties/name/$value  HTTP1.1
@@ -2903,7 +2889,7 @@ length, dose, picture</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get a unit value of a temporal property</div>
+<div class="title">Example 7.32: To get a unit value of a temporal property</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties('length')/uom/$value  HTTP1.1

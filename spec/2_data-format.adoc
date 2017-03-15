@@ -22,7 +22,7 @@ image::mf-overview.png[Overview, pdfwidth=55%, width=55%, align="center"]
 
 
 [source, javascript]
-.Example:
+.Example 6.1:
 {
     "type": "MovingFeature",  //(REQUIRED) Moving Feature Type
     "temporalGeometry": { //(REQUIRED) temporal geometric object, extended from 'geometry'
@@ -194,31 +194,27 @@ Their JSON representation is as follows.
 
 - `"coordinates"`: The object SHALL be a list of leaf geometric primitives (points, linestrings, polygons) at times. The number of elements is same as the `"datetimes"` ones with a temporal order.
 There is an one-to-one correspondence between the elements of `"coordinates"` and `"datetimes"` as a temporal sequence of pairs latexmath:[(g,t)], where latexmath:[g] is a leaf geometry and latexmath:[t] is its sampling time.
-  ** *MovingPoint*: The `"coordinates"` object is a list of points composed of one position.
-  ** *MovingLineString*: The `"coordinates"` object is a list of linestrings composed of an array of positions.
-  ** *MovingPolygon*: The `"coordinates"` object is a list of polygons composed of an array of linearrings.
-
-[NOTE]
-https://www.rfc-editor.org/info/rfc7946[[IETF GeoJSON format]] A position is represented by an array of numbers, where must be two or more elements. The first two elements are longitude/easting (x) and latitude/northing (y), precisely in that order and using decimal numbers. Altitude/elevation (z) MAY be included as an optional third element.
 
 +
 
-[width="99%", cols="2,^6,2", options="header"]
+[width="99%", cols="1,^7,2", options="header"]
 |=========
-| Types   |      Formats      |  _Comments_
+| Types   |      Formats of the `"coordinates"` object  |  _Comments_
 | MovingPoint | [ [x1,y1(,z1)], [x2,y2(,z2)], ... ] | _a list of points at each leaf, increasing time order_
 | MovingLineString | [ [[x11,y11(,z11)], [x12,y12(,z12)], ...], [[x21,y21(,z21)], [x22,y22(,z22)], ...], ... ] | _a list of linestrings at each leaf, increasing time order_
 | MovingPolygon | [ [[[ox11,oy11(,oz11)], [ox12,oy12(,oz12)], ...], [[ix11,iy11(,iz11)],[ix12,iy12(,iz12)], ...],...], [[[ox21,oy21(,oz21)], [ox22,oy22(,oz22)], ...], [[ix21,iy21(,iz21)],[ix22,iy22(,iz22)], ...], ...], ... ] |  _a list of polygons at each leaf, increasing time order_
 |=========
 
+[NOTE]
+https://www.rfc-editor.org/info/rfc7946[[IETF GeoJSON format]] A position is represented by an array of numbers, where must be two or more elements. The first two elements are longitude/easting (x) and latitude/northing (y), precisely in that order and using decimal numbers. Altitude/elevation (z) MAY be included as an optional third element.
 
 - `"datetimes"`: The object SHALL be a list of time instants encoded as a character string of [ISO 8601:2004](http://www.iso.org/iso/home/standards/iso8601.htm) date-time formatter in chronological order, which does not allow duplicates.
 
 +
 
-[width="99%", cols="2,^6,2", options="header"]
+[width="99%", cols="1,^6,3", options="header"]
 |=========
-| Types   |      Formats      |  _Comments_
+| Types   |      Formats the `"datetimes"` object     |  _Comments_
 |http://www.w3.org/TR/xmlschema11-2/#dateTime[DateTime]  | ["yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd'T'HH:mm:ss'Z'", ...]| _a list of monotonic increasing instants_
 |=========
 
@@ -435,6 +431,7 @@ The object SHALL be a JSON array of interpolation methods whose instance is a pr
 
 [source, json]
 {
+  ...,
   "temporalProperties" : [
     {
       "datetimes" : [ "2017-03-13T01:00:00Z", "2017-03-13T02:00:00Z", "2017-03-13T03:00:00Z", "2017-03-13T04:00:00Z", "2017-03-13T05:00:00Z", "2017-03-13T06:00:00Z", "2017-03-13T07:00:00Z", "2017-03-13T08:00:00Z", "2017-03-13T09:00:00Z", "2017-03-13T10:00:00Z", "2017-03-13T11:00:00Z", "2017-03-13T12:00:00Z", "2017-03-13T13:00:00Z", "2017-03-13T14:00:00Z", "2017-03-13T15:00:00Z", "2017-03-13T16:00:00Z", "2017-03-13T17:00:00Z", "2017-03-13T18:00:00Z", "2017-03-13T19:00:00Z", "2017-03-13T20:00:00Z", "2017-03-13T21:00:00Z", "2017-03-13T22:00:00Z", "2017-03-13T23:00:00Z", "2017-03-13T24:00:00Z" ],
@@ -476,7 +473,8 @@ The object SHALL be a JSON array of interpolation methods whose instance is a pr
           }
       },
     }
-  ]
+  ],
+  ...
 }
 
 * `"description"`: A temporal property can have an optional member to describe a short description.
