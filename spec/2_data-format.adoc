@@ -201,6 +201,7 @@ There is an one-to-one correspondence between the elements of `"coordinates"` an
 [NOTE]
 https://www.rfc-editor.org/info/rfc7946[[IETF GeoJSON format]] A position is represented by an array of numbers, where must be two or more elements. The first two elements are longitude/easting (x) and latitude/northing (y), precisely in that order and using decimal numbers. Altitude/elevation (z) MAY be included as an optional third element.
 
++
 
 [width="99%", cols="2,^6,2", options="header"]
 |=========
