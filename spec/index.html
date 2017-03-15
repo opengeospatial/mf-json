@@ -25,7 +25,7 @@
 Publication Date: 2016-mm-dd<br>
 Approval Date: 2016-mm-dd<br>
 Submission Date: 2016-mm-dd<br>
-Reference number of this Document: OGC 16-140<br>
+Reference number of this Document: OGC 16-140r1<br>
 Reference URL for this document: <a href="http://www.opengis.net/doc/DOC-TYPE/xxx/m.n" class="bare">http://www.opengis.net/doc/DOC-TYPE/xxx/m.n</a><br>
 Version: 1.0<br>
 Category: OGC® Best Practice<br>
@@ -45,11 +45,15 @@ To obtain additional rights of use, visit <a href="http://www.opengeospatial.org
 <p><strong>Warning</strong></p>
 </div>
 <div class="paragraph">
-<p>This document is not an OGC Standard. This document is distributed for review and comment.
-This document is subject to change without notice and may not be referred to as an OGC Standard.</p>
+<p>This document defines an OGC Best Practices on a particular technology or approach related to an OGC standard.
+This document is <u>not</u> an OGC Standard and may not be referred to as an OGC Standard.
+This document is subject to change without notice. However, this document is an <u>official</u> position of the OGC membership on this particular technology topic.</p>
 </div>
 <div class="paragraph">
-<p>Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation.</p>
+<p>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium Inc. shall not be held responsible for identifying any or all such patent rights.</p>
+</div>
+<div class="paragraph">
+<p>Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.</p>
 </div>
 <div class="paragraph">
 <p>Document type:          OGC&#174; Best Practice<br>
@@ -132,10 +136,10 @@ Document language:      English<br></p>
 <li><a href="#data_format">6. JSON Encoding</a>
 <ul class="sectlevel2">
 <li><a href="#_overview">6.1. Overview</a></li>
-<li><a href="#_types">6.2. Types</a></li>
-<li><a href="#_temporal_geometries">6.3. Temporal Geometries</a></li>
-<li><a href="#_temporal_properties">6.4. Temporal Properties</a></li>
-<li><a href="#_spatiotemporal_bounding_box">6.5. Spatiotemporal Bounding Box</a></li>
+<li><a href="#_moving_features">6.2. Moving Features</a></li>
+<li><a href="#tgeometry">6.3. Temporal Geometries</a></li>
+<li><a href="#tproperties">6.4. Temporal Properties</a></li>
+<li><a href="#stbox">6.5. Spatiotemporal Bounding Box</a></li>
 <li><a href="#_application_domain_variables_foreign_members">6.6. Application Domain Variables (Foreign Members)</a></li>
 <li><a href="#_discussions">6.7. Discussions</a></li>
 </ul>
@@ -181,7 +185,7 @@ It is Best Practice to share moving feature data based on JSON and GeoJSON (a JS
 <div class="sectionbody">
 <div class="paragraph">
 <p>This best practice document basically follows the abstract data model defined in ISO 19141:2008 [ISO 19141:2008], and
-the encoding method refers to the expression of IETF GeoJSON Format [draft-ietf-geojson-04].
+the encoding method refers to the expression of IETF GeoJSON Format [IETF RFC 7946].
 OGC Moving Features Encoding: XML Core [OGC 14 083r2] and Simple CSV [OGC 14 084r2] have focused on the movement of 0-dimensional geometric primitive (Point), called trajectories.
 However, the draft format of this document covers the movements of 0-dimensional Point, 1-dimensional curve LineString, and 2-dimensional surface Polygon based on the application requirements such as disaster risk management, traffic information services, and geo-fencing services.</p>
 </div>
@@ -282,7 +286,7 @@ The set of leaves also forms a foliation, meaning that there is a complete and s
 The prism of the moving feature can be viewed as a bundle of trajectories of points on the local engineering representation of the feature&#8217;s geometry.</p>
 </div>
 <div class="paragraph">
-<p>In general, Moving Feature JSON encoding applies to representations and formats of IETF GeoJSON [draft-ietf-geojson-04]; however, new terms are added to specify dynamic attributes of moving features:</p>
+<p>In general, Moving Feature JSON encoding applies to representations and formats of IETF GeoJSON [IETF RFC 7946]; however, new terms are added to specify dynamic attributes of moving features:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -373,7 +377,7 @@ to, or revisions of, any of these publications do not apply. For undated referen
 <p><a href="https://www.ietf.org/rfc/rfc7464.txt">IETF RFC 7464</a>, <em>JavaScript Object Notation (JSON) Text Sequences</em>.</p>
 </li>
 <li>
-<p><a href="https://www.rfc-editor.org/info/rfc7946">IETF RFC 7946</a>, <em>The GeoJSON Format</em>.</p>
+<p><a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>, <em>The GeoJSON Format</em>.</p>
 </li>
 <li>
 <p><a href="http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html">OData-Part1</a>, <em>OData Version 4.0. Part 1: Protocol Plus Errata 03.</em> Edited by Michael Pizzo, Ralf Handl, and Martin Zurmuehl. 02 June 2016. OASIS Standard incorporating Approved Errata 03.</p>
@@ -400,9 +404,17 @@ to, or revisions of, any of these publications do not apply. For undated referen
 <div class="sectionbody">
 <div class="paragraph">
 <p>This document uses the specification terms defined in Subclause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards.
-In particular:
-- SHALL is the verb form used to indicate a requirement to be strictly followed to conform to this specification, from which no deviation is permitted
-- MAY is the verb form used to indicate an action permissible within the limits of this specification</p>
+In particular:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>SHALL is the verb form used to indicate a requirement to be strictly followed to conform to this specification, from which no deviation is permitted<br></p>
+</li>
+<li>
+<p>MAY is the verb form used to indicate an action permissible within the limits of this specification</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>For the purposes of this document, the following additional terms and definitions apply.</p>
@@ -497,7 +509,8 @@ EXAMPLE &#160;&#160; A curve C with constructive parameter t is a one parameter 
 <h3 id="_prism">4.13. prism</h3>
 <div class="paragraph">
 <p>&lt;one parameter set of geometries&gt; set of points in the union of the geometries (or the union of the
-trajectories) of a one parameter set of geometries<br></p>
+trajectories) of a one parameter set of geometries<br>
+ [ ISO 19141:2008 ]</p>
 </div>
 </div>
 <div class="sect2">
@@ -562,7 +575,7 @@ trajectories) of a one parameter set of geometries<br></p>
 <p>The notation of JSON in this document is based on the specification of [RFC 7159].</p>
 </div>
 <div class="paragraph">
-<p>The ordering of the members of any JSON object MUST be considered irrelevant. Some examples use a JavaScript single line comment (//) and an ellipsis (&#8230;&#8203;) as placeholder notation for a specific JSON instance.
+<p>The ordering of the members of any JSON object must be considered irrelevant. Some examples use a JavaScript single line comment (//) and an ellipsis (&#8230;&#8203;) as placeholder notation for a specific JSON instance.
 Whitespace is used in the examples inside this document to help illustrate the data structures, but is not required. Unquoted whitespace is not significant in JSON.</p>
 </div>
 </div>
@@ -669,8 +682,22 @@ Whitespace is used in the examples inside this document to help illustrate the d
 <div class="sect2">
 <h3 id="_overview">6.1. Overview</h3>
 <div class="paragraph">
-<p>Moving Features JSON (MF-JSON) defines new fields by extending "foreign members" of GeoJSON [draft-ietf-geojson-04].
-MF-JSON provides several types of JSON objects to represent movements about moving features, their dynamic properties, and their spatiotemporal extents based on two reference systems of World Geodetic System 1984 (WGS84) and Coordinated Universal Time (UTC).</p>
+<p>Moving Features JSON (MF-JSON) defines new fields by extending "foreign members" of <a href="https://www.ietf.org/rfc/rfc7946.txt">GeoJSON</a> [IETF RFC 7946].
+MF-JSON provides several types of JSON objects to represent geographical movements, dynamic properties, and spatiotemporal extents of moving features, based on two reference systems of World Geodetic System 1984 (WGS84) and Coordinated Universal Time (UTC).</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+In <a href="https://www.ietf.org/rfc/rfc7946.txt">IETF GeoJSON format</a>, types are not extensible.
+GeoJSON allows only the fixed types: FeatureCollection, Feature, Point, LineString, MultiPoint, Polygon, MultiLineString, MultiPolygon, and GeometryCollection.
+Even though the type extension occurs contravention of GeoJSON, this document extends new types for representing moving features with time-varying geometries and properties.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><a href="#mf_overview">Figure 2</a> compares the difference of members between GeoJSON and MF-JSON.</p>
@@ -690,35 +717,47 @@ MF-JSON provides several types of JSON objects to represent movements about movi
         <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a geometry type to represent a trajectory</span>
         <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">100.0</span>, <span class="float">0.0</span>], [<span class="float">101.0</span>, <span class="float">0.0</span>], [<span class="float">101.0</span>, <span class="float">1.0</span>], [<span class="float">100.0</span>, <span class="float">1.0</span>] ],
         <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T01:01:01Z</span><span class="delimiter">&quot;</span></span>],
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Linear</span><span class="delimiter">&quot;</span></span> <span class="comment">// an pre-defined interpolation method</span>
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">Linear</span><span class="delimiter">&quot;</span></span>] <span class="comment">// a pre-defined interpolation method between two consecutive instants in the &quot;datetimes&quot; field</span>
     },
     <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: [  <span class="comment">//(OPTIONAL) dynamic non-spatial attributes, extended from 'properties'</span>
-        {       <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">length</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.qudt.org/qudt/owl/1.0.0/quantity/Length</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a URI denoting a unit-of-measure</span>
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">2.4</span>, <span class="float">1.0</span>],
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>],
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Stepwise</span><span class="delimiter">&quot;</span></span>
+        { <span class="comment">// a group of temporal properties that are measured at the same times</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>],
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">length</span><span class="delimiter">&quot;</span></span>: {
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.qudt.org/qudt/owl/1.0.0/quantity/Length</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a URI denoting a unit-of-measure</span>
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">2.4</span>, <span class="float">1.0</span>], <span class="comment">// the array of values for &quot;length&quot;, with the same number of elements as &quot;datetimes&quot;</span>
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">Stepwise</span><span class="delimiter">&quot;</span></span>],
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">description1</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL)</span>
+            },
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span>:{
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a predefined unit for a string value</span>
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">A</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">B</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">C</span><span class="delimiter">&quot;</span></span>], <span class="comment">// the array of values for &quot;message&quot;, with the same number of elements as &quot;datetimes&quot;</span>
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">Discrete</span><span class="delimiter">&quot;</span></span>],
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">description2</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL)</span>
+            }
         },
-        {       <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">discharge</span><span class="delimiter">&quot;</span></span>,
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">m^3/s</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a symbol from UCUM</span>
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="float">3.0</span>, <span class="float">2.4</span>, <span class="float">4.0</span>],
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>],
-                <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [
-                    {
-                        <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">3.0</span>, <span class="float">4.1</span>], <span class="comment">// v = 1.0t^2 + 3.0t + 4.1</span>
-                        <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
-                                <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>,
-                                <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>
-                        }
-                    },
-                    {
-                        <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">5.0</span>, <span class="float">8.2</span>], <span class="comment">// v = 5.0t + 8.2</span>
-                        <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
-                                <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>,
-                                <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>
-                        }
-                    }
-                ]
+        {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:02:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T01:11:22Z</span><span class="delimiter">&quot;</span></span>],
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">discharge</span><span class="delimiter">&quot;</span></span> : {
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">m^3/s</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a symbol from UCUM</span>
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span> : [<span class="float">3.0</span>, <span class="float">4.0</span>],
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [ <span class="comment">// two user-defined interpolations having two sub-time intervals</span>
+                  {
+                      <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">3.0</span>, <span class="float">4.1</span>], <span class="comment">// v = 1.0t^2 + 3.0t + 4.1</span>
+                      <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
+                        <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:02:01Z</span><span class="delimiter">&quot;</span></span>,
+                        <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:11:14Z</span><span class="delimiter">&quot;</span></span>
+                      }
+                  },
+                  {
+                      <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">5.0</span>, <span class="float">8.2</span>], <span class="comment">// v = 5.0t + 8.2</span>
+                      <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
+                        <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:11:14Z</span><span class="delimiter">&quot;</span></span>,
+                        <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T01:11:22Z</span><span class="delimiter">&quot;</span></span>
+                      }
+                  }
+              ],
+              <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">it has two user-defined interpolations</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL)</span>
+            }
         }
     ],
     <span class="key"><span class="delimiter">&quot;</span><span class="content">stBoundedBy</span><span class="delimiter">&quot;</span></span>: {  <span class="comment">//(OPTIONAL) spatiotemporal bounding box to include the moving feature</span>
@@ -729,106 +768,112 @@ MF-JSON provides several types of JSON objects to represent movements about movi
         }
     },
     <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {  <span class="comment">//(OPTIONAL) static non-spatial attributes regardless of time: the same representation of GeoJSON</span>
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">bus1</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">test1</span><span class="delimiter">&quot;</span></span>
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">bus1</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">test1</span><span class="delimiter">&quot;</span></span>
     }
 }</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_types">6.2. Types</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: ...
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In <a href="https://datatracker.ietf.org/doc/draft-ietf-geojson/">IETF GeoJSON format</a>, types are not extensible.
-GeoJSON allows only the fixed types: FeatureCollection, Feature, Point, LineString, MultiPoint, Polygon, MultiLineString, MultiPolygon, and GeometryCollection.
-Even though the type extension occurs contravention of GeoJSON, this document extends new types for representing moving features with time-varying geometries and properties.</p>
-</div>
-<div class="sect3">
-<h4 id="_moving_feature_types">6.2.1. Moving Feature Types</h4>
+<h3 id="_moving_features">6.2. Moving Features</h3>
 <div class="paragraph">
 <p>In the MF-JSON format, two moving feature types are added as follows:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>MovingFeature</strong>: a moving feature instance</p>
-</li>
-</ul>
-</div>
+<p><strong>MovingFeature</strong>: a JSON object to represent a moving feature instance, having two REQUIRED members of <code>"type"</code> and <code>"temporalGeometry"</code>, and three OPTIONAL members of <code>"temporalProperties"</code>, <code>"stBoundedBy"</code>, and <code>"properties"</code> depending on the application requirements.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingFeature</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: ...,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: ...,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">stBoundedBy</span><span class="delimiter">&quot;</span></span>: ...,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: ...
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingFeature</span><span class="delimiter">&quot;</span></span>,    <span class="comment">//(REQUIRED)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: {...},    <span class="comment">//(REQUIRED)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: [...],  <span class="comment">//(OPTIONAL)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">stBoundedBy</span><span class="delimiter">&quot;</span></span>: {...},         <span class="comment">//(OPTIONAL)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {...}           <span class="comment">//(OPTIONAL)</span>
 }</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>A moving feature instance SHALL has the JSON string of "<em>MovingFeature</em>" for the <code>"type"</code> field and contain a <code>"temporalGeometry"</code> field as described in the Temporal Geometries section.
-A moving feature MAY contain a <code>"temporalProperties"</code>, <code>"stBoundedBy"</code>, <code>"properties"</code> fields depending on the application requirements.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>MovingFeatureCollection</strong>: a collection of moving feature instances</p>
+<p>The value of the <code>"type"</code> member SHALL be the string of <code>"MovingFeature"</code>.</p>
+</li>
+<li>
+<p>The value of the <code>"temporalGeometry"</code> member SHALL be a JSON object as described in <a href="#tgeometry">Temporal Geometries</a>. An instace of <code>"MovingFeature"</code> SHALL only one <code>"temporalGeometry"</code> member.</p>
+</li>
+<li>
+<p>The value of the <code>"temporalProperties"</code> memeber SHALL be a JSON array as described in <a href="#tproperties">Temporal Properties</a>.</p>
+</li>
+<li>
+<p>The value of the <code>"stBoundedBy"</code> memeber SHALL be a JSON object as described in <a href="#stbox">Spatiotemporal Bounding Box</a>, representing the spatiotemporal bounding box of the <code>"temporalGeometry"</code> instance.</p>
+</li>
+<li>
+<p>The value of the <code>"properties"</code> member is an object (any JSON object or a JSON null value).</p>
 </li>
 </ul>
 </div>
+</li>
+<li>
+<p><strong>MovingFeatureCollection</strong>: a JSON object to represent a collection of moving feature instances, having two REQUIRED members of <code>"type"</code> and <code>"features"</code>, and one OPTIONAL member of <code>"stBoundedBy"</code>.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingFeatureCollection</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">features</span><span class="delimiter">&quot;</span></span>: [
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingFeatureCollection</span><span class="delimiter">&quot;</span></span>,  <span class="comment">//(REQUIRED)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">features</span><span class="delimiter">&quot;</span></span>: [                       <span class="comment">//(REQUIRED)</span>
         {
             <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingFeature</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: ...,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: ...,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: {...},
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: [...],
             ...
         },
         {
             <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingFeature</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: ...,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: ...,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: {...},
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: [...],
             ...
         }
     ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">stBoundedBy</span><span class="delimiter">&quot;</span></span>: ...
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">stBoundedBy</span><span class="delimiter">&quot;</span></span>: {...}                  <span class="comment">//(OPTIONAL)</span>
 }</code></pre>
 </div>
-</div>
-<div class="paragraph">
-<p>A collection of moving features SHALL has the JSON string of "<em>MovingFeatureCollection</em>" for the <code>"type"</code> field and contain a <code>"features"</code> field as an array object of moving feature instances.
-It MAY contain a <code>"stBoundedBy"</code> field for the spatiotemporal bounding box to cover all of features.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_temporal_geometry_types">6.2.2. Temporal Geometry Types</h4>
-<div class="paragraph">
-<p>The movement of a moving feature is represented as a JSON object where the type members value SHALL be one of the following strings: "<em>MovingPoint</em>", "<em>MovingLineString</em>", "<em>MovingPolygon</em>", "<em>MultiMovingPoint</em>", "<em>MultiMovingLineString</em>", "<em>MultiMovingPolygon</em>", or "<em>MovingGeometryCollection</em>".
-It is modeled as a mapping function from time to a geometric object: <code>temporalGeometry: timePosition &#8594; Geometry</code> (<a href="http://geojson.org/geojson-spec.html#point">Point</a>, <a href="http://geojson.org/geojson-spec.html#linestring">LineString</a>, <a href="http://geojson.org/geojson-spec.html#polygon">Polygon</a>,
-<a href="http://geojson.org/geojson-spec.html#multipoint">MultiPoint</a>, <a href="http://geojson.org/geojson-spec.html#multilinestring">MultiLineString</a>, <a href="http://geojson.org/geojson-spec.html#multipolygon#polygon">MultiPolygon</a>, or <a href="http://geojson.org/geojson-spec.html#geometry-collection">GeometryCollection</a>).
-It represents time-varying locations of a moving feature.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>MovingPoint</strong>: A temporal geometry represents a trajectory of a time-parametered 0-dimensional geometric primitive (Point), representing a single geographic position at a time position (instant) within its temporal domain. Intuitively this type depicts a set of curves in a spatiotemporal domain. It is used to express <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html#78">mf:AbstractTrajectory</a> in the OGC&#174; Moving Features standard. For example, the movement information of people, vehicles, or hurricanes can be shared by instances of the "<em>MovingPoint</em>" type.</p>
+<p>The value of the <code>"type"</code> member SHALL be the string of <code>"MovingFeatureCollection"</code>.</p>
 </li>
 <li>
-<p><strong>MovingLineString</strong>: A temporal geometry represents the prism of a time-parametered 1-dimensional (1D) geometric primitive (LineString), whose leaf at a time position is 1-dimensional linear object in a particular time period. Intuitively this type depicts a set of surfaces in a spatiotemporal domain. For example, the movement information of weather fronts or traffic congestion on roads can be shared by instances of the "<em>MovingLineString</em>" type.</p>
+<p>The value of the <code>"features"</code> member SHALL be a JSON array of moving feature instances as described in <a href="#tgeometry">Temporal Geometries</a>.</p>
 </li>
 <li>
-<p><strong>MovingPolygon</strong>: A temporal geometry represents the prism of a time-parametered 2-dimensional (2D) geometric primitive (Polygon), whose leaf at a time position is 2-dimensional polygonal object in a particular time period. Intuitively this type depicts a set of polyhedrons that are the convex hulls of two congruent polygons in a spatiotemporal domain. For example, the changes of flooding areas or the movement information of air pollution can be shared by instances of the "<em>MovingPolygon</em>" type.</p>
+<p>The value of the <code>"stBoundedBy"</code> memeber SHALL be a JSON object as described in <a href="#stbox">Spatiotemporal Bounding Box</a>, representing the spatiotemporal bounding box to cover all of the <code>"temporalGeometry"</code> instances in  the <code>"features"</code> elements.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tgeometry">6.3. Temporal Geometries</h3>
+<div class="paragraph">
+<p>The value of <code>"temporalGeometry"</code> member of a moving feature SHALL be a JSON object where the value of the <code>"type"</code> member is one of the following strings: <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, <code>"MultiMovingPoint"</code>, <code>"MultiMovingLineString"</code>, <code>"MultiMovingPolygon"</code>, and <code>"MovingGeometryCollection"</code>.
+A temporal geometry is conceptualized as a prism of the set of points contained in all of the leaves (a foliation) and trajectories, representing the geographical movement of a moving feature.
+It is mathematically modeled as a mapping function from time to a geometric object: <strong><em>temporalGeometry: timePosition &#8594; Geometry</em></strong> (<a href="http://geojson.org/geojson-spec.html#point">Point</a>, <a href="http://geojson.org/geojson-spec.html#linestring">LineString</a>, <a href="http://geojson.org/geojson-spec.html#polygon">Polygon</a>,
+<a href="http://geojson.org/geojson-spec.html#multipoint">MultiPoint</a>, <a href="http://geojson.org/geojson-spec.html#multilinestring">MultiLineString</a>, <a href="http://geojson.org/geojson-spec.html#multipolygon#polygon">MultiPolygon</a>, or <a href="http://geojson.org/geojson-spec.html#geometry-collection">GeometryCollection</a>).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>MovingPoint</strong>: A temporal geometry represents the trajectory of a time-parametered 0-dimensional geometric primitive (Point), representing a single geographic position at a time position (instant) within its temporal domain. Intuitively this type depicts a set of curves in a spatiotemporal domain. It is used to express <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html#78">mf:AbstractTrajectory</a> in the OGC&#174; Moving Features standard. For example, the movement information of people, vehicles, or hurricanes can be shared by instances of the <code>"MovingPoint"</code> type.</p>
+</li>
+<li>
+<p><strong>MovingLineString</strong>: A temporal geometry represents the prism of a time-parametered 1-dimensional (1D) geometric primitive (LineString), whose leaf at a time position is 1-dimensional linear object in a particular time period. Intuitively this type depicts a set of surfaces in a spatiotemporal domain. For example, the movement information of weather fronts or traffic congestion on roads can be shared by instances of the <code>"MovingLineString"</code> type.</p>
+</li>
+<li>
+<p><strong>MovingPolygon</strong>: A temporal geometry represents the prism of a time-parametered 2-dimensional (2D) geometric primitive (Polygon), whose leaf at a time position is 2-dimensional polygonal object in a particular time period. Intuitively this type depicts a set of polyhedrons that are the convex hulls of two congruent polygons in a spatiotemporal domain. For example, the changes of flooding areas or the movement information of air pollution can be shared by instances of the <code>"MovingPolygon"</code> type.</p>
 </li>
 <li>
 <p><strong>MultiMovingPoint</strong>: A temporal geometry represents a set of moving points.</p>
@@ -840,26 +885,20 @@ It represents time-varying locations of a moving feature.</p>
 <p><strong>MultiMovingPolygon</strong>: A temporal geometry represents a set of moving polygons.</p>
 </li>
 <li>
-<p><strong>MovingGeometryCollection</strong>: It represents a collection of temporal geometries that have time-varying locations. Each object in this array belongs to one of the above types.</p>
+<p><strong>MovingGeometryCollection</strong>: It represents a collection of temporal geometries that have time-varing locations. Each element in the collection belongs to one of the above types.</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_temporal_geometries">6.3. Temporal Geometries</h3>
 <div class="paragraph">
-<p>A moving feature has only one temporal geometry whose type is one of "MovingPoint", "MovingLineString", "MovingPolygon", "MultiMovingPoint", "MultiMovingLineString",  "MultiMovingPolygon", and "MovingGeometryCollection".
-The temporal geometry is conceptualized as a prism of the set of points contained in all of the leaves (a foliation) and trajectories.
-In this document, a temporal geometry instance is represented by a simple or collection type.</p>
+<p>This practice defines two encoding ways for a temporal geometry instance: simple and collection form.</p>
 </div>
 <div class="sect3">
-<h4 id="_simple">6.3.1. Simple</h4>
+<h4 id="simple">6.3.1. Simple Temporal Geometries</h4>
 <div class="paragraph">
-<p>A simple temporal geometry represents the movement of one geometric primitive that is non-decomposed objects.
-There are three types of temporal geometry: a moving point, moving linestring, and moving polygon.
-If viewed in a 4-dimensional spatio-temporal coordinate system, the simple temporal geometry is a single continuum.
-A moving point, linestring, polygon is a spatio-temporal curve, surface, solid, respectively.
+<p>The simple form of temporal geometry instances is a JSON object with four REQUIRED memebers: <code>"type"</code>, <code>"coordinates"</code>, <code>"datetimes"</code>, and <code>"interpolations"</code>.
+The simple form represents the movement of one geometric primitive that is non-decomposed objects, i.e., a moving point, moving linestring, and moving polygon.
+If viewed in a 4-dimensional spatio-temporal coordinate system, the temporal geometry is a single continuum.
+A moving point, linestring, and polygon is a spatio-temporal curve, surface, and solid, respectively.
 Their JSON representation is as follows.</p>
 </div>
 <div class="listingblock">
@@ -867,10 +906,10 @@ Their JSON representation is as follows.</p>
 <pre class="CodeRay highlight"><code data-lang="json">{
     <span class="error">.</span><span class="error">.</span><span class="error">.</span>,
     <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: {
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint | MovingLineString | MovingPolygon</span><span class="delimiter">&quot;</span></span>,  <span class="error">/</span><span class="error">/</span> <span class="error">v</span><span class="error">b</span><span class="error">a</span><span class="error">r</span> <span class="error">|</span> <span class="error">a</span><span class="error">s</span> <span class="error">a</span> <span class="error">m</span><span class="error">e</span><span class="error">a</span><span class="error">n</span><span class="error">s</span> <span class="error">t</span><span class="error">o</span> <span class="error">s</span><span class="error">e</span><span class="error">l</span><span class="error">e</span><span class="error">c</span><span class="error">t</span> <span class="error">O</span><span class="error">N</span><span class="error">E</span> <span class="error">t</span><span class="error">y</span><span class="error">p</span><span class="error">e</span><span class="error">.</span>
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint | MovingLineString | MovingPolygon</span><span class="delimiter">&quot;</span></span>,  <span class="error">/</span><span class="error">/</span> <span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span> <span class="error">v</span><span class="error">b</span><span class="error">a</span><span class="error">r</span> <span class="error">|</span> <span class="error">a</span><span class="error">s</span> <span class="error">a</span> <span class="error">m</span><span class="error">e</span><span class="error">a</span><span class="error">n</span><span class="error">s</span> <span class="error">t</span><span class="error">o</span> <span class="error">s</span><span class="error">e</span><span class="error">l</span><span class="error">e</span><span class="error">c</span><span class="error">t</span> <span class="error">O</span><span class="error">N</span><span class="error">E</span> <span class="error">t</span><span class="error">y</span><span class="error">p</span><span class="error">e</span><span class="error">.</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],   <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],    <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>] <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span>
     },
     <span class="error">.</span><span class="error">.</span><span class="error">.</span>
 }</code></pre>
@@ -879,14 +918,24 @@ Their JSON representation is as follows.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>"type"</code>: A case-sensitive string that is one of "MovingPoint", "MovingLineString", and "MovingPolygon" in the term "temporal geometry type".</p>
+<p><code>"type"</code>: A case-sensitive string that is one of <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, and <code>"MovingPolygon"</code>.</p>
 </li>
 <li>
-<p><code>"coordinates"</code>: The object SHALL be a list of leaf geometric primitives (points, linestrings, polygons) at times.
-For type "MovingPoint", the "coordinates" member is a list of points composed of one position.
-For type "MovingLineString", the "coordinates" member is a list of linestrings composed of an array of positions.
-The elements of the "coordinates" member have the same number of the elements of the "datetimes" member with a temporal order.
-There is an one-to-one correspondence between the elements of "coordinates" and "datetimes" as a temporal sequemce of pairs \((g,t)\), where \(g\) is a leaf geometry and \(t\) is its sampling time.</p>
+<p><code>"coordinates"</code>: The object SHALL be a list of leaf geometric primitives (points, linestrings, polygons) at times. The number of elements is same as the <code>"datetimes"</code> ones with a temporal order.
+There is an one-to-one correspondence between the elements of <code>"coordinates"</code> and <code>"datetimes"</code> as a temporal sequence of pairs \((g,t)\), where \(g\) is a leaf geometry and \(t\) is its sampling time.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>MovingPoint</strong>: The <code>"coordinates"</code> object is a list of points composed of one position.</p>
+</li>
+<li>
+<p><strong>MovingLineString</strong>: The <code>"coordinates"</code> object is a list of linestrings composed of an array of positions.</p>
+</li>
+<li>
+<p><strong>MovingPolygon</strong>: The <code>"coordinates"</code> object is a list of polygons composed of an array of linearrings.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -936,7 +985,7 @@ There is an one-to-one correspondence between the elements of "coordinates" and 
 <div class="ulist">
 <ul>
 <li>
-<p><code>"datetimes"</code>: The object SHALL be an array of instants of time encoded as a character string of [ISO 8601:2004](<a href="http://www.iso.org/iso/home/standards/iso8601.htm" class="bare">http://www.iso.org/iso/home/standards/iso8601.htm</a>) date-time formatter in monotonically increasing order.</p>
+<p><code>"datetimes"</code>: The object SHALL be a list of time instants encoded as a character string of [ISO 8601:2004](<a href="http://www.iso.org/iso/home/standards/iso8601.htm" class="bare">http://www.iso.org/iso/home/standards/iso8601.htm</a>) date-time formatter in chronological order, which does not allow duplicates.</p>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
 <col style="width: 20%;">
@@ -960,14 +1009,16 @@ There is an one-to-one correspondence between the elements of "coordinates" and 
 </table>
 </li>
 <li>
-<p><code>"interpolations"</code>: The object SHALL be a character string of pre-defined interpolation methods or an array object of interpolation formulas in time.
+<p><code>"interpolations"</code>: The object SHALL be a JSON array of interpolation methods.
 <a href="http://mathworld.wolfram.com/Interpolation.html">Interpolation</a> is a method of finding new values for any function using the given set of values.
-The unknown position at a particular point can be found using many interpolation methods.
 Here, the interpolation object approximates geographic positions at non sampling time instants for constructing the trajectory or prism of a moving feature in a spatiotemporal domain.
-There are two expressions for an interpolation instance: Predefined Interpolation Methods and Interpolation Formulas.</p>
+The unknown position at a particular time can be found using many interpolation methods.
+In this practice, there are two expressions for an instance of interpolation methods: Predefined Interpolation Methods and Interpolation Formulas.</p>
 <div class="paragraph">
 <div class="title">[Predefined Interpolation Methods]</div>
-<p>The new position is differently derived by each method. For the predefine method, there is the restriction of the same number positions of all leaf geometries.</p>
+<p>A predefined method SAHLL be a case-sensitive string of one of <code>"Discrete"</code>, <code>"Stepwise"</code>, <code>"Linear"</code>, and <code>"Spline"</code>.
+The new position is differently derived by each method.
+For the predefine method, there is the restriction of the same number positions of all leaf geometries.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
@@ -1011,22 +1062,34 @@ There are two expressions for an interpolation instance: Predefined Interpolatio
     <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint</span><span class="delimiter">&quot;</span></span>,
     <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">100.0</span>, <span class="float">0.0</span>], [<span class="float">101.0</span>, <span class="float">0.0</span>], [<span class="float">101.0</span>, <span class="float">1.0</span>]],
     <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Linear</span><span class="delimiter">&quot;</span></span> <span class="comment">// an interpolation method</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">Linear</span><span class="delimiter">&quot;</span></span>] <span class="comment">// an interpolation method during the period of datetimes</span>
 }</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<div class="title">[Interpolation Formulas]</div>
-<p>A temporal geometry MAY have a several interpolation formulas within its temporal domain. An element of interpolation formulas is represented by field <code>"coefficients"</code> and <code>"period"</code>.
-The new geographical position at a given time position is derived from a <code>"coefficients"</code> instance as a multidimensional array of <strong>polynomial interpolation formulas</strong> of \((x, y, z)\) coordinates during a particular time period.
-If a time position does not belong to any time period of the elements of formula, there is no interpolation position at that time.
-The order of each formula array SHALL follow \(x\) (longitude), \(y\) (latitude), \(z\) (altitude) order.
-The time periods between any two elements of formulas only allows empty or 0-dimensional intersection.
-In order to compute a value of each axis of coordinates at an arbitrary time position formatted by a character string of [ISO 8601:2004],
-this practice converts the time position to a signed 64-bit integer(long) value to represent milliseconds.</p>
-</div>
 </li>
 </ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If a moving feature needs different predefined interpolation methods for several sub-intervals of time during its lifespan,
+this practice recommends to use user-defined interpolation formulas corresponding each sub-interval.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<div class="title">[Interpolation Formulas]</div>
+<p>A temporal geometry MAY have a several interpolation formulas within its temporal domain. An element of interpolation formulas SHALL be represented by two members of <code>"coefficients"</code> and <code>"period"</code>.
+The new geographical position at a given time position is derived from a <code>"coefficients"</code> instance as a multidimensional array of <strong>polynomial interpolation formulas</strong> of \((x, y, z)\) coordinates during a particular time period.
+If a time position does not belong to any time period of the elements of formula, there is no interpolation position at that time.
+The order of arrays for the interpoation formular of a temporal position SHALL follow \(x\) (longitude), \(y\) (latitude), \(z\) (altitude) order.
+The time periods between any two elements of formulas only allows empty or 0-dimensional intersection.
+This practice converts the time position to a signed 64-bit integer(long) value that represents milliseconds for computing a value of each axis of coordinates at an arbitrary time position formatted by a character string of [ISO 8601:2004].</p>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -1101,9 +1164,9 @@ this practice converts the time position to a signed 64-bit integer(long) value 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_collection">6.3.2. Collection</h4>
+<h4 id="collection">6.3.2. Collection of Temporal Geometries</h4>
 <div class="paragraph">
-<p>A temporal geometry is represented as an array object of a set of simple temporal geometry instances.</p>
+<p>The collection form of temporal geometry instances is a JSON object with two REQUIRED fields: <code>"type"</code> and <code>"members"</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1117,7 +1180,7 @@ this practice converts the time position to a signed 64-bit integer(long) value 
             <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint | MovingLineString | MovingPolygon</span><span class="delimiter">&quot;</span></span>,
             <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],  <span class="error">/</span><span class="error">/</span> <span class="error">C</span><span class="error">O</span><span class="error">O</span><span class="error">R</span><span class="error">D</span><span class="error">I</span><span class="error">N</span><span class="error">A</span><span class="error">T</span><span class="error">E</span><span class="error">S</span> <span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],   <span class="error">/</span><span class="error">/</span> <span class="error">D</span><span class="error">A</span><span class="error">T</span><span class="error">E</span><span class="error">T</span><span class="error">I</span><span class="error">M</span><span class="error">E</span><span class="error">S</span> <span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: <span class="error">.</span><span class="error">.</span><span class="error">.</span>   <span class="error">/</span><span class="error">/</span> <span class="error">I</span><span class="error">N</span><span class="error">T</span><span class="error">E</span><span class="error">R</span><span class="error">P</span><span class="error">O</span><span class="error">L</span><span class="error">A</span><span class="error">T</span><span class="error">I</span><span class="error">O</span><span class="error">N</span><span class="error">S</span> <span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>]   <span class="error">/</span><span class="error">/</span> <span class="error">I</span><span class="error">N</span><span class="error">T</span><span class="error">E</span><span class="error">R</span><span class="error">P</span><span class="error">O</span><span class="error">L</span><span class="error">A</span><span class="error">T</span><span class="error">I</span><span class="error">O</span><span class="error">N</span><span class="error">S</span> <span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>
          }
       ]
     },
@@ -1128,44 +1191,37 @@ this practice converts the time position to a signed 64-bit integer(long) value 
 <div class="ulist">
 <ul>
 <li>
-<p><strong>MultiMovingPoint</strong>: The <code>"members"</code> element SHALL be an array of instances of type <code>"MovingPoint"</code>. The leaf geometry at a time position must be an instance of type "MultiPoint", which is the union of each leaf of moving point members at the same time.</p>
+<p><code>"type"</code>: A case-sensitive string that is one of <code>"MultiMovingPoint"</code>, <code>"MultiMovingLineString"</code>, <code>"MultiMovingPolygon"</code>, and <code>"MovingGeometryCollection"</code>.</p>
 </li>
 <li>
-<p><strong>MultiMovingLineString</strong>: The <code>"members"</code> element SHALL be an array of instances of type <code>"MovingLineString"</code>. The leaf geometry at a time position must be an instance of type "MultiLineString", which is the union of each leaf of moving linestring members at the same time.</p>
+<p><code>"members"</code>: The object is encoded as a JSON array of instances of temporal geometry that each element is encoded as a simple form.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>MultiMovingPoint</strong>: The elements of the <code>"members"</code> object SHALL be instances of type <code>"MovingPoint"</code>. The leaf geometry at a time position is an instance of type "MultiPoint", which is the union of each leaf of moving point members at the same time.</p>
 </li>
 <li>
-<p><strong>MultiMovingPolygon</strong>: The <code>"members"</code> element SHALL be an array of instances of type <code>"MovingPolygon"</code>. The leaf geometry at a time position must be an instance of type "MultiPolygon", which is the union of each leaf of moving polygon members at the same time.</p>
+<p><strong>MultiMovingLineString</strong>: The elements of the <code>"members"</code> object SHALL be instances of type <code>"MovingLineString"</code>. The leaf geometry at a time position is an instance of type "MultiLineString", which is the union of each leaf of moving linestring members at the same time.</p>
 </li>
 <li>
-<p><strong>MovingGeometryCollection</strong>: Each element of <code>"members"</code> can be an instance of different moving types. The leaf geometry at a time position must be an instance of type <code>"GeometryCollection"</code>, which is the union of each leaf of any temporal geometries at the same time.</p>
+<p><strong>MultiMovingPolygon</strong>: The element of the <code>"members"</code> object SHALL be instances of type <code>"MovingPolygon"</code>. The leaf geometry at a time position is an instance of type "MultiPolygon", which is the union of each leaf of moving polygon members at the same time.</p>
+</li>
+<li>
+<p><strong>MovingGeometryCollection</strong>: Each element of the <code>"members"</code> object can be an instance of different moving types. The leaf geometry at a time position is an instance of type <code>"GeometryCollection"</code>, which is the union of each leaf of any temporal geometries at the same time.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_temporal_properties">6.4. Temporal Properties</h3>
+<h3 id="tproperties">6.4. Temporal Properties</h3>
 <div class="paragraph">
-<p>A moving feature can have more than zero time-varying properties, such as the velocity of vehicles or wind speed of hurricanes.
+<p>A moving feature can have more than zero time-varying properties, such as the velocity of vehicles or the wind speed of hurricanes.
 A temporal property represents a dynamic measure that the result of ascertaining the value of a characteristic of a moving feature changes over time and/or location.
-Even though the value of temporal property is depending on the spatiotemporal location, this draft only considers the temporal dependencies of their changes of value.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="json">{
-    <span class="error">.</span><span class="error">.</span><span class="error">.</span>
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: [
-      {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">any string</span><span class="delimiter">&quot;</span></span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span>: <span class="error">.</span><span class="error">.</span><span class="error">.</span>,
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],  <span class="error">/</span><span class="error">/</span> <span class="error">s</span><span class="error">a</span><span class="error">m</span><span class="error">e</span> <span class="error">e</span><span class="error">x</span><span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">s</span><span class="error">s</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> <span class="error">o</span><span class="error">f</span> <span class="error">t</span><span class="error">e</span><span class="error">m</span><span class="error">p</span><span class="error">o</span><span class="error">r</span><span class="error">a</span><span class="error">l</span> <span class="error">g</span><span class="error">e</span><span class="error">o</span><span class="error">m</span><span class="error">e</span><span class="error">t</span><span class="error">r</span><span class="error">y</span>
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: <span class="error">.</span><span class="error">.</span><span class="error">.</span>
-      }
-    ],
-    <span class="error">.</span><span class="error">.</span><span class="error">.</span>
-}</code></pre>
-</div>
+Even though the value of temporal property is depending on the spatiotemporal location, this document only considers the temporal dependencies of their changes of value.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1174,7 +1230,99 @@ Even though the value of temporal property is depending on the spatiotemporal lo
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a property has a static value, it is represented with the member "properties" as same as GeoJSON.
+If a property has a static value, it is represented with the "properties" member as same as GeoJSON.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="json">{
+    <span class="error">.</span><span class="error">.</span><span class="error">.</span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: [
+      { <span class="error">/</span><span class="error">/</span> <span class="error">a</span> <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">l</span><span class="error">e</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> <span class="error">o</span><span class="error">f</span> <span class="error">t</span><span class="error">e</span><span class="error">m</span><span class="error">p</span><span class="error">o</span><span class="error">r</span><span class="error">a</span><span class="error">l</span> <span class="error">p</span><span class="error">r</span><span class="error">o</span><span class="error">p</span><span class="error">e</span><span class="error">r</span><span class="error">t</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> <span class="error">w</span><span class="error">h</span><span class="error">i</span><span class="error">c</span><span class="error">h</span> <span class="error">a</span><span class="error">r</span><span class="error">e</span> <span class="error">m</span><span class="error">e</span><span class="error">a</span><span class="error">s</span><span class="error">u</span><span class="error">r</span><span class="error">e</span><span class="error">d</span> <span class="error">a</span><span class="error">t</span> <span class="error">t</span><span class="error">h</span><span class="error">e</span> <span class="error">s</span><span class="error">a</span><span class="error">m</span><span class="error">e</span> <span class="error">t</span><span class="error">i</span><span class="error">m</span><span class="error">e</span><span class="error">s</span>
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],   <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span> <span class="error">J</span><span class="error">S</span><span class="error">O</span><span class="error">N</span> <span class="error">A</span><span class="error">r</span><span class="error">r</span><span class="error">a</span><span class="error">y</span> <span class="error">o</span><span class="error">f</span> <span class="error">t</span><span class="error">i</span><span class="error">m</span><span class="error">e</span> <span class="error">i</span><span class="error">n</span><span class="error">s</span><span class="error">t</span><span class="error">a</span><span class="error">n</span><span class="error">c</span><span class="error">e</span><span class="error">s</span> <span class="error">i</span><span class="error">n</span> <span class="error">o</span><span class="error">r</span><span class="error">d</span><span class="error">e</span><span class="error">r</span>, <span class="error">w</span><span class="error">h</span><span class="error">i</span><span class="error">c</span><span class="error">h</span> <span class="error">d</span><span class="error">o</span><span class="error">e</span><span class="error">s</span> <span class="error">n</span><span class="error">o</span><span class="error">t</span> <span class="error">a</span><span class="error">l</span><span class="error">l</span><span class="error">o</span><span class="error">w</span> <span class="error">d</span><span class="error">u</span><span class="error">p</span><span class="error">l</span><span class="error">i</span><span class="error">c</span><span class="error">a</span><span class="error">t</span><span class="error">e</span><span class="error">s</span><span class="error">.</span>
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">_property0_</span><span class="delimiter">&quot;</span></span>: {      <span class="error">/</span><span class="error">/</span> <span class="error">_</span><span class="error">p</span><span class="error">r</span><span class="error">o</span><span class="error">p</span><span class="error">e</span><span class="error">r</span><span class="error">t</span><span class="error">y</span><span class="integer">0</span><span class="error">_</span> <span class="error">w</span><span class="error">h</span><span class="error">o</span><span class="error">s</span><span class="error">e</span> <span class="error">n</span><span class="error">a</span><span class="error">m</span><span class="error">e</span> <span class="error">i</span><span class="error">s</span> <span class="error">d</span><span class="error">e</span><span class="error">f</span><span class="error">i</span><span class="error">n</span><span class="error">e</span><span class="error">d</span> <span class="error">b</span><span class="error">y</span> <span class="error">a</span><span class="error">n</span> <span class="error">a</span><span class="error">p</span><span class="error">p</span><span class="error">l</span><span class="error">i</span><span class="error">c</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span>: <span class="error">.</span><span class="error">.</span><span class="error">.</span>,             <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span> <span class="error">a</span> <span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">d</span><span class="error">e</span><span class="error">f</span><span class="error">i</span><span class="error">n</span><span class="error">e</span><span class="error">d</span> <span class="error">s</span><span class="error">t</span><span class="error">r</span><span class="error">i</span><span class="error">n</span><span class="error">g</span> <span class="error">o</span><span class="error">r</span> <span class="error">U</span><span class="error">R</span><span class="error">I</span>
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],        <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span> <span class="error">a</span> <span class="error">J</span><span class="error">S</span><span class="error">O</span><span class="error">N</span> <span class="error">A</span><span class="error">r</span><span class="error">r</span><span class="error">a</span><span class="error">y</span> <span class="error">o</span><span class="error">f</span> <span class="error">v</span><span class="error">a</span><span class="error">l</span><span class="error">u</span><span class="error">e</span><span class="error">s</span>
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],<span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span> <span class="error">a</span> <span class="error">J</span><span class="error">S</span><span class="error">O</span><span class="error">N</span> <span class="error">A</span><span class="error">r</span><span class="error">r</span><span class="error">a</span><span class="error">y</span> <span class="error">o</span><span class="error">f</span> <span class="error">i</span><span class="error">n</span><span class="error">t</span><span class="error">e</span><span class="error">r</span><span class="error">p</span><span class="error">o</span><span class="error">l</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> <span class="error">m</span><span class="error">e</span><span class="error">t</span><span class="error">h</span><span class="error">o</span><span class="error">d</span><span class="error">s</span>
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">any string</span><span class="delimiter">&quot;</span></span>   <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">O</span><span class="error">P</span><span class="error">T</span><span class="error">I</span><span class="error">O</span><span class="error">N</span><span class="error">A</span><span class="error">L</span><span class="error">)</span>
+        },
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">_property1_</span><span class="delimiter">&quot;</span></span>: {      <span class="error">/</span><span class="error">/</span> <span class="error">_</span><span class="error">p</span><span class="error">r</span><span class="error">o</span><span class="error">p</span><span class="error">e</span><span class="error">r</span><span class="error">t</span><span class="error">y</span><span class="integer">1</span><span class="error">_</span> <span class="error">w</span><span class="error">h</span><span class="error">o</span><span class="error">s</span><span class="error">e</span> <span class="error">n</span><span class="error">a</span><span class="error">m</span><span class="error">e</span> <span class="error">i</span><span class="error">s</span> <span class="error">d</span><span class="error">e</span><span class="error">f</span><span class="error">i</span><span class="error">n</span><span class="error">e</span><span class="error">d</span> <span class="error">b</span><span class="error">y</span> <span class="error">a</span><span class="error">n</span> <span class="error">a</span><span class="error">p</span><span class="error">p</span><span class="error">l</span><span class="error">i</span><span class="error">c</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span>
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span>: <span class="error">.</span><span class="error">.</span><span class="error">.</span>,             <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span> <span class="error">a</span> <span class="error">p</span><span class="error">r</span><span class="error">e</span><span class="error">d</span><span class="error">e</span><span class="error">f</span><span class="error">i</span><span class="error">n</span><span class="error">e</span><span class="error">d</span> <span class="error">s</span><span class="error">t</span><span class="error">r</span><span class="error">i</span><span class="error">n</span><span class="error">g</span> <span class="error">o</span><span class="error">r</span> <span class="error">U</span><span class="error">R</span><span class="error">I</span>
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],        <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span> <span class="error">a</span> <span class="error">J</span><span class="error">S</span><span class="error">O</span><span class="error">N</span> <span class="error">A</span><span class="error">r</span><span class="error">r</span><span class="error">a</span><span class="error">y</span> <span class="error">o</span><span class="error">f</span> <span class="error">v</span><span class="error">a</span><span class="error">l</span><span class="error">u</span><span class="error">e</span><span class="error">s</span>
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],<span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">R</span><span class="error">E</span><span class="error">Q</span><span class="error">U</span><span class="error">I</span><span class="error">R</span><span class="error">E</span><span class="error">D</span><span class="error">)</span> <span class="error">a</span> <span class="error">J</span><span class="error">S</span><span class="error">O</span><span class="error">N</span> <span class="error">A</span><span class="error">r</span><span class="error">r</span><span class="error">a</span><span class="error">y</span> <span class="error">o</span><span class="error">f</span> <span class="error">i</span><span class="error">n</span><span class="error">t</span><span class="error">e</span><span class="error">r</span><span class="error">p</span><span class="error">o</span><span class="error">l</span><span class="error">a</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> <span class="error">m</span><span class="error">e</span><span class="error">t</span><span class="error">h</span><span class="error">o</span><span class="error">d</span><span class="error">s</span>
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">any string</span><span class="delimiter">&quot;</span></span>   <span class="error">/</span><span class="error">/</span><span class="error">(</span><span class="error">O</span><span class="error">P</span><span class="error">T</span><span class="error">I</span><span class="error">O</span><span class="error">N</span><span class="error">A</span><span class="error">L</span><span class="error">)</span> <span class="error">a</span> <span class="error">J</span><span class="error">S</span><span class="error">O</span><span class="error">N</span> <span class="error">s</span><span class="error">t</span><span class="error">r</span><span class="error">i</span><span class="error">n</span><span class="error">g</span>
+        },
+        <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+      },
+      { <span class="error">/</span><span class="error">/</span> <span class="error">a</span><span class="error">n</span><span class="error">o</span><span class="error">t</span><span class="error">h</span><span class="error">e</span><span class="error">r</span> <span class="error">c</span><span class="error">o</span><span class="error">l</span><span class="error">l</span><span class="error">e</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> <span class="error">o</span><span class="error">f</span> <span class="error">d</span><span class="error">y</span><span class="error">n</span><span class="error">a</span><span class="error">m</span><span class="error">i</span><span class="error">c</span> <span class="error">p</span><span class="error">r</span><span class="error">o</span><span class="error">p</span><span class="error">e</span><span class="error">r</span><span class="error">t</span><span class="error">i</span><span class="error">e</span><span class="error">s</span> <span class="error">w</span><span class="error">h</span><span class="error">i</span><span class="error">c</span><span class="error">h</span> <span class="error">a</span><span class="error">r</span><span class="error">e</span> <span class="error">m</span><span class="error">e</span><span class="error">a</span><span class="error">s</span><span class="error">u</span><span class="error">r</span><span class="error">e</span><span class="error">d</span> <span class="error">a</span><span class="error">t</span> <span class="error">t</span><span class="error">h</span><span class="error">e</span> <span class="error">s</span><span class="error">a</span><span class="error">m</span><span class="error">e</span> <span class="error">t</span><span class="error">i</span><span class="error">m</span><span class="error">e</span><span class="error">s</span>
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="error">.</span><span class="error">.</span><span class="error">.</span>],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">_property2_</span><span class="delimiter">&quot;</span></span>: {<span class="error">.</span><span class="error">.</span><span class="error">.</span>},
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">_property3_</span><span class="delimiter">&quot;</span></span>: {<span class="error">.</span><span class="error">.</span><span class="error">.</span>}
+      }
+    ],
+    <span class="error">.</span><span class="error">.</span><span class="error">.</span>
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>temporalProperties</code> is a JSON array of collections of temporal properties whose results are ascertained at the same times.
+A collection of temporal properties SHALL one "datetimes" member and more than one <em>property</em> member whose name is defined by an application.
+However, the value of the <em>property</em> member SHALL be a JSON object that has the following fields:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"uom"</code>: A unit of measure is a quantity adopted as a standard of measurement [ISO 19103:2015]. The unit of a temporal property is represented as a URI denoting a unit-of-measure defined in a web resource or a predefined strings. This practice defines the following unit strings.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Unit strings</th>
+<th class="tableblock halign-left valign-top">Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">print symbols</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">From the Unified Code for Units of Measure (UCUM)<a href="#1">[1]</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>"values"</code> member contains counting measures.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>"values"</code> member contains any strings.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <code>"values"</code> member contains Base64 strings converted from images.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"values"</code>: Each element of values is a string, number, null, or one of the literals: true and false. The number of elements is the same as the "datetimes" ones. There is an one-to-one correspondence between the elements of <code>"values"</code> of a <em>property</em> object and <code>"datetimes"</code> as a temporal sequence of pairs \((v,t)\), where \(v\) is a value of measurement and \(t\) is its sampling time.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If the values of a temporal property are measured at different times of <code>"datetimes"</code>, it SHALL be represented as a new element in the JSON array.
 </td>
 </tr>
 </table>
@@ -1182,47 +1330,72 @@ If a property has a static value, it is represented with the member "properties"
 <div class="ulist">
 <ul>
 <li>
-<p><code>"name"</code>: The name of property is always a string. Duplicate names' temporal properties are not allowed in a moving feature.</p>
-</li>
-<li>
-<p><code>"uom"</code>: A unit of measure is a quantity adopted as a standard of measurement [ISO 19103:2015]. The unit of a temporal property is represented as a URI denoting a unit-of-measure defined in a web resource or a string of print symbol from the Unified Code for Units of Measure (UCUM)<a href="#1">[1]</a>.</p>
-</li>
-<li>
-<p><code>"values"</code>: Each member of values is a string, number, or one of the literals: true and false.</p>
-</li>
-<li>
-<p><code>"interpolations"</code>: The temporal property also needs to define an interpolation method like the temporal geometry. The object SHALL be a character string of pre-defined interpolation methods: Discrete, Stepwise, Linear (default), and Spline or an array of interpolation formulas used for polynomial interpolation in time.</p>
+<p><code>"interpolations"</code>: The temporal property also needs to define an interpolation method like the temporal geometry.
+The object SHALL be a JSON array of interpolation methods whose instance is a pre-defined interpolation methods of <code>"Discrete"</code>, <code>"Stepwise"</code>, <code>"Linear"</code>(default), and <code>"Spline"</code>, or an interpolation formula used for polynomial interpolation in time.</p>
 </li>
 </ul>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="json">{
- <span class="error">.</span><span class="error">.</span><span class="error">.</span>,
- <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span>: [
-   {
-     <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">3.0</span>, <span class="float">4.1</span>], <span class="error">/</span><span class="error">/</span> <span class="error">v</span> <span class="error">=</span> <span class="error">a</span><span class="error">t</span><span class="error">^</span><span class="integer">2</span> <span class="error">+</span> <span class="error">b</span><span class="error">t</span> <span class="error">+</span> <span class="error">c</span>
-     <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>,
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span> : [
+    {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [ <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T01:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T02:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T03:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T04:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T05:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T06:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T07:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T08:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T09:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T10:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T11:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T12:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T13:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T14:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T15:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T16:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T17:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T18:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T19:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T20:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T21:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T22:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T23:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T24:00:00Z</span><span class="delimiter">&quot;</span></span> ],
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">NO2</span><span class="delimiter">&quot;</span></span> : {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">ppm</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span> : [ <span class="float">0.018</span>, <span class="float">0.013</span>, <span class="float">0.013</span>, <span class="float">0.014</span>, <span class="float">0.021</span>, <span class="float">0.034</span>, <span class="float">0.036</span>, <span class="float">0.047</span>, <span class="float">0.059</span>, <span class="float">0.052</span>, <span class="float">0.042</span>, <span class="float">0.031</span>, <span class="float">0.024</span>, <span class="float">0.02</span>, <span class="float">0.023</span>, <span class="float">0.022</span>, <span class="float">0.027</span>, <span class="float">0.025</span>, <span class="float">0.029</span>, <span class="float">0.03</span>, <span class="float">0.024</span>, <span class="float">0.02</span>, <span class="float">0.018</span>, <span class="float">0.016</span> ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span> : [ <span class="string"><span class="delimiter">&quot;</span><span class="content">Stepwise</span><span class="delimiter">&quot;</span></span> ]
+      },
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">NO</span><span class="delimiter">&quot;</span></span> : {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">ppm</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span> : [ <span class="float">0.001</span>, <span class="float">0.001</span>, <span class="float">0.001</span>, <span class="float">0.002</span>, <span class="float">0.002</span>, <span class="float">0.006</span>, <span class="float">0.012</span>, <span class="float">0.056</span>, <span class="float">0.085</span>, <span class="float">0.06</span>, <span class="float">0.039</span>, <span class="float">0.024</span>, <span class="float">0.013</span>, <span class="float">0.01</span>, <span class="float">0.009</span>, <span class="float">0.009</span>, <span class="float">0.009</span>, <span class="float">0.007</span>, <span class="float">0.007</span>, <span class="float">0.006</span>, <span class="float">0.005</span>, <span class="float">0.004</span>, <span class="float">0.003</span>, <span class="float">0.003</span> ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span> : [ <span class="string"><span class="delimiter">&quot;</span><span class="content">Linear</span><span class="delimiter">&quot;</span></span> ]
       }
-   },
-   {
-     <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">5.0</span>, <span class="float">8.0</span>], <span class="error">/</span><span class="error">/</span> <span class="error">v</span> <span class="error">=</span> <span class="error">a</span><span class="error">t</span> <span class="error">+</span> <span class="error">b</span>
-     <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>,
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>
-     }
-   }
- ]
+    },
+    {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [ <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T01:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T03:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T04:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T05:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T06:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T07:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T08:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T09:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T10:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T11:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T12:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T13:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T14:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T15:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T16:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T17:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T18:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T19:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T20:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T21:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T22:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T23:00:00Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T24:00:00Z</span><span class="delimiter">&quot;</span></span> ],
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">CH4</span><span class="delimiter">&quot;</span></span> : {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">ppmC</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span> : [ <span class="float">1.97</span>, <span class="float">1.98</span>, <span class="float">1.97</span>, <span class="float">2.01</span>, <span class="float">2.19</span>, <span class="float">2.13</span>, <span class="float">2.06</span>, <span class="float">2.21</span>, <span class="float">2.14</span>, <span class="float">2.08</span>, <span class="float">2.04</span>, <span class="float">1.99</span>, <span class="float">1.97</span>, <span class="float">1.96</span>, <span class="float">1.95</span>, <span class="float">1.95</span>, <span class="float">1.96</span>, <span class="float">1.96</span>, <span class="float">1.97</span>, <span class="float">1.96</span>, <span class="float">1.95</span>, <span class="float">1.95</span>, <span class="float">1.95</span> ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span> : [ <span class="string"><span class="delimiter">&quot;</span><span class="content">Discrete</span><span class="delimiter">&quot;</span></span> ]
+      },
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">THC</span><span class="delimiter">&quot;</span></span> : {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">uom</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">ppmC</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span> : [ <span class="float">2.09</span>, <span class="float">2.05</span>, <span class="float">2.05</span>, <span class="float">2.09</span>, <span class="float">2.33</span>, <span class="float">2.26</span>, <span class="float">2.22</span>, <span class="float">2.45</span>, <span class="float">2.35</span>, <span class="float">2.25</span>, <span class="float">2.18</span>, <span class="float">2.09</span>, <span class="float">2.04</span>, <span class="float">2.04</span>, <span class="float">2.03</span>, <span class="float">2.02</span>, <span class="float">2.03</span>, <span class="float">2.05</span>, <span class="float">2.08</span>, <span class="float">2.06</span>, <span class="float">2.03</span>, <span class="float">2.03</span>, <span class="float">2.03</span> ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolations</span><span class="delimiter">&quot;</span></span> : [  <span class="error">/</span><span class="error">/</span> <span class="error">T</span><span class="error">h</span><span class="error">e</span> <span class="error">f</span><span class="error">u</span><span class="error">n</span><span class="error">c</span><span class="error">t</span><span class="error">i</span><span class="error">o</span><span class="error">n</span> <span class="error">i</span><span class="error">s</span> <span class="error">a</span><span class="error">n</span> <span class="error">e</span><span class="error">x</span><span class="error">a</span><span class="error">m</span><span class="error">p</span><span class="error">l</span><span class="error">e</span>, <span class="error">n</span><span class="error">o</span> <span class="error">s</span><span class="error">e</span><span class="error">n</span><span class="error">s</span><span class="error">e</span> <span class="error">o</span><span class="error">f</span> <span class="error">w</span><span class="error">o</span><span class="error">r</span><span class="error">k</span><span class="error">i</span><span class="error">n</span><span class="error">g</span>
+          {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">3.0</span>, <span class="float">4.1</span>], <span class="error">/</span><span class="error">/</span> <span class="error">v</span> <span class="error">=</span> <span class="error">a</span><span class="error">t</span><span class="error">^</span><span class="integer">2</span> <span class="error">+</span> <span class="error">b</span><span class="error">t</span> <span class="error">+</span> <span class="error">c</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
+                 <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T01:00:00Z</span><span class="delimiter">&quot;</span></span>,
+                 <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T05:00:00Z</span><span class="delimiter">&quot;</span></span>
+             }
+          },
+          {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">coefficients</span><span class="delimiter">&quot;</span></span>: [<span class="float">5.0</span>, <span class="float">8.0</span>], <span class="error">/</span><span class="error">/</span> <span class="error">v</span> <span class="error">=</span> <span class="error">a</span><span class="error">t</span> <span class="error">+</span> <span class="error">b</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">period</span><span class="delimiter">&quot;</span></span>: {
+                 <span class="key"><span class="delimiter">&quot;</span><span class="content">begin</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T05:00:00Z</span><span class="delimiter">&quot;</span></span>,
+                 <span class="key"><span class="delimiter">&quot;</span><span class="content">end</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">2017-03-13T24:00:00Z</span><span class="delimiter">&quot;</span></span>
+            }
+          }
+      },
+    }
+  ]
 }</code></pre>
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"description"</code>: A temporal property can have an optional member to describe a short description.</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_spatiotemporal_bounding_box">6.5. Spatiotemporal Bounding Box</h3>
+<h3 id="stbox">6.5. Spatiotemporal Bounding Box</h3>
 <div class="paragraph">
-<p>A moving feature may have a member named <code>"stBoundedBy"</code>, which indicate the boundary containing moving features in a spatiotemporal domain. To represent information on the coordinate range for moving features, this MF-JSON format follows GeoJSON&#8217;s <code>"bbox"</code> field. The value of the bbox member must be a 2*n array where n is the number of dimensions.
+<p>A moving feature may have a member named <code>"stBoundedBy"</code>, which indicate the boundary containing moving features in a spatiotemporal domain. To represent information on the coordinate range for moving features, this MF-JSON format follows GeoJSON&#8217;s <code>"bbox"</code> field.
+The value of the bbox member is a 2*n array where n is the number of dimensions.
 The temporal boundary is a temporal period of <code>"begin"</code> and <code>"end"</code> expressed in ISO 8601:2004.</p>
 </div>
 <div class="listingblock">
@@ -1259,9 +1432,23 @@ On the name/value pair of a foreign member, the name always starts with the at s
 </td>
 <td class="content">
 <div class="title">Coordinate Reference System</div>
-<a href="https://datatracker.ietf.org/doc/draft-ietf-geojson">The IETF GeoJSON format</a> recommends a single coordinate reference system based on WGS84<a href="#2">[2]</a>.
+<a href="https://www.ietf.org/rfc/rfc7946.txt">The IETF GeoJSON format</a> recommends a single coordinate reference system based on WGS84<a href="#2">[2]</a>.
 In this version of MF-JSON, CRSs are fixed to WGS84 for space and ISO 8601:2004 for time; still they need to be indicated in the request of application demands.
 If the application requires to define an alternative CRS, the CRS of a GeoJSON object can be represented with its "crs" field as described in GeoJSON(2008)<a href="#3">[3]</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Circular Temporal Geometry</div>
+Some applications, such as the predication of hurricanes, need to represent a time-varying circular object. <a href="https://www.ietf.org/rfc/rfc7946.txt">The IETF GeoJSON format</a> excludes the circular types such as Circle or Ellipse.
+No type for "Circle" and "Ellipse" is defined in this version of MF-JSON.
 </td>
 </tr>
 </table>
@@ -1289,7 +1476,7 @@ A moving feature may have a member named <code>"geometry"</code>, which may repr
 <p>This Clause provides a design example of the RESTful API as a form of service interfaces to handle moving features on the Web with ease of development, access, robustness, and scalability in server/client distributed environments.
 In general, Representational State Transfer (REST) focuses on resources and how to access to these resources over Hypertext Transfer Protocol (HTTP).
 A few use cases of RESTful approaches for OGC web service interfaces are analyzed in the OGC Testbed 11 REST Interface Engineering Report [OGC 15-052r1].
-Since OGC still consider a common guidance to define RESTful interfaces and JSON encodings, this work refers to the OGC SensorThings API [OGC 15-078r6], which provides a good example to follow the RESTful principle and is approved as official OGC standard.
+Since OGC still consider a common guidance to define RESTful interfaces and JSON encodings, this practice refers to the OGC SensorThings API [OGC 15-078r6], which provides a good example to follow the RESTful principle and is approved as official OGC standard.
 However, this document contains a minimal description to implement RESTful API using the Moving Features JSON (MF-JSON) encoding.</p>
 </div>
 <div class="sect2">
@@ -1477,7 +1664,8 @@ The Host request-header field specifies the Internet host and port number of the
 <div class="sect2">
 <h3 id="resources">7.2. Resources</h3>
 <div class="paragraph">
-<p>A request URI is constructed with a resource path for a corresponding resource item. Resources are the fundamental elements of the RESTful API. This API is designed by the resource classes and their relationships as shown in <a href="#resource_type">Figure 4</a>.</p>
+<p>A request URI is constructed with a resource path for a corresponding resource item. Resources are the fundamental elements of the RESTful API.
+This API is designed by the resource classes and their relationships as shown in <a href="#resource_type">Figure 4</a>.</p>
 </div>
 <div id="resource_type" class="imageblock" style="text-align: center">
 <div class="content">
@@ -1490,7 +1678,8 @@ The Host request-header field specifies the Internet host and port number of the
 <div class="ulist">
 <ul>
 <li>
-<p><strong>MovingFeature Class</strong>: It is for the root resource to enable the client to access other resources as its properties. A MovingFeature resource is the minimum requirement to be implemented with the following properties in a moving-feature service:</p>
+<p><strong>MovingFeature Class</strong>: It is for the root resource to enable the client to access other resources as its properties.
+A MovingFeature resource is the minimum requirement to be implemented with the following properties in a moving-feature service:</p>
 </li>
 </ul>
 </div>
@@ -1521,21 +1710,21 @@ The Host request-header field specifies the Internet host and port number of the
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">temporalGeometry</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A resource representing a temporal geometry.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address the resource containing a temporal geometry.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JSON Object&lt;TemporalGeometry&gt; (Null is not allowed)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">temporalProperties</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A resource containing temporal properties.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address the resource containing temporal properties.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;TemporalProperty&gt; or Null</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">properties</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A resource containing static properties as name-value pairs.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A navigation property to address the resource containing static properties as name-value pairs.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JSON Array&lt;Property&gt; or Null</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Zero-to-one</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">YES</p></td>
@@ -1712,7 +1901,7 @@ A resource instance whose type is specified, such as Geometry, DateTime, Tempora
 <td class="tableblock halign-left valign-top"><p class="tableblock">NO</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">@name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A name of interpolation.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">JSON String</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">One (mandatory)</p></td>
@@ -1728,7 +1917,7 @@ A resource instance whose type is specified, such as Geometry, DateTime, Tempora
 </tbody>
 </table>
 <div class="paragraph">
-<p>For pre-defined methods such as Discrete, Stepwise, and Linear, the client cannot edit the names of methods.
+<p>For pre-defined methods such as <code>"Discrete"</code>, <code>"Stepwise"</code>, <code>"Linear"</code>, and <code>"Spline"</code>, the client cannot edit the names of methods.
 This practice assumes that the name of a user-defined interpolation formula is automatically assigned by the service when moving features are inserted.</p>
 </div>
 <div class="ulist">
@@ -1854,7 +2043,9 @@ The recommendation pattern of resource URL paths to address a collection of Movi
  - SERVICE_ROOT/MovingFeatures(@id)
  - SERVICE_ROOT/MovingFeatures(@id)/temporalGeometry
  - SERVICE_ROOT/MovingFeatures(@id)/temporalProperties
- - SERVICE_ROOT/MovingFeatures(@id)/properties</code></pre>
+ - SERVICE_ROOT/MovingFeatures(@id)/temporalProperties($NAME)
+ - SERVICE_ROOT/MovingFeatures(@id)/properties
+ - SERVICE_ROOT/MovingFeatures(@id)/properties($NAME)</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1880,7 +2071,9 @@ The recommendation pattern of resource URL paths to address a collection of Movi
  - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)
  - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)/temporalGeometry
  - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)/temporalProperties
- - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)/properties</code></pre>
+ - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)/temporalProperties($NAME)
+ - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)/properties
+ - SERVICE_ROOT/FeatureLayers($NAME)/features(@id)/properties($NAME)</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1890,7 +2083,7 @@ The recommendation pattern of resource URL paths to address a collection of Movi
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
- $NAME is replaced by a string of layer name.
+ $NAME is replaced by a value of property <code>name</code>.
 </td>
 </tr>
 </table>
@@ -1924,28 +2117,47 @@ The recommendation pattern of resource URL paths to address a collection of Movi
 POST  SERVICE_ROOT/MovingFeatures   HTTP1.1
 Content-Type: application/geo+json
 {
-     "type": "MovingFeature",
-     "temporalGeometry": {
-         "type": "MovingPoint", // a geometry type to represent a trajectory object
-             "coordinates": [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0] ],
-             "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z", "2011-07-15T01:01:01Z"],
-             "interpolations": "Linear", // an interpolation method
-       },
-      "temporalProperties": [  //(optional)
-             {
-                "name":"length",
-                "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length", // a URL denoting a unit-of-measure
-                "values": [1.0, 2.4, 1.0],
-                "datetimes" : ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
-                "interpolations": "Stepwise"
-             }
-      ]
+    "type": "MovingFeature",
+    "temporalGeometry": {
+      "type": "MovingPoint", // a geometry type to represent a trajectory object
+      "coordinates": [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0] ],
+      "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z", "2011-07-15T01:01:01Z"],
+      "interpolations": ["Linear"]
+    },
+    "temporalProperties": [  //(optional)
+      {
+        "datetimes" : ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
+        "length": {
+          "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length", // a URL denoting a unit-of-measure
+          "values": [1.0, 2.4, 1.0],
+          "interpolations": ["Stepwise"]
+        }
+      }
+    ]
 }
 
 &lt;&lt;&lt; Response
 201 CREATED
 {
     “@id”: “mf0001",
+    “@created”: "2012-07-14T22:01:01" // Application-defined property
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: To insert a list of moving feature data into the service with the "application/geo+json-seq" content type.</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+POST  SERVICE_ROOT/MovingFeatures   HTTP1.1
+Content-Type: application/geo+json-seq
+{ "type": "MovingFeature", "temporalGeometry": {...}, "temporalProperties": [...]}
+{ "type": "MovingFeature", "temporalGeometry": {...}, "temporalProperties": [...]}
+{ "type": "MovingFeature", "temporalGeometry": {...}, "temporalProperties": [...]}
+
+&lt;&lt;&lt; Response
+201 CREATED
+{
+    “@id”: [“mf0001", “mf0002", “mf0003"]
     “@created”: "2012-07-14T22:01:01" // Application-defined property
 }</code></pre>
 </div>
@@ -1960,7 +2172,7 @@ Content-Type: application/geo+json
     "type": "MovingPoint", // a geometry type to represent a trajectory object
     "coordinates": [ [100.0, 0.0], [101.0, 0.0]],
     "datetimes": ["2011-07-16T02:01:01Z", "2011-07-16T06:01:01Z"],
-    "interpolation": "Linear", // an interpolation method
+    "interpolation": ["Linear"]
 }
 
 &lt;&lt;&lt; Response
@@ -1978,17 +2190,20 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties   HTTP1.1
 
 &lt;&lt;&lt; Response
 200 OK
-[{
-     "name":"length",
-     "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length", // a URL denoting a unit-of-measure
-     "values": [1.0, 2.4, 1.0],
-     "datetimes" : ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
-     "interpolations": "Stepwise"
-}]</code></pre>
+[
+  {
+    "datetimes" : ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
+    "length": {
+      "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length",
+      "values": [1.0, 2.4, 1.0],
+      "interpolations": ["Stepwise"]
+    }
+  }
+]</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To retrieve a temporal property information whose name(key) is 'dose'.</div>
+<div class="title">Example: To retrieve a temporal property information whose name is 'dose'.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('dose')   HTTP1.1
@@ -1996,11 +2211,12 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('dose')   HTTP1.1
 &lt;&lt;&lt; Response
 200 OK
 {
-     "name":"dose",
-     "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/AbsorbedDose", // a URL denoting a unit-of-measure
-     "values": [0.003, 0.003],
-     "datetimes" : ["2011-07-14T22:32:00Z", "2011-07-15T10:15:00Z"],
-     "interpolations": "Discrete"
+    "datetimes" : ["2011-07-14T22:01:01Z", "2011-07-15T12:01:01Z"],
+    "dose": {
+      "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/AbsorbedDose",
+      "values": [0.003, 0.003],
+      "interpolations": ["Discrete"]
+    }
 }</code></pre>
 </div>
 </div>
@@ -2134,7 +2350,7 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=geometryAtTime(2008-02-04T00:
 200 OK
 Content_Type: application/geo+json
 {
-    "pointAtTime" : {
+    "geometryAtTime" : {
         "type" : "POINT",
         "coordinates" : [ 116.35072, 39.96354 ]
     }
@@ -2153,14 +2369,14 @@ Content_Type: application/geo+json
 [
     {
         "@id" : "mf0001",
-        "pointAtTime" : {
+        "geometryAtTime" : {
             "type" : "POINT",
             "coordinates" : [ 116.35072, 39.96354 ]
         }
     },
     {
         "@id" : "mf0002",
-        "pointAtTime" : {
+        "geometryAtTime" : {
             "type" : "POINT",
             "coordinates" : [ 116.01843751281389, 39.909385232047136 ]
         }
@@ -2178,7 +2394,7 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')?$select=timeAtGeometry(POINT(116.4%20
 200 OK
 Content_Type: application/geo+json
 {
-　　　　"timeAtPoint" : [ "2008-02-07T13:00:37Z", "2008-02-07T13:00:51Z", "2008-02-08T13:35:57Z", "2008-02-08T13:36:06Z", "2008-02-06T13:08:32Z", "2008-02-06T13:08:29Z", "2008-02-07T23:04:51Z", "2008-02-07T23:04:55Z", "2008-02-06T23:09:41Z", "2008-02-06T23:09:56Z", "2008-02-04T00:36:14Z", "2008-02-04T00:36:23Z", "2008-02-05T13:17:28Z", "2008-02-05T13:17:39Z" ]
+    "timeAtGeometry" : [ "2008-02-07T13:00:37Z", "2008-02-07T13:00:51Z", "2008-02-08T13:35:57Z", "2008-02-08T13:36:06Z", "2008-02-06T13:08:32Z", "2008-02-06T13:08:29Z", "2008-02-07T23:04:51Z", "2008-02-07T23:04:55Z", "2008-02-06T23:09:41Z", "2008-02-06T23:09:56Z", "2008-02-04T00:36:14Z", "2008-02-04T00:36:23Z", "2008-02-05T13:17:28Z", "2008-02-05T13:17:39Z" ]
 }</code></pre>
 </div>
 </div>
@@ -2194,11 +2410,11 @@ Content_Type: application/geo+json
 [
     {
         "@id" : "mf0001",
-        "timeAtPoint" : [ "2008-02-07T13:00:37Z", "2008-02-07T13:00:51Z", "2008-02-08T13:35:57Z", "2008-02-08T13:36:06Z", "2008-02-06T13:08:32Z", "2008-02-06T13:08:29Z", "2008-02-07T23:04:51Z", "2008-02-07T23:04:55Z", "2008-02-06T23:09:41Z", "2008-02-06T23:09:56Z", "2008-02-04T00:36:14Z", "2008-02-04T00:36:23Z", "2008-02-05T13:17:28Z", "2008-02-05T13:17:39Z" ]
+        "timeAtGeometry" : [ "2008-02-07T13:00:37Z", "2008-02-07T13:00:51Z", "2008-02-08T13:35:57Z", "2008-02-08T13:36:06Z", "2008-02-06T13:08:32Z", "2008-02-06T13:08:29Z", "2008-02-07T23:04:51Z", "2008-02-07T23:04:55Z", "2008-02-06T23:09:41Z", "2008-02-06T23:09:56Z", "2008-02-04T00:36:14Z", "2008-02-04T00:36:23Z", "2008-02-05T13:17:28Z", "2008-02-05T13:17:39Z" ]
     },
     {
         "@id": "mf0002",
-        "timeAtPoint": ["2013-05-01T10:33:45Z"]
+        "timeAtGeometry": ["2013-05-01T10:33:45Z"]
     }
 ]</code></pre>
 </div>
@@ -2239,6 +2455,36 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
+<div class="title">Example: stBoundedBy of moving features.</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/MovingFeatures?$select=stBoundedBy()  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: application/geo+json
+[
+  {
+    "@id" : "mf0001",
+    "stBoundedBy" : {
+      "bbox": [-10.0, -10.0, 10.0, 10.0],
+      "period": {
+        "begin": "1994-11-05T13:15:30Z",
+        "end" : "1994-11-05T13:15:30Z"
+      }
+    }
+  },
+  {
+    "@id" : "mf0002",
+    "stBoundedBy" : {
+      "bbox": ...,
+      "period": ...
+    }
+  }
+]</code></pre>
+</div>
+</div>
+<div class="listingblock">
 <div class="title">Example: subTrajectory of a moving feature with ID.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
@@ -2252,7 +2498,7 @@ Content_Type: application/geo+json
         "type" : "MovingPoint",
         "datetimes" : [ "2008-02-03T23:00:00Z", "2008-02-03T23:04:34Z", "2008-02-03T23:03:49Z", "2008-02-03T23:03:04Z", "2008-02-03T23:02:19Z", "2008-02-03T23:01:29Z", "2008-02-03T23:00:44Z", "2008-02-03T23:00:04Z", "2008-02-03T23:04:39Z", "2008-02-03T23:03:54Z", "2008-02-03T23:03:09Z", "2008-02-03T23:02:24Z", "2008-02-03T23:01:34Z", "2008-02-03T23:00:49Z", "2008-02-03T23:00:09Z", "2008-02-03T23:04:44Z", "2008-02-03T23:03:59Z", "2008-02-03T23:03:14Z", "2008-02-03T23:02:29Z", "2008-02-03T23:01:39Z", "2008-02-03T23:00:54Z", "2008-02-03T23:00:14Z", "2008-02-03T23:04:49Z", "2008-02-03T23:04:04Z", "2008-02-03T23:03:19Z", "2008-02-03T23:02:34Z", "2008-02-03T23:01:49Z", "2008-02-03T23:00:59Z", "2008-02-03T23:00:19Z", "2008-02-03T23:04:56Z", "2008-02-03T23:04:09Z", "2008-02-03T23:03:24Z", "2008-02-03T23:02:39Z", "2008-02-03T23:01:54Z", "2008-02-03T23:01:04Z", "2008-02-03T23:00:24Z", "2008-02-03T23:04:14Z", "2008-02-03T23:03:29Z", "2008-02-03T23:02:49Z", "2008-02-03T23:01:59Z", "2008-02-03T23:01:09Z", "2008-02-03T23:00:29Z", "2008-02-03T23:04:19Z", "2008-02-03T23:03:34Z", "2008-02-03T23:02:54Z", "2008-02-03T23:02:04Z", "2008-02-03T23:01:19Z", "2008-02-03T23:00:34Z", "2008-02-03T23:04:29Z", "2008-02-03T23:03:44Z", "2008-02-03T23:02:59Z", "2008-02-03T23:02:09Z", "2008-02-03T23:01:24Z", "2008-02-03T23:00:39Z", "2008-02-03T23:05:00Z" ],
         "coordinates" : [ [ 116.35079, 39.96372 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35102, 39.96422 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96372 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35102, 39.96422 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35102, 39.96421 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35107, 39.96425 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35106, 39.96425 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35105, 39.96424 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35104, 39.96424 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35104, 39.96423 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ] ],
-        "interpolations" : "Linear"
+        "interpolations" : ["Linear"]
     }
 }</code></pre>
 </div>
@@ -2274,7 +2520,7 @@ Content_Type: application/geo+json
         "type" : "MovingPoint",
         "datetimes" : [ "2008-02-03T23:00:00Z", "2008-02-03T23:04:34Z", "2008-02-03T23:03:49Z", "2008-02-03T23:03:04Z", "2008-02-03T23:02:19Z", "2008-02-03T23:01:29Z", "2008-02-03T23:00:44Z", "2008-02-03T23:00:04Z", "2008-02-03T23:04:39Z", "2008-02-03T23:03:54Z", "2008-02-03T23:03:09Z", "2008-02-03T23:02:24Z", "2008-02-03T23:01:34Z", "2008-02-03T23:00:49Z", "2008-02-03T23:00:09Z", "2008-02-03T23:04:44Z", "2008-02-03T23:03:59Z", "2008-02-03T23:03:14Z", "2008-02-03T23:02:29Z", "2008-02-03T23:01:39Z", "2008-02-03T23:00:54Z", "2008-02-03T23:00:14Z", "2008-02-03T23:04:49Z", "2008-02-03T23:04:04Z", "2008-02-03T23:03:19Z", "2008-02-03T23:02:34Z", "2008-02-03T23:01:49Z", "2008-02-03T23:00:59Z", "2008-02-03T23:00:19Z", "2008-02-03T23:04:56Z", "2008-02-03T23:04:09Z", "2008-02-03T23:03:24Z", "2008-02-03T23:02:39Z", "2008-02-03T23:01:54Z", "2008-02-03T23:01:04Z", "2008-02-03T23:00:24Z", "2008-02-03T23:04:14Z", "2008-02-03T23:03:29Z", "2008-02-03T23:02:49Z", "2008-02-03T23:01:59Z", "2008-02-03T23:01:09Z", "2008-02-03T23:00:29Z", "2008-02-03T23:04:19Z", "2008-02-03T23:03:34Z", "2008-02-03T23:02:54Z", "2008-02-03T23:02:04Z", "2008-02-03T23:01:19Z", "2008-02-03T23:00:34Z", "2008-02-03T23:04:29Z", "2008-02-03T23:03:44Z", "2008-02-03T23:02:59Z", "2008-02-03T23:02:09Z", "2008-02-03T23:01:24Z", "2008-02-03T23:00:39Z", "2008-02-03T23:05:00Z" ],
         "coordinates" : [ [ 116.35079, 39.96372 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35102, 39.96422 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96372 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35102, 39.96422 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35102, 39.96421 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35107, 39.96425 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35106, 39.96425 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35105, 39.96424 ], [ 116.35079, 39.96373 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35104, 39.96424 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35076, 39.96383 ], [ 116.35104, 39.96423 ], [ 116.35079, 39.96374 ], [ 116.35079, 39.96373 ], [ 116.35076, 39.96383 ] ],
-        "interpolations" : "Linear"
+        "interpolations" : ["Linear"]
     }
 }</code></pre>
 </div>
@@ -2294,11 +2540,11 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('length')?$select=
 Content_Type: application/geo+json
 {
     "snapshot": {
-        "name": "length",
-        "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length", // a URL denoting a unit-of-measure
+      "datetimes": ["2013-05-01T10:33:41Z"],
+      "length": {
+        "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length",
         "values": [1.2],
-        "datetimes": ["2013-05-01T10:33:41Z"],
-        "interpolations": "Discrete"
+        "interpolations": ["Discrete"]
     }
 }</code></pre>
 </div>
@@ -2403,16 +2649,16 @@ The current API tries to realize the Type C operation by a temporary method unti
 POST  SERVICE_ROOT/FeatureLayers   HTTP1.1
 Content-Type: application/geo+json
 {
-  "name": "queryfeatures",
-  "description": "temporal feature layer for query parameters"
-  "updateFrequency": 0
+    "name": "queryfeatures",
+    "description": "temporal feature layer for query parameters"
+    "updateFrequency": 0
 }
 
 &lt;&lt;&lt; Response
 201 CREATED
 {
-  “@id”: "queryfeatures",
-  “@created”: "2012-07-14T22:01:01"
+    “@id”: "queryfeatures",
+    “@created”: "2012-07-14T22:01:01"
 }</pre>
 </div>
 </div>
@@ -2423,16 +2669,16 @@ Content-Type: application/geo+json
 POST  SERVICE_ROOT/FeatureLayers('queryfeatures')/features   HTTP1.1
 Content-Type: application/geo+json
 {
-  "type": "MovingFeature",
-  "temporalGeometry": {
-  ....
-  }
+    "type": "MovingFeature",
+    "temporalGeometry": {
+    ....
+    }
 }
 &lt;&lt;&lt; Response
 201 CREATED
 {
-  “@id”: "mf9999999",
-  “@created”: "2012-07-14T23:01:01"
+    “@id”: "mf9999999",
+    “@created”: "2012-07-14T23:01:01"
 }</pre>
 </div>
 </div>
@@ -2446,7 +2692,7 @@ GET  SERVICE_ROOT/FeatureLayers('bus')/features?$filter=intersects(@id)&amp;@id=
 200 OK
 Content_Type: application/geo+json
 {
-  "intersects": [ "mf0001", "mf0003"]
+    "intersects": [ "mf0001", "mf0003"]
 }</pre>
 </div>
 </div>
@@ -2474,7 +2720,7 @@ Content_Type: application/geo+json
           "type" : "MovingPoint",
           "datetimes" : [ "2008-02-04T00:06:14Z", "2008-02-04T00:06:19Z" ],
           "coordinates" : [ [ 116.35089, 39.96329 ], [ 116.35814635910225, 39.962927182044886 ] ],
-          "interpolations" : "Linear"
+          "interpolations" : ["Linear"]
       }
 }</code></pre>
 </div>
@@ -2492,11 +2738,12 @@ Content_Type: application/geo+json
      {
          "@id" : "mf0001",
          "nearestApproach" : {
-             "name" : "distance",
-             "uom" : "m",
-             "values" : [ 7.265423889165578, 7.265423889165578 ],
-             "datetimes" : [ "2008-02-04T00:06:14Z", "2008-02-04T00:06:19Z" ],
-             "interpolations" : "Linear"
+            "datetimes" : [ "2008-02-04T00:06:14Z", "2008-02-04T00:06:19Z" ],
+            "distance" : {
+              "uom" : "m",
+              "values" : [ 7.265423889165578, 7.265423889165578 ],
+              "interpolations" : ["Linear"]
+            }
          }
      }
  ]</code></pre>
@@ -2518,7 +2765,7 @@ Content_Type: application/geo+json
             "type": "MovingPoint,
             "coordinates": [...],
             "datetimes" : [...],
-            "interpolations": ...
+            "interpolations": [...]
         }
     },
     {
@@ -2560,7 +2807,7 @@ For example,</p>
 <h4 id="addressing">7.3.4. Addressing Entities: <code>$ref</code>, <code>$value</code></h4>
 <div class="paragraph">
 <p>This practice uses the symbolic resource <code>$ref</code>, located at the service root or a FeatureLayer entity, to get the URL for addressing all entities.
-The symbolic resource <code>$value</code> is allowed to resolve to a single property value or to get a list of values of TemporalProperty elements of a MovingFeatures resource in text/plain form.</p>
+The symbolic resource <code>$value</code> is allowed to resolve to a single property value or to get a list of values of TemporalProperty and Property elements of a MovingFeatures resource in text/plain form.</p>
 </div>
 <div class="listingblock">
 <div class="title">Example: To get the URLs of all MovingFeatures entities if the service does not have any resource of FeatureLayer.</div>
@@ -2605,7 +2852,19 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get a value of a static property.</div>
+<div class="title">Example: To get a list of names of FeatureLayer.</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/FeatureLayers/name/$value  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: text/plain
+bus, typhoon</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: To get a list of static properties' name.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/properties/name/$value  HTTP1.1
@@ -2613,11 +2872,23 @@ GET  SERVICE_ROOT/MovingFeatures('m0001')/properties/name/$value  HTTP1.1
 &lt;&lt;&lt; Response
 200 OK
 Content_Type: text/plain
-title</code></pre>
+title, author</code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: To get a list of values of an element of TemporalProperties.</div>
+<div class="title">Example: To get a value of a static properties.</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/MovingFeatures('m0001')/properties('title')/$value  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: text/plain
+Test Title</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: To get a list of temporal properties' name.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties/name/$value  HTTP1.1
@@ -2625,15 +2896,19 @@ GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties/name/$value  HTTP1.
 &lt;&lt;&lt; Response
 200 OK
 Content_Type: text/plain
-length, dose
-
-&gt;&gt;&gt; Request
-GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties/uom/$value  HTTP1.1
+length, dose, picture</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Example: To get a unit value of a temporal property</div>
+<div class="content">
+<pre class="CodeRay highlight"><code>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties('length')/uom/$value  HTTP1.1
 
 &lt;&lt;&lt; Response
 200 OK
 Content_Type: text/plain
-http://www.qudt.org/qudt/owl/1.0.0/quantity/Length, http://www.qudt.org/qudt/owl/1.0.0/quantity/AbsorbedDose</code></pre>
+http://www.qudt.org/qudt/owl/1.0.0/quantity/Length</code></pre>
 </div>
 </div>
 </div>
@@ -2707,6 +2982,13 @@ http://www.qudt.org/qudt/owl/1.0.0/quantity/Length, http://www.qudt.org/qudt/owl
 <td class="tableblock halign-left valign-top"><p class="tableblock">RESTful APIs- Addressing Entities</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Added</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2017-03-15</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kyoung-Sook KIM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Temporal Properties</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Revised</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -2714,7 +2996,7 @@ http://www.qudt.org/qudt/owl/1.0.0/quantity/Length, http://www.qudt.org/qudt/owl
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-07 19:59:27 JST
+Last updated 2017-03-15 20:20:08 JST
 </div>
 </div>
 <script type="text/x-mathjax-config">

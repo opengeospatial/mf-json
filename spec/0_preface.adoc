@@ -14,7 +14,7 @@ ogcdoc, OGC document, moving features, encoding, JSON, REST
 == iii. Preface
 
 This best practice document basically follows the abstract data model defined in ISO 19141:2008 [ISO 19141:2008], and
-the encoding method refers to the expression of IETF GeoJSON Format [draft-ietf-geojson-04].
+the encoding method refers to the expression of IETF GeoJSON Format [IETF RFC 7946].
 OGC Moving Features Encoding: XML Core [OGC 14 083r2] and Simple CSV [OGC 14 084r2] have focused on the movement of 0-dimensional geometric primitive (Point), called trajectories.
 However, the draft format of this document covers the movements of 0-dimensional Point, 1-dimensional curve LineString, and 2-dimensional surface Polygon based on the application requirements such as disaster risk management, traffic information services, and geo-fencing services.
 

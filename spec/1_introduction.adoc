@@ -14,7 +14,7 @@ The set of points contained in all of the leaves, and in all of the trajectories
 The set of leaves also forms a foliation, meaning that there is a complete and separate representation of the geometry of the feature for each specific time.
 The prism of the moving feature can be viewed as a bundle of trajectories of points on the local engineering representation of the feature's geometry.
 
-In general, Moving Feature JSON encoding applies to representations and formats of IETF GeoJSON [draft-ietf-geojson-04]; however, new terms are added to specify dynamic attributes of moving features:
+In general, Moving Feature JSON encoding applies to representations and formats of IETF GeoJSON [IETF RFC 7946]; however, new terms are added to specify dynamic attributes of moving features:
 
 * _Temporal geometric objects_ whose location changes over time: Movements of 0-dimensional, 1-dimensional, 2-dimensional geometric primitives, and their collections.
 * _Dynamic non-spatial attributes_ whose value varies with time: Changes of a quantity.
@@ -51,7 +51,7 @@ to, or revisions of, any of these publications do not apply. For undated referen
 * https://www.ietf.org/rfc/rfc2616.txt[IETF RFC 2616], _Hypertext Transfer Protocol -- HTTP/1.1_.
 * https://www.ietf.org/rfc/rfc7159.txt[IETF RFC 7159], _The JavaScript Object Notation (JSON) Data Interchange Format_.
 * https://www.ietf.org/rfc/rfc7464.txt[IETF RFC 7464], _JavaScript Object Notation (JSON) Text Sequences_.
-* https://www.rfc-editor.org/info/rfc7946[IETF RFC 7946], _The GeoJSON Format_.
+* https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946], _The GeoJSON Format_.
 * http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html[OData-Part1], _OData Version 4.0. Part 1: Protocol Plus Errata 03._ Edited by Michael Pizzo, Ralf Handl, and Martin Zurmuehl. 02 June 2016. OASIS Standard incorporating Approved Errata 03.
 
 
@@ -64,7 +64,8 @@ Additionally the following informative documents are addressed:
 
 This document uses the specification terms defined in Subclause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards.
 In particular:
-- SHALL is the verb form used to indicate a requirement to be strictly followed to conform to this specification, from which no deviation is permitted
+
+- SHALL is the verb form used to indicate a requirement to be strictly followed to conform to this specification, from which no deviation is permitted +
 - MAY is the verb form used to indicate an action permissible within the limits of this specification
 
 For the purposes of this document, the following additional terms and definitions apply.
@@ -122,7 +123,7 @@ one-dimensional geometric primitive representing extent in time +
 === prism
 <one parameter set of geometries> set of points in the union of the geometries (or the union of the
 trajectories) of a one parameter set of geometries +
-[ ISO 19141:2008 ]
+ [ ISO 19141:2008 ]
 
 === request
 invocation of an operation by a client +
@@ -159,7 +160,7 @@ This sections provides details and examples for conventions used in the document
 
 The notation of JSON in this document is based on the specification of [RFC 7159].
 
-The ordering of the members of any JSON object MUST be considered irrelevant. Some examples use a JavaScript single line comment (//) and an ellipsis (...) as placeholder notation for a specific JSON instance.
+The ordering of the members of any JSON object must be considered irrelevant. Some examples use a JavaScript single line comment (//) and an ellipsis (...) as placeholder notation for a specific JSON instance.
 Whitespace is used in the examples inside this document to help illustrate the data structures, but is not required. Unquoted whitespace is not significant in JSON.
 
 === UML notation
