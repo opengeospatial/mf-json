@@ -35,13 +35,14 @@ The following organizations have submitted this Document to the Open GeoSpatial 
 
 All questions regarding this submission should be directed to the editor or the submitters:
 
-[width="99%", cols="3,7", options="header"]
+{set:cellbgcolor!}
+[width="99%", cols="3,7"]
 |===========================================================
-|{set:cellbgcolor!}
-|Name             |Organization
+|*Name*          |*Organization*
 |Kyoung-Sook KIM  |Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology
 |Hirotaka OGAWA   |Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology
 |===========================================================
+
 
 [big]*vi.     Future Work*
 

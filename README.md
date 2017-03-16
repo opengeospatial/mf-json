@@ -1,5 +1,5 @@
 ![OGC Logo](http://portal.opengeospatial.org/files/?artifact_id=11976&format=gif "OGC Logo")
-<img src="https://github.com/opengeospatial/mf-json/blob/master/logo.png" width="100">
+<img src="https://github.com/opengeospatial/mf-json/blob/master/logo.png" width="200">
 
 # Moving Features JSON Encodings
 
@@ -50,6 +50,9 @@ in the change request form will help the SWG adjudicate and prioritize the reque
 ## Usages
 1. Install [asciidoctor](http://asciidoctor.org)
 2. On command line: asciidoctor -a stylesheet=./example.css index.adoc
+
+**asciidoctor-pdf -r asciidoctor-mathematical -a pdf-stylesdir=. -a pdf-style=asciidoctor -o output.pdf index.adoc
+
 
 [Document rendering example](https://ksookim.github.io/mf-json)
 
