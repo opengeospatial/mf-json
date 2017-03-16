@@ -1,6 +1,10 @@
 ![OGC Logo](http://portal.opengeospatial.org/files/?artifact_id=11976&format=gif "OGC Logo")
+<<<<<<< HEAD
 <img src="https://github.com/opengeospatial/mf-json/blob/master/logo.png" width="100">
 
+=======
+<img src="https://github.com/opengeospatial/mf-json/blob/master/logo.png" width="200">
+>>>>>>> f27db1dc9ec323f9e8288548e9eff4cb172e96e5
 
 # Moving Features JSON Encodings 
 
