@@ -711,7 +711,7 @@ Content-Type: application/geo+json
 .(2) Insert a query object into the feature layer as follows:
 -----
 >>> Request
-POST  SERVICE_ROOT/FeatureLayers('queryfeatures')/features   HTTP1.1
+POST  SERVICE_ROOT/FeatureLayers('queryfeatures')   HTTP1.1
 Content-Type: application/geo+json
 {
     "type": "MovingFeature",

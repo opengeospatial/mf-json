@@ -1,4 +1,5 @@
 ![OGC Logo](http://portal.opengeospatial.org/files/?artifact_id=11976&format=gif "OGC Logo")
+![mf-json](https://github.com/opengeospatial/mf-json/blob/master/logo.png "mf-json")
 
 # Moving Features JSON Encodings 
 
