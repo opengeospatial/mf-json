@@ -1,17 +1,18 @@
-[preface]
-== i. Abstract
+[big]*i.     Abstract*
 
 This document proposes a JavaScript Object Notation (JSON) encoding representation of movement of geographic features as an encoding extension of OGC Moving Features ([OGC 14-083r2] and [OGC 14-084r2]).
 A moving feature, typically a vehicle and pedestrian, can be express as a temporal geometry whose location continuously changes over time and contains dynamic non-spatial attributes whose value varies with time.
 It is Best Practice to share moving feature data based on JSON and GeoJSON (a JSON format for encoding a variety of geographic data structures). In addition, this document provides an example of RESTful approaches as a Feature Service Interface that has the potential for simplicity, scalability, and resilience to exchange moving feature data across the Web.
 
-== ii. Keywords
+
+[big]*ii.    Keywords*
 
 The following are keywords to be used by search engines and document catalogues.
 
 ogcdoc, OGC document, moving features, encoding, JSON, REST
 
-== iii. Preface
+
+[big]*iii.   Preface*
 
 This best practice document basically follows the abstract data model defined in ISO 19141:2008 [ISO 19141:2008], and
 the encoding method refers to the expression of IETF GeoJSON Format [IETF RFC 7946].
@@ -23,26 +24,26 @@ The Open Geospatial Consortium shall not be held responsible for identifying any
 
 _Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation._
 
-== iv. Submitting organizations
+[big]*iv.    Submitting organizations*
 
 The following organizations have submitted this Document to the Open GeoSpatial Consortium, Inc.:
 
 * Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology
 
 
-== v. Document Contributor Contact Points
+[big]*v.     Submitters*
 
 All questions regarding this submission should be directed to the editor or the submitters:
 
 [width="99%", cols="3,7", options="header"]
 |===========================================================
+|{set:cellbgcolor!}
 |Name             |Organization
 |Kyoung-Sook KIM  |Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology
 |Hirotaka OGAWA   |Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology
 |===========================================================
 
-
-== vi. Future Work
+[big]*vi.     Future Work*
 
 Among the topics for future development are the following items:
 

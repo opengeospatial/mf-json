@@ -156,7 +156,7 @@ admonition:
 caption:
   font_color: 7A2518
   font_style: bold
-  align: left
+  align: center
   margin_inside: $vertical_rhythm * 0.25
   margin_outside: 0
 conum:
@@ -164,7 +164,7 @@ conum:
   font_color: $literal_font_color
   font_size: $code_font_size
 image:
-  align_default: left
+  align_default: center
   scaled_width_default: 0.5
 lead:
   # QUESTION what about $base_font_size_large?
@@ -172,9 +172,8 @@ lead:
   font_size: $base_font_size_large
   line_height: 1.4
 abstract:
-  text_align: right
-  font_size: $base_font_size_small
-  font_color: 999999
+  font_size: $base_font_size
+  # font_color: 999999
   font_style: normal
   #line_height: $lead_line_height
   # HACK set line_height to 1 to workaround spacing problem after first line
@@ -195,6 +194,7 @@ table:
   border_width: $base_border_width
   # HACK accounting for line-height
   cell_padding: [3, 3, 6, 3]
+  image_valign: 50
 footer:
   font_size: $base_font_size_small
   # NOTE if background_color is set, background and border will span width of page

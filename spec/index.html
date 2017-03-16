@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.4">
-<meta name="author" content="Kyoungsook Kim; Hirotaka OGAWA;">
 <title>OGC Moving Features Encoding Extension - JSON</title>
 <link rel="stylesheet" href="./example.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -17,55 +16,107 @@
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div id="ogcname" class="paragraph title">
-<p>Open Geospatial Consortium</p>
+<div style="page-break-after: always;"></div>
+<table class="tableblock frame-none grid-none" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">Open Geospatial Consortium</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Submission Date: &lt;yyyy-mm-dd&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Approval Date:   &lt;yyyy-mm-dd&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date:   &lt;yyyy-mm-dd&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC® document: <a href="http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}" class="bare">http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC® document:    OGC 16-140r1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: n.n</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC® Best Practice</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Editor:   Kyoung-Sook KIM, Hirotaka OGAWA</p></td>
+</tr>
+</tbody>
+</table>
+<div id="ogctitle" class="paragraph title">
+<p>OGC Moving Features Encoding Extension - JSON</p>
 </div>
-<div id="ogcheading" class="quoteblock abstract">
-<blockquote>
-Publication Date: 2016-mm-dd<br>
-Approval Date: 2016-mm-dd<br>
-Submission Date: 2016-mm-dd<br>
-Reference number of this Document: OGC 16-140r1<br>
-Reference URL for this document: <a href="http://www.opengis.net/doc/DOC-TYPE/xxx/m.n" class="bare">http://www.opengis.net/doc/DOC-TYPE/xxx/m.n</a><br>
-Version: 1.0<br>
-Category: OGC® Best Practice<br>
-Editor: Kyoung-Sook KIM, Hirotaka OGAWA
-</blockquote>
-</div>
-</div>
-</div>
-<h1 id="_ogc_moving_features_encoding_extension_json" class="sect0">OGC Moving Features Encoding Extension - JSON</h1>
-<div class="openblock partintro">
-<div class="content">
-<div class="paragraph">
-<p>Copyright&#169; 2016 Open Geospatial Consortium.<br>
-To obtain additional rights of use, visit <a href="http://www.opengeospatial.org/legal/" class="bare">http://www.opengeospatial.org/legal/</a><br></p>
-</div>
-<div class="paragraph">
-<p><strong>Warning</strong></p>
-</div>
+<table class="tableblock frame-none grid-none" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Copyright notice</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Copyright © &lt;year&gt; Open Geospatial Consortium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">To obtain additional rights of use, visit <a href="http://www.opengeospatial.org/legal/" class="bare">http://www.opengeospatial.org/legal/</a></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Warning</strong></p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>This document defines an OGC Best Practices on a particular technology or approach related to an OGC standard.
-This document is <u>not</u> an OGC Standard and may not be referred to as an OGC Standard.
-This document is subject to change without notice. However, this document is an <u>official</u> position of the OGC membership on this particular technology topic.</p>
+This document is <strong>not</strong> an OGC Standard and may not be referred to as an OGC Standard.
+This document is subject to change without notice. However, this document is an <strong>official</strong> position of the OGC membership on this particular technology topic.</p>
 </div>
 <div class="paragraph">
 <p>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium Inc. shall not be held responsible for identifying any or all such patent rights.</p>
 </div>
 <div class="paragraph">
-<p>Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.</p>
+<p>Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation.</p>
 </div>
+<table class="tableblock frame-all grid-none" style="width: 50%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document type:   	OGC® Best Practice</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document subtype:   	if applicable</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document stage:   	Draft</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document language: 	English</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
 <div class="paragraph">
-<p>Document type:          OGC&#174; Best Practice<br>
-Document subtype:       if applicable<br>
-Document stage:         Draft<br>
-Document language:      English<br></p>
+<p>License Agreement</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_license_agreement">License Agreement</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p><span class="small">Permission is hereby granted by the Open Geospatial Consortium, ("Licensor"), free of charge and subject to the terms set forth below, to any person obtaining a copy of this Intellectual Property and any associated documentation, to deal in the Intellectual Property without restriction (except as set forth below), including without limitation the rights to implement, use, copy, modify, merge, publish, distribute, and/or sublicense copies of the Intellectual Property, and to permit persons to whom the Intellectual Property is furnished to do so, provided that all copyright notices on the intellectual property are retained intact and that each person to whom the Intellectual Property is furnished agrees to the terms of this Agreement.</span></p>
 </div>
@@ -73,32 +124,21 @@ Document language:      English<br></p>
 <p><span class="small">If you modify the Intellectual Property, all copies of the modified Intellectual Property must include, in addition to the above copyright notice, a notice that the Intellectual Property includes modifications that have not been approved or adopted by LICENSOR.</span></p>
 </div>
 <div class="paragraph">
-<p><span class="small">THIS LICENSE IS A COPYRIGHT LICENSE ONLY, AND DOES NOT CONVEY ANY RIGHTS UNDER ANY PATENTS THAT MAY BE IN FORCE ANYWHERE IN THE WORLD. THE INTELLECTUAL PROPERTY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE DO NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE INTELLECTUAL PROPERTY WILL MEET YOUR REQUIREMENTS OR THAT THE OPERATION OF THE INTELLECTUAL PROPERTY WILL BE UNINTERRUPTED OR ERROR FREE. ANY USE OF THE INTELLECTUAL PROPERTY SHALL BE MADE ENTIRELY AT THE USER’S OWN RISK. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR ANY CONTRIBUTOR OF INTELLECTUAL PROPERTY RIGHTS TO THE INTELLECTUAL PROPERTY BE LIABLE FOR ANY CLAIM, OR ANY DIRECT, SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM ANY ALLEGED INFRINGEMENT OR ANY LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR UNDER ANY OTHER LEGAL THEORY, ARISING OUT OF OR IN CONNECTION WITH THE IMPLEMENTATION, USE, COMMERCIALIZATION OR PERFORMANCE OF THIS INTELLECTUAL PROPERTY.</span></p>
+<p><span class="small">THIS LICENSE IS A COPYRIGHT LICENSE ONLY, AND DOES NOT CONVEY ANY RIGHTS UNDER ANY PATENTS THAT MAY BE IN FORCE ANYWHERE IN THE WORLD.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">THE INTELLECTUAL PROPERTY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE DO NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE INTELLECTUAL PROPERTY WILL MEET YOUR REQUIREMENTS OR THAT THE OPERATION OF THE INTELLECTUAL PROPERTY WILL BE UNINTERRUPTED OR ERROR FREE. ANY USE OF THE INTELLECTUAL PROPERTY SHALL BE MADE ENTIRELY AT THE USER’S OWN RISK. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR ANY CONTRIBUTOR OF INTELLECTUAL PROPERTY RIGHTS TO THE INTELLECTUAL PROPERTY BE LIABLE FOR ANY CLAIM, OR ANY DIRECT, SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM ANY ALLEGED INFRINGEMENT OR ANY LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR UNDER ANY OTHER LEGAL THEORY, ARISING OUT OF OR IN CONNECTION WITH THE IMPLEMENTATION, USE, COMMERCIALIZATION OR PERFORMANCE OF THIS INTELLECTUAL PROPERTY.</span></p>
 </div>
 <div class="paragraph">
 <p><span class="small">This license is effective until terminated. You may terminate it at any time by destroying the Intellectual Property together with all copies in any form. The license will also terminate if you fail to comply with any term or condition of this Agreement. Except as provided in the following sentence, no such termination of this license shall require the termination of any third party end-user sublicense to the Intellectual Property which is in force as of the date of notice of such termination. In addition, should the Intellectual Property, or the operation of the Intellectual Property, infringe, or in LICENSOR’s sole opinion be likely to infringe, any patent, copyright, trademark or other right of a third party, you agree that LICENSOR, in its sole discretion, may terminate this license without any compensation or liability to you, your licensees or any other party. You agree upon termination of any kind to destroy or cause to be destroyed the Intellectual Property together with all copies in any form, whether held by you or by any third party.</span></p>
 </div>
 <div class="paragraph">
-<p><span class="small">Except as contained in this notice, the name of LICENSOR or of any other holder of a copyright in all or part of the Intellectual Property shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Intellectual Property without prior written authorization of LICENSOR or such copyright holder. LICENSOR is and shall at all times be the sole entity that may authorize you or any third party to use certification marks, trademarks or other special designations to indicate compliance with any LICENSOR standards or specifications.</span></p>
+<p><span class="small">Except as contained in this notice, the name of LICENSOR or of any other holder of a copyright in all or part of the Intellectual Property shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Intellectual Property without prior written authorization of LICENSOR or such copyright holder. LICENSOR is and shall at all times be the sole entity that may authorize you or any third party to use certification marks, trademarks or other special designations to indicate compliance with any LICENSOR standards or specifications. This Agreement is governed by the laws of the Commonwealth of Massachusetts. The application to this Agreement of the United Nations Convention on Contracts for the International Sale of Goods is hereby expressly excluded. In the event any provision of this Agreement shall be deemed unenforceable, void or invalid, such provision shall be modified so as to make it valid and enforceable, and as so modified the entire Agreement shall remain in full force and effect. No decision, action or inaction by LICENSOR shall be construed to be a waiver of any rights or remedies available to it.</span></p>
 </div>
-<div class="paragraph">
-<p><span class="small">This Agreement is governed by the laws of the Commonwealth of Massachusetts. The application to this Agreement of the United Nations Convention on Contracts for the International Sale of Goods is hereby expressly excluded. In the event any provision of this Agreement shall be deemed unenforceable, void or invalid, such provision shall be modified so as to make it valid and enforceable, and as so modified the entire Agreement shall remain in full force and effect. No decision, action or inaction by LICENSOR shall be construed to be a waiver of any rights or remedies available to it.</span></p>
-</div>
-<div class="paragraph">
-<p><span class="small">None of the Intellectual Property or underlying information or technology may be downloaded or otherwise exported or reexported in violation of U.S. export laws and regulations. In addition, you are responsible for complying with any local laws in your jurisdiction which may impact your right to import, export or use the Intellectual Property, and you represent that you have complied with any regulations or registration procedures required by applicable law to make this license enforceable.</span></p>
-</div>
+<div style="page-break-after: always;"></div>
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Contents</div>
-<ul class="sectlevel0">
-<li><a href="#_ogc_moving_features_encoding_extension_json">OGC Moving Features Encoding Extension - JSON</a>
 <ul class="sectlevel1">
-<li><a href="#_license_agreement">License Agreement</a></li>
-<li><a href="#_i_abstract">i. Abstract</a></li>
-<li><a href="#_ii_keywords">ii. Keywords</a></li>
-<li><a href="#_iii_preface">iii. Preface</a></li>
-<li><a href="#_iv_submitting_organizations">iv. Submitting organizations</a></li>
-<li><a href="#_v_document_contributor_contact_points">v. Document Contributor Contact Points</a></li>
-<li><a href="#_vi_future_work">vi. Future Work</a></li>
 <li><a href="#_scope">1. Scope</a></li>
 <li><a href="#_conformance">2. Conformance</a></li>
 <li><a href="#references">3. References</a></li>
@@ -137,7 +177,12 @@ Document language:      English<br></p>
 <ul class="sectlevel2">
 <li><a href="#_overview">6.1. Overview</a></li>
 <li><a href="#_moving_features">6.2. Moving Features</a></li>
-<li><a href="#tgeometry">6.3. Temporal Geometries</a></li>
+<li><a href="#tgeometry">6.3. Temporal Geometries</a>
+<ul class="sectlevel3">
+<li><a href="#simple">6.3.1. Simple Temporal Geometries</a></li>
+<li><a href="#collection">6.3.2. Collection of Temporal Geometries</a></li>
+</ul>
+</li>
 <li><a href="#tproperties">6.4. Temporal Properties</a></li>
 <li><a href="#stbox">6.5. Spatiotemporal Bounding Box</a></li>
 <li><a href="#_application_domain_variables_foreign_members">6.6. Application Domain Variables (Foreign Members)</a></li>
@@ -146,43 +191,58 @@ Document language:      English<br></p>
 </li>
 <li><a href="#rest_api">7. RESTful API</a>
 <ul class="sectlevel2">
-<li><a href="#_general_information">7.1. General Information</a></li>
-<li><a href="#resources">7.2. Resources</a></li>
-<li><a href="#queries">7.3. Access Interfaces</a></li>
+<li><a href="#_general_information">7.1. General Information</a>
+<ul class="sectlevel3">
+<li><a href="#_verb">7.1.1. Verb</a></li>
+<li><a href="#_uri">7.1.2. URI</a></li>
+<li><a href="#_version">7.1.3. Version</a></li>
+<li><a href="#_status">7.1.4. Status</a></li>
+<li><a href="#_header">7.1.5. Header</a></li>
+<li><a href="#_body">7.1.6. Body</a></li>
+</ul>
+</li>
+<li><a href="#resources">7.2. Resources</a>
+<ul class="sectlevel3">
+<li><a href="#_resource_classes">7.2.1. Resource Classes</a></li>
+<li><a href="#_resource_path_patterns">7.2.2. Resource Path Patterns</a></li>
+<li><a href="#_resource_path_examples">7.2.3. Resource Path Examples</a></li>
+</ul>
+</li>
+<li><a href="#queries">7.3. Access Interfaces</a>
+<ul class="sectlevel3">
+<li><a href="#select_query">7.3.1. Query Option <code>$select</code></a></li>
+<li><a href="#filter_query">7.3.2. Query Option <code>$filter</code></a></li>
+<li><a href="#search_query">7.3.3. Query Option <code>$search</code></a></li>
+<li><a href="#addressing">7.3.4. Addressing Entities: <code>$ref</code>, <code>$value</code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#_bibliography">Bibliography</a></li>
-<li><a href="#_revision_history">Annex A: Revision History</a></li>
-</ul>
-</li>
+<li><a href="#_revision_history">Appendix A: Revision History</a></li>
 </ul>
 </div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong class="big">i.     Abstract</strong></p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_i_abstract">i. Abstract</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>This document proposes a JavaScript Object Notation (JSON) encoding representation of movement of geographic features as an encoding extension of OGC Moving Features ([OGC 14-083r2] and [OGC 14-084r2]).
 A moving feature, typically a vehicle and pedestrian, can be express as a temporal geometry whose location continuously changes over time and contains dynamic non-spatial attributes whose value varies with time.
 It is Best Practice to share moving feature data based on JSON and GeoJSON (a JSON format for encoding a variety of geographic data structures). In addition, this document provides an example of RESTful approaches as a Feature Service Interface that has the potential for simplicity, scalability, and resilience to exchange moving feature data across the Web.</p>
 </div>
+<div class="paragraph">
+<p><strong class="big">ii.    Keywords</strong></p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_ii_keywords">ii. Keywords</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>The following are keywords to be used by search engines and document catalogues.</p>
 </div>
 <div class="paragraph">
 <p>ogcdoc, OGC document, moving features, encoding, JSON, REST</p>
 </div>
+<div class="paragraph">
+<p><strong class="big">iii.   Preface</strong></p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_iii_preface">iii. Preface</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>This best practice document basically follows the abstract data model defined in ISO 19141:2008 [ISO 19141:2008], and
 the encoding method refers to the expression of IETF GeoJSON Format [IETF RFC 7946].
@@ -196,11 +256,9 @@ The Open Geospatial Consortium shall not be held responsible for identifying any
 <div class="paragraph">
 <p><em>Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.</em></p>
 </div>
+<div class="paragraph">
+<p><strong class="big">iv.    Submitting organizations</strong></p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_iv_submitting_organizations">iv. Submitting organizations</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>The following organizations have submitted this Document to the Open GeoSpatial Consortium, Inc.:</p>
 </div>
@@ -211,11 +269,9 @@ The Open Geospatial Consortium shall not be held responsible for identifying any
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p><strong class="big">v.     Submitters</strong></p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_v_document_contributor_contact_points">v. Document Contributor Contact Points</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>All questions regarding this submission should be directed to the editor or the submitters:</p>
 </div>
@@ -226,26 +282,24 @@ The Open Geospatial Consortium shall not be held responsible for identifying any
 </colgroup>
 <thead>
 <tr>
+<th class="tableblock halign-left valign-top"></th>
 <th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Organization</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Organization</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Kyoung-Sook KIM</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Hirotaka OGAWA</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hirotaka OGAWA</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><strong class="big">vi.     Future Work</strong></p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_vi_future_work">vi. Future Work</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>Among the topics for future development are the following items:</p>
 </div>
@@ -265,7 +319,7 @@ The Open Geospatial Consortium shall not be held responsible for identifying any
 </div>
 </div>
 <div class="sect1">
-<h2 id="_scope">1. Scope</h2>
+<h2 id="_scope"><a class="anchor" href="#_scope"></a>1. Scope</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This Best Practice provides a format for encoding moving features using JavaScript Object Notation (JSON) [IETF RFC7159] and an example of interfaces of the RESTful service of moving features.
@@ -315,7 +369,7 @@ Design issues with complex interpolation methods and service capabilities were n
 </div>
 </div>
 <div class="sect1">
-<h2 id="_conformance">2. Conformance</h2>
+<h2 id="_conformance"><a class="anchor" href="#_conformance"></a>2. Conformance</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Not applicable for this Best Practice document.</p>
@@ -323,7 +377,7 @@ Design issues with complex interpolation methods and service capabilities were n
 </div>
 </div>
 <div class="sect1">
-<h2 id="references">3. References</h2>
+<h2 id="references"><a class="anchor" href="#references"></a>3. References</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The following normative documents contain provisions that, through reference in this text, constitute provisions of this document. For dated references, subsequent amendments
@@ -400,7 +454,7 @@ to, or revisions of, any of these publications do not apply. For undated referen
 </div>
 </div>
 <div class="sect1">
-<h2 id="_terms_and_definitions">4. Terms and definitions</h2>
+<h2 id="_terms_and_definitions"><a class="anchor" href="#_terms_and_definitions"></a>4. Terms and definitions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This document uses the specification terms defined in Subclause 5.3 of [OGC 06-121r9], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards.
@@ -420,33 +474,33 @@ In particular:</p>
 <p>For the purposes of this document, the following additional terms and definitions apply.</p>
 </div>
 <div class="sect2">
-<h3 id="_api">4.1. API</h3>
+<h3 id="_api"><a class="anchor" href="#_api"></a>4.1. API</h3>
 <div class="paragraph">
 <p>An interface that is defined in terms of a set of functions and procedures, and enables a program to gain access to facilities within an application. (Definition from Dictionary of Computer Science - Oxford Quick Reference, 2016)</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_client">4.2. client</h3>
+<h3 id="_client"><a class="anchor" href="#_client"></a>4.2. client</h3>
 <div class="paragraph">
 <p>software component that can invoke an operation from a server<br>
  [ OGC 06-121r9 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_dynamic_attributes">4.3. dynamic attributes</h3>
+<h3 id="_dynamic_attributes"><a class="anchor" href="#_dynamic_attributes"></a>4.3. dynamic attributes</h3>
 <div class="paragraph">
 <p>characteristic of a feature in which its value varies with time</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_feature">4.4. feature</h3>
+<h3 id="_feature"><a class="anchor" href="#_feature"></a>4.4. feature</h3>
 <div class="paragraph">
 <p>abstraction of real world phenomena<br>
  [ ISO 19101:2014 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_foliation">4.5. foliation</h3>
+<h3 id="_foliation"><a class="anchor" href="#_foliation"></a>4.5. foliation</h3>
 <div class="paragraph">
 <p>one parameter set of geometries such that each point in the prism of the set is in one and only one
 trajectory and in one and only one leaf<br>
@@ -454,35 +508,35 @@ trajectory and in one and only one leaf<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_geometric_object">4.6. geometric object</h3>
+<h3 id="_geometric_object"><a class="anchor" href="#_geometric_object"></a>4.6. geometric object</h3>
 <div class="paragraph">
 <p>spatial object representing a geometric set<br>
  [ ISO 19107:2003 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_geometric_primitive">4.7. geometric primitive</h3>
+<h3 id="_geometric_primitive"><a class="anchor" href="#_geometric_primitive"></a>4.7. geometric primitive</h3>
 <div class="paragraph">
 <p>geometric object representing a single, connected, homogeneous element of space<br>
  [ ISO 19107:2003 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_interface">4.8. interface</h3>
+<h3 id="_interface"><a class="anchor" href="#_interface"></a>4.8. interface</h3>
 <div class="paragraph">
 <p>named set of operations that characterize the behaviour of an entity<br>
  [ ISO 19119:2006 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_leaf">4.9. leaf</h3>
+<h3 id="_leaf"><a class="anchor" href="#_leaf"></a>4.9. leaf</h3>
 <div class="paragraph">
 <p>&lt;one parameter set of geometries&gt; geometry at a particular value of the parameter<br>
  [ ISO 19141:2008 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_moving_feature">4.10. moving feature</h3>
+<h3 id="_moving_feature"><a class="anchor" href="#_moving_feature"></a>4.10. moving feature</h3>
 <div class="paragraph">
 <p>feature whose location changes over time<br>
  [ ISO 19141:2008 ]<br>
@@ -490,7 +544,7 @@ NOTE &#160;&#160; Its base representation uses a local origin and local coordina
 </div>
 </div>
 <div class="sect2">
-<h3 id="_one_parameter_set_of_geometries">4.11. one parameter set of geometries</h3>
+<h3 id="_one_parameter_set_of_geometries"><a class="anchor" href="#_one_parameter_set_of_geometries"></a>4.11. one parameter set of geometries</h3>
 <div class="paragraph">
 <p>function f from an interval t \(\in \) [a, b] such that f(t) is a geometry and for each point P \(\in \) f(a) there is a one
 parameter set of points (called the trajectory of P) P(t):[a,b] &#8594; P(t) such that P(t) \(\in \) f(t)<br>
@@ -499,14 +553,14 @@ EXAMPLE &#160;&#160; A curve C with constructive parameter t is a one parameter 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_period">4.12. period</h3>
+<h3 id="_period"><a class="anchor" href="#_period"></a>4.12. period</h3>
 <div class="paragraph">
 <p>one-dimensional geometric primitive representing extent in time<br>
  [ ISO 19141:2008 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_prism">4.13. prism</h3>
+<h3 id="_prism"><a class="anchor" href="#_prism"></a>4.13. prism</h3>
 <div class="paragraph">
 <p>&lt;one parameter set of geometries&gt; set of points in the union of the geometries (or the union of the
 trajectories) of a one parameter set of geometries<br>
@@ -514,48 +568,48 @@ trajectories) of a one parameter set of geometries<br>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_request">4.14. request</h3>
+<h3 id="_request"><a class="anchor" href="#_request"></a>4.14. request</h3>
 <div class="paragraph">
 <p>invocation of an operation by a client<br>
  [ OGC 06-121r9 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_resource">4.15. resource</h3>
+<h3 id="_resource"><a class="anchor" href="#_resource"></a>4.15. resource</h3>
 <div class="paragraph">
 <p>any addressable unit of information or service<br>
  [ IETF RFC 3986 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_response">4.16. response</h3>
+<h3 id="_response"><a class="anchor" href="#_response"></a>4.16. response</h3>
 <div class="paragraph">
 <p>result of an operation, returned from a server to a client<br>
  [ OGC 06-121r9 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_server">4.17. server</h3>
+<h3 id="_server"><a class="anchor" href="#_server"></a>4.17. server</h3>
 <div class="paragraph">
 <p>a particular instance of a service<br>
  [ OGC 06-121r9 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_service">4.18. service</h3>
+<h3 id="_service"><a class="anchor" href="#_service"></a>4.18. service</h3>
 <div class="paragraph">
 <p>distinct part of the functionality that is provided by an entity through interfaces<br>
  [ ISO 19119:2006 ]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_temporal_geometry">4.19. temporal geometry</h3>
+<h3 id="_temporal_geometry"><a class="anchor" href="#_temporal_geometry"></a>4.19. temporal geometry</h3>
 <div class="paragraph">
 <p>one parameter set of geometries in which the parameter is time</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_trajectory">4.20. trajectory</h3>
+<h3 id="_trajectory"><a class="anchor" href="#_trajectory"></a>4.20. trajectory</h3>
 <div class="paragraph">
 <p>path of a moving point described by a one parameter set of points<br>
  [ ISO 19141:2008 ]</p>
@@ -564,13 +618,13 @@ trajectories) of a one parameter set of geometries<br>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_conventions">5. Conventions</h2>
+<h2 id="_conventions"><a class="anchor" href="#_conventions"></a>5. Conventions</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This sections provides details and examples for conventions used in the document. All examples illustrated by gray or orange boxes are informative only.</p>
 </div>
 <div class="sect2">
-<h3 id="_json_notation">5.1. JSON notation</h3>
+<h3 id="_json_notation"><a class="anchor" href="#_json_notation"></a>5.1. JSON notation</h3>
 <div class="paragraph">
 <p>The notation of JSON in this document is based on the specification of [RFC 7159].</p>
 </div>
@@ -580,13 +634,13 @@ Whitespace is used in the examples inside this document to help illustrate the d
 </div>
 </div>
 <div class="sect2">
-<h3 id="_uml_notation">5.2. UML notation</h3>
+<h3 id="_uml_notation"><a class="anchor" href="#_uml_notation"></a>5.2. UML notation</h3>
 <div class="paragraph">
 <p>Unified Modeling Language (UML) static structure diagrams appearing in this document are used as described in Subclause 5.2 of OGC Web Services Common [OGC 06-121r9].</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_abbreviated_terms">5.3. Abbreviated terms</h3>
+<h3 id="_abbreviated_terms"><a class="anchor" href="#_abbreviated_terms"></a>5.3. Abbreviated terms</h3>
 <div class="paragraph">
 <p>The following symbols and abbreviated terms are used in this best practice paper:</p>
 </div>
@@ -674,13 +728,13 @@ Whitespace is used in the examples inside this document to help illustrate the d
 </div>
 </div>
 <div class="sect1">
-<h2 id="data_format">6. JSON Encoding</h2>
+<h2 id="data_format"><a class="anchor" href="#data_format"></a>6. JSON Encoding</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This clause specifies the data format for encoding moving features by using JSON objects.</p>
 </div>
 <div class="sect2">
-<h3 id="_overview">6.1. Overview</h3>
+<h3 id="_overview"><a class="anchor" href="#_overview"></a>6.1. Overview</h3>
 <div class="paragraph">
 <p>Moving Features JSON (MF-JSON) defines new fields by extending "foreign members" of <a href="https://www.ietf.org/rfc/rfc7946.txt">GeoJSON</a> [IETF RFC 7946].
 MF-JSON provides several types of JSON objects to represent geographical movements, dynamic properties, and spatiotemporal extents of moving features, based on two reference systems of World Geodetic System 1984 (WGS84) and Coordinated Universal Time (UTC).</p>
@@ -776,7 +830,7 @@ Even though the type extension occurs contravention of GeoJSON, this document ex
 </div>
 </div>
 <div class="sect2">
-<h3 id="_moving_features">6.2. Moving Features</h3>
+<h3 id="_moving_features"><a class="anchor" href="#_moving_features"></a>6.2. Moving Features</h3>
 <div class="paragraph">
 <p>In the MF-JSON format, two moving feature types are added as follows:</p>
 </div>
@@ -857,7 +911,7 @@ Even though the type extension occurs contravention of GeoJSON, this document ex
 </div>
 </div>
 <div class="sect2">
-<h3 id="tgeometry">6.3. Temporal Geometries</h3>
+<h3 id="tgeometry"><a class="anchor" href="#tgeometry"></a>6.3. Temporal Geometries</h3>
 <div class="paragraph">
 <p>The value of <code>"temporalGeometry"</code> member of a moving feature SHALL be a JSON object where the value of the <code>"type"</code> member is one of the following strings: <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, <code>"MultiMovingPoint"</code>, <code>"MultiMovingLineString"</code>, <code>"MultiMovingPolygon"</code>, and <code>"MovingGeometryCollection"</code>.
 A temporal geometry is conceptualized as a prism of the set of points contained in all of the leaves (a foliation) and trajectories, representing the geographical movement of a moving feature.
@@ -893,7 +947,7 @@ It is mathematically modeled as a mapping function from time to a geometric obje
 <p>This practice defines two encoding ways for a temporal geometry instance: simple and collection form.</p>
 </div>
 <div class="sect3">
-<h4 id="simple">6.3.1. Simple Temporal Geometries</h4>
+<h4 id="simple"><a class="anchor" href="#simple"></a>6.3.1. Simple Temporal Geometries</h4>
 <div class="paragraph">
 <p>The simple form of temporal geometry instances is a JSON object with four REQUIRED memebers: <code>"type"</code>, <code>"coordinates"</code>, <code>"datetimes"</code>, and <code>"interpolations"</code>.
 The simple form represents the movement of one geometric primitive that is non-decomposed objects, i.e., a moving point, moving linestring, and moving polygon.
@@ -1151,7 +1205,7 @@ This practice converts the time position to a signed 64-bit integer(long) value 
 </div>
 </div>
 <div class="sect3">
-<h4 id="collection">6.3.2. Collection of Temporal Geometries</h4>
+<h4 id="collection"><a class="anchor" href="#collection"></a>6.3.2. Collection of Temporal Geometries</h4>
 <div class="paragraph">
 <p>The collection form of temporal geometry instances is a JSON object with two REQUIRED fields: <code>"type"</code> and <code>"members"</code>.</p>
 </div>
@@ -1204,7 +1258,7 @@ This practice converts the time position to a signed 64-bit integer(long) value 
 </div>
 </div>
 <div class="sect2">
-<h3 id="tproperties">6.4. Temporal Properties</h3>
+<h3 id="tproperties"><a class="anchor" href="#tproperties"></a>6.4. Temporal Properties</h3>
 <div class="paragraph">
 <p>A moving feature can have more than zero time-varying properties, such as the velocity of vehicles or the wind speed of hurricanes.
 A temporal property represents a dynamic measure that the result of ascertaining the value of a characteristic of a moving feature changes over time and/or location.
@@ -1381,7 +1435,7 @@ The object SHALL be a JSON array of interpolation methods whose instance is a pr
 </div>
 </div>
 <div class="sect2">
-<h3 id="stbox">6.5. Spatiotemporal Bounding Box</h3>
+<h3 id="stbox"><a class="anchor" href="#stbox"></a>6.5. Spatiotemporal Bounding Box</h3>
 <div class="paragraph">
 <p>A moving feature may have a member named <code>"stBoundedBy"</code>, which indicate the boundary containing moving features in a spatiotemporal domain. To represent information on the coordinate range for moving features, this MF-JSON format follows GeoJSON&#8217;s <code>"bbox"</code> field.
 The value of the bbox member is a 2*n array where n is the number of dimensions.
@@ -1404,7 +1458,7 @@ The temporal boundary is a temporal period of <code>"begin"</code> and <code>"en
 </div>
 </div>
 <div class="sect2">
-<h3 id="_application_domain_variables_foreign_members">6.6. Application Domain Variables (Foreign Members)</h3>
+<h3 id="_application_domain_variables_foreign_members"><a class="anchor" href="#_application_domain_variables_foreign_members"></a>6.6. Application Domain Variables (Foreign Members)</h3>
 <div class="paragraph">
 <p>MF-JSON uses annotations to represent foreign members which are not described in this document and their semantics are dependent on a domain or application specific requirement.
 It is the reason why MF-JSON defines their elements by extending the foreign member of GeoJSON.
@@ -1412,7 +1466,7 @@ On the name/value pair of a foreign member, the name always starts with the at s
 </div>
 </div>
 <div class="sect2">
-<h3 id="_discussions">6.7. Discussions</h3>
+<h3 id="_discussions"><a class="anchor" href="#_discussions"></a>6.7. Discussions</h3>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -1459,7 +1513,7 @@ A moving feature may have a member named <code>"geometry"</code>, which may repr
 </div>
 </div>
 <div class="sect1">
-<h2 id="rest_api">7. RESTful API</h2>
+<h2 id="rest_api"><a class="anchor" href="#rest_api"></a>7. RESTful API</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This Clause provides a design example of the RESTful API as a form of service interfaces to handle moving features on the Web with ease of development, access, robustness, and scalability in server/client distributed environments.
@@ -1469,7 +1523,7 @@ Since OGC still consider a common guidance to define RESTful interfaces and JSON
 However, this document contains a minimal description to implement RESTful API using the Moving Features JSON (MF-JSON) encoding.</p>
 </div>
 <div class="sect2">
-<h3 id="_general_information">7.1. General Information</h3>
+<h3 id="_general_information"><a class="anchor" href="#_general_information"></a>7.1. General Information</h3>
 <div class="paragraph">
 <p>Clients and servers exchange representations of resources via HTTP messages as shown in <a href="#protocol">Figure 3</a>.
 Clients send a request against the resources to the server in the form of a HTTP verb, Uniform Resource Identifier (URI), protocol version, and request content (header and body).
@@ -1482,7 +1536,7 @@ The server replies with a response message consisting of the protocol version fo
 <div class="title">Figure 3. Client/Server Communication based on RESTful API</div>
 </div>
 <div class="sect3">
-<h4 id="_verb">7.1.1. Verb</h4>
+<h4 id="_verb"><a class="anchor" href="#_verb"></a>7.1.1. Verb</h4>
 <div class="paragraph">
 <p>Verb is an HTTP method: POST, GET, PUT/PATCH, and DELETE corresponding to create, read, update, and delete (CRUD) operations, respectively. A client make a request with one of the following method to be applied to the resource.</p>
 </div>
@@ -1516,7 +1570,7 @@ The server replies with a response message consisting of the protocol version fo
 </table>
 </div>
 <div class="sect3">
-<h4 id="_uri">7.1.2. URI</h4>
+<h4 id="_uri"><a class="anchor" href="#_uri"></a>7.1.2. URI</h4>
 <div class="paragraph">
 <p>A Uniform Resource Identifier (URI) provides a simple and extensible means for identifying a resource as being a locator, a name, or both. The general rules of URIs are defined in [IETF RFC 3986].
 The RESTful API to support moving feature data uses a Uniform Resource Locator (URL) for location and access of resources via the HTTP protocol. The basic components of URLs can be defined as follows:</p>
@@ -1544,13 +1598,13 @@ protocol. The host is a domain name of a network host, or its IPv4 address as a 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_version">7.1.3. Version</h4>
+<h4 id="_version"><a class="anchor" href="#_version"></a>7.1.3. Version</h4>
 <div class="paragraph">
 <p>The service implementation shall support a HTTP version. This document assumes the protocol referred to as "HTTP/1.1" [IETF RFC 2616].</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_status">7.1.4. Status</h4>
+<h4 id="_status"><a class="anchor" href="#_status"></a>7.1.4. Status</h4>
 <div class="paragraph">
 <p>The response message should contain a status code of the attempt to understand and satisfy the request. Depending on the first digit of a 3-digit integer code, it is classified into five roles:</p>
 </div>
@@ -1615,7 +1669,7 @@ protocol. The host is a domain name of a network host, or its IPv4 address as a 
 </div>
 </div>
 <div class="sect3">
-<h4 id="_header">7.1.5. Header</h4>
+<h4 id="_header"><a class="anchor" href="#_header"></a>7.1.5. Header</h4>
 <div class="paragraph">
 <p>A general HTTP request/response message contains header fields consisting of a name, followed by a colon (":") and the field value. Detail information of HTTP header fields are also described in [IETF RFC 2616], Section 4.5 (General Header Fields), Section 5.3 (Request Header Fields), Section 6.2 (Response Header Fields), and Section 7.1 (Entity Header Fields).
 The RESTful API of moving features in this document concerns only the Content-Type field, and the other fields are charged to the implementation of domain applications.</p>
@@ -1644,14 +1698,14 @@ The Host request-header field specifies the Internet host and port number of the
 </div>
 </div>
 <div class="sect3">
-<h4 id="_body">7.1.6. Body</h4>
+<h4 id="_body"><a class="anchor" href="#_body"></a>7.1.6. Body</h4>
 <div class="paragraph">
 <p>The entity-body (if any) sent with an request or response is in the JSON format. If the entities represent moving feature data, it is encoded by MF-JSON. More examples are given the next sub-clause.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="resources">7.2. Resources</h3>
+<h3 id="resources"><a class="anchor" href="#resources"></a>7.2. Resources</h3>
 <div class="paragraph">
 <p>A request URI is constructed with a resource path for a corresponding resource item. Resources are the fundamental elements of the RESTful API.
 This API is designed by the resource classes and their relationships as shown in <a href="#resource_type">Figure 4</a>.</p>
@@ -1663,7 +1717,7 @@ This API is designed by the resource classes and their relationships as shown in
 <div class="title">Figure 4. REST Resource Classes of a Moving Feature Service</div>
 </div>
 <div class="sect3">
-<h4 id="_resource_classes">7.2.1. Resource Classes</h4>
+<h4 id="_resource_classes"><a class="anchor" href="#_resource_classes"></a>7.2.1. Resource Classes</h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2020,7 +2074,7 @@ The moving-feature service needs to manage the connectivity of features' movemen
 </div>
 </div>
 <div class="sect3">
-<h4 id="_resource_path_patterns">7.2.2. Resource Path Patterns</h4>
+<h4 id="_resource_path_patterns"><a class="anchor" href="#_resource_path_patterns"></a>7.2.2. Resource Path Patterns</h4>
 <div class="paragraph">
 <p>Each resource in the service has at least one URL.
 The recommendation pattern of resource URL paths to address a collection of MovingFeature entities, a MovingFeature entity, and its properties may be formed as:</p>
@@ -2095,7 +2149,7 @@ The recommendation pattern of resource URL paths to address a collection of Movi
 </div>
 </div>
 <div class="sect3">
-<h4 id="_resource_path_examples">7.2.3. Resource Path Examples</h4>
+<h4 id="_resource_path_examples"><a class="anchor" href="#_resource_path_examples"></a>7.2.3. Resource Path Examples</h4>
 <div class="paragraph">
 <p>A client can make a request against the resources via URL using various HTTP methods: POST, GET, PUT/PATCH, and DELETE.</p>
 </div>
@@ -2222,7 +2276,7 @@ PUT  SERVICE_ROOT/MovingFeatures('mf0001')/properties#name='title'   HTTP1.1
 </div>
 </div>
 <div class="sect2">
-<h3 id="queries">7.3. Access Interfaces</h3>
+<h3 id="queries"><a class="anchor" href="#queries"></a>7.3. Access Interfaces</h3>
 <div class="paragraph">
 <p>The OGC Moving Feature Access [OGC 16-120r3] document requires three types of operations for accessing moving feature data: Type A, Type B, and Type C as follows:</p>
 </div>
@@ -2325,7 +2379,7 @@ The <code>convoy</code> operation returns the minimum bounding temporal geometry
 </ul>
 </div>
 <div class="sect3">
-<h4 id="select_query">7.3.1. Query Option <code>$select</code></h4>
+<h4 id="select_query"><a class="anchor" href="#select_query"></a>7.3.1. Query Option <code>$select</code></h4>
 <div class="paragraph">
 <p>The <code>$select</code> query option requests the service to harvest the properties or return a value derived from properties. The operations of <strong>Harvest</strong>, <strong>GeoSpatial</strong>, and <strong>Temporal</strong> are realized with the <code>$select</code> query option corresponding to a MovingFeature or FeatureLayer resource.</p>
 </div>
@@ -2574,7 +2628,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="sect3">
-<h4 id="filter_query">7.3.2. Query Option <code>$filter</code></h4>
+<h4 id="filter_query"><a class="anchor" href="#filter_query"></a>7.3.2. Query Option <code>$filter</code></h4>
 <div class="paragraph">
 <p>The <code>$filter</code> query option allows clients to filter a collection of moving features that are addressed by a request URL. It can be applied to a specific moving feature and a collection of moving features. The <code>$filter</code> option is evaluated for each moving features in the collection, and returns the features where the expression of the Relation interface is <code>true</code> in the response. For a specific feature, it returns <code>true</code> or <code>false</code>. The <strong>Relation</strong> interface is realized with the <code>$filter</code> query option.</p>
 </div>
@@ -2691,7 +2745,7 @@ Content_Type: application/geo+json
 </div>
 </div>
 <div class="sect3">
-<h4 id="search_query">7.3.3. Query Option <code>$search</code></h4>
+<h4 id="search_query"><a class="anchor" href="#search_query"></a>7.3.3. Query Option <code>$search</code></h4>
 <div class="paragraph">
 <p>The <code>$search</code> query option allows clients to analyze moving features or a specific moving feature, and returns a new object as a computation result. The <strong>Analysis</strong> interface is realized with the <code>$search</code> query option.</p>
 </div>
@@ -2793,7 +2847,7 @@ For example,</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="addressing">7.3.4. Addressing Entities: <code>$ref</code>, <code>$value</code></h4>
+<h4 id="addressing"><a class="anchor" href="#addressing"></a>7.3.4. Addressing Entities: <code>$ref</code>, <code>$value</code></h4>
 <div class="paragraph">
 <p>This practice uses the symbolic resource <code>$ref</code>, located at the service root or a FeatureLayer entity, to get the URL for addressing all entities.
 The symbolic resource <code>$value</code> is allowed to resolve to a single property value or to get a list of values of TemporalProperty and Property elements of a MovingFeatures resource in text/plain form.</p>
@@ -2905,7 +2959,7 @@ http://www.qudt.org/qudt/owl/1.0.0/quantity/Length</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_bibliography">Bibliography</h2>
+<h2 id="_bibliography"><a class="anchor" href="#_bibliography"></a>Bibliography</h2>
 <div class="sectionbody">
 <div class="ulist bibliography">
 <ul class="bibliography">
@@ -2923,7 +2977,7 @@ http://www.qudt.org/qudt/owl/1.0.0/quantity/Length</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_revision_history">Annex A: Revision History</h2>
+<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Appendix A: Revision History</h2>
 <div class="sectionbody">
 <table id="revision_history" class="tableblock frame-all grid-all spread">
 <colgroup>
@@ -2985,7 +3039,7 @@ http://www.qudt.org/qudt/owl/1.0.0/quantity/Length</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-15 20:20:44 JST
+Last updated 2017-03-17 00:00:12 JST
 </div>
 </div>
 <script type="text/x-mathjax-config">
