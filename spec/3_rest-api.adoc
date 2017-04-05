@@ -631,10 +631,30 @@ GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalGeometry?$select=boundary()  
 200 OK
 Content_Type: application/geo+json
 {
-    "boundary": {
-       "type": "LineString",
-       "coordinates": [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0] ]
-    }
+  "boundary": {
+    "type": "LineString",
+    "coordinates": [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0] ]
+  }
+}
+----
+
+[source]
+.Example 7.19: to select a part of a temporal property of the moving feature whose identifier is 'mf0001'.
+----
+>>> Request
+GET  SERVICE_ROOT/MovingFeatures('mf0001')/temporalProperties('length')?select=values gt 10 HTTP1.1
+
+<<< Response
+200 OK
+Content_Type: application/geo+json
+{
+  "temporalProperties": [{
+      "datetimes": ["2017-03-13T01:00:00Z","2017-03-13T21:00:00Z", "2017-03-13T23:00:00Z"],
+      "length": {
+        "uom" : "m",
+        "values": [10, 15, 20],
+        "interpolations": "Linear"
+  }]
 }
 ----
 
@@ -644,7 +664,7 @@ Content_Type: application/geo+json
 The `$filter` query option allows clients to filter a collection of moving features that are addressed by a request URL. It can be applied to a specific moving feature and a collection of moving features. The `$filter` option is evaluated for each moving features in the collection, and returns the features where the expression of the Relation interface is `true` in the response. For a specific feature, it returns `true` or `false`. The *Relation* interface is realized with the `$filter` query option.
 
 [source]
-.Example 7.19: The disjoint operation returns true or false corresponding to a moving feature.
+.Example 7.20: The disjoint operation returns true or false corresponding to a moving feature.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$filter=disjoint(LINESTRING(1%202,3%204,5%206),2008-02-02T22:31:00Z,2008-02-02T22:40:00Z)  HTTP1.1
@@ -658,7 +678,7 @@ Content_Type: application/geo+json
 ----
 
 [source]
-.Example 7.20: The intersects operation returns the identifiers of moving features whose trajectory intersects with the parameter geometry object for a particular period of time in the collection.
+.Example 7.21: The intersects operation returns the identifiers of moving features whose trajectory intersects with the parameter geometry object for a particular period of time in the collection.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures?$filter=intersects(POLYGON((30%2010%2C40%2040%2C20%2040%2C10%2020%2C30%2010)),2013-05-01T10:33:50Z,2013-05-01T10:36:41Z)  HTTP1.1
@@ -672,7 +692,7 @@ Content_Type: application/geo+json
 ----
 
 [source]
-.Example 7.21: The distanceWithin operation returns the identifiers of moving features which are located within 100km from the given position during the parameter time period.
+.Example 7.22: The distanceWithin operation returns the identifiers of moving features which are located within 100km from the given position during the parameter time period.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures?$filter=distanceWithin(POINT(103%201.0),2013-05-01T10:33:50Z,2013-05-01T10:36:41Z,100;km) HTTP1.1
@@ -748,7 +768,7 @@ Content_Type: application/geo+json
 The `$search` query option allows clients to analyze moving features or a specific moving feature, and returns a new object as a computation result. The *Analysis* interface is realized with the `$search` query option.
 
 [source]
-.Example 7.22: To search the nearest approach point with ID.
+.Example 7.23: To search the nearest approach point with ID.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures('mf0001')?$search=nearestApproachPoint(LINESTRING(116.35%2039.8,116.36%2040),2008-02-04T00:00:00Z,2008-02-04T00:10:00Z)  HTTP1.1
@@ -767,7 +787,7 @@ Content_Type: application/geo+json
 ----
 
 [source]
-.Example 7.23: To search the nearest approach distance for all moving features.
+.Example 7.24: To search the nearest approach distance for all moving features.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures?$search=nearestApproach(LINESTRING(116.35%2039.8,116.36%2040),2008-02-04T00:00:00Z,2008-02-04T00:10:00Z)  HTTP1.1
@@ -791,7 +811,7 @@ Content_Type: application/geo+json
 ----
 
 [source]
-.Example 7.24: To compute each intersection object of the temporal geometry from a collection of moving features with a parameter geometry object for a particular period of time.
+.Example 7.25: To compute each intersection object of the temporal geometry from a collection of moving features with a parameter geometry object for a particular period of time.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures?$search=intersection(POLYGON((30%2010%2C40%2040%2C20%2040%2C10%2020%2C30%2010)),2013-05-01T10:33:50Z,2013-05-01T10:36:41Z)  HTTP1.1
@@ -910,7 +930,7 @@ This practice uses the symbolic resource `$ref`, located at the service root or 
 The symbolic resource `$value` is allowed to resolve to a single property value or to get a list of values of TemporalProperty and Property elements of a MovingFeatures resource in text/plain form.
 
 [source]
-.Example 7.25: To get the URLs of all MovingFeatures entities if the service does not have any resource of FeatureLayer.
+.Example 7.26: To get the URLs of all MovingFeatures entities if the service does not have any resource of FeatureLayer.
 ----
 >>> Request
 GET  SERVICE_ROOT/$ref  HTTP1.1
@@ -924,7 +944,7 @@ Content_Type: application/geo+json
 ----
 
 [source]
-.Example 7.26: To get the URLs of all FeatureLayer entities if the service manages resources of FeatureLayer.
+.Example 7.27: To get the URLs of all FeatureLayer entities if the service manages resources of FeatureLayer.
 ----
 >>> Request
 GET  SERVICE_ROOT/$ref  HTTP1.1
@@ -938,7 +958,7 @@ Content_Type: application/geo+json
 ----
 
 [source]
-.Example 7.27: To get the URLs of all MovingFeatures entities in a FeatureLayer entity.
+.Example 7.28: To get the URLs of all MovingFeatures entities in a FeatureLayer entity.
 ----
 >>> Request
 GET  SERVICE_ROOT/FeatureLayers('typhoon')/$ref  HTTP1.1
@@ -952,7 +972,7 @@ Content_Type: application/geo+json
 ----
 
 [source]
-.Example 7.28: To get a list of names of FeatureLayer.
+.Example 7.29: To get a list of names of FeatureLayer.
 ----
 >>> Request
 GET  SERVICE_ROOT/FeatureLayers/name/$value  HTTP1.1
@@ -964,7 +984,7 @@ bus, typhoon
 ----
 
 [source]
-.Example 7.29: To get a list of static properties' name.
+.Example 7.30: To get a list of static properties' name.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/properties/name/$value  HTTP1.1
@@ -976,7 +996,7 @@ title, author
 ----
 
 [source]
-.Example 7.30: To get a value of a static properties.
+.Example 7.31: To get a value of a static properties.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/properties('title')/$value  HTTP1.1
@@ -988,7 +1008,7 @@ Test Title
 ----
 
 [source]
-.Example 7.31: To get a list of temporal properties' name.
+.Example 7.32: To get a list of temporal properties' name.
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties/name/$value  HTTP1.1
@@ -1000,7 +1020,7 @@ length, dose, picture
 ----
 
 [source]
-.Example 7.32: To get a unit value of a temporal property
+.Example 7.33: To get a unit value of a temporal property
 ----
 >>> Request
 GET  SERVICE_ROOT/MovingFeatures('m0001')/temporalProperties('length')/uom/$value  HTTP1.1
