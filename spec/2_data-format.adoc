@@ -415,7 +415,7 @@ However, the value of the _property_ member SHALL be a JSON object that has the 
 [width="99%", cols="2,8", options="header"]
 |=========
 | Unit strings | Descriptions
-| print symbols | From the Unified Code for Units of Measure (UCUM)<<1>>
+| _print symbols_ | From the Unified Code for Units of Measure (UCUM)<<1>>
 | null | The `"values"` member contains counting measures.
 | text | The `"values"` member contains any strings.
 | image| The `"values"` member contains Base64 strings converted from images.

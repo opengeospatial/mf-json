@@ -821,11 +821,48 @@ Content_Type: application/geo+json
 
 [NOTE]
 ==========
-In the OData protocol, the `$search` query option is used to restrict the result to include only those entities matching the specified search expression. +
+The `$search` query option can be used for the full text search of properties/temporalProperties of moving features with a set of keywords. +
 For example,
 
-- [underline]#http://host/service/Products?$search=bike# //return all Products that match the search term "bike"
-- [underline]#http://host/service/Products?$search=(mountain%20OR%20bike)%20AND%20NOT%20clothing# //return all Products that match either "mountain" or "bike" and do not match clothing
+----
+>>> Request
+GET  SERVICE_ROOT/MovingFeatures/properties?$search=bike  HTTP1.1
+
+<<< Response
+200 OK
+Content_Type: application/geo+json
+[
+    {
+        "@id": "mf001",
+        "properties": {
+            "name": "bike"
+        }
+    }
+]
+----
+
+----
+>>> Request
+GET  SERVICE_ROOT/MovingFeatures/temporalProperties?$search=mountain%20OR%20bike)%20AND%20NOT%20clothing  HTTP1.1
+
+<<< Response
+200 OK
+Content_Type: application/geo+json
+[
+    {
+        "@id": "mf003",
+        "temporalProperties": [{
+            "datetimes": ["2017-03-13T01:00:00Z","2017-03-13T21:00:00Z", "2017-03-13T23:00:00Z"],
+            "messages": {
+              "uom" : "text",
+              "values": ["mountain bike", "mountain", "bike"],
+              "interpolations": "Discrete"
+            }
+        }]
+    }
+]
+----
+
 ==========
 
 [#addressing]
