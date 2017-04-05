@@ -835,7 +835,8 @@ Content_Type: application/geo+json
     {
         "@id": "mf001",
         "properties": {
-            "name": "bike"
+            "name": "bike",
+            "description": "fast bike"
         }
     }
 ]
@@ -843,7 +844,22 @@ Content_Type: application/geo+json
 
 ----
 >>> Request
-GET  SERVICE_ROOT/MovingFeatures/temporalProperties?$search=mountain%20OR%20bike)%20AND%20NOT%20clothing  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures/properties('name')?$search=bike  HTTP1.1
+
+<<< Response
+200 OK
+Content_Type: application/geo+json
+[
+    {
+        "@id": "mf001",
+        "name": "bike"
+    }
+]
+----
+
+----
+>>> Request
+GET  SERVICE_ROOT/MovingFeatures/temporalProperties?$search=(mountain OR bike) AND NOT clothing  HTTP1.1
 
 <<< Response
 200 OK
@@ -857,8 +873,31 @@ Content_Type: application/geo+json
               "uom" : "text",
               "values": ["mountain bike", "mountain", "bike"],
               "interpolations": "Discrete"
+            },
+            "annotations": {
+              "uom" : "text",
+              "values": ["a mountain bike", "a mountain", "a bike"],
+              "interpolations": "Discrete"
             }
         }]
+    }
+]
+----
+
+----
+>>> Request
+GET  SERVICE_ROOT/MovingFeatures/temporalProperties('messages')?$search=(mountain OR bike) AND NOT clothing  HTTP1.1
+
+<<< Response
+200 OK
+Content_Type: application/geo+json
+[
+    {
+        "@id": "mf003",
+        "messages": {
+            "datetimes": ["2017-03-13T01:00:00Z","2017-03-13T21:00:00Z", "2017-03-13T23:00:00Z"],
+            "values": ["mountain bike", "mountain", "bike"]
+        }
     }
 ]
 ----

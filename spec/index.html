@@ -2844,7 +2844,8 @@ Content_Type: application/geo+json
     {
         "@id": "mf001",
         "properties": {
-            "name": "bike"
+            "name": "bike",
+            "description": "fast bike"
         }
     }
 ]</pre>
@@ -2853,7 +2854,23 @@ Content_Type: application/geo+json
 <div class="listingblock">
 <div class="content">
 <pre>&gt;&gt;&gt; Request
-GET  SERVICE_ROOT/MovingFeatures/temporalProperties?$search=mountain%20OR%20bike)%20AND%20NOT%20clothing  HTTP1.1
+GET  SERVICE_ROOT/MovingFeatures/properties('name')?$search=bike  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: application/geo+json
+[
+    {
+        "@id": "mf001",
+        "name": "bike"
+    }
+]</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/MovingFeatures/temporalProperties?$search=(mountain OR bike) AND NOT clothing  HTTP1.1
 
 &lt;&lt;&lt; Response
 200 OK
@@ -2861,13 +2878,37 @@ Content_Type: application/geo+json
 [
     {
         "@id": "mf003",
-        "temporalProperties": {
+        "temporalProperties": [{
             "datetimes": ["2017-03-13T01:00:00Z","2017-03-13T21:00:00Z", "2017-03-13T23:00:00Z"],
             "messages": {
               "uom" : "text",
               "values": ["mountain bike", "mountain", "bike"],
               "interpolations": "Discrete"
+            },
+            "annotations": {
+              "uom" : "text",
+              "values": ["a mountain bike", "a mountain", "a bike"],
+              "interpolations": "Discrete"
             }
+        }]
+    }
+]</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&gt;&gt;&gt; Request
+GET  SERVICE_ROOT/MovingFeatures/temporalProperties('messages')?$search=(mountain OR bike) AND NOT clothing  HTTP1.1
+
+&lt;&lt;&lt; Response
+200 OK
+Content_Type: application/geo+json
+[
+    {
+        "@id": "mf003",
+        "messages": {
+            "datetimes": ["2017-03-13T01:00:00Z","2017-03-13T21:00:00Z", "2017-03-13T23:00:00Z"],
+            "values": ["mountain bike", "mountain", "bike"]
         }
     }
 ]</pre>
