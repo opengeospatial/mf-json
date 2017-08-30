@@ -106,9 +106,9 @@ In the MF-JSON format, two moving feature types are added as follows:
 +
 
   ** The value of the `"type"` member SHALL be the string of `"MovingFeature"`.
-  ** The value of the `"temporalGeometry"` member SHALL be a JSON object as described in <<tgeometry>>. An instace of `"MovingFeature"` SHALL only one `"temporalGeometry"` member.
-  ** The value of the `"temporalProperties"` memeber SHALL be a JSON array as described in <<tproperties>>.
-  ** The value of the `"stBoundedBy"` memeber SHALL be a JSON object as described in <<stbox>>, representing the spatiotemporal bounding box of the `"temporalGeometry"` instance.
+  ** The value of the `"temporalGeometry"` member SHALL be a JSON object as described in <<tgeometry>>. An instance of `"MovingFeature"` SHALL only one `"temporalGeometry"` member.
+  ** The value of the `"temporalProperties"` member SHALL be a JSON array as described in <<tproperties>>.
+  ** The value of the `"stBoundedBy"` member SHALL be a JSON object as described in <<stbox>>, representing the spatiotemporal bounding box of the `"temporalGeometry"` instance.
   ** The value of the `"properties"` member is an object (any JSON object or a JSON null value).
 
 
@@ -140,7 +140,7 @@ In the MF-JSON format, two moving feature types are added as follows:
 
   ** The value of the `"type"` member SHALL be the string of `"MovingFeatureCollection"`.
   ** The value of the `"features"` member SHALL be a JSON array of moving feature instances as described in <<tgeometry>>.
-  ** The value of the `"stBoundedBy"` memeber SHALL be a JSON object as described in <<stbox>>, representing the spatiotemporal bounding box to cover all of the `"temporalGeometry"` instances in  the `"features"` elements.
+  ** The value of the `"stBoundedBy"` member SHALL be a JSON object as described in <<stbox>>, representing the spatiotemporal bounding box to cover all of the `"temporalGeometry"` instances in  the `"features"` elements.
 
 
 [#tgeometry]
@@ -177,7 +177,7 @@ If viewed in a 4-dimensional spatio-temporal coordinate system, the temporal geo
 A moving point, linestring, and polygon is a spatio-temporal curve, surface, and solid, respectively.
 Their JSON representation is as follows.
 
-[source, json]
+[source, javascript]
 {
     ...,
     "temporalGeometry": {
@@ -247,7 +247,7 @@ For the predefine method, there is the restriction of the same number positions 
 [source, javascript]
 {
     "type": "MovingPoint",
-    "coordinates": [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0]],
+    "coordinates": [[100.0, 0.0], [101.0, 0.0], [101.0, 1.0]],
     "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
     "interpolations": ["Linear"] // an interpolation method during the period of datetimes
 }
@@ -261,7 +261,7 @@ this practice recommends to use user-defined interpolation formulas correspondin
 A temporal geometry MAY have a several interpolation formulas within its temporal domain. An element of interpolation formulas SHALL be represented by two members of `"coefficients"` and `"period"`.
 The new geographical position at a given time position is derived from a `"coefficients"` instance as a multidimensional array of *polynomial interpolation formulas* of latexmath:[(x, y, z)] coordinates during a particular time period.
 If a time position does not belong to any time period of the elements of formula, there is no interpolation position at that time.
-The order of arrays for the interpoation formular of a temporal position SHALL follow latexmath:[x] (longitude), latexmath:[y] (latitude), latexmath:[z] (altitude) order.
+The order of arrays for the interpolation formula of a temporal position SHALL follow latexmath:[x] (longitude), latexmath:[y] (latitude), latexmath:[z] (altitude) order.
 The time periods between any two elements of formulas only allows empty or 0-dimensional intersection.
 This practice converts the time position to a signed 64-bit integer(long) value that represents milliseconds for computing a value of each axis of coordinates at an arbitrary time position formatted by a character string of [ISO 8601:2004].
 
@@ -337,7 +337,7 @@ This practice converts the time position to a signed 64-bit integer(long) value 
 
 The collection form of temporal geometry instances is a JSON object with two REQUIRED fields: `"type"` and `"members"`.
 
-[source, json]
+[source, javascript]
 {
     ...
     "temporalGeometry": {
@@ -376,7 +376,7 @@ Even though the value of temporal property is depending on the spatiotemporal lo
 If a property has a static value, it is represented with the "properties" member as same as GeoJSON.
 
 
-[source, json]
+[source, javascript]
 {
     ...,
     "temporalProperties": [
@@ -429,7 +429,7 @@ If the values of a temporal property are measured at different times of `"dateti
 * `"interpolations"`: The temporal property also needs to define an interpolation method like the temporal geometry.
 The object SHALL be a JSON array of interpolation methods whose instance is a pre-defined interpolation methods of `"Discrete"`, `"Stepwise"`, `"Linear"`(default), and `"Spline"`, or an interpolation formula used for polynomial interpolation in time.
 
-[source, json]
+[source, javascript]
 {
   ...,
   "temporalProperties" : [
@@ -471,6 +471,7 @@ The object SHALL be a JSON array of interpolation methods whose instance is a pr
                  "end" : "2017-03-13T24:00:00Z"
             }
           }
+        ]
       },
     }
   ],
@@ -487,7 +488,7 @@ A moving feature may have a member named `"stBoundedBy"`, which indicate the bou
 The value of the bbox member is a 2*n array where n is the number of dimensions.
 The temporal boundary is a temporal period of `"begin"` and `"end"` expressed in ISO 8601:2004.
 
-[source, json]
+[source, javascript]
 {
     ...,
     "stBoundedBy": {
