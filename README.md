@@ -14,7 +14,7 @@ With this repository the OGC invites collaboration and comments directed at the 
 Pull requests for fixes are appreciated, and new functionality will still be considered until fixing the encoding format.
 The specification is done in asciidoc a format supported by GitHub, similar to markdown but with some features that make it better for specifications, like automatic section numbering.
 
-**Editor: Kyoung-Sook KIM, Hirotaka Ogawa**
+**Editor: Kyoung-Sook KIM, Nobuhiro ISHIMARU**
 
 ## Contributing
 
@@ -27,9 +27,9 @@ of the standard.
 
 The Moving Features SWG currently has the following email list:
    - moving-features.swg@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/moving-features.swg)
-      - Private List
-      - Access controlled archives
-      - Requires OGC membership and Observer Agreement to protect IPR (intellectual property rights)
+   - Private List
+   - Access controlled archives
+   - Requires OGC membership and Observer Agreement to protect IPR (intellectual property rights)
 
 
 **SWG Chair:**
