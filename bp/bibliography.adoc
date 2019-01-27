@@ -1,0 +1,6 @@
+== Bibliography
+
+[bibliography]
+- [[[1]]] Schadow, G. and McDonald, C. J.: Unified Code for Units of Measure (UCUM), unitsofmeasure.org
+- [[[2]]] EPSG: EPSG Geodetic Parameter Dataset, www.epsg.org
+- [[[3]]] IETF: [RFC 7946] The GeoJSON Format, 2016

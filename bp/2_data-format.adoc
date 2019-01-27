@@ -1,0 +1,531 @@
+[#data_format,reftext='6']
+== JSON Encoding
+
+This clause specifies the data format for encoding moving features by using JSON objects.
+
+
+=== Overview
+
+Moving Features JSON (MF-JSON) defines new fields by extending "foreign members" of https://www.ietf.org/rfc/rfc7946.txt[GeoJSON] [IETF RFC 7946].
+MF-JSON provides several types of JSON objects to represent geographical movements, dynamic properties, and spatiotemporal extents of moving features,
+based on the two reference systems of World Geodetic System 1984 (WGS84) and Coordinated Universal Time (UTC). However, the MF-JSON object may have the "crs" member
+to describe its local or global coordinate reference system (CRS).
+
+[NOTE]
+In https://www.ietf.org/rfc/rfc7946.txt[IETF GeoJSON format], types are not extensible.
+GeoJSON allows only the fixed types: FeatureCollection, Feature, Point, LineString, MultiPoint, Polygon, MultiLineString, MultiPolygon, and GeometryCollection.
+For the compatibility with GeoJSON, MF-JSON reserves new members of the geometric description of feature movement and the change of non-spatial attributes of features.
+
+
+// (Despite compliant GeoJSON not permitting extension of types, this document extends new types for representing moving features with time-varying geometries and properties.
+
+
+<<mf_overview>> compares the difference of members between GeoJSON and MF-JSON.
+
+[#mf_overview,reftext='{figure-caption} {counter:figure-num}']
+.JSON Objects in the Moving Features JSON format
+image::mfjson.png[Overview, pdfwidth=55%, width=55%, align="center"]
+// image::mf-overview.png[Overview, pdfwidth=55%, width=55%, align="center"] s
+
+
+[source, javascript]
+.Example 6.1:
+{
+    "type": "MovingFeature",  //(REQUIRED) Moving Feature Type
+    "temporalGeometry": { //(REQUIRED) temporal geometric object, extended from 'geometry'
+        "type": "MovingPoint", // a geometry type to represent a trajectory
+        "coordinates": [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0], [100.0, 1.0] ],
+        "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z", "2011-07-15T01:01:01Z"],
+        "interpolations": ["Linear"] // a pre-defined interpolation method between two consecutive instants in the "datetimes" field
+    },
+    "temporalProperties": [  //(OPTIONAL) dynamic non-spatial attributes, extended from 'properties'
+        { // a group of temporal properties that are measured at the same times
+            "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
+            "length": {
+              "uom": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length", // a URI denoting a unit-of-measure
+              "values": [1.0, 2.4, 1.0], // the array of values for "length", with the same number of elements as "datetimes"
+              "interpolations": ["Stepwise"],
+              "description": "description1" //(OPTIONAL)
+            },
+            "message":{
+              "uom": "text", // a predefined unit for a string value
+              "values": ["A", "B", "C"], // the array of values for "message", with the same number of elements as "datetimes"
+              "interpolations": ["Discrete"],
+              "description": "description2" //(OPTIONAL)
+            }
+        },
+        {
+            "datetimes" : ["2011-07-14T22:02:01Z", "2011-07-15T01:11:22Z"],
+            "discharge" : {
+              "uom" : "m^3/s", // a symbol from UCUM
+              "values" : [3.0, 4.0],
+              "interpolations": [ // two user-defined interpolations having two sub-time intervals
+                  {
+                      "coefficients": [1.0, 3.0, 4.1], // v = 1.0t^2 + 3.0t + 4.1
+                      "period": {
+                        "begin": "2011-07-14T22:02:01Z",
+                        "end" : "2011-07-14T23:11:14Z"
+                      }
+                  },
+                  {
+                      "coefficients": [5.0, 8.2], // v = 5.0t + 8.2
+                      "period": {
+                        "begin": "2011-07-14T23:11:14Z",
+                        "end" : "2011-07-15T01:11:22Z"
+                      }
+                  }
+              ],
+              "description": "it has two user-defined interpolations" //(OPTIONAL)
+            }
+        }
+    ],
+    "stBoundedBy": {  //(OPTIONAL) spatiotemporal bounding box to include the moving feature
+        "bbox": [100.0, 0.0, 101.0, 1.0],
+        "period": {
+            "begin": "2011-07-14T22:01:00Z",
+            "end" : "2011-07-15T21:14:00Z"
+        }
+    },
+    "properties": {  //(OPTIONAL) static non-spatial attributes regardless of time: the same representation of GeoJSON
+        "name": "bus1",
+        "state":"test1"
+    }
+}
+
+
+=== Moving Features
+
+In the MF-JSON format, two moving feature types are added as follows:
+
+- *MovingFeature*: a JSON object to represent a moving feature instance, having two REQUIRED members of `"type"` and `"temporalGeometry"`, and three OPTIONAL members of `"temporalProperties"`, `"stBoundedBy"`, and `"properties"` depending on the application requirements.
+
++
+
+[source, javascript]
+{
+    "type": "MovingFeature",    //(REQUIRED)
+    "temporalGeometry": {...},    //(REQUIRED)
+    "temporalProperties": [...],  //(OPTIONAL)
+    "stBoundedBy": {...},         //(OPTIONAL)
+    "properties": {...}           //(OPTIONAL)
+}
+
++
+
+  ** The value of the `"type"` member SHALL be the string of `"MovingFeature"`.
+  ** The value of the `"temporalGeometry"` member SHALL be a JSON object as described in <<tgeometry>>. An instance of `"MovingFeature"` SHALL only one `"temporalGeometry"` member.
+  ** The value of the `"temporalProperties"` member SHALL be a JSON array as described in <<tproperties>>.
+  ** The value of the `"stBoundedBy"` member SHALL be a JSON object as described in <<stbox>>, representing the spatiotemporal bounding box of the `"temporalGeometry"` instance.
+  ** The value of the `"properties"` member is an object (any JSON object or a JSON null value).
+
+
+- *MovingFeatureCollection*: a JSON object to represent a collection of moving feature instances, having two REQUIRED members of `"type"` and `"features"` and one OPTIONAL member of `"stBoundedBy"`.
+
++
+
+[source, javascript]
+{
+    "type": "MovingFeatureCollection",  //(REQUIRED)
+    "features": [                       //(REQUIRED)
+        {
+            "type": "MovingFeature",
+            "temporalGeometry": {...},
+            "temporalProperties": [...],
+            ...
+        },
+        {
+            "type": "MovingFeature",
+            "temporalGeometry": {...},
+            "temporalProperties": [...],
+            ...
+        }
+    ],
+    "stBoundedBy": {...}                  //(OPTIONAL)
+}
+
++
+
+  ** The value of the `"type"` member SHALL be the string of `"MovingFeatureCollection"`.
+  ** The value of the `"features"` member SHALL be a JSON array of moving feature instances as described in <<tgeometry>>.
+  ** The value of the `"stBoundedBy"` member SHALL be a JSON object as described in <<stbox>>, representing the spatiotemporal bounding box to cover all of the `"temporalGeometry"` instances in  the `"features"` elements.
+
+
+[#tgeometry]
+=== Temporal Geometries
+
+The value of `"temporalGeometry"` member of a moving feature SHALL be a JSON object where the value of the `"type"` member is one of the following strings: `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, `"MultiMovingPoint"`, `"MultiMovingLineString"`, `"MultiMovingPolygon"`, and `"MovingGeometryCollection"`.
+A temporal geometry is conceptualized as a prism of the set of points contained in all of the leaves (a foliation) and trajectories, representing the geographical movement of a moving feature.
+The temporal geometry is mathematically modeled as a mapping function from time to a geometric object: *_temporalGeometry: timePosition -> Geometry_* (http://geojson.org/geojson-spec.html#point[Point], http://geojson.org/geojson-spec.html#linestring[LineString], http://geojson.org/geojson-spec.html#polygon[Polygon],
+http://geojson.org/geojson-spec.html#multipoint[MultiPoint], http://geojson.org/geojson-spec.html#multilinestring[MultiLineString], http://geojson.org/geojson-spec.html#multipolygon#polygon[MultiPolygon], or http://geojson.org/geojson-spec.html#geometry-collection[GeometryCollection]).
+
+- *MovingPoint*: A temporal geometry represents the trajectory of a time-parameterized 0-dimensional geometric primitive (Point) representing a single geographic position at a time position (instant) within its temporal domain. Intuitively, this type depicts a set of curves in a spatiotemporal domain. A MovingPoint is used to express http://docs.opengeospatial.org/is/14-083r2/14-083r2.html#78[mf:AbstractTrajectory] in the OGC Moving Features standard. For example, the movement information of people, vehicles, or hurricanes can be shared by instances of the `"MovingPoint"` type.
+
+- *MovingLineString*: A temporal geometry represents the prism of a time-parameterized 1-dimensional (1D) geometric primitive (LineString) whose leaf at a time position is 1-dimensional linear object in a particular time period. Intuitively this type depicts a set of surfaces in a spatiotemporal domain. For example, the movement information of weather fronts or traffic congestion on roads can be shared by instances of the `"MovingLineString"` type.
+
+- *MovingPolygon*: A temporal geometry represents the prism of a time-parameterized 2-dimensional (2D) geometric primitive (Polygon) whose leaf at a time position is 2-dimensional polygonal object in a particular time period. Intuitively this type depicts a set of polyhedrons that are the convex hulls of two congruent polygons in a spatiotemporal domain. For example, the changes of flooding areas or the movement information of air pollution can be shared by instances of the `"MovingPolygon"` type.
+
+- *MultiMovingPoint*: A temporal geometry represents a set of moving points.
+
+- *MultiMovingLineString*: A temporal geometry represents a set of moving linestrings.
+
+- *MultiMovingPolygon*: A temporal geometry represents a set of moving polygons.
+
+- *MovingGeometryCollection*: Represents a collection of temporal geometries that have time-varing locations. Each element in the collection belongs to one of the above types.
+
+
+This practice defines two encoding mthods for a temporal geometry instance: simple and collection form.
+
+[#simple]
+==== Simple Temporal Geometries
+
+The simple form of temporal geometry instances is a JSON object with four REQUIRED members: `"type"`, `"coordinates"`, `"datetimes"`, and `"interpolations"`.
+The simple form represents the movement of one geometric primitive that comprises non-decomposed objects, i.e., a moving point, moving linestring, and moving polygon.
+If viewed in a 4-dimensional spatio-temporal coordinate system, the temporal geometry is a single continuum.
+A moving point, linestring, and polygon is a spatio-temporal curve, surface, and solid, respectively.
+Their JSON representation is as follows.
+
+[source, json]
+{
+    ...,
+    "temporalGeometry": {
+      "type": "MovingPoint | MovingLineString | MovingPolygon",  // (REQUIRED) vbar | as a means to select ONE type.
+      "coordinates": [...],   //(REQUIRED)
+      "datetimes" : [...],    //(REQUIRED)
+      "interpolations": [...] //(REQUIRED)
+    },
+    ...
+}
+
+
+- `"type"`: A case-sensitive string that is one of `"MovingPoint"`, `"MovingLineString"`, and `"MovingPolygon"`.
+
+- `"coordinates"`: The object SHALL be a list of leaf geometric primitives (points, linestrings, polygons) at times. The number of elements is same as the `"datetimes"` ones with a temporal order.
+There is an one-to-one correspondence between the elements of `"coordinates"` and `"datetimes"` as a temporal sequence of pairs latexmath:[(g,t)], where latexmath:[g] is a leaf geometry and latexmath:[t] is its sampling time.
+
++
+
+[width="99%", cols="1,^7,2", options="header"]
+|=========
+| Types   |      Formats of the `"coordinates"` object  |  _Comments_
+| MovingPoint | [ [x1,y1(,z1)], [x2,y2(,z2)], ... ] | _a list of points at each leaf, increasing time order_
+| MovingLineString | [ [[x11,y11(,z11)], [x12,y12(,z12)], ...], [[x21,y21(,z21)], [x22,y22(,z22)], ...], ... ] | _a list of linestrings at each leaf, increasing time order_
+| MovingPolygon | [ [[[ox11,oy11(,oz11)], [ox12,oy12(,oz12)], ...], [[ix11,iy11(,iz11)],[ix12,iy12(,iz12)], ...],...], [[[ox21,oy21(,oz21)], [ox22,oy22(,oz22)], ...], [[ix21,iy21(,iz21)],[ix22,iy22(,iz22)], ...], ...], ... ] |  _a list of polygons at each leaf, increasing time order_
+|=========
+
+[NOTE]
+https://www.rfc-editor.org/info/rfc7946[[IETF GeoJSON format]] A position is represented by an array of numbers, which must contain two or more elements. The first two elements are longitude/easting (x) and latitude/northing (y), precisely in that order and using decimal numbers. Altitude/elevation (z) MAY be included as an optional third element.
+
+- `"datetimes"`: The object SHALL be a list of time instants encoded as a character string of [ISO 8601:2004](http://www.iso.org/iso/home/standards/iso8601.htm) date-time formatter in chronological order, which does not allow duplicates.
+
++
+
+[width="99%", cols="1,^6,3", options="header"]
+|=========
+| Types   |      Formats the `"datetimes"` object     |  _Comments_
+|http://www.w3.org/TR/xmlschema11-2/#dateTime[DateTime]  | ["yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd'T'HH:mm:ss'Z'", ...]| _a list of monotonic increasing instants_
+|=========
+
+- `"interpolations"`: The object SHALL be a JSON array of interpolation methods.
+http://mathworld.wolfram.com/Interpolation.html[Interpolation] is a method of finding new values for any function using the given set of values.
+Here, the interpolation object approximates geographic positions at non sampling time instants for constructing the trajectory or prism of a moving feature in a spatiotemporal domain.
+The unknown position at a particular time can be found using many interpolation methods.
+In this practice, there are two expressions for an instance of interpolation methods: Predefined Interpolation Methods and Interpolation Formulas.
+
++
+
+.[Predefined Interpolation Methods]
+A predefined method SHALL be a case-sensitive string of one of `"Discrete"`, `"Stepwise"`, `"Linear"`, and `"Spline"`.
+The new position is differently derived by each method.
+For the predefined method, there is the restriction of the same number positions of all leaf geometries.
+
++
+
+[width="99%", cols="1,^5,3", options="header"]
+|=========
+| Types | Descriptions | _Comments_
+| Discrete | image:discrete.png[Discrete, pdfwidth=80%, width=70%] | _There is no interpolation position between two successive positions._
+| Stepwise | image:stepwise.png[Stepwise, pdfwidth=80%, width=70%] | _The interpolation position between two successive positions equals to the first position._
+| Linear   | image:linear.png[Linear, pdfwidth=80%, width=70%] | _The new position is found from the linear interpolation formula with the two successive positions. *Default_
+| Spline   | image:spline.png[Spline, pdfwidth=80%, width=70%] | _An interpolation position is derived from a cubic spline function on each interval between data positions._
+|=========
+
++
+
+[source, javascript]
+{
+    "type": "MovingPoint",
+    "coordinates": [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0]],
+    "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
+    "interpolations": ["Linear"] // an interpolation method during the period of datetimes
+}
+
+[NOTE]
+If a moving feature needs different predefined interpolation methods for several sub-intervals of time during its lifespan,
+this practice recommends the use of user-defined interpolation formulas corresponding to each sub-interval.
+
+
+.[Interpolation Formulas]
+A temporal geometry MAY have a several interpolation formulas within its temporal domain. An element of interpolation formulas SHALL be represented by two members of `"coefficients"` and `"period"`.
+The new geographical position at a given time position is derived from a `"coefficients"` instance as a multidimensional array of *polynomial interpolation formulas* of latexmath:[(x, y, z)] coordinates during a particular time period.
+If a time position does not belong to any time period of the elements of formula, there is no interpolation position at that time.
+The order of arrays for the interpolation formula of a temporal position SHALL follow latexmath:[x] (longitude), latexmath:[y] (latitude), latexmath:[z] (altitude) order.
+The time periods between any two elements of formulas only allows empty or 0-dimensional intersection.
+This practice converts the time position to a signed 64-bit integer(long) value that represents milliseconds for computing a value of each axis of coordinates at an arbitrary time position formatted by a character string of [ISO 8601:2004].
+
+[latexmath]
++++++++++++
+[x(t) = a_{n-1}t^{n-1} + a_{n-2}t^{n-2} + ... + a_0t^0]
++++++++++++
+[latexmath]
++++++++++++
+[y(t) = b_{n-1}t^{n-1} + b_{n-2}t^{n-2} + ... + b_0t^0]
++++++++++++
+[latexmath]
++++++++++++
+[z(t) = c_{n-1}t^{n-1} + c_{n-2}t^{n-2} + ... + c_0t^0]
++++++++++++
+
+[source, javascript]
+{
+    "type": "MovingPoint",
+    "coordinates": ...,
+    "datetimes": ...,
+    "interpolations": [
+     {
+         "coefficients": [[1.0, 3.0, 4.1], [2.0, 2.1, 3.0]],
+         // x = 1.0*t^2 + 3.0*t + 4.1 , y = 2.0*t^2 + 2.1*t + 3.0
+         "period": {
+             "begin": "2011-07-14T22:01:01Z",
+             "end" : "2011-07-14T23:01:01Z"
+         }
+     },
+     {
+         "coefficients": [[4.0, 2.0], [1.0, 2.0]],
+         // x = 4.0*t + 2.0 , y = 1.0*t + 2.0
+         "period": {
+             "begin": "2011-07-14T23:01:01Z",
+             "end" : "2011-07-15T00:01:01Z"
+         }
+     }
+   ]
+}
+
+
+[source, javascript]
+{
+    "type": "MovingLineString",
+    "coordinates": ...,
+    "datetimes": ...,
+    "interpolations": [
+     {
+         "coefficients": [[[1.0, 3.0, 4.1], [2.0, 2.1, 3.0]], [[2.0, 1.0, 1.2], [1.0, 0.1, 2.0]]],
+         // x1 = 1.0*t^2 + 3.0*t + 4.1 , y1 = 2.0*t^2 + 2.1*t + 3.0
+         // x2 = 2.0*t^2 + 1.0*t + 1.2 , y2 = 1.0*t^2 + 0.1*t + 2.0
+         "period": {
+             "begin": "2011-07-14T22:01:01Z",
+             "end" : "2011-07-14T23:01:01Z"
+         }
+     },
+     {
+         "coefficients": [[[4.0, 2.0], [1.0, 2.0]], [[2.0, 3.0], [2.0, 1.0]]],
+         // x1 = 4.0*t + 2.0 , y1 = 1.0*t + 2.0
+         // x2 = 2.0*t + 3.0 , y2 = 2.0*t + 1.0
+         "period": {
+             "begin": "2011-07-14T23:01:01Z",
+             "end" : "2011-07-15T00:01:01Z"
+          }
+     }
+   ]
+}
+
+
+[#collection]
+==== Collection of Temporal Geometries
+
+The collection form of temporal geometry instances is a JSON object with two REQUIRED fields: `"type"` and `"members"`.
+
+[source, json]
+{
+    ...
+    "temporalGeometry": {
+      "type": "MultiMovingPoint | MultiMovingLineString | MultiMovingPolygon | MovingGeometryCollection",
+      "members": [
+         {
+            // Simple temporal geometry instance
+            "type": "MovingPoint | MovingLineString | MovingPolygon",
+            "coordinates": [...],  // COORDINATES expression
+            "datetimes" : [...],   // DATETIMES expression
+            "interpolations": [...]   // INTERPOLATIONS expression
+         }
+      ]
+    },
+    ...
+}
+
+
+- `"type"`: A case-sensitive string that is one of `"MultiMovingPoint"`, `"MultiMovingLineString"`, `"MultiMovingPolygon"`, and `"MovingGeometryCollection"`.
+
+- `"members"`: The object is encoded as a JSON array of instances of temporal geometry where each element is encoded in simple form.
+  ** *MultiMovingPoint*: The elements of the `"members"` object SHALL be instances of type `"MovingPoint"`. The leaf geometry at a time position is an instance of type "MultiPoint", which is the union of each leaf of moving point members at the same time.
+  ** *MultiMovingLineString*: The elements of the `"members"` object SHALL be instances of type `"MovingLineString"`. The leaf geometry at a time position is an instance of type "MultiLineString", which is the union of each leaf of moving linestring members at the same time.
+  ** *MultiMovingPolygon*: The element of the `"members"` object SHALL be instances of type `"MovingPolygon"`. The leaf geometry at a time position is an instance of type "MultiPolygon", which is the union of each leaf of moving polygon members at the same time.
+  ** *MovingGeometryCollection*: Each element of the `"members"` object can be an instance of different moving types. The leaf geometry at a time position is an instance of type `"GeometryCollection"`, which is the union of each leaf of any temporal geometries at the same time.
+
+
+[#tproperties]
+=== Temporal Properties
+
+A moving feature can have more than zero time-varying properties, such as the velocity of vehicles or the wind speed of hurricanes.
+A temporal property represents a dynamic measure that the result of ascertaining the value of a characteristic of a moving feature that changes over time and/or location.
+Even though the value of temporal property depends on the spatiotemporal location, this document only considers the temporal dependencies of their changes of value.
+
+[NOTE]
+If a property has a static value, it is represented with the "properties" member as same as GeoJSON.
+
+
+[source, json]
+{
+    ...,
+    "temporalProperties": [
+      { // a collection of temporal properties which are measured at the same times
+        "datetimes": [...],   //(REQUIRED) JSON Array of time instances in order, which does not allow duplicates.
+        "_property0_": {      // _property0_ whose name is defined by an application
+          "uom": ...,             //(REQUIRED) a predefined string or URI
+          "values": [...],        //(REQUIRED) a JSON Array of values
+          "interpolations": [...],//(REQUIRED) a JSON Array of interpolation methods
+          "description": "any string"   //(OPTIONAL)
+        },
+        "_property1_": {      // _property1_ whose name is defined by an application
+          "uom": ...,             //(REQUIRED) a predefined string or URI
+          "values": [...],        //(REQUIRED) a JSON Array of values
+          "interpolations": [...],//(REQUIRED) a JSON Array of interpolation methods
+          "description": "any string"   //(OPTIONAL) a JSON string
+        },
+        ...
+      },
+      { // another collection of dynamic properties which are measured at the same times
+        "datetimes": [...],
+        "_property2_": {...},
+        "_property3_": {...}
+      }
+    ],
+    ...
+}
+
+
+The `temporalProperties` is a JSON array of collections of temporal properties whose results are ascertained at the same times.
+A collection of temporal properties SHALL have one "datetimes" member and more than one _property_ member whose name is defined by an application.
+However, the value of the _property_ member SHALL be a JSON object that has the following fields:
+
+* `"uom"`: A unit of measure is a quantity adopted as a standard of measurement [ISO 19103:2015]. The unit of a temporal property is represented as a URI denoting a unit-of-measure defined in a web resource or a predefined strings. This practice defines the following unit strings.
+
+[width="99%", cols="2,8", options="header"]
+|=========
+| Unit strings | Descriptions
+| _print symbols_ | From the Unified Code for Units of Measure (UCUM)<<1>>
+| null | The `"values"` member contains counting measures.
+| text | The `"values"` member contains any strings.
+| image| The `"values"` member contains Base64 strings converted from images.
+|=========
+
+* `"values"`: Each element of values is a string, number, null, or one of the literals: true and false. The number of elements is the same as the "datetimes" ones. There is an one-to-one correspondence between the elements of `"values"` of a _property_ object and `"datetimes"` as a temporal sequence of pairs latexmath:[(v,t)], where latexmath:[v] is a value of measurement and latexmath:[t] is its sampling time.
+
+[NOTE]
+If the values of a temporal property are measured at different times of `"datetimes"`, each SHALL be represented as a new element in the JSON array.
+
+* `"interpolations"`: The temporal property also needs to define an interpolation method like the temporal geometry.
+The object SHALL be a JSON array of interpolation methods whose instance is a pre-defined interpolation methods of `"Discrete"`, `"Stepwise"`, `"Linear"`(default), and `"Spline"`, or an interpolation formula used for polynomial interpolation in time.
+
+[source, json]
+{
+  ...,
+  "temporalProperties" : [
+    {
+      "datetimes" : [ "2017-03-13T01:00:00Z", "2017-03-13T02:00:00Z", "2017-03-13T03:00:00Z", "2017-03-13T04:00:00Z", "2017-03-13T05:00:00Z", "2017-03-13T06:00:00Z", "2017-03-13T07:00:00Z", "2017-03-13T08:00:00Z", "2017-03-13T09:00:00Z", "2017-03-13T10:00:00Z", "2017-03-13T11:00:00Z", "2017-03-13T12:00:00Z", "2017-03-13T13:00:00Z", "2017-03-13T14:00:00Z", "2017-03-13T15:00:00Z", "2017-03-13T16:00:00Z", "2017-03-13T17:00:00Z", "2017-03-13T18:00:00Z", "2017-03-13T19:00:00Z", "2017-03-13T20:00:00Z", "2017-03-13T21:00:00Z", "2017-03-13T22:00:00Z", "2017-03-13T23:00:00Z", "2017-03-13T24:00:00Z" ],
+      "NO2" : {
+        "uom" : "ppm",
+        "values" : [ 0.018, 0.013, 0.013, 0.014, 0.021, 0.034, 0.036, 0.047, 0.059, 0.052, 0.042, 0.031, 0.024, 0.02, 0.023, 0.022, 0.027, 0.025, 0.029, 0.03, 0.024, 0.02, 0.018, 0.016 ],
+        "interpolations" : [ "Stepwise" ]
+      },
+      "NO" : {
+        "uom" : "ppm",
+        "values" : [ 0.001, 0.001, 0.001, 0.002, 0.002, 0.006, 0.012, 0.056, 0.085, 0.06, 0.039, 0.024, 0.013, 0.01, 0.009, 0.009, 0.009, 0.007, 0.007, 0.006, 0.005, 0.004, 0.003, 0.003 ],
+        "interpolations" : [ "Linear" ]
+      }
+    },
+    {
+      "datetimes" : [ "2017-03-13T01:00:00Z", "2017-03-13T03:00:00Z", "2017-03-13T04:00:00Z", "2017-03-13T05:00:00Z", "2017-03-13T06:00:00Z", "2017-03-13T07:00:00Z", "2017-03-13T08:00:00Z", "2017-03-13T09:00:00Z", "2017-03-13T10:00:00Z", "2017-03-13T11:00:00Z", "2017-03-13T12:00:00Z", "2017-03-13T13:00:00Z", "2017-03-13T14:00:00Z", "2017-03-13T15:00:00Z", "2017-03-13T16:00:00Z", "2017-03-13T17:00:00Z", "2017-03-13T18:00:00Z", "2017-03-13T19:00:00Z", "2017-03-13T20:00:00Z", "2017-03-13T21:00:00Z", "2017-03-13T22:00:00Z", "2017-03-13T23:00:00Z", "2017-03-13T24:00:00Z" ],
+      "CH4" : {
+        "uom" : "ppmC",
+        "values" : [ 1.97, 1.98, 1.97, 2.01, 2.19, 2.13, 2.06, 2.21, 2.14, 2.08, 2.04, 1.99, 1.97, 1.96, 1.95, 1.95, 1.96, 1.96, 1.97, 1.96, 1.95, 1.95, 1.95 ],
+        "interpolations" : [ "Discrete" ]
+      },
+      "THC" : {
+        "uom" : "ppmC",
+        "values" : [ 2.09, 2.05, 2.05, 2.09, 2.33, 2.26, 2.22, 2.45, 2.35, 2.25, 2.18, 2.09, 2.04, 2.04, 2.03, 2.02, 2.03, 2.05, 2.08, 2.06, 2.03, 2.03, 2.03 ],
+        "interpolations" : [  // The function is an example, no sense of working
+          {
+            "coefficients": [1.0, 3.0, 4.1], // v = at^2 + bt + c
+            "period": {
+                 "begin": "2017-03-13T01:00:00Z",
+                 "end" : "2017-03-13T05:00:00Z"
+             }
+          },
+          {
+            "coefficients": [5.0, 8.0], // v = at + b
+            "period": {
+                 "begin": "2017-03-13T05:00:00Z",
+                 "end" : "2017-03-13T24:00:00Z"
+            }
+          }
+      },
+    }
+  ],
+  ...
+}
+
+* `"description"`: A temporal property can have an optional member to describe a short description.
+
+
+[#stbox]
+=== Spatiotemporal Bounding Box
+
+A moving feature may have a member named `"stBoundedBy"`, which indicates the boundary containing moving features in a spatiotemporal domain. To represent information on the coordinate range for moving features, this MF-JSON format follows GeoJSON's `"bbox"` field.
+The value of the bbox member is a 2*n array where n is the number of dimensions.
+The temporal boundary is a temporal period of `"begin"` and `"end"` expressed in ISO 8601:2004.
+
+[source, json]
+{
+    ...,
+    "stBoundedBy": {
+        "bbox": [-10.0, -10.0, 10.0, 10.0],
+        "period": {
+          "begin": "1994-11-05T13:15:30Z",
+          "end" : "1994-11-05T13:15:30Z"
+        }
+    },
+    ...
+}
+
+=== Application Domain Variables (Foreign Members)
+
+MF-JSON uses annotations to represent foreign members which are not described in this document and whose semantics are dependent on a domain or application specific requirement.
+For this reason,  MF-JSON defines foreign elements by extending the foreign member of GeoJSON.
+For a name/value pair of a foreign member, the name always starts with the at sign (@), such as `"@id"`, `"@context"`, and so on.
+
+=== Discussions
+
+[NOTE]
+.Coordinate Reference System
+https://www.ietf.org/rfc/rfc7946.txt[The IETF GeoJSON format] recommends a single coordinate reference system based on WGS84<<2>>.
+In this version of MF-JSON, CRSs are fixed to WGS84 for space and ISO 8601:2004 for time; however, the coordinate reference systems need to be indicated in the case of an application request.
+If the application requires an alternative CRS, the CRS of a GeoJSON object can be represented with its "crs" field as described in GeoJSON(2008)<<3>>.
+
+[NOTE]
+.Circular Temporal Geometry
+Some applications, such as the predication of hurricanes, need to represent a time-varying circular object. https://www.ietf.org/rfc/rfc7946.txt[The IETF GeoJSON format] excludes the circular types such as Circle or Ellipse.
+No type for "Circle" and "Ellipse" is defined in this version of MF-JSON.
+
+[NOTE]
+.Geometry Object
+A moving feature may have a member named `"geometry"`, which may represent its projection in coordinate space as points, curves, or surfaces. The representation of Geometry objects is same as GeoJSON.

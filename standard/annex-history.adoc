@@ -1,0 +1,10 @@
+[appendix]
+:appendix-caption: Annex
+== Revision History
+
+[width="90%",options="header"]
+|===
+|Date |Release |Editor | Primary clauses modified |Description
+|2018-12-01 |0.1 |Kyoung-Sook Kim |all |initial version
+|2018-01-25 |0.1 |Kyoung-Sook Kim, Taehoon Kim |all |draft
+|===

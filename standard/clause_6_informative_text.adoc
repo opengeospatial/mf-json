@@ -1,0 +1,143 @@
+== Overview of MF-JSON Encoding (Informative)
+
+Moving Features JSON (MF-JSON) encoding is a format for sharing moving feature data by using JSON objects that is easily readable by machines and by humans.
+A MF-JSON object represents a moving feature or a collection of moving features with dynamic attributes.
+This encoding standard leverages https://www.ietf.org/rfc/rfc7946.txt[GeoJSON] [IETF RFC 7946]
+that has already been commonly used in many applications and well supported by tools and software libraries.
+A similar structure of GeoJSON would be helpful for the implementations of MF-JSON.
+MF-JSON reserves new members of JSON objects to represent geographical movements, variations of measure,
+spatiotemporal extents of moving features and coordinate reference systems, as well as "type", "geometry", "properties", "crs", and "bbox".
+The new members are dealt with as "foreign members" in the GeoJSON document.
+
+TIP: The existing GeoJSON implementation can ignore the new members of MF-JSON if there is no processing module for foreign members.
+Accordingly, MF-JSON is compatible with the GeoJSON encoding.
+
+<<mf-json>> presents the overview of Moving Features JSON encoding format with new members of "temporalGeometry", "temporalProperties", "trs", and "time".
+
+[#mf-json,reftext='{figure-caption} {counter:figure-num}']
+.GeoJSON extension for Moving Features JSON encoding
+image::mf-json.png[Overview, pdfwidth=60%, width=60%, align="center"]
+// image::mf-overview.png[Overview, pdfwidth=55%, width=55%, align="center"]
+
+[NOTE]
+.Coordinate Reference System (CRS)
+The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees.
+However, a moving feature needs a temporal coordinate system and may require an engineering coordinate reference system or parametric coordinate reference system
+to represent the movement of the geometry of the feature in the case of an application request.
+
+MF-JSON allows the "crs" member to describe an alternative CRS whose representation follows the way as described in GeoJSON(2008)<<3>>
+and the “trs” member to describe a temporal reference system.
+If there is no member of "crs” and “trs”, it is fixed to the default of WGS84 for space and Coordinated Universal Time (UTC) using the Gregorian calendar for time.
+
+[source, javascript]
+.Example {counter:example-num}: Example of encoding a moving feature
+{
+    "type": "Feature",
+    "geometry": { //(OPTIONAL) base representation for the motion of a rigid body
+      "type": "MultiPolygon",
+      "coordinates": [
+         [[-0.5,-0.5,-0.5], [0.5,-0.5,-0.5], [0.5,0.5,-0.5], [-0.5,0.5,-0.5], [-0.5,-0.5,-0.5]],
+         [[-0.5,-0.5,-0.5], [-0.5,-0.5,0.5], [0.5,-0.5,0.5], [0.5,-0.5,-0.5], [-0.5,-0.5,-0.5]],
+         [[0.5,-0.5,-0.5], [0.5,-0.5,0.5], [0.5,0.5,0.5], [0.5,0.5,-0.5], [0.5,-0.5,-0.5]],
+         [[0.5,0.5,-0.5], [0.5,0.5,0.5], [-0.5,0.5,0.5], [-0.5,0.5,-0.5], [0.5,0.5,-0.5]],
+         [[-0.5,0.5,-0.5], [-0.5,0.5,0.5], [-0.5,-0.5,0.5], [-0.5,-0.5,-0.5], [-0.5,0.5,-0.5]],
+         [[-0.5,-0.5,0.5], [-0.5,0.5,0.5], [0.5,0.5,0.5], [0.5,-0.5,0.5], [-0.5,-0.5,0.5]]
+      ]
+    },
+    "properties": {
+      "name": "car1",
+      "state":"test1"
+    },
+    "crs" : { // If there is no "crs", the default crs is "WGC84".
+      "type": "name",
+      "properties": {"name": "urn:ogc:def:crs:OGC:1.3:WGC84"}
+    },
+    "bbox": [35.627423, 139.75707855, -0.5, 35.627761, 139.75772045, 0.5],
+    "temporalGeometry": { //(REQUIRED) a one paremeter set of geometries
+      "type": "MovingPoint",
+      "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T22:01:02Z", "2011-07-14T22:01:03Z", "2011-07-14T22:01:04Z", "2011-07-14T22:01:05Z"],
+      "coordinates": [ [35.627701, 139.757083, 0.0], [35.627701, 139.757399, 2.0], [35.627688, 139.757555, 4.0], [35.627596, 139.757651, 4.0], [35.627483, 139.757716, 4.0] ],
+      "orientations": [
+          [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0],  // same as original
+          [0.996194698091746, 0.0, 0.0871557427476582, 0.0, 0.0, 1.0, 0.0, 0.0, -0.0871557427476582, 0.0, 0.996194698091746, 0.0, 0.0, 0.0, 0.0, 1.0],  // Pitch rotation angle: 355 degree
+          [0.866025403784438, -0.5, 0.0, 0.0, 0.5, 0.866025403784438, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0], // Yaw rotation angle: 330 degree
+          [0.5, -0.866025403784439, 0.0, 0.0, 0.866025403784439, 0.5, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0], // Yaw rotation angle: 300 degree
+          [0.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]  // // Yaw rotation angle: 270 degree
+        ],
+      "scales": [ [0.000012, 0.0000089, 1], [0.000012, 0.0000089, 1], [0.000012, 0.0000089, 1], [0.000012, 0.0000089, 1], [0.000012, 0.0000089, 1]],
+      "interpolation": "Linear",
+    },
+    "temporalProperties": [  //(OPTIONAL) dynamic non-spatial attributes, extended from 'properties'
+      { // a group of temporal properties that are measured at the same times
+        "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
+        "length": {
+            "type": "measure",
+            "form": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length", // a URI denoting a unit-of-measure
+            "values": [1.0, 2.4, 1.0], // the array of values for "length", with the same number of elements as "datetimes"
+            "interpolation": "Continuous",
+            "description": "description1" //(OPTIONAL)
+        },
+        "message":{
+            "type": "text", // a predefined unit for a string value
+            "values": ["A", "B", "C"], // the array of values for "message", with the same number of elements as "datetimes"
+            "interpolation": "Discontinuous",
+            "description": "description2" //(OPTIONAL)
+        }
+      },{
+        "datetimes" : ["2011-07-14T22:02:01Z", "2011-07-15T01:11:22Z"],
+        "discharge" : {
+            "type" : "measure",
+            "form" : "m^3/s", // a symbol from UCUM
+            "values" : [3.0, 4.0],
+            "interpolation": "Minimum"
+        }
+      }
+    ],
+    "trs" : { // If there is no "trs", the default trs is "Gregorian".
+      "type": "link",
+      "properties": {
+          "type": "ogcdef",
+          "href": "http://www.opengis.net/def/uom/ISO-8601/0/Gregorian",
+      }
+    },
+    "time": ["2011-07-14T22:01:01Z", "2011-07-15T01:11:22Z"]
+}
+
+
+The conceptual schema specified by https://www.iso.org/standard/41445.html[ISO 19141:2008] represents the motion
+consisting of translation and/or rotation of a feature, but not including deformation of the feature.
+The ISO conceptual schema is based on one-parameter geometry types based on two geometric objects as shown in <<mf-schema>>.
+*MF_OneParamGeometry* is the type to describe a function latexmath:[f] from an interval latexmath:[t \in [a, b]] such that latexmath:[f(t)] is a geometry.
+A leaf of a one parameter set of geometries is the geometry latexmath:[f(t)] at a particular value latexmath:[t] of the parameter.
+*MF_Trajectory* describes a one-parameter geometry whose cross section is a point as a leaf.
+*MF_TemporalGeometry* is a specialization of MF_OneParamGeometry in which the parameter is time as a multiple of a single unit of measure such as year, day, or second.
+An instance of *MF_TemporalTrajectory* is a trajectory whose parameter is time.
+The prism geometry of the moving feature is the set of points in the union of the leaf geometries (or the union of the temporal trajectories).
+The *MF_PrismGeometry* type represents the movement of an object through geographic space without deformation, where the object's basic shape is immutable and may be translated or rotated over time.
+*MF_RigidTemporalGeometry* specializes MF_PrismGeometry to describe the motion of a rigid body, especially for a 3D object.
+In this document, two new types of *MF_OneParamMeasure* and *MF_TemporalMeasure* are added for representing a one parameter set of values, e.g., timeseries data of a thematic attribute of a feature.
+
+[#mf-schema,reftext='{figure-caption} {counter:figure-num}']
+.Components of the Moving Feature Package
+image::mf-schema.png[Components, pdfwidth=95%, width=95%, align="center"]
+
+This encoding specification addresses the representation of a temporal geometry including a temporal trajectory, a prism geometry, and a ridig temporal geometry.
+Comparing to the https://www.iso.org/standard/41445.html[ISO 19141:2008] schema, MF-JSON can represent certain of deformation types of feature, such as shrink, expand, and change of the shape
+with the same number of trajectories. Also, the ISO conceptual shcema for moving features only defines the geometry type to represent the movement, but not feature-level schema.
+Geometry objects are not abstractions of real-world phenomena. For example, a "Moving Car" is an abstraction of a car that moves along a road in transporation applications and
+a "Tsunami" is an abstraction of seismic sea waves generated by the displacement of water.
+https://www.iso.org/standard/59193.html[ISO 19109:2015] supports features representing discrete objects with attributes having values which apply to the entire feature.
+However, the attributes of feature types carry all static information of a feature. https://www.iso.org/standard/40121.html[ISO 19123:2005] allows the attribute value to vary,
+depending upon the location within a feature, but does not support the assignment of attribute values to a geometry.
+In order to describe an application schema for handling moving features, this document addes ParametericAttributeType to represent the attribute variation with a parameter attributes
+as shown in <<mf-attribute>>.
+[#mf-attribute,reftext='{figure-caption} {counter:figure-num}']
+.Parametric attribute type of a feature
+image::mf-attribute.png[Components, pdfwidth=90%, width=90%, align="center"]
+
+For example, an application schema with MovingFeature type having two parametric attributes may be defined like <<mf-application>>.
+The temporalGeometry attribute carries the changes of the position of the feature over time and temporalProperties contain feature attributes
+which carry parametric vlaues over time. The next clause will describe how to represent and share the instances of this kind of application schema to handle the moving features by using JSON objects.
+[#mf-application,reftext='{figure-caption} {counter:figure-num}']
+.Example of an application schema for moving features
+image::mf-application.png[Components, pdfwidth=75%, width=75%, align="center"]

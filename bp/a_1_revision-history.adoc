@@ -1,0 +1,14 @@
+[appendix]
+== Revision History
+
+[#revision_history,reftext='{table-caption} {counter:table-num}']
+[cols="2,2,3,3,2",options="header"]
+|===============================================================================
+|Date       |Release |Author                    |Paragraph modified |Description
+|2016-08-29 |   |Kyoung-Sook KIM, Hirotaka OGAWA |All     |Created
+|2016-09-27 |   |Kyoung-Sook KIM |RESTful APIs: Resource types and interfaces |Revised
+|2016-10-23 |   |Kyoung-Sook KIM |Interpolation formulas, RESTful APIs|Revised
+|2017-01-15 |   |Kyoung-Sook KIM |RESTful APIs- Addressing Entities|Added
+|2017-03-15 |   |Kyoung-Sook KIM |Temporal Properties|Revised
+|2017-06-12 |   |Scott Simmons |All |prepare for publication
+|===============================================================================

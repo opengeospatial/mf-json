@@ -1,0 +1,217 @@
+== Terms and Definitions
+This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r8], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards.
+In particular, the word “SHALL” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+
+For the purposes of this document, the following additional terms and definitions apply.
+
+/////
+=== *API*
+An interface that is defined in terms of a set of functions and procedures, and enables a program to gain access to facilities within an application. (Definition from Dictionary of Computer Science - Oxford Quick Reference, 2016)
+
+=== *client*
+software component that can invoke an operation from a server +
+ [ OGC 06-121r9 ]
+/////
+
+=== *base representation*
+<moving features> representation, using a local origin and local ordinate vectors, of a geometric object at a given reference time.
+[ ISO 19141:2008 ]
+
+ NOTE 1: A rigid geometric object many undergo translation or rotation, but remains congruent with its base representation.
+
+ NOTE 2: The local origin and ordinate vectors establish an engineering coordinate reference system (ISO 19111), also called a local frame or a local Euclidean coordinate system.
+
+=== *coordinate*
+one of a sequence of n numbers designating the position of a point in n-dimensional space +
+[ OGC 08-015r2 ]
+
+ NOTE: In a coordinate reference system, the coordinate numbers are qualified by units.
+
+=== *coordinate reference system*
+coordinate system that is related to an object by a datum +
+[ OGC 08-015r2 ]
+
+ NOTE: For geodetic and vertical datums, the object will be the Earth.
+
+=== *curve*
+1-dimensional geometric primitive, representing the countinous image of a line +
+[ ISO 19107:2003 ]
+
+ NOTE: The boudary of a curve is the set of points at either end of the curve. If the curve is a cycle, the two ends are identical, and the curve (if toplogically closed) is considered to not have a boudary.
+ The first point is called the start point, and the last is the end point. Connectivity of the curve is guarateed by the "continuous image of a line" clause. A topological theorem states that a
+ continous image of a connected set is connected.
+
+=== *domain*
+well-defined set +
+[ ISO 19109:2015 ]
+
+=== *dynamic attribute*
+characteristic of a feature in which its value taken from the domain of the feature attribute type varies with time
+
+=== *encoding*
+Conversion of data into a series of codes +
+[ ISO 11179-1:2004 ]
+
+=== *engineering coordinate reference system*
+coordinate reference system based on an engineering datum
+[ OGC 08-015r2 ]
+
+ EXAMPLES: Local engineering and architectural grids; coordinate reference system local to a ship or an orbiting spacecraft.
+
+=== *feature*
+abstraction of real world phenomena +
+[ ISO 19101:2014 ]
+
+=== *feature attribute*
+characteristic of a feature +
+[ ISO 19109:2015 ]
+
+ Note: A feature attribute type has a name, a data type and a domain associated with it. A feature attribute instance has an attribute value taken
+ from the domain of the feature attribute type.
+
+=== *feature collection; collection*
+a set of features from a dataset +
+
+ NOTE: In this specification, 'collection' is used as a synonym for 'feature collection'.
+ This is done to make, for example, URI path expressions shorter and easier to understand for those that are not geo-experts.
+
+=== *foliation*
+one parameter set of geometries such that each point in the prism of the set is in one and only one
+trajectory and in one and only one leaf +
+[ ISO 19141:2008 ]
+
+=== *geometric object*
+spatial object representing a geometric set +
+[ ISO 19107:2003 ]
+
+ NOTE: A geometric object consists of a geometric primitive, a collection of geometric primitives,
+ or a geometric complex treated as a single entity. A geometric object may be the spatial representation of an object such as a feature or a significant part of a feature.
+
+=== *geometric primitive*
+geometric object representing a single, connected, homogeneous element of space +
+[ ISO 19107:2003 ]
+
+ NOTE: Geometric primitives are non-decomposed objects that present information about geometric configuration. They include points, curves, surfaces, and solids.
+
+////
+=== *interface*
+named set of operations that characterize the behaviour of an entity +
+[ ISO 19119:2006 ]
+////
+
+=== *instant*
+zero-dimensional geometric primitive representing position in time +
+[ ISO 19108:2002 ]
+
+=== *leaf*
+<one parameter set of geometries> geometry at a particular value of the parameter +
+[ ISO 19141:2008 ]
+
+=== *life span*
+period during which something exists +
+[ ISO 19108:2002 ]
+
+=== *motion*
+a change in position measured by distance and time
+
+
+=== *moving feature*
+feature whose position changes over time +
+
+ NOTE: Its base representation uses a local origin and local coordinate vectors of a geometric object at a given reference time.
+
+
+=== *one parameter set of geometries*
+function latexmath:[f] from an interval latexmath:[t \in [a, b]] such that latexmath:[f(t)] is a geometry and for each point latexmath:[P \in f(a)] there is a one
+parameter set of points (called the trajectory of latexmath:[P]) latexmath:[P(t)]: latexmath:[[a, b]] latexmath:[\rightarrow P(t)] such that latexmath:[P(t) \in f(t)] +
+[ ISO 19141:2008 ]
+
+ EXAMPLE: A curve C with constructive parameter (variable) t is a one parameter set of points c(t).
+
+=== *one parameter set of values*
+function latexmath:[f] from an interval latexmath:[t \in [a, b]] such that latexmath:[f(t)] is a measure value latexmath:[m] in a plane with coordinate latexmath:[(t, m)]
+
+
+=== *parametric coordinate reference system*
+coordinate reference system based on a parametric datum +
+[ OGC 10-020 ]
+
+=== *parametric datum*
+datum describing the relationship of a parametric coordinate system to an object +
+[ OGC 10-020 ]
+
+ NOTE The object is normally the Earth.
+
+/////
+=== *parametric coordinate system*
+one-dimensonal coordinate system where the axis units are parameter values which are not inherently spatial +
+[ ISO 19111-2:2009 ]
+
+=== *spatio-parametric coordinate refernce system*
+compound coordinate reference system in which one constituent coordinate reference system is a parametric coordinate reference system and one is a spatial coordinate reference system +
+[ ISO 19111-2:2009 ]
+
+=== *spatio-parametric-temporal coordinate refernce system*
+compound coordinate reference system comprised of spatial, parametric and temporal coordinate reference systems +
+[ ISO 19111-2:2009 ]
+/////
+
+=== *period*
+one-dimensional geometric primitive representing extent in time +
+[ ISO 19108:2002 ]
+
+ NOTE: A period is bounded by two different temporal positions.
+
+=== *position*
+data type that describes a point or geometry potentially occupied by an object or person
+
+=== *prism*
+<one parameter set of geometries> set of points in the union of the geometries (or the union of the
+trajectories) of a one parameter set of geometries +
+[ ISO 19141:2008 ]
+
+/////
+=== *request*
+invocation of an operation by a client +
+[ OGC 06-121r9 ]
+
+=== *resource*
+any addressable unit of information or service +
+[ IETF RFC 3986 ]
+
+=== *response*
+result of an operation, returned from a server to a client +
+[ OGC 06-121r9 ]
+
+=== *server*
+a particular instance of a service +
+[ OGC 06-121r9 ]
+
+=== *service*
+distinct part of the functionality that is provided by an entity through interfaces +
+[ ISO 19119:2006 ]
+/////
+
+
+=== *temporal coordinate reference system*
+coordinate reference system based on a temporal datum
+
+=== *temporal datum*
+datum describing the relationship of a temporal coordinate system to an object
+
+
+=== *temporal geometry*
+one parameter set of geometries in which the parameter is time
+
+=== *trajectory*
+path of a moving *point* described by a one parameter set of points +
+[ ISO 19141:2008 ]
+
+=== *valid time*
+time when a fact is true in the abstracted reality +
+[ ISO 19108:2002 ]
+
+
+=== *value*
+element of a type domain +
+[ ISO/IEC 19501:2005 ]

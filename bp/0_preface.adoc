@@ -1,0 +1,54 @@
+[big]*i.     Abstract*
+
+This document proposes a JavaScript Object Notation (JSON) encoding representation of movement of geographic features as an encoding extension of OGC Moving Features ([OGC 14-083r2] and [OGC 14-084r2]).
+A moving feature, typically a vehicle and pedestrian, can be expressed as a temporal geometry whose location continuously changes over time and contains dynamic non-spatial attributes whose values vary with time.
+This Best Practice describes how to share moving feature data based on JSON and GeoJSON (a JSON format for encoding geographic data structures).
+In addition, this document provides an example of RESTful approaches as a Feature Service Interface that has the potential for simplicity, scalability, and resilience with respect to exchange of moving feature data across the Web.
+
+
+[big]*ii.    Keywords*
+
+The following are keywords to be used by search engines and document catalogues.
+
+ogcdoc, OGC document, moving features, encoding, JSON, REST
+
+
+[big]*iii.   Preface*
+
+This Best Practice document follows the abstract data model defined in ISO 19141:2008 [ISO 19141:2008] with
+the encoding method referring to the IETF GeoJSON Format [IETF RFC 7946].
+OGC Moving Features Encoding standards XML Core [OGC 14 083r2] and Simple CSV [OGC 14 084r2] have focused on the movement of 0-dimensional geometric primitives (Points), called trajectories.
+However, this document covers the movements of 0-dimensional Points, 1-dimensional curve LineStrings, and 2-dimensional surface Polygons to support application requirements such as disaster risk management, traffic information services, and geo-fencing services.
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights.
+The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
+
+_Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation._
+
+[big]*iv.    Submitting organizations*
+
+The following organization has submitted this Document to the Open GeoSpatial Consortium, Inc.:
+
+* Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology
+
+
+[big]*v.     Submitters*
+
+All questions regarding this submission should be directed to the editor or the submitters:
+
+{set:cellbgcolor!}
+[width="99%", cols="3,7"]
+|===========================================================
+|*Name*          |*Organization*
+|Kyoung-Sook KIM  |Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology
+|Hirotaka OGAWA   |Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology
+|===========================================================
+
+
+[big]*vi.     Future Work*
+
+Among the topics for future development are the following items:
+
+- Testing RESTful API implementation;
+- Moving features in an indoor space; and
+- Representation of three-dimensional moving features.

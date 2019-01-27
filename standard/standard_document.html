@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.7.1">
+<title>OGC Moving Features Encoding Extension - JSON</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
+</head>
+<body class="book">
+<div id="header">
+<h1>OGC Moving Features Encoding Extension - JSON</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div style="page-break-after: always;"></div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">Open Geospatial Consortium</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Submission Date: &lt;yyyy-mm-dd&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Approval Date:   &lt;yyyy-mm-dd&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date:   &lt;yyyy-mm-dd&gt;</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC® document: <a href="http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}" class="bare">http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC® document:    YY-nnnrx</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: n.n</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC® Implementation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Editor: Kyoung-Sook KIM, Nobuhiro ISHIMARU</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">OGC Moving Features Encoding Extension - JSON</strong></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Copyright notice</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Copyright © 2018 Open Geospatial Consortium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">To obtain additional rights of use, visit <a href="http://www.opengeospatial.org/legal/" class="bare">http://www.opengeospatial.org/legal/</a></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Warning</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This document is not an OGC Standard. This document is distributed for review and comment. This document is subject to change without notice and may not be referred to as an OGC Standard.</p>
+</div>
+<div class="paragraph">
+<p>Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation.</p>
+</div>
+<table class="tableblock frame-all grid-none" style="width: 50%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document type:   	OGC® Standard</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document subtype:  Encoding</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document stage:   	Draft</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document language: English</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>License Agreement</p>
+</div>
+<div class="paragraph">
+<p><span class="small">Permission is hereby granted by the Open Geospatial Consortium, ("Licensor"), free of charge and subject to the terms set forth below, to any person obtaining a copy of this Intellectual Property and any associated documentation, to deal in the Intellectual Property without restriction (except as set forth below), including without limitation the rights to implement, use, copy, modify, merge, publish, distribute, and/or sublicense copies of the Intellectual Property, and to permit persons to whom the Intellectual Property is furnished to do so, provided that all copyright notices on the intellectual property are retained intact and that each person to whom the Intellectual Property is furnished agrees to the terms of this Agreement.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">If you modify the Intellectual Property, all copies of the modified Intellectual Property must include, in addition to the above copyright notice, a notice that the Intellectual Property includes modifications that have not been approved or adopted by LICENSOR.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">THIS LICENSE IS A COPYRIGHT LICENSE ONLY, AND DOES NOT CONVEY ANY RIGHTS UNDER ANY PATENTS THAT MAY BE IN FORCE ANYWHERE IN THE WORLD.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">THE INTELLECTUAL PROPERTY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE DO NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE INTELLECTUAL PROPERTY WILL MEET YOUR REQUIREMENTS OR THAT THE OPERATION OF THE INTELLECTUAL PROPERTY WILL BE UNINTERRUPTED OR ERROR FREE. ANY USE OF THE INTELLECTUAL PROPERTY SHALL BE MADE ENTIRELY AT THE USER’S OWN RISK. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR ANY CONTRIBUTOR OF INTELLECTUAL PROPERTY RIGHTS TO THE INTELLECTUAL PROPERTY BE LIABLE FOR ANY CLAIM, OR ANY DIRECT, SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM ANY ALLEGED INFRINGEMENT OR ANY LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR UNDER ANY OTHER LEGAL THEORY, ARISING OUT OF OR IN CONNECTION WITH THE IMPLEMENTATION, USE, COMMERCIALIZATION OR PERFORMANCE OF THIS INTELLECTUAL PROPERTY.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">This license is effective until terminated. You may terminate it at any time by destroying the Intellectual Property together with all copies in any form. The license will also terminate if you fail to comply with any term or condition of this Agreement. Except as provided in the following sentence, no such termination of this license shall require the termination of any third party end-user sublicense to the Intellectual Property which is in force as of the date of notice of such termination. In addition, should the Intellectual Property, or the operation of the Intellectual Property, infringe, or in LICENSOR’s sole opinion be likely to infringe, any patent, copyright, trademark or other right of a third party, you agree that LICENSOR, in its sole discretion, may terminate this license without any compensation or liability to you, your licensees or any other party. You agree upon termination of any kind to destroy or cause to be destroyed the Intellectual Property together with all copies in any form, whether held by you or by any third party.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">Except as contained in this notice, the name of LICENSOR or of any other holder of a copyright in all or part of the Intellectual Property shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Intellectual Property without prior written authorization of LICENSOR or such copyright holder. LICENSOR is and shall at all times be the sole entity that may authorize you or any third party to use certification marks, trademarks or other special designations to indicate compliance with any LICENSOR standards or specifications. This Agreement is governed by the laws of the Commonwealth of Massachusetts. The application to this Agreement of the United Nations Convention on Contracts for the International Sale of Goods is hereby expressly excluded. In the event any provision of this Agreement shall be deemed unenforceable, void or invalid, such provision shall be modified so as to make it valid and enforceable, and as so modified the entire Agreement shall remain in full force and effect. No decision, action or inaction by LICENSOR shall be construed to be a waiver of any rights or remedies available to it.</span></p>
+</div>
+<div style="page-break-after: always;"></div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_scope">1. Scope</a></li>
+<li><a href="#_conformance">2. Conformance</a></li>
+<li><a href="#_references">3. References</a></li>
+<li><a href="#_terms_and_definitions">4. Terms and Definitions</a>
+<ul class="sectlevel2">
+<li><a href="#_base_representation">4.1. <strong>base representation</strong></a></li>
+<li><a href="#_coordinate">4.2. <strong>coordinate</strong></a></li>
+<li><a href="#_coordinate_reference_system">4.3. <strong>coordinate reference system</strong></a></li>
+<li><a href="#_curve">4.4. <strong>curve</strong></a></li>
+<li><a href="#_domain">4.5. <strong>domain</strong></a></li>
+<li><a href="#_dynamic_attribute">4.6. <strong>dynamic attribute</strong></a></li>
+<li><a href="#_encoding">4.7. <strong>encoding</strong></a></li>
+<li><a href="#_engineering_coordinate_reference_system">4.8. <strong>engineering coordinate reference system</strong></a></li>
+<li><a href="#_feature">4.9. <strong>feature</strong></a></li>
+<li><a href="#_feature_attribute">4.10. <strong>feature attribute</strong></a></li>
+<li><a href="#_feature_collection_collection">4.11. <strong>feature collection; collection</strong></a></li>
+<li><a href="#_foliation">4.12. <strong>foliation</strong></a></li>
+<li><a href="#_geometric_object">4.13. <strong>geometric object</strong></a></li>
+<li><a href="#_geometric_primitive">4.14. <strong>geometric primitive</strong></a></li>
+<li><a href="#_instant">4.15. <strong>instant</strong></a></li>
+<li><a href="#_leaf">4.16. <strong>leaf</strong></a></li>
+<li><a href="#_life_span">4.17. <strong>life span</strong></a></li>
+<li><a href="#_motion">4.18. <strong>motion</strong></a></li>
+<li><a href="#_moving_feature">4.19. <strong>moving feature</strong></a></li>
+<li><a href="#_one_parameter_set_of_geometries">4.20. <strong>one parameter set of geometries</strong></a></li>
+<li><a href="#_one_parameter_set_of_values">4.21. <strong>one parameter set of values</strong></a></li>
+<li><a href="#_parametric_coordinate_reference_system">4.22. <strong>parametric coordinate reference system</strong></a></li>
+<li><a href="#_parametric_datum">4.23. <strong>parametric datum</strong></a></li>
+<li><a href="#_period">4.24. <strong>period</strong></a></li>
+<li><a href="#_position">4.25. <strong>position</strong></a></li>
+<li><a href="#_prism">4.26. <strong>prism</strong></a></li>
+<li><a href="#_temporal_coordinate_reference_system">4.27. <strong>temporal coordinate reference system</strong></a></li>
+<li><a href="#_temporal_datum">4.28. <strong>temporal datum</strong></a></li>
+<li><a href="#_temporal_geometry">4.29. <strong>temporal geometry</strong></a></li>
+<li><a href="#_trajectory">4.30. <strong>trajectory</strong></a></li>
+<li><a href="#_valid_time">4.31. <strong>valid time</strong></a></li>
+<li><a href="#_value">4.32. <strong>value</strong></a></li>
+</ul>
+</li>
+<li><a href="#_conventions">5. Conventions</a>
+<ul class="sectlevel2">
+<li><a href="#_identifiers">5.1. Identifiers</a></li>
+<li><a href="#_json_notation">5.2. JSON notation</a></li>
+<li><a href="#_uml_notation">5.3. UML notation</a></li>
+<li><a href="#_abbreviated_terms">5.4. Abbreviated terms</a></li>
+</ul>
+</li>
+<li><a href="#_overview_of_mf_json_encoding_informative">6. Overview of MF-JSON Encoding (Informative)</a></li>
+<li><a href="#_the_mf_json_format_normative">7. The MF-JSON Format (Normative)</a>
+<ul class="sectlevel2">
+<li><a href="#_requirements_class_core">7.1. Requirements Class: Core</a></li>
+<li><a href="#feature">7.2. Feature Object</a></li>
+<li><a href="#fcollection">7.3. FeatureCollection Object</a></li>
+<li><a href="#crs">7.4. CoordinateReferenceSystem Object</a>
+<ul class="sectlevel3">
+<li><a href="#_named_crs">7.4.1. Named CRS</a></li>
+<li><a href="#_linked_crs">7.4.2. Linked CRS</a></li>
+<li><a href="#defaultCRS">7.4.3. Default CRS</a></li>
+</ul>
+</li>
+<li><a href="#tgeometry">7.5. TemporalGeometry Object</a>
+<ul class="sectlevel3">
+<li><a href="#tprimitive">7.5.1. TemporalPrimitiveGeometry Object</a></li>
+<li><a href="#taggregate">7.5.2. TemporalAggregateGeometry Object</a></li>
+<li><a href="#_requirement_2">7.5.3. Requirement 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_media_types">8. Media Types</a></li>
+<li><a href="#_conformance_class_abstract_test_suite_normative">Annex A: Conformance Class Abstract Test Suite (Normative)</a>
+<ul class="sectlevel2">
+<li><a href="#_conformance_class_a">A.1. Conformance Class A</a>
+<ul class="sectlevel3">
+<li><a href="#_requirement_1">A.1.1. Requirement 1</a></li>
+<li><a href="#_requirement_2_2">A.1.2. Requirement 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_title_normativeinformative">Annex B: Title ( {Normative/Informative} )</a></li>
+<li><a href="#_revision_history">Annex C: Revision History</a></li>
+<li><a href="#Bibliography">Annex D: Bibliography</a></li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong class="big">i.     Abstract</strong></p>
+</div>
+<div class="paragraph">
+<p>This standard defines how to encode and share the various movements of geographic features by using JavaScript Object Notation (JSON).
+It provides an alternative encoding for OGC Moving Features instead of <a href="http://www.opengeospatial.org/standards/movingfeatures">XML Core [OGC 14-083r2</a>] and <a href="http://www.opengeospatial.org/standards/movingfeatures">Simple CSV [OGC 14-084r2</a>].
+A moving feature, typically like a vehicle and pedestrian, contains a temporal geometry
+whose location continuously changes over time and dynamic non-spatial attributes whose values vary with time.
+This Moving Features JSON encoding defines several keywords to implement the conceptual schema of moving features defined in ISO 19141:2008 [ISO 19141:2008], accompanied with <a href="https://www.ietf.org/rfc/rfc7946.txt">IETF GeoJSON Format [IETF RFC 7946</a>].</p>
+</div>
+<div class="paragraph">
+<p><strong class="big">ii.    Keywords</strong></p>
+</div>
+<div class="paragraph">
+<p>TThe following are keywords to be used by search engines and document catalogues.</p>
+</div>
+<div class="paragraph">
+<p>ogcdoc, OGC document, moving features, encoding, JSON, OpenAPI</p>
+</div>
+<div class="paragraph">
+<p><strong class="big">iii.   Preface</strong></p>
+</div>
+<div class="paragraph">
+<p>This document specifies the JSON encoding of the conceptual schema of moving features defined in <a href="https://www.iso.org/standard/41445.html">ISO 19141:2008</a>,
+i.e., features whose locations change over time. OGC Moving Features Encoding standards <a href="http://www.opengeospatial.org/standards/movingfeatures">XML Core [OGC 14-083r2</a>]
+and <a href="http://www.opengeospatial.org/standards/movingfeatures">Simple CSV [OGC 14-084r2</a>] have focused on the movement of 0-dimensional geometric primitives (Points),
+called trajectories. In addition, the ISO schema excludes deformation and changes of non-spatial attributes of the feature.
+However, there are requirements to represent and share the movements of 1-dimensional curve LineStrings, 2-dimensional surface Polygons, and 3-dimensional solid polyhedrons with time-varying non-spatial attributes in various application areas, including: Location Based Services, Intelligent Transportation Systems,
+Disaster Risk Management Systems, and Smart City Applications. For example, the traffic congestion on roads and the hotspot of air pollution are typical moving features in the real world.</p>
+</div>
+<div class="paragraph">
+<p>Therefore, OGC Moving Features JSON encoding standard (MF-JSON) defines data members for one-parameter geometries and propeties of the moving feature in time not only trajectory.
+MF-JSON is compatible with the <a href="https://www.ietf.org/rfc/rfc7946.txt">IETF GeoJSON Format [IETF RFC 7946</a>] in a JSON document.</p>
+</div>
+<div class="paragraph">
+<p>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.</p>
+</div>
+<div class="paragraph">
+<p>Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.</p>
+</div>
+<div class="paragraph">
+<p><strong class="big">iv.    Submitting organizations</strong></p>
+</div>
+<div class="paragraph">
+<p>The following organization has submitted this Document to the Open GeoSpatial Consortium, Inc.:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology</p>
+</li>
+<li>
+<p>Defense Systems Company, Hitachi, Ltd.</p>
+</li>
+<li>
+<p>Pusan National University</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong class="big">v.     Submitters</strong></p>
+</div>
+<div class="paragraph">
+<p>All questions regarding this submission should be directed to the editor or the submitters:</p>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 30%;">
+<col style="width: 70%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Name</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Organization</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kyoung-Sook KIM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Taehoon KIM</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Artificial Intelligence Research Center, National Institute of Advanced Industrial Science and Technology</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nobuhiro ISHIMARU</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Defense Systems Company, Hitachi, Ltd.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ki-Joune LI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pusan National University</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_scope"><a class="anchor" href="#_scope"></a>1. Scope</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document defines the structure and content of JSON (JavaScript Object Notation) [<a href="https://www.ietf.org/rfc/rfc7159.txt">IETF RFC7159</a>] encoding implementation of the conceptual model
+for moving features described in <a href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445">ISO 19141:2008</a>.
+In common, a moving feature is a geographic feature whose location changes over time containing zero or more thematic attributes.
+Such a feature may be a car, an airplane, a ship, or something alike.
+The geometry of a moving feature to express its motion is defined as a one parameter set of geometries that may be viewed as a set of leaves or
+a set of trajectories as shown in the <a href="#mf-concept">Figure 1</a>.
+A leaf represents the geometry of the moving feature at a particular value of the parameter (e.g., a point in time) and
+a trajectory is a curve that represents the path of a point in the geometry of the moving feature as it moves with respect to the parameter (e.g., time).</p>
+</div>
+<div id="mf-concept" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./images/mf-concept.png" alt="Conceptual Moving Feature" width="60%">
+</div>
+<div class="title">Figure 1. Feature Movement: Trajectory, Leaf, Foliation, and Prism [ISO 19141:2008]</div>
+</div>
+<div class="paragraph">
+<p>In the illustration above, a 2D rectangle moves, rotates, and shrink through time.
+Each representation of the rectangle at a given time (e.g., \(t_1\), \(t_2\), and \(t_3\)) is a leaf.
+The path traced by each corner point of the rectangle (and by each of its other points) is a trajectory.
+The set of points contained in all of the leaves, and in all of the trajectories, forms a prism.
+The set of leaves also forms a foliation, meaning that there is a complete and separate representation of the geometry of the feature for each specific time.
+If viewed in a 4 dimensional spatio-temporal coordinate system, the points on the feature&#8217;s geometry at different times are different points.</p>
+</div>
+<div class="paragraph">
+<p>This specification of Moving Features JSON (MF-JSON) encoding extends IETF GeoJSON Format [IETF RFC 7946] to describe two types of dynamic attribute of a feature
+or feature collection in a JSON document as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>The spatial change over time (temporal geometry)</em>, representing the movement of the rigid or nonrigid body of a feature; and</p>
+</li>
+<li>
+<p><em>The thematic change over time (temporal property)</em>, representing the variation of the value of any descriptive characteristic of a feature.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The MF-JSON encoding provides an alternative to the OGC&#174; Moving Features Encodings XML [OGC 14 083r2] and Simple Comma Separated Values (CSV) [OGC 14 084r2] standards,
+containing the movement of 0-dimensional, 1-dimensional, 2-dimensional, 3-dimensional geometric primitives. Also it can represent the following phenomena in a spatio-temporal
+domain depending on the type of function from time to geometry:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><em>Discrete phenomena</em>, which exist only on a set of instants, such as road accidents;</p>
+</li>
+<li>
+<p><em>Stepwise phenomena</em>, where the changes of locations are abrupt at an instant, such as administrative boundaries;</p>
+</li>
+<li>
+<p><em>Continuous phenomena</em>, whose locations move continuously for a period in time, such as vehicles, typhoons, or floods.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This specification does not address partial motions of parts of bodies and the dimensonal deformation of the feature (e.g., from 1-d geometry to 0-d geometry).
+Also the succession of either features or their association is out of scope in this specification.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conformance"><a class="anchor" href="#_conformance"></a>2. Conformance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This standard defines a single requirements class with URI:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req</a></p>
+</div>
+<div class="paragraph">
+<p>with a single accompanying conformance class with URI:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/conf" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/conf</a></p>
+</div>
+<div class="paragraph">
+<p>Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document.
+The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified
+in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references"><a class="anchor" href="#_references"></a>3. References</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following normative documents contain provisions that, through reference in this text, constitute provisions of this document. For dated references, subsequent amendments to, or revisions of, any of these publications do not apply. For undated references, the latest edition of the normative document referred to applies.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OGC: <a href="https://portal.opengeospatial.org/files/?artifact_id=39049">OGC 08-015r2</a>, <em>OGC Abstract Specifications - Topic 2 - Spatial referencing by coordinates</em>, version 4.0, 2010.</p>
+</li>
+<li>
+<p>OGC: <a href="https://portal.opengeospatial.org/files/?artifact_id=37761">OGC 10-020</a>, <em>OGC Abstract Specifications - Topic 2.1 - Spatial referencing by coordinates - Extension for Parametric Values</em>, version 1.0, 2014.</p>
+</li>
+<li>
+<p>OGC: <a href="http://www.opengeospatial.org/standards/movingfeatures">OGC 14-083r2</a>, <em>OGC Moving Features Encoding Part I: XML Core</em>, 2015.</p>
+</li>
+<li>
+<p>OGC: <a href="http://www.opengeospatial.org/standards/movingfeatures">OGC 14-084r2</a>, <em>OGC Moving Features Encoding Extension: Simple Comma Separated Values (CSV)</em>, 2015.</p>
+</li>
+<li>
+<p>OGC: <a href="http://www.opengeospatial.org/standards/movingfeatures">OGC 16-120r3</a>, <em>OGC Moving Features Access</em>, 2017.</p>
+</li>
+<li>
+<p>ISO: <a href="http://isotc.iso.org/livelink/livelink?func=ll&amp;objId=4230456&amp;objAction=browse&amp;sort=subtype">ISO/IEC Directives</a>, <em>Part 2. Rules for the structure and drafting of International Standards</em></p>
+</li>
+<li>
+<p>ISO: <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">ISO 8601:2004</a>, <em>Data elements and interchange formats - Information interchange - Representation of dates and time</em>, 2004.</p>
+</li>
+<li>
+<p>ISO: <a href="http://www.iso.org/iso/catalogue_detail?csnumber=59164">ISO 19101:2014</a>, <em>Geographic information — Reference model — Part 1: Fundamentals</em>, 2014.</p>
+</li>
+<li>
+<p>ISO: <a href="http://www.iso.org/iso/catalogue_detail?csnumber=26012">ISO 19107:2003</a> <em>Geographic Information - Spatial schema</em>, 2003.</p>
+</li>
+<li>
+<p>ISO: <a href="http://www.iso.org/iso/catalogue_detail?csnumber=26012">ISO 19108:2002</a> <em>Geographic Information - Temporal schema</em>, 2002.</p>
+</li>
+<li>
+<p>ISO: <a href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445">ISO 19141:2008</a>, <em>Geographic information - Schema for moving features</em>, 2008.</p>
+</li>
+<li>
+<p>ISO/IEC: <a href="https://www.iso.org/standard/35343.html">ISO 11179-1:2004</a>, <em>Information technology — Metadata registries (MDR) — Part 1: Framework</em>, 2004.</p>
+</li>
+<li>
+<p>IETF: <a href="https://www.ietf.org/rfc/rfc3986.txt">IETF RFC 3986</a>, <em>Uniform Resource Identifier (URI): Generic Syntax</em>, 2005.</p>
+</li>
+<li>
+<p>IETF: <a href="https://www.ietf.org/rfc/rfc7159.txt">IETF RFC 7159</a>, <em>The JavaScript Object Notation (JSON) Data Interchange Format</em>, 2014.</p>
+</li>
+<li>
+<p>IETF: <a href="https://www.ietf.org/rfc/rfc7464.txt">IETF RFC 7464</a>, <em>JavaScript Object Notation (JSON) Text Sequences</em>, 2015.</p>
+</li>
+<li>
+<p>IETF: <a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>, <em>The GeoJSON Format</em>, 2016.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additionally the following informative documents are addressed:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>OGC: OGC 17-069, <em>OGC Web Feature Service 3.0: Part 1 - Core</em>, 2017.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_terms_and_definitions"><a class="anchor" href="#_terms_and_definitions"></a>4. Terms and Definitions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r8], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards.
+In particular, the word “SHALL” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.</p>
+</div>
+<div class="paragraph">
+<p>For the purposes of this document, the following additional terms and definitions apply.</p>
+</div>
+<div class="sect2">
+<h3 id="_base_representation"><a class="anchor" href="#_base_representation"></a>4.1. <strong>base representation</strong></h3>
+<div class="paragraph">
+<p>&lt;moving features&gt; representation, using a local origin and local ordinate vectors, of a geometric object at a given reference time.
+[ ISO 19141:2008 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE 1: A rigid geometric object many undergo translation or rotation, but remains congruent with its base representation.</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE 2: The local origin and ordinate vectors establish an engineering coordinate reference system (ISO 19111), also called a local frame or a local Euclidean coordinate system.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_coordinate"><a class="anchor" href="#_coordinate"></a>4.2. <strong>coordinate</strong></h3>
+<div class="paragraph">
+<p>one of a sequence of n numbers designating the position of a point in n-dimensional space<br>
+[ OGC 08-015r2 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE: In a coordinate reference system, the coordinate numbers are qualified by units.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_coordinate_reference_system"><a class="anchor" href="#_coordinate_reference_system"></a>4.3. <strong>coordinate reference system</strong></h3>
+<div class="paragraph">
+<p>coordinate system that is related to an object by a datum<br>
+[ OGC 08-015r2 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE: For geodetic and vertical datums, the object will be the Earth.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_curve"><a class="anchor" href="#_curve"></a>4.4. <strong>curve</strong></h3>
+<div class="paragraph">
+<p>1-dimensional geometric primitive, representing the countinous image of a line<br>
+[ ISO 19107:2003 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE: The boudary of a curve is the set of points at either end of the curve. If the curve is a cycle, the two ends are identical, and the curve (if toplogically closed) is considered to not have a boudary.
+The first point is called the start point, and the last is the end point. Connectivity of the curve is guarateed by the "continuous image of a line" clause. A topological theorem states that a
+continous image of a connected set is connected.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_domain"><a class="anchor" href="#_domain"></a>4.5. <strong>domain</strong></h3>
+<div class="paragraph">
+<p>well-defined set<br>
+[ ISO 19109:2015 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dynamic_attribute"><a class="anchor" href="#_dynamic_attribute"></a>4.6. <strong>dynamic attribute</strong></h3>
+<div class="paragraph">
+<p>characteristic of a feature in which its value taken from the domain of the feature attribute type varies with time</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_encoding"><a class="anchor" href="#_encoding"></a>4.7. <strong>encoding</strong></h3>
+<div class="paragraph">
+<p>Conversion of data into a series of codes<br>
+[ ISO 11179-1:2004 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_engineering_coordinate_reference_system"><a class="anchor" href="#_engineering_coordinate_reference_system"></a>4.8. <strong>engineering coordinate reference system</strong></h3>
+<div class="paragraph">
+<p>coordinate reference system based on an engineering datum
+[ OGC 08-015r2 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>EXAMPLES: Local engineering and architectural grids; coordinate reference system local to a ship or an orbiting spacecraft.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature"><a class="anchor" href="#_feature"></a>4.9. <strong>feature</strong></h3>
+<div class="paragraph">
+<p>abstraction of real world phenomena<br>
+[ ISO 19101:2014 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_attribute"><a class="anchor" href="#_feature_attribute"></a>4.10. <strong>feature attribute</strong></h3>
+<div class="paragraph">
+<p>characteristic of a feature<br>
+[ ISO 19109:2015 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>Note: A feature attribute type has a name, a data type and a domain associated with it. A feature attribute instance has an attribute value taken
+from the domain of the feature attribute type.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_feature_collection_collection"><a class="anchor" href="#_feature_collection_collection"></a>4.11. <strong>feature collection; collection</strong></h3>
+<div class="paragraph">
+<p>a set of features from a dataset<br></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE: In this specification, 'collection' is used as a synonym for 'feature collection'.
+This is done to make, for example, URI path expressions shorter and easier to understand for those that are not geo-experts.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_foliation"><a class="anchor" href="#_foliation"></a>4.12. <strong>foliation</strong></h3>
+<div class="paragraph">
+<p>one parameter set of geometries such that each point in the prism of the set is in one and only one
+trajectory and in one and only one leaf<br>
+[ ISO 19141:2008 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_geometric_object"><a class="anchor" href="#_geometric_object"></a>4.13. <strong>geometric object</strong></h3>
+<div class="paragraph">
+<p>spatial object representing a geometric set<br>
+[ ISO 19107:2003 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE: A geometric object consists of a geometric primitive, a collection of geometric primitives,
+or a geometric complex treated as a single entity. A geometric object may be the spatial representation of an object such as a feature or a significant part of a feature.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_geometric_primitive"><a class="anchor" href="#_geometric_primitive"></a>4.14. <strong>geometric primitive</strong></h3>
+<div class="paragraph">
+<p>geometric object representing a single, connected, homogeneous element of space<br>
+[ ISO 19107:2003 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE: Geometric primitives are non-decomposed objects that present information about geometric configuration. They include points, curves, surfaces, and solids.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_instant"><a class="anchor" href="#_instant"></a>4.15. <strong>instant</strong></h3>
+<div class="paragraph">
+<p>zero-dimensional geometric primitive representing position in time<br>
+[ ISO 19108:2002 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_leaf"><a class="anchor" href="#_leaf"></a>4.16. <strong>leaf</strong></h3>
+<div class="paragraph">
+<p>&lt;one parameter set of geometries&gt; geometry at a particular value of the parameter<br>
+[ ISO 19141:2008 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_life_span"><a class="anchor" href="#_life_span"></a>4.17. <strong>life span</strong></h3>
+<div class="paragraph">
+<p>period during which something exists<br>
+[ ISO 19108:2002 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_motion"><a class="anchor" href="#_motion"></a>4.18. <strong>motion</strong></h3>
+<div class="paragraph">
+<p>a change in position measured by distance and time</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_moving_feature"><a class="anchor" href="#_moving_feature"></a>4.19. <strong>moving feature</strong></h3>
+<div class="paragraph">
+<p>feature whose position changes over time<br></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE: Its base representation uses a local origin and local coordinate vectors of a geometric object at a given reference time.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_one_parameter_set_of_geometries"><a class="anchor" href="#_one_parameter_set_of_geometries"></a>4.20. <strong>one parameter set of geometries</strong></h3>
+<div class="paragraph">
+<p>function \(f\) from an interval \(t \in [a, b\)] such that \(f(t)\) is a geometry and for each point \(P \in f(a)\) there is a one
+parameter set of points (called the trajectory of \(P\)) \(P(t)\): \([a, b\)] \(\rightarrow P(t)\) such that \(P(t) \in f(t)\)<br>
+[ ISO 19141:2008 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>EXAMPLE: A curve C with constructive parameter (variable) t is a one parameter set of points c(t).</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_one_parameter_set_of_values"><a class="anchor" href="#_one_parameter_set_of_values"></a>4.21. <strong>one parameter set of values</strong></h3>
+<div class="paragraph">
+<p>function \(f\) from an interval \(t \in [a, b\)] such that \(f(t)\) is a measure value \(m\) in a plane with coordinate \((t, m)\)</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_parametric_coordinate_reference_system"><a class="anchor" href="#_parametric_coordinate_reference_system"></a>4.22. <strong>parametric coordinate reference system</strong></h3>
+<div class="paragraph">
+<p>coordinate reference system based on a parametric datum<br>
+[ OGC 10-020 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_parametric_datum"><a class="anchor" href="#_parametric_datum"></a>4.23. <strong>parametric datum</strong></h3>
+<div class="paragraph">
+<p>datum describing the relationship of a parametric coordinate system to an object<br>
+[ OGC 10-020 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE The object is normally the Earth.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_period"><a class="anchor" href="#_period"></a>4.24. <strong>period</strong></h3>
+<div class="paragraph">
+<p>one-dimensional geometric primitive representing extent in time<br>
+[ ISO 19108:2002 ]</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>NOTE: A period is bounded by two different temporal positions.</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_position"><a class="anchor" href="#_position"></a>4.25. <strong>position</strong></h3>
+<div class="paragraph">
+<p>data type that describes a point or geometry potentially occupied by an object or person</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_prism"><a class="anchor" href="#_prism"></a>4.26. <strong>prism</strong></h3>
+<div class="paragraph">
+<p>&lt;one parameter set of geometries&gt; set of points in the union of the geometries (or the union of the
+trajectories) of a one parameter set of geometries<br>
+[ ISO 19141:2008 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_temporal_coordinate_reference_system"><a class="anchor" href="#_temporal_coordinate_reference_system"></a>4.27. <strong>temporal coordinate reference system</strong></h3>
+<div class="paragraph">
+<p>coordinate reference system based on a temporal datum</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_temporal_datum"><a class="anchor" href="#_temporal_datum"></a>4.28. <strong>temporal datum</strong></h3>
+<div class="paragraph">
+<p>datum describing the relationship of a temporal coordinate system to an object</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_temporal_geometry"><a class="anchor" href="#_temporal_geometry"></a>4.29. <strong>temporal geometry</strong></h3>
+<div class="paragraph">
+<p>one parameter set of geometries in which the parameter is time</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_trajectory"><a class="anchor" href="#_trajectory"></a>4.30. <strong>trajectory</strong></h3>
+<div class="paragraph">
+<p>path of a moving <strong>point</strong> described by a one parameter set of points<br>
+[ ISO 19141:2008 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_valid_time"><a class="anchor" href="#_valid_time"></a>4.31. <strong>valid time</strong></h3>
+<div class="paragraph">
+<p>time when a fact is true in the abstracted reality<br>
+[ ISO 19108:2002 ]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_value"><a class="anchor" href="#_value"></a>4.32. <strong>value</strong></h3>
+<div class="paragraph">
+<p>element of a type domain<br>
+[ ISO/IEC 19501:2005 ]</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conventions"><a class="anchor" href="#_conventions"></a>5. Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This sections provides details and examples for any conventions used in the document.
+Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.</p>
+</div>
+<div class="sect2">
+<h3 id="_identifiers"><a class="anchor" href="#_identifiers"></a>5.1. Identifiers</h3>
+<div class="paragraph">
+<p>The normative provisions in this specification are denoted by the URI</p>
+</div>
+<div class="paragraph">
+<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0</a></p>
+</div>
+<div class="paragraph">
+<p>All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.</p>
+</div>
+<div class="paragraph">
+<p>All examples in this document are informative only.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_json_notation"><a class="anchor" href="#_json_notation"></a>5.2. JSON notation</h3>
+<div class="paragraph">
+<p>The notation of JSON in this document is based on the specification of [RFC 7159].</p>
+</div>
+<div class="paragraph">
+<p>The ordering of the members of any JSON object must be considered irrelevant. Some examples use a JavaScript single line comment (//) and an ellipsis (&#8230;&#8203;) as placeholder notation for a specific JSON instance.
+Whitespace is used in the examples inside this document to help illustrate the data structures, but is not required. Unquoted whitespace is not significant in JSON.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_uml_notation"><a class="anchor" href="#_uml_notation"></a>5.3. UML notation</h3>
+<div class="paragraph">
+<p>Unified Modeling Language (UML) static structure diagrams appearing in this document are used as described in Subclause 5.2 of OGC Web Services Common [OGC 06-121r9].</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_abbreviated_terms"><a class="anchor" href="#_abbreviated_terms"></a>5.4. Abbreviated terms</h3>
+<div class="paragraph">
+<p>The following symbols and abbreviated terms are used in this best practice paper:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">API</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Application Program Interface</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CRS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coordinate Reference Systems</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CRUD</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create, Read, Update, Delete</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CSV</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Comma Separated Values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">HTTP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hypertext Transfer Protocol</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IETF</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Internet Engineering Task Force</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">International Organization for Standardization</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JavaScript Object Notation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OASIS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Organization for the Advancement of Structured Information Standards</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">OGC</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Open Geospatial Consortium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REST</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Representational State Transfer</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unified Modeling Language</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uniform Resource Identifiers</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Uniform Resource Locators</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">WKT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Well Known Text</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">XML</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Extensible Markup Language</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">One Dimensional</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Two Dimensional</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Three Dimensional</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_overview_of_mf_json_encoding_informative"><a class="anchor" href="#_overview_of_mf_json_encoding_informative"></a>6. Overview of MF-JSON Encoding (Informative)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Moving Features JSON (MF-JSON) encoding is a format for sharing moving feature data by using JSON objects that is easily readable by machines and by humans.
+A MF-JSON object represents a moving feature or a collection of moving features with dynamic attributes.
+This encoding standard leverages <a href="https://www.ietf.org/rfc/rfc7946.txt">GeoJSON</a> [IETF RFC 7946]
+that has already been commonly used in many applications and well supported by tools and software libraries.
+A similar structure of GeoJSON would be helpful for the implementations of MF-JSON.
+MF-JSON reserves new members of JSON objects to represent geographical movements, variations of measure,
+spatiotemporal extents of moving features and coordinate reference systems, as well as "type", "geometry", "properties", "crs", and "bbox".
+The new members are dealt with as "foreign members" in the GeoJSON document.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The existing GeoJSON implementation can ignore the new members of MF-JSON if there is no processing module for foreign members.
+Accordingly, MF-JSON is compatible with the GeoJSON encoding.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><a href="#mf-json">Figure 2</a> presents the overview of Moving Features JSON encoding format with new members of "temporalGeometry", "temporalProperties", "trs", and "time".</p>
+</div>
+<div id="mf-json" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./images/mf-json.png" alt="Overview" width="60%">
+</div>
+<div class="title">Figure 2. GeoJSON extension for Moving Features JSON encoding</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Coordinate Reference System (CRS)</div>
+The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees.
+However, a moving feature needs a temporal coordinate system and may require an engineering coordinate reference system or parametric coordinate reference system
+to represent the movement of the geometry of the feature in the case of an application request.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>MF-JSON allows the "crs" member to describe an alternative CRS whose representation follows the way as described in GeoJSON(2008)<a href="#3">[3]</a>
+and the “trs” member to describe a temporal reference system.
+If there is no member of "crs” and “trs”, it is fixed to the default of WGS84 for space and Coordinated Universal Time (UTC) using the Gregorian calendar for time.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example 1: Example of encoding a moving feature</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">{
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Feature</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(OPTIONAL) base representation for the motion of a rigid body</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MultiPolygon</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [
+         [[-<span class="float">0.5</span>,-<span class="float">0.5</span>,-<span class="float">0.5</span>], [<span class="float">0.5</span>,-<span class="float">0.5</span>,-<span class="float">0.5</span>], [<span class="float">0.5</span>,<span class="float">0.5</span>,-<span class="float">0.5</span>], [-<span class="float">0.5</span>,<span class="float">0.5</span>,-<span class="float">0.5</span>], [-<span class="float">0.5</span>,-<span class="float">0.5</span>,-<span class="float">0.5</span>]],
+         [[-<span class="float">0.5</span>,-<span class="float">0.5</span>,-<span class="float">0.5</span>], [-<span class="float">0.5</span>,-<span class="float">0.5</span>,<span class="float">0.5</span>], [<span class="float">0.5</span>,-<span class="float">0.5</span>,<span class="float">0.5</span>], [<span class="float">0.5</span>,-<span class="float">0.5</span>,-<span class="float">0.5</span>], [-<span class="float">0.5</span>,-<span class="float">0.5</span>,-<span class="float">0.5</span>]],
+         [[<span class="float">0.5</span>,-<span class="float">0.5</span>,-<span class="float">0.5</span>], [<span class="float">0.5</span>,-<span class="float">0.5</span>,<span class="float">0.5</span>], [<span class="float">0.5</span>,<span class="float">0.5</span>,<span class="float">0.5</span>], [<span class="float">0.5</span>,<span class="float">0.5</span>,-<span class="float">0.5</span>], [<span class="float">0.5</span>,-<span class="float">0.5</span>,-<span class="float">0.5</span>]],
+         [[<span class="float">0.5</span>,<span class="float">0.5</span>,-<span class="float">0.5</span>], [<span class="float">0.5</span>,<span class="float">0.5</span>,<span class="float">0.5</span>], [-<span class="float">0.5</span>,<span class="float">0.5</span>,<span class="float">0.5</span>], [-<span class="float">0.5</span>,<span class="float">0.5</span>,-<span class="float">0.5</span>], [<span class="float">0.5</span>,<span class="float">0.5</span>,-<span class="float">0.5</span>]],
+         [[-<span class="float">0.5</span>,<span class="float">0.5</span>,-<span class="float">0.5</span>], [-<span class="float">0.5</span>,<span class="float">0.5</span>,<span class="float">0.5</span>], [-<span class="float">0.5</span>,-<span class="float">0.5</span>,<span class="float">0.5</span>], [-<span class="float">0.5</span>,-<span class="float">0.5</span>,-<span class="float">0.5</span>], [-<span class="float">0.5</span>,<span class="float">0.5</span>,-<span class="float">0.5</span>]],
+         [[-<span class="float">0.5</span>,-<span class="float">0.5</span>,<span class="float">0.5</span>], [-<span class="float">0.5</span>,<span class="float">0.5</span>,<span class="float">0.5</span>], [<span class="float">0.5</span>,<span class="float">0.5</span>,<span class="float">0.5</span>], [<span class="float">0.5</span>,-<span class="float">0.5</span>,<span class="float">0.5</span>], [-<span class="float">0.5</span>,-<span class="float">0.5</span>,<span class="float">0.5</span>]]
+      ]
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">car1</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content">test1</span><span class="delimiter">&quot;</span></span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : { <span class="comment">// If there is no &quot;crs&quot;, the default crs is &quot;WGC84&quot;.</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {<span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:def:crs:OGC:1.3:WGC84</span><span class="delimiter">&quot;</span></span>}
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">bbox</span><span class="delimiter">&quot;</span></span>: [<span class="float">35.627423</span>, <span class="float">139.75707855</span>, -<span class="float">0.5</span>, <span class="float">35.627761</span>, <span class="float">139.75772045</span>, <span class="float">0.5</span>],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(REQUIRED) a one paremeter set of geometries</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:02Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:03Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:04Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:05Z</span><span class="delimiter">&quot;</span></span>],
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">35.627701</span>, <span class="float">139.757083</span>, <span class="float">0.0</span>], [<span class="float">35.627701</span>, <span class="float">139.757399</span>, <span class="float">2.0</span>], [<span class="float">35.627688</span>, <span class="float">139.757555</span>, <span class="float">4.0</span>], [<span class="float">35.627596</span>, <span class="float">139.757651</span>, <span class="float">4.0</span>], [<span class="float">35.627483</span>, <span class="float">139.757716</span>, <span class="float">4.0</span>] ],
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">orientations</span><span class="delimiter">&quot;</span></span>: [
+          [<span class="float">1.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>],  <span class="comment">// same as original</span>
+          [<span class="float">0.996194698091746</span>, <span class="float">0.0</span>, <span class="float">0.0871557427476582</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, -<span class="float">0.0871557427476582</span>, <span class="float">0.0</span>, <span class="float">0.996194698091746</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>],  <span class="comment">// Pitch rotation angle: 355 degree</span>
+          [<span class="float">0.866025403784438</span>, -<span class="float">0.5</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.5</span>, <span class="float">0.866025403784438</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>], <span class="comment">// Yaw rotation angle: 330 degree</span>
+          [<span class="float">0.5</span>, -<span class="float">0.866025403784439</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.866025403784439</span>, <span class="float">0.5</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>], <span class="comment">// Yaw rotation angle: 300 degree</span>
+          [<span class="float">0.0</span>, -<span class="float">1.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">0.0</span>, <span class="float">1.0</span>]  <span class="comment">// // Yaw rotation angle: 270 degree</span>
+        ],
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">scales</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">0.000012</span>, <span class="float">0.0000089</span>, <span class="integer">1</span>], [<span class="float">0.000012</span>, <span class="float">0.0000089</span>, <span class="integer">1</span>], [<span class="float">0.000012</span>, <span class="float">0.0000089</span>, <span class="integer">1</span>], [<span class="float">0.000012</span>, <span class="float">0.0000089</span>, <span class="integer">1</span>], [<span class="float">0.000012</span>, <span class="float">0.0000089</span>, <span class="integer">1</span>]],
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Linear</span><span class="delimiter">&quot;</span></span>,
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: [  <span class="comment">//(OPTIONAL) dynamic non-spatial attributes, extended from 'properties'</span>
+      { <span class="comment">// a group of temporal properties that are measured at the same times</span>
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01Z</span><span class="delimiter">&quot;</span></span>],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">length</span><span class="delimiter">&quot;</span></span>: {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">measure</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">form</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.qudt.org/qudt/owl/1.0.0/quantity/Length</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a URI denoting a unit-of-measure</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">2.4</span>, <span class="float">1.0</span>], <span class="comment">// the array of values for &quot;length&quot;, with the same number of elements as &quot;datetimes&quot;</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Continuous</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">description1</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL)</span>
+        },
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">message</span><span class="delimiter">&quot;</span></span>:{
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a predefined unit for a string value</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">A</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">B</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">C</span><span class="delimiter">&quot;</span></span>], <span class="comment">// the array of values for &quot;message&quot;, with the same number of elements as &quot;datetimes&quot;</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Discontinuous</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">description2</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL)</span>
+        }
+      },{
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:02:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T01:11:22Z</span><span class="delimiter">&quot;</span></span>],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">discharge</span><span class="delimiter">&quot;</span></span> : {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">measure</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">form</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">m^3/s</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a symbol from UCUM</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span> : [<span class="float">3.0</span>, <span class="float">4.0</span>],
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Minimum</span><span class="delimiter">&quot;</span></span>
+        }
+      }
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span> : { <span class="comment">// If there is no &quot;trs&quot;, the default trs is &quot;Gregorian&quot;.</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">link</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ogcdef</span><span class="delimiter">&quot;</span></span>,
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/def/uom/ISO-8601/0/Gregorian</span><span class="delimiter">&quot;</span></span>,
+      }
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">time</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T01:11:22Z</span><span class="delimiter">&quot;</span></span>]
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The conceptual schema specified by <a href="https://www.iso.org/standard/41445.html">ISO 19141:2008</a> represents the motion
+consisting of translation and/or rotation of a feature, but not including deformation of the feature.
+The ISO conceptual schema is based on one-parameter geometry types based on two geometric objects as shown in <a href="#mf-schema">Figure 3</a>.
+<strong>MF_OneParamGeometry</strong> is the type to describe a function \(f\) from an interval \(t \in [a, b\)] such that \(f(t)\) is a geometry.
+A leaf of a one parameter set of geometries is the geometry \(f(t)\) at a particular value \(t\) of the parameter.
+<strong>MF_Trajectory</strong> describes a one-parameter geometry whose cross section is a point as a leaf.
+<strong>MF_TemporalGeometry</strong> is a specialization of MF_OneParamGeometry in which the parameter is time as a multiple of a single unit of measure such as year, day, or second.
+An instance of <strong>MF_TemporalTrajectory</strong> is a trajectory whose parameter is time.
+The prism geometry of the moving feature is the set of points in the union of the leaf geometries (or the union of the temporal trajectories).
+The <strong>MF_PrismGeometry</strong> type represents the movement of an object through geographic space without deformation, where the object&#8217;s basic shape is immutable and may be translated or rotated over time.
+<strong>MF_RigidTemporalGeometry</strong> specializes MF_PrismGeometry to describe the motion of a rigid body, especially for a 3D object.
+In this document, two new types of <strong>MF_OneParamMeasure</strong> and <strong>MF_TemporalMeasure</strong> are added for representing a one parameter set of values, e.g., timeseries data of a thematic attribute of a feature.</p>
+</div>
+<div id="mf-schema" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./images/mf-schema.png" alt="Components" width="95%">
+</div>
+<div class="title">Figure 3. Components of the Moving Feature Package</div>
+</div>
+<div class="paragraph">
+<p>This encoding specification addresses the representation of a temporal geometry including a temporal trajectory, a prism geometry, and a ridig temporal geometry.
+Comparing to the <a href="https://www.iso.org/standard/41445.html">ISO 19141:2008</a> schema, MF-JSON can represent certain of deformation types of feature, such as shrink, expand, and change of the shape
+with the same number of trajectories. Also, the ISO conceptual shcema for moving features only defines the geometry type to represent the movement, but not feature-level schema.
+Geometry objects are not abstractions of real-world phenomena. For example, a "Moving Car" is an abstraction of a car that moves along a road in transporation applications and
+a "Tsunami" is an abstraction of seismic sea waves generated by the displacement of water.
+<a href="https://www.iso.org/standard/59193.html">ISO 19109:2015</a> supports features representing discrete objects with attributes having values which apply to the entire feature.
+However, the attributes of feature types carry all static information of a feature. <a href="https://www.iso.org/standard/40121.html">ISO 19123:2005</a> allows the attribute value to vary,
+depending upon the location within a feature, but does not support the assignment of attribute values to a geometry.
+In order to describe an application schema for handling moving features, this document addes ParametericAttributeType to represent the attribute variation with a parameter attributes
+as shown in <a href="#mf-attribute">Figure 4</a>.</p>
+</div>
+<div id="mf-attribute" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./images/mf-attribute.png" alt="Components" width="90%">
+</div>
+<div class="title">Figure 4. Parametric attribute type of a feature</div>
+</div>
+<div class="paragraph">
+<p>For example, an application schema with MovingFeature type having two parametric attributes may be defined like <a href="#mf-application">Figure 5</a>.
+The temporalGeometry attribute carries the changes of the position of the feature over time and temporalProperties contain feature attributes
+which carry parametric vlaues over time. The next clause will describe how to represent and share the instances of this kind of application schema to handle the moving features by using JSON objects.</p>
+</div>
+<div id="mf-application" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="./images/mf-application.png" alt="Components" width="75%">
+</div>
+<div class="title">Figure 5. Example of an application schema for moving features</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_mf_json_format_normative"><a class="anchor" href="#_the_mf_json_format_normative"></a>7. The MF-JSON Format (Normative)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This standard specifies describe the structure and content of JSON (JavaScript Object Notation) [<a href="https://www.ietf.org/rfc/rfc7159.txt">IETF RFC7159</a>]
+encoding implementation of the conceptual model for moving features described in <a href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445">ISO 19141:2008</a>.
+The MF-JSON format is based on GeoJSON <a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a> and defines new members to describe two types of dynamic attribute of a feature
+or feature collection in a JSON document.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="title">GeoJSON type</div>
+In IETF GeoJSON format, types are not extensible.
+GeoJSON allows only the fixed types: FeatureCollection, Feature, Point, LineString, MultiPoint, Polygon, MultiLineString, MultiPolygon, and GeometryCollection.
+MF-JSON is obedient to the GeoJSON rule not to occur contravention, and new types defined in this standard are only valid within "foreign members" of GeoJSON.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>A MF-JSON document may contain instances that has one of the following types, as well as primitives types of JSON null, boolean, array, number, and string.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Moving feature object (see <a href="#feature">7.2. Feature Object</a>)</p>
+</li>
+<li>
+<p>Moving feature collection object (see <a href="#fcollection">7.3. FeatureCollection Object</a>)</p>
+</li>
+<li>
+<p>Coordinate reference system (CRS) object (see <a href="#crs">7.4. CoordinateReferenceSystem Object</a>)</p>
+</li>
+<li>
+<p>Temporal geometry object (see <a href="#tgeometry">7.5. TemporalGeometry Object</a>)</p>
+</li>
+<li>
+<p>Geometry object (see <a href="#geometry">[geometry]</a>)</p>
+</li>
+<li>
+<p>Temporal properties object (see <a href="#tproperties">[tproperties]</a>)</p>
+</li>
+<li>
+<p>Interpolation object (see <a href="#interpoation">[interpoation]</a>)</p>
+</li>
+<li>
+<p>Life span (see <a href="#time">[time]</a>)</p>
+</li>
+<li>
+<p>Bounding box (see <a href="#bbox">[bbox]</a>)</p>
+</li>
+<li>
+<p>Properties object (see <a href="#properties">[properties]</a>)</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The object in this document is a JSON object.
+A JSON object is an unordered collection of zero or more name/value pairs, where a name is a string and a value is a string, number, boolean, null, object, or array.
+If the value of a member of an object is a JSON <code>null</code> value or a <strong>default</strong> value defined in this specification,
+the member and its value can be omitted in the document.
+If an object member is mandatory, its value does NOT allow a JSON <code>null</code> value. An optional member can have a JSON <code>null</code> value or be excluded from the document.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_requirements_class_core"><a class="anchor" href="#_requirements_class_core"></a>7.1. Requirements Class: Core</h3>
+<div class="paragraph">
+<p>The core requirements every implementation of the MF-JSON data model must fulfill are listed in Table 1. Their normative definitions are given in the sequent subclauses.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">MF-JSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">ISO 19141</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">IETF GeoJSON</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/feature" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/feature</a><br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/featurecollection" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/featurecollection</a><br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 3</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/temporalgeometry" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/temporalgeometry</a><br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 4</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/geometry" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/geometry</a><br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 5</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/temporalProperties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/temporalProperties</a><br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 6</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/properties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/properties</a><br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 7</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/crs</a><br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 8</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/bbox" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/bbox</a><br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 9</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/corer/trs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/corer/trs</a><br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 10</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/time" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/time</a><br>
+requirement description 
+</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="feature"><a class="anchor" href="#feature"></a>7.2. Feature Object</h3>
+<div class="paragraph">
+<p>MF-JSON comprises the types Feature and FeatureCollection to represent a feature (abstraction of real world phenomena) as same as GeoJSON,
+but there are a dyamic feature in time.
+A Feature object in a MF-JSON document represents a moving feature that is spatially bounded and its postion continously changes over time.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A Feature object SHALL have a <code>"type"</code> member with the value <code>"Feature"</code>.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Due to the compatibility issue, MF-JSON uses the same keyword to abstract a moving feature.
+If there is no member of temporal gemetry, applications can interprete the data by the semantics of GeoJSON members and types.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>A Feature object SHALL have a member with the name <code>"temporalGeometry"</code>.  The value of the <code>"temporalGeometry"</code> member SHALL be a TemporalGeometry object as defined below (see <a href="#tgeometry">7.5. TemporalGeometry Object</a>).
+It does NOT allow a JSON <code>null</code> value.</p>
+</li>
+<li>
+<p>A Feature object has a a member with the name <code>"geometry"</code> as the base representation of a rigid geometry of the feature at a given reference time
+or a JSON <code>null</code> value. A rigid geometry, using a local origin and local ordinate vectors, may undergo translation or rotation,
+but remains congruent with its base representation. The value expression of the <code>"geometry"</code> member is the same as the <code>"geometry"</code> member of GeoJSON.</p>
+</li>
+<li>
+<p>A Feature object has a <code>"bbox"</code> member for the spatial coordinate range and a <code>"time"</code> member for the temporal coordinate range of the life span to cover the moving feature.
+Two members of <code>"bbox"</code> and <code>"time"</code> allows a JSON <code>null</code> value.</p>
+</li>
+<li>
+<p>A Feature object has a member with the name <code>"temporalProperties"</code> as additional thematic attributes whose value varies over time.
+The <code>"temporalProperties"</code> member has a JSON array of TemporalProperties objects as defined below or a JSON <code>null</code> value.</p>
+</li>
+<li>
+<p>A Feature object has a member with the name <code>"properties"</code> as the same semantics of GeoJSON. The value of the properties member is an object
+(any JSON object or a JSON <code>null</code> value). The difference from <code>"temporalProperties"</code> is that a "properties" member has a static value during the life span of a feature.</p>
+</li>
+<li>
+<p>A Feature object has a <code>"crs"</code> member for representing the spatial coordinate reference system and a <code>"trs"</code> member for the temporal coordinate reference system of a moving feature.
+The value of the <code>"crs"</code> and <code>"trs"</code> member is a CoordinateReferenceSystem (CRS) object, a default CRS, or a JSON <code>null</code> value (see <a href="#crs">7.4. CoordinateReferenceSystem Object</a>).
+The value expression of spatial and temporal coordinates of <code>"temporalGeometry"</code>, <code>"temporalProperties"</code>, <code>"bbox"</code>, and <code>"time"</code> is obedient to
+these CRS objects. <strong>An instance of <code>"geometry"</code> is represented by its own local CRS as a default CRS</strong>.
+If a Feature object has no <code>"crs"</code> or <code>"trs"</code> member, the default CRS object shall apply to the Feature object.
+If there is no CRS object for a spatial or temporal coordinate, a Feature object SHALL explicitly has <code>"crs"</code> or <code>"trs"</code> member with a JSON <code>null</code> value.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/req-class-a/req-name-1<br>
+<br></p>
+<p class="tableblock">Requirement 'shall' statement </p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="title">Example 2: Members of a moving feature</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">{
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Feature</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(mandatory)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: {...}, <span class="comment">//(optional)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {...}, <span class="comment">//(optional)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : {...}, <span class="comment">//(default)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">bbox</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(optional)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: {...}, <span class="comment">//(mandatory)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(optional)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span> : {...}, <span class="comment">//(default)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">time</span><span class="delimiter">&quot;</span></span>: ... <span class="comment">//(optional)</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="fcollection"><a class="anchor" href="#fcollection"></a>7.3. FeatureCollection Object</h3>
+<div class="paragraph">
+<p>A MF-JSON object with the type "FeatureCollection" is a FeatureCollection object having a member with the name <code>"features"</code> of a collection of moving features.
+The value of <code>"features"</code> is a JSON array. Each element of the array is a Feature object as defined above.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A FeatureCollection object SHALL have a <code>"type"</code> member with the value <code>"FeatureCollection"</code>.</p>
+</li>
+<li>
+<p>A FeatureCollection object has a <code>"name"</code> member as a JSON string to indicate an alias of the collection. It allows a JSON <code>null</code> value.</p>
+</li>
+<li>
+<p>A FeatureCollection object has a <code>"features"</code> member as a JSON array of Feature instances. It is possible for this array to be empty.</p>
+</li>
+<li>
+<p>A FeatureCollection object has a <code>"bbox"</code>  member for the spatial coordinate range and a <code>"time"</code> member for the temporal coordinate range of the life span to cover
+all element instances of the collection. The values of <code>"bbox"</code> and <code>"time"</code> refer to the CRS objects of <code>"crs"</code> and <code>"trs"</code> below.</p>
+</li>
+<li>
+<p>A FeatureCollection object has a <code>"crs"</code> and <code>"trs"</code> member like a Feature object.
+If a collection object has the value of the <code>"crs"</code> or <code>"trs"</code> member, its elements of <code>"features"</code> SHALL refer to the coordinate reference systems of the collection object,
+not features' reference systems. The <code>"crs"</code> and <code>"trs"</code> member is on the top-level object in a hierarchy of feature collection, feature, tempral geometry/temporal properies order.</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/req-class-a/req-name-1<br>
+<br></p>
+<p class="tableblock">Requirement 'shall' statement </p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="title">Example 3: Members of a collection of moving features</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">{
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">FeatureCollection</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(mandatory)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(optional)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">features</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(mandatory)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : {...}, <span class="comment">//(default)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">bbox</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(optional)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span> : {...}, <span class="comment">//(default)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">time</span><span class="delimiter">&quot;</span></span>: [...] <span class="comment">//(optional)</span>
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="crs"><a class="anchor" href="#crs"></a>7.4. CoordinateReferenceSystem Object</h3>
+<div class="paragraph">
+<p>A coordinate reference system is usually comprised of two components: one coordinate system and one datum (reference frame).
+The IETF GeoJSON format recommends that the coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system,
+using the World Geodetic System 1984 (WGS 84)<a href="#4">[4]</a> datum, with longitude and latitude units of decimal degrees.
+This is equivalent to the coordinate reference system identified by the <a href="http://spatialreference.org/ref/epsg/wgs-84">EPSG:4326</a> with the axis Lat-Long.
+For a 3D coordinate with a altitude/elevation value, the value refers to distance above mean sea level (MSL or AMSL).
+However, a moving feature needs a temporal coordinate system and may require an engineering coordinate reference system or parametric coordinate reference system
+to represent the movement of the geometry of the feature in the case of an application request.
+Therefore, MF-JSON allows the "crs" member of a Feature object to describe an alternative coordinate reference system
+whose representation follows the way as described in GeoJSON(2008) and the “trs” member to describe a temporal coordinate reference system against which time is measured.
+<a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601</a> specifies the use of the Gregorian Calendar and 24 hour local or Coordinated Universal Time (UTC)
+for information interchange. This shall be the primary temporal reference system for use with geographic information.</p>
+</div>
+<div class="paragraph">
+<p>The vlaue of a <code>"crs"</code> and <code>"trs"</code> member</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A non-null CoordinateReferenceSystem (CRS) object represents a coordinate reference system to which the postions of a moving feature are referenced.
+The value of a <code>"trs"</code> member SHALL is an CRS object that indicates a temporal coordinate reference system.</p>
+</li>
+<li>
+<p>A non-null CRS object has two mandatory members: <code>"type"</code> and <code>"properties"</code>.</p>
+</li>
+<li>
+<p>The value of the <code>"type"</code> member SHALL be a string as one of the string "name" and "link", indicating the type of CRS object.</p>
+</li>
+<li>
+<p>The value of the <code>"properties"</code> member is a JSON object with members named <code>"name"</code>, <code>"href"</code>, and <code>"type"</code> whose value is a string or JSON <code>null</code> value.</p>
+</li>
+<li>
+<p>CRS shall not change coordinate ordering.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="_named_crs"><a class="anchor" href="#_named_crs"></a>7.4.1. Named CRS</h4>
+<div class="paragraph">
+<p>A Named CRS object indicates a coordinate reference system by name.
+In this case, the value of its "type" member must be the string "name".
+The value of its "properties" member is an object containing a "name" member whose value is a string identifying a coordinate reference system (not JSON <code>null</code> value).
+The value of <code>"href"</code> and <code>"type"</code> is a JSON <code>null</code> value.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example 4: Example of a named CRS object</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">{
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:def:crs:OGC:1.3:CRS84</span><span class="delimiter">&quot;</span></span>
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_linked_crs"><a class="anchor" href="#_linked_crs"></a>7.4.2. Linked CRS</h4>
+<div class="paragraph">
+<p>A linked CRS object has one required member: "href", and one optional member: "type".
+The value of the required "href" member must be a dereferenceable URI.
+The value of the optional "type" member must be a string that hints at the format used to represent CRS parameters at the provided URI.
+Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example 5: Example of a linked CRS object</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">{
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">link</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://example.com/crs/42</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">proj4</span><span class="delimiter">&quot;</span></span>
+    }
+}</code></pre>
+</div>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Relative links may be used to direct processors to CRS parameters in an auxiliary file</dt>
+</dl>
+</div>
+<div class="listingblock">
+<div class="title">Example 6: Example of a linked CRS object</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">{
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">link</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">data.crs</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ogcwkt</span><span class="delimiter">&quot;</span></span>
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="defaultCRS"><a class="anchor" href="#defaultCRS"></a>7.4.3. Default CRS</h4>
+<div class="paragraph">
+<p>MF-JSON has two default CRS objects as follows:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.opengis.net/def/crs/OGC/1.3/CRS84">WGS 84</a> with longitude and latitude units of decimal degrees: This CRS object is the default value of the <code>"crs"</code> member.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">    <span class="string"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:def:crs:OGC:1.3:CRS84</span><span class="delimiter">&quot;</span></span>
+        }
+    }</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://www.iso.org/iso/home/standards/iso8601.htm">ISO 8601</a> of dates and times using the Gregorian calendar: This CRS object is the default value of the <code>"trs"</code> member.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">    <span class="string"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span> : {
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:data:time:iso8601</span><span class="delimiter">&quot;</span></span>
+        }
+    }</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tgeometry"><a class="anchor" href="#tgeometry"></a>7.5. TemporalGeometry Object</h3>
+<div class="paragraph">
+<p>A moving feature, Feature object, has only one <code>"temporalGeometry"</code> member with a TemporalGeometry object to represent the movement of a moving feature,
+i.e., changes of the position. A prism of the set of leaves (MF_PrismGeometry in ISO 19141) or trajectories (MF_TemporalTrajectory in ISO 19141) is realized by
+a TemporalGeometry object modeled as a mapping function from \(t\in time\) to a geometric object \(g\) of Point, LineString, Polygon, MultiPoint,
+MultiLineString, MultiPolygon, or GeometryCollection.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A TemporalGeometry object SHALL have a <code>"type"</code> member with of of the value of <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, <code>"MovingPointCloud"</code>,
+<code>"MultiMovingPoint"</code>, <code>"MultiMovingLineString"</code>, <code>"MultiMovingPolygon"</code>, and <code>"MovingGeometryCollection"</code>. Depending on the value of <code>"type"</code>, a TemporalGeometry object
+is classified into two object types: TemporalPrimitiveGeometry and TemporalAggregateGeometry.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>MovingPoint</strong>: The type represents a trajectory of a time-parametered 0-dimensional geometric primitive (Point),
+representing a single position at a time position (instant) within its temporal domain.
+Intuitively a temporal geometry of this type depicts a curve in a spatiotemporal domain.
+It is used to express mf:AbstractTrajectory in the OGC® Moving Features standard.
+For example, the movement information of people, vehicles, or hurricanes can be shared as a TemporalGeometry object with the <code>"MovingPoint"</code> type.</p>
+</li>
+<li>
+<p><strong>MovingLineString</strong>: The type represents the prism of a time-parametered 1-dimensional (1D) geometric primitive (LineString),
+whose leaf geometry at a time position is 1-dimensional linear object in a particular time period.
+Intuitively a temporal geometry of this type depicts a set of surfaces in a spatiotemporal domain.
+For example, the movement information of weather fronts or traffic congestion on roads can be shared as a TemporalGeometry object with the <code>"MovingLineString"</code> type.</p>
+</li>
+<li>
+<p><strong>MovingPolygon</strong>: This type represents the prism of a time-parametered 2-dimensional (2D) geometric primitive (Polygon),
+whose leaf geometry at a time position is 2-dimensional polygonal object in a particular time period.
+Intuitively a temporal geometry of this type depicts a set of polyhedrons that are the convex hulls of two congruent polygons in a spatiotemporal domain.
+For example, the changes of flooding areas or the movement information of air pollution can be shared as a TemporalGeometry object with the <code>"MovingPolygon"</code> type.</p>
+</li>
+<li>
+<p><strong>MovingPointCloud</strong>: This type represents the prism of a time-parametered point aggregate whose leaf geometry at a time position is a set of points in a particular time period.
+Intuitively a temporal geometry of this type depicts a set of curves in a spatiotemporal domain.
+For example, the tacking information by using Light Detection and Ranging (LiDAR) can be shared as a TemporalGeometry object with the <code>"MovingPointCloud"</code> type.</p>
+</li>
+<li>
+<p><strong>MultiMovingPoint</strong>: This type represents a set of temporal geometries whose type is <code>"MovingPoint"</code>.</p>
+</li>
+<li>
+<p><strong>MultiMovingLineString</strong>: This type represents a set of temporal geometries whose type is <code>"MovingLineString"</code>.</p>
+</li>
+<li>
+<p><strong>MultiMovingPolygon</strong>: This type represents a set of temporal geometries whose type is <code>"MovingPolygon"</code>.</p>
+</li>
+<li>
+<p><strong>MovingGeometryCollection</strong>: It represents a collection of temporal geometries. Each temporal geometry in this array belongs to one of the above types.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>A TemporalGeometry object optionally has a <code>"crs"</code> and <code>"trs"</code> member.
+If an object has no <code>"crs"</code> and <code>"trs"</code> member, then it may acquire the CRS instances of <code>"crs"</code> and <code>"trs"</code> member from upper-level braces of a JSON object.
+If no CRS instance can be so acquired, the default CRSs shall apply to the object.</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="tprimitive"><a class="anchor" href="#tprimitive"></a>7.5.1. TemporalPrimitiveGeometry Object</h4>
+<div class="paragraph">
+<p>When a TemporalGeometry object has a <code>"type"</code> member with of of the value of <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, and <code>"MovingPointCloud"</code>,
+the object SHALL be a TemporalPrimitiveGeometry object with additional memebers named <code>"coordinates"</code>, <code>"datetimes"</code>, <code>"orientations"</code>, and <code>"interpolation"</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">{
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint | MovingLineString | MovingPolygon</span><span class="delimiter">&quot;</span></span>,  <span class="comment">// (MANDATORY) vbar | as a means to select ONE type.</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [...],   <span class="comment">//(MANDATORY)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [...],    <span class="comment">//(MANDATORY)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">orientations</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(OPTIONAL)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(MANDATORY)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span>: {}, <span class="comment">//(OPTIONAL)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span>: {}  <span class="comment">//(OPTIONAL)</span>
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"coordinates"</code>: The <code>"coordinates"</code> member is mandatory. Its value is a JSON array of leaf geometries of a temporal geometry, having at least one element. It does NOT allows a JSON <code>null</code> vlaue.</p>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 60%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Types</th>
+<th class="tableblock halign-center valign-top" style="background-color: #FFFFFF;">Formats of the <code>"coordinates"</code> value</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><em>Comments</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">MovingPoint</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">[ [x1,y1(,z1)], [x2,y2(,z2)], &#8230;&#8203; ]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>a list of single positions to construct a point as each leaf at a time instant, increasing time order</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">MovingLineString</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">[ [[x11,y11(,z11)], [x12,y12(,z12)], &#8230;&#8203;], [[x21,y21(,z21)], [x22,y22(,z22)], &#8230;&#8203;], &#8230;&#8203; ]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>a list of LineString coordinate arrays to construct a linestring as each leaf at a time instant, increasing time order</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">MovingPolygon</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">[ [[[ox11,oy11(,oz11)], [ox12,oy12(,oz12)], &#8230;&#8203;], [[ix11,iy11(,iz11)],[ix12,iy12(,iz12)], &#8230;&#8203;],&#8230;&#8203;], [[[ox21,oy21(,oz21)], [ox22,oy22(,oz22)], &#8230;&#8203;], [[ix21,iy21(,iz21)],[ix22,iy22(,iz22)], &#8230;&#8203;], &#8230;&#8203;], &#8230;&#8203; ]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>a list of Polygon
+coordinate arrays to construct a polygon as each leaf at a time instant, increasing time order</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">MovingPointCloud</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">[ [[x11,y11(,z11)], [x12,y12(,z12)], &#8230;&#8203;], [[x21,y21(,z21)], [x22,y22(,z22)], &#8230;&#8203;], &#8230;&#8203; ]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>a list of MultiPoint coordinate arrays to construct a set of points as each leaf at a time instant, increasing time order</em></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>A single position is represented by a JSON array of numbers,
+which must contain two or more elements. The first two elements are longitude/easting (x) and latitude/northing (y), precisely in that order and using decimal numbers.
+altitude/elevation (z) MAY be included as an optional third element.</p>
+</li>
+<li>
+<p>A LineString coordinate array is expressed as a JSON array of two or more positions.</p>
+</li>
+<li>
+<p>A Polygon coordinate array is expressed as a JSON array of LinearRing coordinate arrays. A LinearRing is closed LineString with 4 or more positions. The first and last
+positions are equivalent (they represent equivalent points). For Polygons with multiple rings, the first must be the exterior ring and any others must be interior rings or holes.</p>
+</li>
+<li>
+<p>A MultiPoint coordinate array is a JSON array of single positions.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"datetimes"</code>: The <code>"datetimes"</code> member is mandatory. Its value is a JSON array of instants of time to construct leaf geometries based on the temporal coordinate reference system
+described by a CRS object of the <code>"trs"</code> member. The array SHALL be a list of monotonic increasing instants, having the same number of elements of the <code>"coordinates"</code> value.
+It does NOT allows a JSON <code>null</code> vlaue.</p>
+<table class="tableblock frame-all grid-all" style="width: 99%;">
+<colgroup>
+<col style="width: 10%;">
+<col style="width: 60%;">
+<col style="width: 30%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Types</th>
+<th class="tableblock halign-center valign-top" style="background-color: #FFFFFF;">Formats of the <code>"datetimes"</code> value</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><em>Comments</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TimeInstant</p></td>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">[t1, t2, t3, &#8230;&#8203;]</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>a list of monotonic increasing instants</em></p></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When the <code>"trs"</code> member has the default temporal CRS (i.e., ISO8601) object, an instant is generally encoded as a a JSON string of ISO 8601:2004 field-based formats using Z (e.g., 2016-09-11T06:10:32Z) or incremental time as the number of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., 1465621816590), but others can be used such as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   YYYY (e.g., 1997)
+   Year and month:
+      YYYY-MM (e.g., 1997-07)
+   Complete date:
+      YYYY-MM-DD (e.g., 1997-07-16)
+   Complete date plus hours and minutes:
+      YYYY-MM-DDThh:mmTZD (e.g., 1997-07-16T19:20+01:00)
+   Complete date plus hours, minutes and seconds:
+      YYYY-MM-DDThh:mm:ssTZD (e.g., 1997-07-16T19:20:30+01:00)
+   Complete date plus hours, minutes, seconds and a decimal fraction of a second
+      YYYY-MM-DDThh:mm:ss.sTZD (e.g., 1997-07-16T19:20:30.450Z)
+   where:
+           YYYY = four-digit year
+           MM   = two-digit month (01=January, etc.)
+           DD   = two-digit day of month (01 through 31)
+           hh   = two digits of hour (00 through 23) (am/pm NOT allowed)
+           mm   = two digits of minute (00 through 59)
+           ss   = two digits of second (00 through 59)
+           s    = one or more digits representing a decimal fraction of a second
+           TZD  = time zone designator (Z or +hh:mm or -hh:mm)</pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"orientations"</code>:  The <code>"orientations"</code> member is optional. Its value is a JSON array of sets of transformation matrices for rotating and scailing of the base representation of a member named <code>"geometry"</code>.
+It allows a JSON <code>null</code> value. See <a href="#geometry">[geometry]</a> for a detailed expression of the transformation matrix. The combination of the <code>"geometry"</code> and <code>"orientations"</code> can represent a 3D temporal geometry of the MF_RigidTemporalGeometry type in ISO 19141.</p>
+</li>
+<li>
+<p><code>"interpolation"</code>: The <code>"interpolation" member is mandatory, and its value is an GeometricInterpolation object (see <a href="#interpolation">[interpolation]</a>). It does NOT allow a JSON `null</code> value.
+Interpolation is a method of finding new values for any function using the given set of values. The unknown position at a particular point can be found using the GeometricInterpolation instance.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#appendix-b1">[appendix-b1]</a> shows examples of TemporalPrimitiveGeometry instances.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="taggregate"><a class="anchor" href="#taggregate"></a>7.5.2. TemporalAggregateGeometry Object</h4>
+<div class="paragraph">
+<p>When a TemporalGeometry object has a <code>"type"</code> member with one of the value of <code>"MultiMovingPoint"</code>, <code>"MultiMovingLineString"</code>, <code>"MultiMovingPolygon"</code>, and <code>"MovingGeometryCollection"</code>,
+the object SHALL be a TemporalAggregateGeometry object with one additonal member named <code>"bundles"</code>.
+The value of the <code>"bundles"</code> member is represented by a JSON array of a set of TemporalPrimitiveGeometry instances, having at least one instance.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">{
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MultiMovingPoint | MultiMovingLineString | MultiMovingPolygon</span><span class="delimiter">&quot;</span></span> | <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingGeometryCollection</span><span class="delimiter">&quot;</span></span>,  <span class="comment">// (MANDATORY) vbar | as a means to select ONE type.</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">bundles</span><span class="delimiter">&quot;</span></span>: [  <span class="comment">//(MANDATORY)</span>
+        {
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint | MovingLineString | MovingPolygon</span><span class="delimiter">&quot;</span></span>,  <span class="comment">// (MANDATORY) vbar | as a means to select ONE type.</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [...],   <span class="comment">//(MANDATORY)</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [...],    <span class="comment">//(MANDATORY)</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">orientations</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(OPTIONAL)</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(MANDATORY)</span>
+        },
+        ...
+    ],
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span>: {}, <span class="comment">//(OPTIONAL)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span>: {}  <span class="comment">//(OPTIONAL)</span>
+}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>MultiMovingPoint</strong>: An element of the "bundles" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type <code>"MovingPoint"</code>.
+The leaf geometry at a time position must be an instance of type "MultiPoint" of GeoJSON, which is the union of each leaf of moving point members at the same time.</p>
+</li>
+<li>
+<p><strong>MultiMovingLineString</strong>: An element of the "bundles" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type <code>"MovingLineString"</code>.
+The leaf geometry at a time position must be an instance of type "MultiLineString" of GeoJSON, which is the union of each leaf of moving linestring members at the same time.</p>
+</li>
+<li>
+<p><strong>MultiMovingPolygon</strong>: An element of the "bundles" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type <code>"MovingPolygon"</code>.
+The leaf geometry at a time position must be an instance of type "MultiPolygon" of GeoJSON, which is the union of each leaf of moving polygon members at the same time.</p>
+</li>
+<li>
+<p><strong>MovingGeometryCollection</strong>: Each element of "bundles" can be an TemporalPrimitiveGeometry with one of types of <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, and <code>"MovingPointCloud"</code>.
+The leaf geometry at a time position must be an instance of type <code>"GeometryCollection"</code> of GeoJSON, which is the union of each leaf of any temporal geometries at the same time.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#appendix-b2">[appendix-b2]</a> shows examples of TemporalAggregateGeometry instances.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_requirement_2"><a class="anchor" href="#_requirement_2"></a>7.5.3. Requirement 2</h4>
+<div class="paragraph">
+<p>Paragraph - intro text for the requirement.</p>
+</div>
+<div class="paragraph">
+<p>Use the following table for Requirements, number sequentially.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/req-class-a/req-name-1<br>
+<br></p>
+<p class="tableblock">Requirement 'shall' statement </p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Dictionary tables for requirements can be added as necessary. Modify the following example as needed.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Names</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Definition</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Data types and values</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Multiplicity and use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">name 1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">definition of name 1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">float</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">One or more (mandatory)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">name 2</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">definition of name 2</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">character string type, not empty</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Zero or one (optional)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">name 3</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">definition of name 3</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">GML:: Point PropertyType</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">One (mandatory)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_media_types"><a class="anchor" href="#_media_types"></a>8. Media Types</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The MIME media type for MF-JSON text is "application/json" <a href="https://www.iana.org/assignments/media-types/application/json">[RFC4627</a>],
+"application/json-seq" <a href="https://www.iana.org/assignments/media-types/application/json-seq">[RFC7464</a>],
+"application/geo+json" <a href="https://www.iana.org/assignments/media-types/application/geo+json">[RFC7946</a>], or
+"application/geo+json-seq" <a href="https://www.iana.org/assignments/media-types/application/geo+json-seq">[RFC8142</a>]. The default encoding is UTF-8.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conformance_class_abstract_test_suite_normative"><a class="anchor" href="#_conformance_class_abstract_test_suite_normative"></a>Annex A: Conformance Class Abstract Test Suite (Normative)</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Ensure that there is a conformance class for each requirements class and a test for each requirement (identified by requirement name and number)
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_conformance_class_a"><a class="anchor" href="#_conformance_class_a"></a>A.1. Conformance Class A</h3>
+<div class="sect3">
+<h4 id="_requirement_1"><a class="anchor" href="#_requirement_1"></a>A.1.1. Requirement 1</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/conf-class-a/req-name-1</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/req-class-a/req-name-1</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that&#8230;&#8203;</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Inspect&#8230;&#8203;</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_2_2"><a class="anchor" href="#_requirement_2_2"></a>A.1.2. Requirement 2</h4>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_title_normativeinformative"><a class="anchor" href="#_title_normativeinformative"></a>Annex B: Title ( {Normative/Informative} )</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Place other Annex material in sequential annexes beginning with "B" and leave final two annexes for the Revision History and Bibliography
+</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex C: Revision History</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Date</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Release</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Editor</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Primary clauses modified</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-12-01</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Kyoung-Sook Kim</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">initial version</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-01-25</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Kyoung-Sook Kim, Taehoon Kim</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">draft</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex D: Bibliography</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="title">Example Bibliography (Delete this note).</div>
+<div class="paragraph">
+<p>The TC has approved Springer LNCS as the official document citation type.</p>
+</div>
+<div class="paragraph">
+<p>Springer LNCS is widely used in technical and computer science journals and other publications</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For citations in the text please use square brackets and consecutive numbers: [1], [2], [3]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>– Actual References:</p>
+</div>
+<div class="paragraph">
+<p>[n] Journal: Author Surname, A.: Title. Publication Title. Volume number, Issue number, Pages Used (Year Published)</p>
+</div>
+<div class="paragraph">
+<p>[n] Web: Author Surname, A.: Title, <a href="http://Website-Url" class="bare">http://Website-Url</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div id="OGC2015" class="paragraph">
+<p>[1] OGC: OGC Testbed 12 Annex B: Architecture. (2015).
+[1] Unified Code for Units of Measure (UCUM), unitsofmeasure.org
+[2] EPSG Geodetic Parameter Dataset, www.epsg.org
+[3] The GeoJSON Format Specification. 2008, geojson.org
+[4] National Imagery and Mapping Agency, "Department of Defense World Geodetic System 1984: Its Definition and Relationships with Local Geodetic Systems", Third Edition, 1984.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2019-01-16 22:34:13 JST
+</div>
+</div>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  messageStyle: "none",
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  },
+  TeX: { equationNumbers: { autoNumber: "none" } }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</body>
+</html>

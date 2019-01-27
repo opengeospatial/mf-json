@@ -1,0 +1,50 @@
+== Conventions
+This sections provides details and examples for any conventions used in the document.
+Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+
+=== Identifiers
+The normative provisions in this specification are denoted by the URI
+
+http://www.opengis.net/spec/movingfeatures/json/1.0
+
+All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
+
+All examples in this document are informative only.
+
+=== JSON notation
+
+The notation of JSON in this document is based on the specification of [RFC 7159].
+
+The ordering of the members of any JSON object must be considered irrelevant. Some examples use a JavaScript single line comment (//) and an ellipsis (...) as placeholder notation for a specific JSON instance.
+Whitespace is used in the examples inside this document to help illustrate the data structures, but is not required. Unquoted whitespace is not significant in JSON.
+
+=== UML notation
+
+Unified Modeling Language (UML) static structure diagrams appearing in this document are used as described in Subclause 5.2 of OGC Web Services Common [OGC 06-121r9].
+
+=== Abbreviated terms
+
+The following symbols and abbreviated terms are used in this best practice paper:
+
+[width="99%", cols="2,8"]
+|=========
+|API	| Application Program Interface
+|CRS	| Coordinate Reference Systems
+|CRUD | Create, Read, Update, Delete
+|CSV	| Comma Separated Values
+|HTTP	| Hypertext Transfer Protocol
+|IETF | Internet Engineering Task Force
+|ISO	| International Organization for Standardization
+|JSON | JavaScript Object Notation
+|OASIS|	Organization for the Advancement of Structured Information Standards
+|OGC	| Open Geospatial Consortium
+|REST | Representational State Transfer
+|UML  | Unified Modeling Language
+|URI  | Uniform Resource Identifiers
+|URL  | Uniform Resource Locators
+|WKT  |	Well Known Text
+|XML	| Extensible Markup Language
+|1D   | One Dimensional
+|2D	  | Two Dimensional
+|3D	  | Three Dimensional
+|=========

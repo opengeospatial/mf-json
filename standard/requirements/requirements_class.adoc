@@ -1,0 +1,30 @@
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class* {set:cellbgcolor:#CACCCE}
+2+|http://www.opengis.net/spec/movingfeatures/json/1.0/req/core {set:cellbgcolor:#FFFFFF}
+|Target type |MF-JSON
+|Dependency |ISO 19141
+|Dependency |IETF GeoJSON
+|*Requirement 1* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/feature +
+requirement description {set:cellbgcolor:#FFFFFF}
+|*Requirement 2* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/featurecollection +
+requirement description {set:cellbgcolor:#FFFFFF}
+|*Requirement 3* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/temporalgeometry +
+requirement description {set:cellbgcolor:#FFFFFF}
+|*Requirement 4* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/geometry +
+requirement description {set:cellbgcolor:#FFFFFF}
+|*Requirement 5* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/temporalProperties +
+requirement description {set:cellbgcolor:#FFFFFF}
+|*Requirement 6* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/properties +
+requirement description {set:cellbgcolor:#FFFFFF}
+|*Requirement 7* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/crs +
+requirement description {set:cellbgcolor:#FFFFFF}
+|*Requirement 8* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/bbox +
+requirement description {set:cellbgcolor:#FFFFFF}
+|*Requirement 9* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/corer/trs +
+requirement description {set:cellbgcolor:#FFFFFF}
+|*Requirement 10* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/time +
+requirement description {set:cellbgcolor:#FFFFFF}
+
+{set:cellbgcolor:#FFFFFF}
+|===
