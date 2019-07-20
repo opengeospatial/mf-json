@@ -207,10 +207,11 @@ one parameter set of geometries in which the parameter is time
 path of a moving *point* described by a one parameter set of points +
 [ ISO 19141:2008 ]
 
+/////
 === *valid time*
 time when a fact is true in the abstracted reality +
 [ ISO 19108:2002 ]
-
+/////
 
 === *value*
 element of a type domain +

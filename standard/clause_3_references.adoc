@@ -3,7 +3,7 @@ The following normative documents contain provisions that, through reference in 
 
 * OGC: https://portal.opengeospatial.org/files/?artifact_id=39049[OGC 08-015r2], _OGC Abstract Specifications - Topic 2 - Spatial referencing by coordinates_, version 4.0, 2010.
 * OGC: https://portal.opengeospatial.org/files/?artifact_id=37761[OGC 10-020], _OGC Abstract Specifications - Topic 2.1 - Spatial referencing by coordinates - Extension for Parametric Values_, version 1.0, 2014.
-
+* OGC: http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[OGC 15-042r3] ,_TimeseriesML 1.0 – XML Encoding of the Timeseries Profile of Observations and Measurements_, version 1.0, 2016.
 * OGC: http://www.opengeospatial.org/standards/movingfeatures[OGC 14-083r2], _OGC Moving Features Encoding Part I: XML Core_, 2015.
 * OGC: http://www.opengeospatial.org/standards/movingfeatures[OGC 14-084r2], _OGC Moving Features Encoding Extension: Simple Comma Separated Values (CSV)_, 2015.
 * OGC: http://www.opengeospatial.org/standards/movingfeatures[OGC 16-120r3], _OGC Moving Features Access_, 2017.
@@ -18,7 +18,6 @@ The following normative documents contain provisions that, through reference in 
 * IETF: https://www.ietf.org/rfc/rfc7159.txt[IETF RFC 7159], _The JavaScript Object Notation (JSON) Data Interchange Format_, 2014.
 * IETF: https://www.ietf.org/rfc/rfc7464.txt[IETF RFC 7464], _JavaScript Object Notation (JSON) Text Sequences_, 2015.
 * IETF: https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946], _The GeoJSON Format_, 2016.
-
 
 Additionally the following informative documents are addressed:
 

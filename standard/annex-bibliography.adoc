@@ -21,9 +21,20 @@ Springer LNCS is widely used in technical and computer science journals and othe
 ===============================================
 
 ((( Example )))
-[[OGC2015]]
-[1] OGC: OGC Testbed 12 Annex B: Architecture. (2015).
-[1] Unified Code for Units of Measure (UCUM), unitsofmeasure.org
-[2] EPSG Geodetic Parameter Dataset, www.epsg.org
-[3] The GeoJSON Format Specification. 2008, geojson.org
-[4] National Imagery and Mapping Agency, "Department of Defense World Geodetic System 1984: Its Definition and Relationships with Local Geodetic Systems", Third Edition, 1984.
+[#WGS84, reftext='[{counter:ref-num}]']
+[1] National Imagery and Mapping Agency, "Department of Defense World Geodetic System 1984: Its Definition and Relationships with Local Geodetic Systems", Third Edition, 1984.
+
+[#UCUM, reftext='[{counter:ref-num}]']
+[2] Unified Code for Units of Measure (UCUM), https://unitsofmeasure.org
+
+[#EPSG, reftext='[{counter:ref-num}]']
+[3] EPSG Geodetic Parameter Dataset, http://www.epsg.org
+
+[#GJSON2008, reftext='[{counter:ref-num}]']
+[4] The GeoJSON Format Specification. 2008, https://geojson.org
+
+[#INTER, reftext='[{counter:ref-num}]']
+[5] Rick Parent, Chapter 3 - Interpolating Values, Editor(s): Rick Parent, Computer Animation (Third Edition), Morgan Kaufmann, 2012, Pages 61-109, https://doi.org/10.1016/B978-0-12-415842-9.00003-4.
+
+[#OBJ, reftext='[{counter:ref-num}]']
+[6] Wavefront OBJ, https://en.wikipedia.org/wiki/Wavefront_.obj_file

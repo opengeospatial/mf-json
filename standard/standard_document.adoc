@@ -15,6 +15,7 @@
 :stem: latexmath, pass
 :toc-title: Contents
 :linkcss:
+:example-caption: Example
 
 = {title}
 
@@ -98,9 +99,9 @@ include::clause_4_terms_and_definitions.adoc[]
 
 include::clause_5_conventions.adoc[]
 
-include::clause_6_informative_text.adoc[]
+include::clause_6_overview_informative.adoc[]
 
-include::clause_7_normative_text.adoc[]
+include::clause_7_json_encodings.adoc[]
 
 include::clause_8_media_types.adoc[]
 

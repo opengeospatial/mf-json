@@ -2,7 +2,7 @@
 |===
 2+|*Requirements Class* {set:cellbgcolor:#CACCCE}
 2+|http://www.opengis.net/spec/movingfeatures/json/1.0/req/core {set:cellbgcolor:#FFFFFF}
-|Target type |MF-JSON
+|Target type | JSON object
 |Dependency |ISO 19141
 |Dependency |IETF GeoJSON
 |*Requirement 1* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/core/feature +

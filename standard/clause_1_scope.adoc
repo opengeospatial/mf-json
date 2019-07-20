@@ -1,6 +1,6 @@
 == Scope
-This document defines the structure and content of JSON (JavaScript Object Notation) [https://www.ietf.org/rfc/rfc7159.txt[IETF RFC7159]] encoding implementation of the conceptual model
-for moving features described in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008].
+This document defines the structure and content of JSON (JavaScript Object Notation) [https://www.ietf.org/rfc/rfc7159.txt[IETF RFC7159]]
+encoding implementation of the conceptual model for moving features described in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008].
 In common, a moving feature is a geographic feature whose location changes over time containing zero or more thematic attributes.
 Such a feature may be a car, an airplane, a ship, or something alike.
 The geometry of a moving feature to express its motion is defined as a one parameter set of geometries that may be viewed as a set of leaves or
@@ -17,17 +17,18 @@ Each representation of the rectangle at a given time (e.g., latexmath:[t_1], lat
 The path traced by each corner point of the rectangle (and by each of its other points) is a trajectory.
 The set of points contained in all of the leaves, and in all of the trajectories, forms a prism.
 The set of leaves also forms a foliation, meaning that there is a complete and separate representation of the geometry of the feature for each specific time.
-If viewed in a 4 dimensional spatio-temporal coordinate system, the points on the feature's geometry at different times are different points.
+If viewed in a 4 dimensional spatiotemporal coordinate system, the points on the feature's geometry at different times are different points.
 
-This specification of Moving Features JSON (MF-JSON) encoding extends IETF GeoJSON Format [IETF RFC 7946] to describe two types of dynamic attribute of a feature
+This specification of Moving Features JSON encodings extends IETF GeoJSON Format https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]] to describe two types of dynamic attribute of a feature
 or feature collection in a JSON document as follows:
 
 * _The spatial change over time (temporal geometry)_, representing the movement of the rigid or nonrigid body of a feature; and
 * _The thematic change over time (temporal property)_, representing the variation of the value of any descriptive characteristic of a feature.
 
-The MF-JSON encoding provides an alternative to the OGC(R) Moving Features Encodings XML [OGC 14 083r2] and Simple Comma Separated Values (CSV) [OGC 14 084r2] standards,
-containing the movement of 0-dimensional, 1-dimensional, 2-dimensional, 3-dimensional geometric primitives. Also it can represent the following phenomena in a spatio-temporal
-domain depending on the type of function from time to geometry:
+The JSON encodings provide an alternative to the OGC(R) Moving Features Encodings XML Core http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[[OGC 14-083r2]] and
+Simple Comma Separated Values (CSV) http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[[OGC 14-084r2]] standards by using GeoJSON https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]].
+Moreover, it can encompass the movement of 1-dimensional, 2-dimensional, 3-dimensional geometric primitives, and their aggregation, as well as moving points and their trajectories.
+For exmaple, the representation of the following phenomena in a spatiotemporal domain is scope of this specification:
 
 * _Discrete phenomena_, which exist only on a set of instants, such as road accidents;
 * _Stepwise phenomena_, where the changes of locations are abrupt at an instant, such as administrative boundaries;

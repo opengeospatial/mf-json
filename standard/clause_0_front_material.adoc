@@ -24,14 +24,14 @@ Insert Preface Text here. Give OGC specific commentary: describe the technical c
 ====
 ////
 
-This document specifies the JSON encoding of the conceptual schema of moving features defined in https://www.iso.org/standard/41445.html[ISO 19141:2008],
+This document specifies JSON encodings for the implementation of the conceptual schema of moving features defined in https://www.iso.org/standard/41445.html[ISO 19141:2008],
 i.e., features whose locations change over time. OGC Moving Features Encoding standards http://www.opengeospatial.org/standards/movingfeatures[XML Core [OGC 14-083r2]]
 and http://www.opengeospatial.org/standards/movingfeatures[Simple CSV [OGC 14-084r2]] have focused on the movement of 0-dimensional geometric primitives (Points),
 called trajectories. In addition, the ISO schema excludes deformation and changes of non-spatial attributes of the feature.
 However, there are requirements to represent and share the movements of 1-dimensional curve LineStrings, 2-dimensional surface Polygons, and 3-dimensional solid polyhedrons with time-varying non-spatial attributes in various application areas, including: Location Based Services, Intelligent Transportation Systems,
 Disaster Risk Management Systems, and Smart City Applications. For example, the traffic congestion on roads and the hotspot of air pollution are typical moving features in the real world.
 
-Therefore, OGC Moving Features JSON encoding standard (MF-JSON) defines data members for one-parameter geometries and propeties of the moving feature in time not only trajectory.
+Therefore, OGC Moving Features JSON encodings (MF-JSON) define data members for one-parameter geometries and propeties of the moving feature in time not only trajectory.
 MF-JSON is compatible with the https://www.ietf.org/rfc/rfc7946.txt[IETF GeoJSON Format [IETF RFC 7946]] in a JSON document.
 
 Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.

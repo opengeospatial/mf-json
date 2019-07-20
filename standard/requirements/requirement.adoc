@@ -1,7 +1,11 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 1* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
- +
-
-Requirement 'shall' statement {set:cellbgcolor:#FFFFFF}
+|*Requirement 2.1* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/GeoJSON +
+A MF-JSON Prism file SHALL be compatible with the IETF GeoJSON Format.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.1* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/GeoJSON +
+A MF-JSON Prism file SHALL be compatible with the IETF GeoJSON Format.
+{set:cellbgcolor:#FFFFFF}
 |===
