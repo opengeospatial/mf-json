@@ -1,0 +1,39 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 2.5* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/primitive +
+A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
+The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
+The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.6* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/primitive/constraint +
+A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
+The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
+The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.7* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpoint +
+A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
+The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
+The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.8* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movinglinestring +
+A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
+The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
+The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.9* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpolygon +
+A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
+The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
+The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.10* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpointcloud +
+A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
+The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
+The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+{set:cellbgcolor:#FFFFFF}
+|===

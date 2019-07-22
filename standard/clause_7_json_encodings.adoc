@@ -1,0 +1,27 @@
+== Moving Features JSON Encodings (MF-JSON) Specification
+
+This clause specifies the structure and content of JSON (JavaScript Object Notation) [https://www.ietf.org/rfc/rfc7159.txt[IETF RFC7159]]
+encoding implementation for the conceptual model of moving features described in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008].
+Moving Features JSON Encodings (MF-JSON) has two encoding formats: *MF-JSON Trajectory* for instances of the MF_TemporalGeometry type with linear interpoation and
+*MF-JSON Prism* that contains new members to describe instances of the MF_PrismGeometry (or MF_RigidTemporalGeometry) type in the ISO coneptual model.
+
+
+[IMPORTANT]
+An object in this specification is a JSON object.
+The JSON object is an unordered collection of zero or more name/value pairs, where a name is a string and a value can be a JSON `null`, `true`, `false`, string, number, array, or object.
+An array consists of elements where each element is a value as a JSON `null`, `true`, `false`, string, number, array, or object.
+
+In an object, there are three types of members: MANDATORY, OPTIONAL, and DEFAULT.
+[horizontal]
+MANDATORY:: If an object member is *mandatory*, its value SHOULD NOT be a JSON `null` value. The mandatory member of an object and its value SHOULD appear in a MF-JSON document.
+OPTIONAL:: If an object member is *optional*, its value allows a JSON `null` value. The optional member and its `null` value can be excluded from a MF-JSON document.
+DEFAULT:: If an object member has a *default* value defined in this specification, the pair of member and value can be omitted in a MF-JSON document.
+
+include::clause_7_1_trajectory.adoc[]
+
+include::clause_7_2_prism.adoc[]
+
+
+////////
+Two forms are incompatible, and MF-JSON Prism takes priority for the interpretation of the feature position.
+////////

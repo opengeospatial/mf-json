@@ -54,5 +54,3 @@ in the change request form will help the SWG adjudicate and prioritize the reque
 
 
 [Document rendering example](https://ksookim.github.io/mf-json)
-
-

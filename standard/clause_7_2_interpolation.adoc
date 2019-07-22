@@ -1,0 +1,236 @@
+[#interpolation, reftext='7.2.10']
+==== MotionCurve Objects
+In MF-JSON Prism, the concept of motion curves is important to represent various types of dynamic movements,
+especially non-linear movements of features.
+
+===== Predefined curves
+In order to reduce the encoding cost and the data size,
+the MF-JSON Prism encoding defines five strings of built-in motion curves for the value of the `"interpolation"`
+member in a TemporalPrimitiveGeometry object: `"Discrete"`, `"Step"`, `"Linear"`, `"Quadratic"`, and `"Cube"`.
+For these built-in motion curves, each leaf geometry of the TemporalPrimitiveGeometry object has the same structure for the elements
+in the value array of the `"coordinates"` member and the same number of single positions in the elements, except `"MovingPointCloud"`.
+For example, if a leaf linestring consists of two single positions in a temporal geometry of type `"MovingLineString"`,
+the other leaves also have two single positions. If a leaf polygon in a temporal geometry of type `"MovingPolygon"` has
+one interior ring, the others also have one interior ring and the number of positions of rings is same.
+
+[source, javascript]
+.Example {counter:example-num}: Predefined motion curves of a TemporalPrimitiveGeometry object
+{
+    ....,
+    "datetimes": [...],  //T={t_0, t_1, ..., t_n}
+    "coordinates": [...], //G={G_0, G_1, ..., G_n}
+    "interpolation": "Discrete|Step|Linear|Quadratic|Cube", // vbar | as a means to select ONE.
+    ....
+ }
+
+When a geographic feature is moving, each variable (i.e., latexmath:[x], latexmath:[y], latexmath:[z]) of position can be expressed
+in terms of another variable called a parameter. The two most commonly used parameters are time and distance traveled along the path of motion.
+This standard interprets a value of the `"interpolation"` member in a TemporalPrimitiveGeometry object
+as parametric equations with the time parameter.
+In general, parametric equations of 3D movement are represented by
+any three such functions that depending on the same variable latexmath:[t] as
+latexmath:[x = x(t)], latexmath:[y = y(t)], and latexmath:[z = z(t)].
+In orther words, the position latexmath:[P(t)] is described as
+
+[latexmath]
++++++++++++
+P(t) = (x(t), y(t), z(t));
++++++++++++
+velocity latexmath:[v] is the derivative of position (first derivative of position) with respect to time as follows:
+
+[latexmath]
++++++++++++
+V(t) = P'(x'(t), y'(t), z'(t));
++++++++++++
+and
+acceleration latexmath:[a] is the derivative of velocity (second derivative of position) with respect to time as follows:
+
+[latexmath]
++++++++++++
+A(t) = V'(t) = P''(x''(t), y''(t), z''(t)).
++++++++++++
+
+[NOTE]
+==========
+For example, when a geographic feature continuously moves over time but there are
+only four explicit positions as shown in <<mf-interpolation>>.
+Depending on the parametric equation, the path of motion can be modeled with different curves in the plan.
+The `"interpolation"` member allows applications to design their time-varying positions at any time using few positions and a parametric curve.
+In particular, a parametric curve is associated with parametric continuity to describe the smoothness of of the parameter's value with distance along the curve.
+The various order of parametric continuity can be described as follows:
+
+ ** latexmath:[C^0]: Curves are continuous; zeroth-order parametric continuity.
+ ** latexmath:[C^1]: First derivatives are continuous; first-order parametric continuity.
+ ** latexmath:[C^2]: First and second derivatives are continuous; second-order parametric continuity.
+ ** latexmath:[C^n]: First through latexmath:[n]-th derivatives are continuous.
+==========
+
+[#mf-interpolation,reftext='{figure-caption} {counter:figure-num}']
+.The dynamic motion of a geographic feature on parametrized curves
+image::mf-interpolation.png[mf-interpolation, pdfwidth=65%, width=65%, align="center"]
+
+Given latexmath:[N=(n+1)] leaf geometries latexmath:[G=\{G_0, G_1, ..., G_n\}] at time instants in latexmath:[T=\{t_0, t_1, ..., t_n\}]
+with the strictly increasing condition latexmath:[t_0 < t_1 < ...< t_n] and one-to-one correspondence,
+a temporal geometry latexmath:[TG] can be drawn by a bundle of latexmath:[k] temporal trajectories (i.e., parametric curves with the time parameter)
+latexmath:[\{C_0, C_1, ..., C_k\}], where latexmath:[k] is the number of single positions in any leaf geometry. A temporal trajectory latexmath:[C] is
+drawn for each position in latexmath:[P=\{P_0, P_1, ..., P_n\}] at each time instant in latexmath:[T=\{t_0, t_1, ..., t_n\}] such that
+latexmath:[P_i \in G_i] and latexmath:[0 \leq i \leq n], and its curve is realized by spline interpolation on subintervals.
+Namely, a temporal trajectory is implemented by a set of piecewise low-degree polynomials latexmath:[\{ SC_{1}, SC_{2}, ..., SC_{n}\}]
+whose derivatives satisfy some continuity constraints across sub-curve boundaries.
+
+Each type of built-in parametric curves interpolates a time-varying position
+latexmath:[P(t)] for any time instant latexmath:[t] in the time interval latexmath:[I=[t_0, t_n]]
+on the temporal trajectory as follows:
+$$
+\[
+   P(t) = C(t) = \begin{cases}
+       SC_{1}(t),  & \quad t \in [t_0, t_1],\\
+       SC_{2}(t),  & \quad t \in [t_1, t_2],\\
+       ...,\\
+       SC_{n}(t),  & \quad t \in [t_{n-1}, t_n].
+   \end{cases}
+\]
+$$
+Note that latexmath:[C(t_0) = P_0, C(t_1) = P_1,..., C(t_{n})=P_n].
+
+ .. `"Discrete"` : The positions are NOT connected. The position is valid only at the time instant in latexmath:[T].
+ $$
+ \[
+    P(t) = \begin{cases}
+        P_i  & \quad \text{if } t = t_i \in T\\
+        \emptyset & \quad \text{otherwise.}
+    \end{cases}
+ \]
+ $$
+ .. `"Step"` : It just jumps from one position to the next halfway through for a subinterval.
+ The curve is not continuous but would be useful for representing an accident or event.
+ This interpolation requires at least two positions, i.e., latexmath:[N \geq 2].
+ $$
+  \[
+   \forall t \in [t_{i-1}, t_{i}]: P(t) = \begin{cases}
+    P_{i-1}  & \quad \text{if } \frac{t-t_{i-1}}{t_{i}-t_{i-1}} < \text{0.5}\\
+    P_{i}  & \quad \text{otherwise.}
+  \end{cases}
+  \]
+ $$
+ .. `"Linear"` : This method is the *default* value of the `"interpolation"` member. It connects straight lines between positions
+ with zeroth-order parametric continuity (latexmath:[C^0]) on interval latexmath:[I]. The position with respect to time is constructed
+ from linear splines that are two–positions interpolating polynomials. Therefore, this interpolation also requires at least two positions, i.e., latexmath:[N \geq 2].
+ $$
+  \[
+   \forall t \in [t_{i-1}, t_{i}]: P(t) = C(t) = SC_{i}(t) = \frac{t-t_{i}}{t_{i-1}-t_{i}}P_{i-1} + \frac{t-t_{i-1}}{t_{i}-t_{i-1}}P_{i}.
+  \]
+ $$
+ .. `"Quadratic"`: This method interpolates the position at time latexmath:[t] by using a piecewise quadratic spline on each interval latexmath:[[t_{i−1}, t_i]]
+ with first-order parametric continuity (latexmath:[C^1]).
+ Between consecutive positions, piecewise quadratic splines are constructed from the following parametric equations
+ in terms of the time variable:
+ $$
+  \[
+   \forall t \in [t_{i-1}, t_{i}]: P(t) = C(t) = SC_i(t) = a_it^2 + b_it + c_i,\\
+    SC_i(t_{i-1}) = P_{i-1}, \quad SC_i(t_{i}) = P_{i} = SC_{i+1}(t_i),\\
+    P'(t_{i})=V(t_{i})=SC'_i(t_{i})=SC'_{i+1}(t_i), a_0 = 0.
+  \]
+ $$
+ It means the curve of a temporal trajectory is continuous and has continuous first derivative at the positions in latexmath:[P] except two end positons.
+ For this interpolation, at least three leaves at particular times are required, i.e., latexmath:[N \geq 3].
+ .. `"Cube"` :This method interpolates the position at time latexmath:[t] by
+ using a Catmull–Rom (cubic) spline on each interval latexmath:[[t_{i−1}, t_i]]
+ with first-order parametric continuity (latexmath:[C^1]).
+ The Catmull-Rom splines is a method that approximate a set of positions
+ with a smooth polynomial function that is piecewise-defined.
+ This interpolation requires at least four positions, i.e., latexmath:[N \geq 4], i.e.,
+ position latexmath:[P_{i-1}] and latexmath:[P_{i+2}] are needed
+ to calculate the spline between positions latexmath:[P_i] and latexmath:[P_{i+1}].
+ Between consecutive positions, Catmull-Rom splines are constructed from the following parametric equations
+ in terms of the time variable:
+ $$
+   \[
+   \forall t \in [t_{i-1}, t_{i}]: P(t) =
+   \begin{bmatrix}
+   t^3 & t^2 & t & 1
+   \end{bmatrix}
+   \begin{bmatrix}
+   -1 & 3 & -3 & 1\\
+   2 & -5 & 4 & -1\\
+   -1 & 0 & 1 & 0\\
+   0 & 2 & 0 & 0\\
+   \end{bmatrix}
+   \begin{bmatrix}
+   P_{i-1}\\
+   P_i\\
+   P_{i+1}\\
+   P_{i+2}
+   \end{bmatrix}
+   \]
+ $$
+
+/////////////////
+[width="99%", cols="1,3,1,3", options="header"]
+|=========
+| Names | Curves | Names | Curves
+| Step | image:mf-step.png[Step, pdfwidth=100%, width=100%] |Linear |image:mf-linear.png[Linear, pdfwidth=100%, width=100%]
+| Quadratic   | image:mf-quadratic.png[Quadratic, pdfwidth=100%, width=100%] | Cube   | image:mf-cube.png[CatmullRom, pdfwidth=100%, width=100%]
+|=========
+/////////////////
+
+
+===== URLs for user-defined parametric curve
+If applications need to define their own interpolation methods, the `"interpolation"` member
+in the TemporalPrimitiveGeometry object has a URL to
+address a JSON array of parametric equations defined on a set of intervals of parameter latexmath:[t]-value.
+
+[source, javascript]
+.Example {counter:example-num}: A TemporalPrimitiveGeometry instance of with a user-defined parametric curve
+"temporalGeometry": {
+    "type": "MovingPoint",
+    "datetimes": [...],  //T={t_0, t_1, ..., t_n}
+    "coordinates": [...], //G={G_0, G_1, ..., G_n}
+    "interpolation": "http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve",
+    ....
+}
+
+The URL indicates a JSON array composing of a JSON object which has two members of `"coefficients"` and `"time"`
+to represent a parametric equation within a temporal interval.
+The position latexmath:[P(t)] at time position latexmath:[t] is derived
+from a `"coefficients"` value as a multidimensional array of *polynomials* of latexmath:[(x(t), y(t), z(t))]
+coordinates during a particular time interval.
+[latexmath]
++++++++++++
+[x(t) = a_{n-1}t^{n-1} + a_{n-2}t^{n-2} + ... + a_0t^0]
++++++++++++
+[latexmath]
++++++++++++
+[y(t) = b_{n-1}t^{n-1} + b_{n-2}t^{n-2} + ... + b_0t^0]
++++++++++++
+[latexmath]
++++++++++++
+[z(t) = c_{n-1}t^{n-1} + c_{n-2}t^{n-2} + ... + c_0t^0]
++++++++++++
+
+If a time position does not belong to any time interval of the elements of equations,
+there is no interpolation equations at that time.
+The order of arrays for the interpolation formula of a temporal position SHALL
+follow latexmath:[x] (longitude), latexmath:[y] (latitude), latexmath:[z] (altitude) order.
+The time intervals between any two elements of equations only allows empty or 0-dimensional intersection.
+For compute parametric equations, the time position formatted by a character string of [ISO 8601:2004] is converted into
+a signed 64-bit integer(long) value that represents milliseconds.
+[source, javascript]
+.Example {counter:example-num}: http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve
+[
+  {
+    "coefficients": [[1.0, 3.0, 4.1], [2.0, 2.1, 3.0]],
+    // x = 1.0*t^2 + 3.0*t + 4.1 , y = 2.0*t^2 + 2.1*t + 3.0
+    "time": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z"]
+  },
+  {
+    "coefficients": [[4.0, 2.0], [1.0, 2.0]],
+      // x = 4.0*t + 2.0 , y = 1.0*t + 2.0
+    "time": ["2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"]
+  },
+  {
+    "coefficients": [["sin", "0.0"], ["cos", "0.0"]],
+      // x = sin*t , y = cos*t
+    "time": ["2011-07-15T00:01:01Z", "2011-07-16T00:01:01Z"]
+  }
+]

@@ -1,0 +1,9 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 2.4* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/feature +
+A MovingFeature object SHALL have at least two mandatory members of `"type"` and `"temporalGeometry"`.
+The value of the `"type"` member SHALL be string `"Feature"` string.
+The value of the `"temporalGeometry"` member SHALL be a TemporalGeometry object, not allowing the JSON `null`.
+{set:cellbgcolor:#FFFFFF}
+|===
