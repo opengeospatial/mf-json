@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.7.1">
+<meta name="generator" content="Asciidoctor 2.0.10">
 <title>OGC Moving Features Encoding Extension - JSON</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
-<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="./standard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./coderay-asciidoctor.css">
 </head>
 <body class="book">
 <div id="header">
@@ -337,7 +335,7 @@ a set of trajectories as shown in the <a href="#mf-concept">Figure 1</a>.
 A leaf represents the geometry of the moving feature at a particular value of the parameter (e.g., a point in time) and
 a trajectory is a curve that represents the path of a point in the geometry of the moving feature as it moves with respect to the parameter (e.g., time).</p>
 </div>
-<div id="mf-concept" class="imageblock" style="text-align: center">
+<div id="mf-concept" class="imageblock text-center">
 <div class="content">
 <img src="./images/mf-concept.png" alt="Conceptual Moving Feature" width="60%">
 </div>
@@ -933,7 +931,7 @@ For other cases, <strong>MF-JSON Prism</strong> can be used for expressing more 
 to represent spatiotemporal geometries, variations of measure, coordinate reference systems, and the time interval of moving features in the GeoJSON document.
 <a href="#mf-encodings">Figure 2</a> presents the overview of two forms of Moving Features JSON encodings.</p>
 </div>
-<div id="mf-encodings" class="imageblock" style="text-align: center">
+<div id="mf-encodings" class="imageblock text-center">
 <div class="content">
 <img src="./images/mf-encodings.png" alt="mf-encodings" width="65%">
 </div>
@@ -973,13 +971,13 @@ at \(t_1, t_2, t_3\), and \(t_4\). Its trajectory may be drawn depending on the 
 <a href="https://www.iso.org/standard/41445.html">ISO 19141:2008</a> defines a conceptual schema of a moving feature based on geometry types as shown in <a href="#mf-iso">Figure 4</a>.
 The ISO conceptual schema represents the motion consisting of translation and/or rotation of a moving feature, but not including deformation of the geometry, over time.</p>
 </div>
-<div id="mf-hurricane" class="imageblock" style="text-align: center">
+<div id="mf-hurricane" class="imageblock text-center">
 <div class="content">
 <img src="./images/mf-hurricane.png" alt="mf-hurricane" width="70%">
 </div>
 <div class="title">Figure 3. Example of a moving feature: a hurricane and its properties</div>
 </div>
-<div id="mf-iso" class="imageblock" style="text-align: center">
+<div id="mf-iso" class="imageblock text-center">
 <div class="content">
 <img src="./images/mf-iso.png" alt="Components" width="95%">
 </div>
@@ -995,20 +993,20 @@ such as year, day, or second for those types. <strong>MF_TemporalTrajectory</str
 The OGC Moving Features XML and CSV standard provide the encoding formats to represent linear trajectories of moving points, typically representing vehicles or pedestrians.
 <a href="#mf-ogc">Figure 5</a> shows an example for linear trajectories of two moving points A and B.
 Each trajectory has the start time and the end time. Both points start to move at t=10sec and end at t=19sec. While the movement of B does not change, the movement of A is changed at t=15sec.
-<a href="#mf-xml">Example 1</a> and <a href="#mf-csv">Example 2</a> shows how to encode the trajectories shown in <a href="#mf-ogc">Figure 5</a> by using two OGC Moving Features encoding standards.
+<a href="#mf-xml">Example 1</a> and <a href="#mf-csv">Example 3</a> shows how to encode the trajectories shown in <a href="#mf-ogc">Figure 5</a> by using two OGC Moving Features encoding standards.
 However, XML and CSV encoding standards have limitation on the representation of prism geometries such as <strong>MF_PrismGeometry</strong> and <strong>MF_RigidTemporalGeometry</strong>.
 They describe the implementation of only a type of <strong>MF_TemporalTrajectory</strong> with linear interpolation of movement.
 This MF-JSON standard specifies how to encode the same information by using GeoJSON; Additionally, it defines new JSON members to support applications that need more power expression of
 the movement of a feature whose geometry may be 0D, 1D, 2D, 3D geometric primitives, or their aggregations and continuously changes over time with various temporal interpolation methods.</p>
 </div>
-<div id="mf-ogc" class="imageblock" style="text-align: center">
+<div id="mf-ogc" class="imageblock text-center">
 <div class="content">
 <img src="./images/mf-ogc.png" alt="Components" width="70%">
 </div>
 <div class="title">Figure 5. Example for two linear trajectories</div>
 </div>
 <div id="mf-xml" class="listingblock">
-<div class="title">Example 1: OGC Moving Features XML Core encoding of linear trajectories.</div>
+<div class="title">Example 2: OGC Moving Features XML Core encoding of linear trajectories.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
   <span class="tag">&lt;mf:MovingFeatures&gt;</span>
@@ -1039,7 +1037,7 @@ the movement of a feature whose geometry may be 0D, 1D, 2D, 3D geometric primiti
 </div>
 </div>
 <div id="mf-csv" class="listingblock">
-<div class="title">Example 2: OGC Moving Features CSV encoding of linear trajectories.</div>
+<div class="title">Example 4: OGC Moving Features CSV encoding of linear trajectories.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="csv">@stboundedby,urn:x-ogc:def:crs:EPSG:6.6:4326,2D,50.23 9.23,50.31 9.27,2012-01-17T12:33:41Z,2012-01-17T12:37:00Z,sec
 @columns,mfidref,trajectory,state,xsd:token,”type code”,xsd:integer
@@ -1237,10 +1235,10 @@ It is possible for this array to be empty.
 </ul>
 </div>
 <div class="paragraph">
-<p><a href="#mf-geojson">Example 3</a> illustrates an example of the MF-JSON Trajectory encoding corresponding to two moving points, as shown in <a href="#mf-ogc">Figure 5</a> to be replaceable with <a href="#mf-xml">Example 1</a> and <a href="#mf-csv">Example 2</a>.</p>
+<p><a href="#mf-geojson">Example 5</a> illustrates an example of the MF-JSON Trajectory encoding corresponding to two moving points, as shown in <a href="#mf-ogc">Figure 5</a> to be replaceable with <a href="#mf-xml">Example 1</a> and <a href="#mf-csv">Example 3</a>.</p>
 </div>
 <div id="mf-geojson" class="listingblock">
-<div class="title">Example 3: Example of the MF-JSON Trajectory encoding</div>
+<div class="title">Example 6: Example of the MF-JSON Trajectory encoding</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">FeatureCollection</span><span class="delimiter">&quot;</span></span>,
@@ -1320,7 +1318,7 @@ The number of elements in the array of the <code>"coordinates"</code> value in t
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1.4</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/propeties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/propeties</a><br>
 The value of member <code>"properties"</code> SHALL be a GeoJSON object that has at least a member with the named <code>"datetimes"</code>.
-The value of the "datetimes" member is a JSON array.</p></td>
+The value of the <code>"datetimes"</code> member is a JSON array.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1.5</strong> </p></td>
@@ -1355,7 +1353,7 @@ The type <strong>MF_LocalGeometry</strong> is a geometric object to define the l
 The design coordinate reference system is accessible through the Coordinate Reference System association inherited from GM_Object.
 The remaining types support description of the possible rotation of such an object.</p>
 </div>
-<div id="mf-isoprism" class="imageblock" style="text-align: center">
+<div id="mf-isoprism" class="imageblock text-center">
 <div class="content">
 <img src="./images/mf-isoprism.png" alt="mf-isoprism" width="80%">
 </div>
@@ -1401,16 +1399,16 @@ to represent the movement of the geometry of the feature in the case of an appli
 </table>
 </div>
 <div class="paragraph">
-<p><a href="#mf-car">Figure 7</a> shows the movement of a car which has a rigid 3D solid, and <a href="#mf-prism">Example 4</a> is an example of moving-feature instances encoded by the MF-JSON Prism format.</p>
+<p><a href="#mf-car">Figure 7</a> shows the movement of a car which has a rigid 3D solid, and <a href="#mf-prism">Example 7</a> is an example of moving-feature instances encoded by the MF-JSON Prism format.</p>
 </div>
-<div id="mf-car" class="imageblock" style="text-align: center">
+<div id="mf-car" class="imageblock text-center">
 <div class="content">
 <img src="./images/mf-car.png" alt="mf-car" width="60%">
 </div>
 <div class="title">Figure 7. Example of the movement of a car which has a rigid 3D solid</div>
 </div>
 <div id="mf-prism" class="listingblock">
-<div class="title">Example 4: Example of the MF-JSON Prism encoding</div>
+<div class="title">Example 8: Example of the MF-JSON Prism encoding</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
     <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Feature</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(MANDATORY)</span>
@@ -1597,7 +1595,7 @@ or GeometryCollection.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>A TemporalGeometry object is a JSON object that has at least three members with the name <code>"type"</code>, <code>"crs"</code>, and <code>"trs"</code> as shown in <a href="#tgeometryjson">Example 5</a>.</p>
+<p>A TemporalGeometry object is a JSON object that has at least three members with the name <code>"type"</code>, <code>"crs"</code>, and <code>"trs"</code> as shown in <a href="#tgeometryjson">Example 9</a>.</p>
 </li>
 <li>
 <p>The value of the <code>"type"</code> member is one of string <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, <code>"MovingPointCloud"</code>,
@@ -1613,7 +1611,7 @@ If no CRS instance can be so acquired in a file, the default CRSs shall be appli
 </ul>
 </div>
 <div id="tgeometryjson" class="listingblock">
-<div class="title">Example 5: Common members of a TemporalGeometry object</div>
+<div class="title">Example 10: Common members of a TemporalGeometry object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(MANDATORY)</span>
@@ -1644,10 +1642,10 @@ string "MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", "
 leaf geometry at a time instant is drawn by a primitive geometry such as a point, linestring, and polygon in the two- or three-dimensional spatial coordinate system,
 or a point cloud in the three-dimensional spatial coordinate system.
 The TemporalPrimitiveGeometry object is defined with additional members
-named <code>"datetimes"</code>, <code>"coordinates"</code>, <code>"interpolation"</code>, <code>"orientations"</code>, and <code>"base"</code> as shown in <a href="#tprimitivejson">Example 6</a>, as well as the common members in <a href="#tgeometryjson">Example 5</a>.</p>
+named <code>"datetimes"</code>, <code>"coordinates"</code>, <code>"interpolation"</code>, <code>"orientations"</code>, and <code>"base"</code> as shown in <a href="#tprimitivejson">Example 11</a>, as well as the common members in <a href="#tgeometryjson">Example 9</a>.</p>
 </div>
 <div id="tprimitivejson" class="listingblock">
-<div class="title">Example 6: Members of a TemporalPrimitiveGeometry Object</div>
+<div class="title">Example 12: Members of a TemporalPrimitiveGeometry Object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="comment">// vbar | as a means to select ONE type.</span>
@@ -1957,7 +1955,7 @@ The quaternion \(Q\) can then be calculated as follow:</p>
 \[[W = cos(\dfrac{\psi}{2})cos(\dfrac{\theta}{2})cos(\dfrac{\phi}{2}) + sin(\dfrac{\psi}{2})sin(\dfrac{\theta}{2})sin(\dfrac{\phi}{2})]\]
 </div>
 </div>
-<div id="mf-orientation" class="imageblock" style="text-align: center">
+<div id="mf-orientation" class="imageblock text-center">
 <div class="content">
 <img src="./images/mf-orientation.png" alt="mf-orientation" width="65%">
 </div>
@@ -1972,44 +1970,44 @@ The quaternion \(Q\) can then be calculated as follow:</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.5</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/primitive" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/primitive</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+A TemporalPrimitiveGeometry object SHALL have at least three mandatory members of <code>"type"</code>, <code>"datetimes"</code>, and <code>"coordinates"</code>.
+The value of the <code>"type"</code> member SHALL be one of string "MovingPoint", "MovingLineString", "MovingPolygon", and "MovingPointCloud".
+The value of the <code>"datetimes"</code> member SHALL be a JSON array of a sequence of monotonic increasing instants,
+having at least one element that is not <code>null</code>.
+The value of the <code>"coordinates"</code> member SHALL be a JSON array of a sequence of leaf geometries of a temporal geometry,
+having at least one element that is not <code>null</code> and its expression is depending on the <code>"type"</code>.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.6</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/primitive/constraint" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/primitive/constraint</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+The number of elements in both arrays of the <code>"coordinates"</code> value and the <code>"datetimes"</code> value SHALL be equal.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.7</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpoint" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpoint</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+If the value of the <code>"type"</code> = <code>"MovingPoint"</code>, the value of the <code>"coordinates"</code> member
+SHALL be a list of Point coordinates to construct a 0D leaf geometry (point) corresponding to each instant in order.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.8</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movinglinestring" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movinglinestring</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+If the value of the <code>"type"</code> = <code>"MovingLineString"</code>, the value of the <code>"coordinates"</code> member
+SHALL be a list of LineString coordinate arrays to construct a 1D leaf geometry (linestring)
+corresponding to each instant in order.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.9</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpolygon" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpolygon</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+If the value of the <code>"type"</code> = <code>"MovingPolygon"</code>, the value of the <code>"coordinates"</code> member
+SHALL be a list of Polygon coordinate arrays to construct a 2D leaf geometry (polygon)
+corresponding to each instant in order.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.10</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpointcloud" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpointcloud</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+If the value of the <code>"type"</code> = <code>"MovingPointCloud"</code>, the value of the <code>"coordinates"</code> member
+SHALL be a list of MultiPoint 3D coordinate arrays to construct a set of points as a leaf geometry
+corresponding to each instant in order.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2046,20 +2044,21 @@ a JSON array of a set of TemporalPrimitiveGeometry instances, having at least on
 <div class="ulist">
 <ul>
 <li>
-<p><strong>MultiMovingPoint</strong>: An element of the "prisms" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type <code>"MovingPoint"</code>.
-The leaf geometry at a time position must be an instance of type "MultiPoint" of GeoJSON, which is the union of each leaf of moving point members at the same time.</p>
+<p><strong>MultiMovingPoint</strong>: The type represents a trajectory of a set of time-parametered 0-dimensional (0D)
+geometric primitive (Point), representing a multi-position at a time position (instant) within its temporal domain.
+The leaf geometry at a time position is the union of each leaf of moving point members at the same time.</p>
 </li>
 <li>
-<p><strong>MultiMovingLineString</strong>: An element of the "prisms" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type <code>"MovingLineString"</code>.
-The leaf geometry at a time position must be an instance of type "MultiLineString" of GeoJSON, which is the union of each leaf of moving linestring members at the same time.</p>
+<p><strong>MultiMovingLineString</strong>: The type represents the prism of a set of time-parametered 1-dimensional (1D)
+geometric primitive (LineString), whose leaf geometry at a time position is the union of each leaf of moving linestring members at the same time.</p>
 </li>
 <li>
-<p><strong>MultiMovingPolygon</strong>: An element of the "prisms" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type <code>"MovingPolygon"</code>.
-The leaf geometry at a time position must be an instance of type "MultiPolygon" of GeoJSON, which is the union of each leaf of moving polygon members at the same time.</p>
+<p><strong>MultiMovingPolygon</strong>: The type represents the prism of a set of time-parametered 2-dimensional (2D)
+geometric primitive (Polygon), whose leaf geometry at a time position is the union of each leaf of moving polygon members at the same time.</p>
 </li>
 <li>
 <p><strong>MovingGeometryCollection</strong>: Each element of "prisms" can be an TemporalPrimitiveGeometry with one of types of <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, and <code>"MovingPointCloud"</code>.
-The leaf geometry at a time position must be an instance of type <code>"GeometryCollection"</code> of GeoJSON, which is the union of each leaf of any temporal geometries at the same time.</p>
+The leaf geometry at a time position is the union of each leaf of any temporal geometries at the same time.</p>
 </li>
 </ul>
 </div>
@@ -2072,37 +2071,43 @@ The leaf geometry at a time position must be an instance of type <code>"Geometry
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.11</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/aggregation" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/aggregation</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+A TemporalAggregateGeometry object SHALL have at least two mandatory members of <code>"type"</code> and <code>"prisms"</code>.
+The value of the <code>"type"</code> member SHALL be one of string "MultiMovingPoint", "MultiMovingLineString",
+"MultiMovingPolygon", and "MovingGeometryCollection".
+The value of the <code>"prisms"</code> member SHALL be a JSON array of a set of TemporalPrimitiveGeometry instances,
+having at least one element in the array.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.12</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/multimovingpoint" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/multimovingpoint</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+If the value of the <code>"type"</code> = <code>"MultiMovingPoint"</code>, an element of the <code>"prisms"</code> member
+SHALL be a JSON array of TemporalPrimitiveGeometry instances of type <code>"MovingPoint"</code>.
+The leaf geometry at a time position must be an instance of type "MultiPoint" of GeoJSON,
+which is the union of each leaf of moving point members at the same time.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.13</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/multimovinglinestring" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/multimovinglinestring</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+If the value of the <code>"type"</code> = <code>"MultiMovingLineString"</code>, an element of the <code>"prisms"</code> member
+SHALL be a JSON array of TemporalPrimitiveGeometry instances of type <code>"MovingLineString"</code>.
+The leaf geometry at a time position must be an instance of type "MultiLineString" of GeoJSON,
+which is the union of each leaf of moving linestring members at the same time.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.14</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/multimovingpolygon" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/multimovingpolygon</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+If the value of the <code>"type"</code> = <code>"MultiMovingPolygon"</code>, an element of the <code>"prisms"</code> member
+SHALL be a JSON array of TemporalPrimitiveGeometry instances of type <code>"MovingPolygon"</code>.
+The leaf geometry at a time position must be an instance of type "MultiPolygon" of GeoJSON,
+which is the union of each leaf of moving polygon members at the same time.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.15</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movinggeometrycollection" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movinggeometrycollection</a><br>
-A MovingFeatureCollection object SHALL have at least two mandatory members of <code>"type"</code> and <code>"features"</code>.
-The value of the <code>"type"</code> member SHALL be string <code>"FeatureCollection"</code> string.
-The value of the <code>"features"</code> member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.</p></td>
+If the value of the <code>"type"</code> = <code>"MovingGeometryCollection"</code>, each element of <code>"prisms"</code> can be an TemporalPrimitiveGeometry
+with one of types of <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, and <code>"MovingPointCloud"</code>.
+The leaf geometry at a time position must be an instance of type <code>"GeometryCollection"</code> of GeoJSON,
+which is the union of each leaf of any temporal geometries at the same time.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2118,7 +2123,7 @@ Even though the dynamic value may depends on the spatiotemporal location,
 MF-JSON Prism only considers the temporal dependencies of their changes of value.</p>
 </div>
 <div id="tpropertiesjson" class="listingblock">
-<div class="title">Example 7: Examples of a TemporalProperties object</div>
+<div class="title">Example 14: Examples of a TemporalProperties object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(MANDATORY) a JSON Array of time instants</span>
@@ -2294,7 +2299,7 @@ whose value is a string identifying a coordinate reference system (not JSON <cod
 The value of <code>"href"</code> and <code>"type"</code> is a JSON <code>null</code> value.</p>
 </div>
 <div id="namedcrs" class="listingblock">
-<div class="title">Example 8: Example of a named CRS object</div>
+<div class="title">Example 16: Example of a named CRS object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
@@ -2315,7 +2320,7 @@ used to represent CRS parameters at the provided URI.
 Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.</p>
 </div>
 <div id="linkedcrs" class="listingblock">
-<div class="title">Example 9: Example of a linked CRS object</div>
+<div class="title">Example 18: Example of a linked CRS object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">link</span><span class="delimiter">&quot;</span></span>,
@@ -2327,7 +2332,7 @@ Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.</p>
 </div>
 </div>
 <div id="auxiliarycrs" class="listingblock">
-<div class="title">Example 10: Example of a relative linked CRS object with an auxiliary file</div>
+<div class="title">Example 20: Example of a relative linked CRS object with an auxiliary file</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">link</span><span class="delimiter">&quot;</span></span>,
@@ -2390,7 +2395,7 @@ This CRS object is the default value of the <code>"trs"</code> member.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.#</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.16</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/crs</a><br>
 A CoordinateReferenceSystem object SHALL have two mandatory members of <code>"type"</code> and <code>"properties"</code>
 to describe an instance of Named CRS, Linked CRS, or Default CRS.</p></td>
@@ -2404,10 +2409,10 @@ to describe an instance of Named CRS, Linked CRS, or Default CRS.</p></td>
 <div class="paragraph">
 <p>A MovingFeature object in a MF-JSON Prism document is a JSON object to represent
 a moving feature that is spatially and temporally bounded,
-and its position (continuously) changes over time with the members as shown in <a href="#mfeaturejson">Example 11</a>.</p>
+and its position (continuously) changes over time with the members as shown in <a href="#mfeaturejson">Example 21</a>.</p>
 </div>
 <div id="mfeaturejson" class="listingblock">
-<div class="title">Example 11: Members of a MovingFeature object</div>
+<div class="title">Example 22: Members of a MovingFeature object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Feature</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(MANDATORY)</span>
@@ -2484,7 +2489,7 @@ whose value is fixed for the life span of a moving feature.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.4</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2.17</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/feature" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/feature</a><br>
 A MovingFeature object SHALL have at least two mandatory members of <code>"type"</code> and <code>"temporalGeometry"</code>.
 The value of the <code>"type"</code> member SHALL be string <code>"Feature"</code> string.
@@ -2496,11 +2501,11 @@ The value of the <code>"temporalGeometry"</code> member SHALL be a TemporalGeome
 <div class="sect3">
 <h4 id="mfeaturecollection"><a class="anchor" href="#mfeaturecollection"></a>7.2.5. MovingFeatureCollection Object</h4>
 <div class="paragraph">
-<p>MovingFeatureCollection object is a JSON object with the following members as shown in <a href="#mfeaturecollectionjson">Example 12</a>.
+<p>MovingFeatureCollection object is a JSON object with the following members as shown in <a href="#mfeaturecollectionjson">Example 23</a>.
 It bundles a collection of moving features into a logical abstraction with a certain alias.</p>
 </div>
 <div id="mfeaturecollectionjson" class="listingblock">
-<div class="title">Example 12: Members of a MovingFeatureCollection object</div>
+<div class="title">Example 24: Members of a MovingFeatureCollection object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">FeatureCollection</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(mandatory)</span>
@@ -2550,9 +2555,9 @@ It allows a JSON <code>null</code> value.</p>
 The expression of an element in the array refers to the default temporal CRS object, i.e., ISO 8601:2004.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example 13: An example of LifeSpan object with ISO 8601:2004</div>
+<div class="title">Example 1: An example of LifeSpan object with ISO 8601:2004</div>
 <div class="content">
-<pre class="CodeRay highlight"><code>["2011-07-14T22:01:01Z", "2011-07-15T01:11:22Z"]</code></pre>
+<pre class="CodeRay highlight"><code>[&quot;2011-07-14T22:01:01Z&quot;, &quot;2011-07-15T01:11:22Z&quot;]</code></pre>
 </div>
 </div>
 </div>
@@ -2565,7 +2570,7 @@ The order of values follows the axes order of single position of longitude, lati
 The expression of an element in the array refers to the default spatial CRS object, i.e., WGS 84.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example 14: An example of BoundingBox object with WGS 84</div>
+<div class="title">Example 2: An example of BoundingBox object with WGS 84</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>[139.757083, 35.627483, 0.0, 139.757716, 35.627701, 4.5]</code></pre>
 </div>
@@ -2605,7 +2610,7 @@ the other leaves also have two single positions. If a leaf polygon in a temporal
 one interior ring, the others also have one interior ring and the number of positions of rings is same.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example 15: Predefined motion curves of a TemporalPrimitiveGeometry object</div>
+<div class="title">Example 3: Predefined motion curves of a TemporalPrimitiveGeometry object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
     ....,
@@ -2683,7 +2688,7 @@ The various order of parametric continuity can be described as follows:</p>
 </tr>
 </table>
 </div>
-<div id="mf-interpolation" class="imageblock" style="text-align: center">
+<div id="mf-interpolation" class="imageblock text-center">
 <div class="content">
 <img src="./images/mf-interpolation.png" alt="mf-interpolation" width="65%">
 </div>
@@ -2809,7 +2814,7 @@ in the TemporalPrimitiveGeometry object has a URL to
 address a JSON array of parametric equations defined on a set of intervals of parameter \(t\)-value.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example 16: A TemporalPrimitiveGeometry instance of with a user-defined parametric curve</div>
+<div class="title">Example 4: A TemporalPrimitiveGeometry instance of with a user-defined parametric curve</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript"><span class="string"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: {
     <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint</span><span class="delimiter">&quot;</span></span>,
@@ -2852,7 +2857,7 @@ For compute parametric equations, the time position formatted by a character str
 a signed 64-bit integer(long) value that represents milliseconds.</p>
 </div>
 <div class="listingblock">
-<div class="title">Example 17: <a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve</a></div>
+<div class="title">Example 5: <a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve</a></div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">[
   {
@@ -3076,9 +3081,10 @@ Place other Annex material in sequential annexes beginning with "B" and leave fi
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-05-20 23:37:43 JST
+Last updated 2019-07-22 14:57:38 +0900
 </div>
 </div>
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   messageStyle: "none",
@@ -3092,8 +3098,16 @@ MathJax.Hub.Config({
     ignoreClass: "nostem|noasciimath"
   },
   TeX: { equationNumbers: { autoNumber: "none" } }
-});
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains('stemblock')) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>
