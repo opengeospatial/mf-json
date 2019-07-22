@@ -1,0 +1,73 @@
+[#tproperties, reftext='7.2.2']
+==== TemporalProperties Object
+A TemporalProperties object is a JSON object to represent
+a collection of dynamic values of properties that are ascertained at the same times.
+A dynamic value may be a time-varying measure, a sequence of texts, or a sequence of images.
+Even though the dynamic value may depends on the spatiotemporal location,
+MF-JSON Prism only considers the temporal dependencies of their changes of value.
+
+[#tpropertiesjson, reftext='{example-caption} {counter:example-num}']
+.Example {counter:example-num}: Examples of a TemporalProperties object
+[source, javascript]
+{
+  "datetimes": [...], //(MANDATORY) a JSON Array of time instants
+  "@property0": {    // @property0 whose name is any string defined by an application.
+      "type": "measure",//(MANDATORY) a predefined string among `measure`, `text`, and `image`
+      "values": [...],            //(MANDATORY) a JSON Array of values
+      "interpolation": "...",     //(DEFAULT) a predefined string
+      "form": "...",              //(OPTIONAL) a symbol from UCUM
+      "description": "any string" //(OPTIONAL) any string content for an application
+  },
+  "@property1": { // @property1 whose name is any string defined by an application, but the name is not the same as @property0.
+      "type": "text", // @property1 has values at the same time instants of @property0
+      ...
+  },
+  "@property2" : { // @property1 whose name is any string defined by an application, but the name is same neither @property0 nor @property1.
+    "type": "image",
+    ....
+  },
+  ...
+}
+
+A TemporalProperties object has one `"datetimes"` member and
+more than one member with the name latexmath:[@propertyN], where latexmath:[@propertyN]
+is any string defined by an application as a temporal property.
+The value of the "latexmath:[@propertyN]" member is a JSON object that has the following fields:
+
+* `"type"`: The `"type"` member is mandatory and has a string as one of the followings:
+
+[width="98%", cols="2,8", options="header"]
+|=========
+| type strings | Descriptions
+| measure | The `"values"` member contains any numeric values.
+| text | The `"values"` member contains any strings.
+| image| The `"values"` member contains Base64 strings converted from images or URLs to address images.
+|=========
+
+* `"values"`: The `"values"` member is mandatory and
+has a JSON array whose element is a string (including null, true and false) or numeric value.
+The number of elements is the same as the "datetimes" ones.
+There is an one-to-one correspondence between the elements of `"values"` of a latexmath:[@propertyN] object
+and `"datetimes"` as a temporal sequence of pairs latexmath:[(v,t)],
+where latexmath:[v] is a value of measurement and latexmath:[t] is its sampling time.
+
+* `"interpolation"`: The temporal property also needs to define an interpolation method like the TemporalPrimitiveGeometry object.
+This standard defines the following interpolation methods for the temporal property by referring to http://docs.opengeospatial.org/is/15-042r3/15-042r3.html#75[InterpolationCode]
+defined in OGC http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[TimeseriesML 1.0].
+
+[width="98%", cols="2,8", options="header"]
+|=========
+| Names | Descriptions
+| Discrete| The sampling of the property occurs such that it is not possible to regard the series as continuous.
+| Minimum | Value represents the minimum value that was measured during the preceding time interval.
+| Maximum | Value represents the maximum value that was measured during the preceding time interval.
+| Average | Value represents the average value over the preceding interval.
+| Linear | The values are essentially connected and linear interpolation estimates the value of the property at the indicated instant during the time interval.
+| Regression | The value of the property at the indicated instant is estimated from a simple linear regression model with the whole observation values corresponding to the all elements in "datetimes".
+|=========
+
+* `"form"`: The `"form"` member is optional and has a string as
+a standard of measurement [ISO 19103:2015] or a URI denoting a unit-of-measure defined in a web resource.
+This member is applied only for a temporal property whose value type is `measure`.
+
+* `"description"`: The `"description"` member is optional and its value is any string to describe a short description.

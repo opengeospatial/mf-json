@@ -34,7 +34,6 @@ The Moving Features SWG currently has the following email list:
 
 **SWG Chair:**
 + Nobuhiro ISHIMARU(Hitachi, Ltd., Defense Systems Company)
-+ Ryosuke SHIBASAKI(University of Tokyo CSIS)
 + Kyoung-Sook KIM(National Institute of Advanced Industrial Science & Technology (AIST))
 
 ## Editing and commenting
@@ -55,5 +54,3 @@ in the change request form will help the SWG adjudicate and prioritize the reque
 
 
 [Document rendering example](https://ksookim.github.io/mf-json)
-
-

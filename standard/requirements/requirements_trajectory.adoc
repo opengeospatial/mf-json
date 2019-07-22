@@ -1,0 +1,35 @@
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class: MF-JSON Trajectory* {set:cellbgcolor:#CACCCE}
+2+|http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/req {set:cellbgcolor:#FFFFFF}
+|Target type | JSON object
+|Dependency |ISO 19141
+|Dependency |IETF GeoJSON
+|*Requirement 1.1* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/GeoJSON +
+A MF-JSON Trajectory file SHALL contain a LinearTrajectory object or a set of LinearTrajectory objects
+having a compliance with the IETF GeoJSON specification.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 1.2* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/feature +
+A LinearTrajectory object SHALL be a GeoJSON Feature object that has two MANDATORY members of `"geometry"` and `"properties"`.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 1.3* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/geometry +
+The value of the `"geometry"` member SHALL be a LineString Geometry object, having `"type"` = `"LineString"`.
+The number of elements in the array of the `"coordinates"` value in the Geometry object SHALL more than two positions.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 1.4* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/propeties +
+The value of member `"properties"` SHALL be a GeoJSON object that has at least a member with the named `"datetimes"`.
+The value of the "datetimes" member is a JSON array.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 1.5* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/datetimes +
+Each element in the array of the `"datetimes"` value SHALL be a Instant object
+A Instant object is only a JSON string encoded by ISO 8601 field-based formats using `Z` or
+the number of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 1.6* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/monotonic +
+The array of the `"datetimes"` value SHALL be a monotonic increasing sequence.
+There is no Instant object that has the same value as any other element.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 1.7* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/constraints +
+The number of elements in both arrays of the `"coordinates"` value and the `"datetimes"` value SHALL be equal.
+{set:cellbgcolor:#FFFFFF}
+|===

@@ -1,0 +1,284 @@
+[#tgeometry, reftext='7.2.1']
+==== TemporalGeometry Object
+A TemporalGeometry object represents the movement of a moving feature, i.e., changes of the position.
+Comparing to MF-JSON Trajectory, MF-JSON Prism provides an encoding rule for conceptual schemas specifying
+prisms of the set of leaves (*MF_PrismGeometry* in ISO 19141) or trajectories (*MF_TemporalTrajectory* in ISO 19141).
+The TemporalGeometry object is modeled as a mapping function from latexmath:[t\in time]
+to a Geometry object latexmath:[g] of Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon,
+or GeometryCollection.
+
+* A TemporalGeometry object is a JSON object that has at least three members with the name `"type"`, `"crs"`, and `"trs"` as shown in <<tgeometryjson>>.
+* The value of the `"type"` member is one of string `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, `"MovingPointCloud"`,
+`"MultiMovingPoint"`, `"MultiMovingLineString"`, `"MultiMovingPolygon"`, and `"MovingGeometryCollection"`.
+The TemporalGeometry object is spefified with additional members depending upon the value of the `"type"` member.
+* The value of the `"crs"` and `"trs"` member is a JSON object to represent a CoordinateReferenceSystem (CRS) object (see <<crs>>).
+If an object has no `"crs"` and `"trs"` member, then it may acquire the CRS instances of
+the `"crs"` and `"trs"` member from upper-level braces of a JSON object.
+If no CRS instance can be so acquired in a file, the default CRSs shall be applied to the object.
+
+[#tgeometryjson, reftext='{example-caption} {counter:example-num}']
+.Example {counter:example-num}: Common members of a TemporalGeometry object
+[source, javascript]
+{
+  "type": "...", //(MANDATORY)
+  "crs" : {...}, //(DEFAULT)
+  "trs" : {...}, //(DEFAULT)
+  ......, // different expression with respect to the value of "type"
+}
+
+include::requirements/requirements_tgeometry.adoc[]
+
+===== TemporalPrimitiveGeometry Object
+A TemporalPrimitiveGeometry object describes the movement of a geographic feature whose
+leaf geometry at a time instant is drawn by a primitive geometry such as a point, linestring, and polygon in the two- or three-dimensional spatial coordinate system,
+or a point cloud in the three-dimensional spatial coordinate system.
+The TemporalPrimitiveGeometry object is defined with additional members
+named `"datetimes"`, `"coordinates"`, `"interpolation"`, `"orientations"`, and `"base"` as shown in <<tprimitivejson>>, as well as the common members in <<tgeometryjson>>.
+
+/////////////
+When a TemporalGeometry object has a `"type"` member with the value of
+one of string `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`,
+the object is specialized as a TemporalPrimitiveGeometry object with.
+/////////////
+
+[#tprimitivejson, reftext='{example-caption} {counter:example-num}']
+.Example {counter:example-num}: Members of a TemporalPrimitiveGeometry Object
+[source, javascript]
+{
+  // vbar | as a means to select ONE type.
+  "type": "MovingPoint | MovingLineString | MovingPolygon | MovingPointCloud", //(MANDATORY)
+  "datetimes" : [...],    //(MANDATORY)
+  "coordinates": [...],   //(MANDATORY)
+  "interpolation": "...", //(DEFAULT)
+  "base": "...",          //(OPTIONAL)
+  "orientations": [...],  //(OPTIONAL)
+  "crs": {...},           //(DEFAULT)
+  "trs": {...}            //(DEFAULT)
+}
+
+* `"type"`: The `"type"` member is *mandatory* and its value is one of string
+`"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
+The value specifies the type of a TemporalPrimitiveGeometry object
+for the interpretation of the array value of the "coordinates" member. Each type represents as follows:
++
+[width="99%", cols="1,9", options="header"]
+|=========
+| Types   |    Description
+| MovingPoint |  The type represents a trajectory of a time-parametered 0-dimensional (0D) geometric primitive (Point),
+representing a single position at a time position (instant) within its temporal domain.
+Intuitively a temporal geometry of this type depicts a curve in a spatiotemporal domain.
+It supports more complex movements of moving features, as well as linear movement like MF-JSON Trajectory.
+For example, the non-linear movement information of people, vehicles, or hurricanes can
+be shared as a TemporalPrimitiveGeometry object with the `"MovingPoint"` type.
+| MovingLineString | The type represents the prism of a time-parametered 1-dimensional (1D) geometric primitive (LineString),
+whose leaf geometry at a time position is a 1D linear object in a particular time period.
+Intuitively a temporal geometry of this type depicts a set of surfaces in a spatiotemporal domain.
+For example, the movement information of weather fronts or traffic congestion on roads can be shared
+as a TemporalPrimitiveGeometry object with the `"MovingLineString"` type.
+| MovingPolygon | The type represents the prism of a time-parametered 2-dimensional (2D) geometric primitive (Polygon),
+whose leaf geometry at a time position is a 2D polygonal object in a particular time period.
+Intuitively a temporal geometry of this type depicts a set of polyhedrons that are the convex hulls of two congruent polygons in a spatiotemporal domain.
+For example, the changes of flooding areas or the movement information of air pollution can be shared as a TemporalPrimitiveGeometry object with the `"MovingPolygon"` type.
+| MovingPointCloud | The type represents the prism of a time-parametered point aggregate
+whose leaf geometry at a time position is a set of points in a particular time period.
+Intuitively a temporal geometry of this type depicts a set of curves in a spatiotemporal domain.
+For example, the tacking information by using Light Detection and Ranging (LiDAR) can be shared as a TemporalPrimitiveGeometry object with the `"MovingPointCloud"` type.
+|=========
+
+* `"datetimes"`: The `"datetimes"` member is *mandatory*. Its value is a JSON array of
+a sequence of monotonic increasing instants, having at least one element that is not `null`.
+It does NOT allow a JSON `null` value. The expression of element instant is based on
+its temporal coordinate reference system that is given by the `"trs"` member.
++
+[width="99%", cols="2,^4,4", options="header"]
+|=========
+| Types   |      Formats of the `"datetimes"` value  |  _Comments_
+| TimeInstant | [t1, t2, t3, ...]| _a list of monotonic increasing instants, i.e., latexmath:[t1 < t2 < t3 <...]_
+|=========
+
+[NOTE]
+==========
+When the `"trs"` member has the default temporal CRS (i.e., ISO8601) object, an instant is generally encoded as a a JSON string
+of https://www.iso.org/iso-8601-date-and-time-format.html[ISO 8601] field-based formats using Z (e.g., `"2016-09-11T06:10:32Z"`) or
+incremental time as the number of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., `1465621816590`),
+but others can be used such as:
+-----
+   YYYY (e.g., 1997)
+   Year and month:
+      YYYY-MM (e.g., 1997-07)
+   Complete date:
+      YYYY-MM-DD (e.g., 1997-07-16)
+   Complete date plus hours and minutes:
+      YYYY-MM-DDThh:mmTZD (e.g., 1997-07-16T19:20+01:00)
+   Complete date plus hours, minutes and seconds:
+      YYYY-MM-DDThh:mm:ssTZD (e.g., 1997-07-16T19:20:30+01:00)
+   Complete date plus hours, minutes, seconds and a decimal fraction of a second
+      YYYY-MM-DDThh:mm:ss.sTZD (e.g., 1997-07-16T19:20:30.450Z)
+   where:
+           YYYY = four-digit year
+           MM   = two-digit month (01=January, etc.)
+           DD   = two-digit day of month (01 through 31)
+           hh   = two digits of hour (00 through 23) (am/pm NOT allowed)
+           mm   = two digits of minute (00 through 59)
+           ss   = two digits of second (00 through 59)
+           s    = one or more digits representing a decimal fraction of a second
+           TZD  = time zone designator (Z or +hh:mm or -hh:mm)
+-----
+==========
+
+* `"coordinates"`: The `"coordinates"` member is *mandatory*. Its value is a JSON array of a sequence
+of leaf geometries of a temporal geometry. It does NOT allow a JSON `null` value nor an empty array.
+Each leaf geometry corresponds to each instant element in the array value of `"datetimes"` in order.
+The value expression of this member is different depending on the `"type"` value as follows:
++
+[width="99%", cols="1,^5,4", options="header"]
+|=========
+| Types   |      Formats of the `"coordinates"` value  |  _Comments_
+| MovingPoint | [ [x1,y1(,z1)], [x2,y2(,z2)], ... ] | _a list of Point coordinates to construct a 0D leaf geometry (point) corresponding to each instant in order_
+| MovingLineString | [ [[x11,y11(,z11)], [x12,y12(,z12)], ...], [[x21,y21(,z21)], [x22,y22(,z22)], ...], ... ] | _a list of LineString coordinate arrays to construct a 1D leaf geometry (linestring) corresponding to each instant in order_
+| MovingPolygon | [ [[[ox11,oy11(,oz11)], [ox12,oy12(,oz12)], ...], [[ix11,iy11(,iz11)],[ix12,iy12(,iz12)], ...],...], [[[ox21,oy21(,oz21)], [ox22,oy22(,oz22)], ...], [[ix21,iy21(,iz21)],[ix22,iy22(,iz22)], ...], ...], ... ] |  _a list of Polygon
+coordinate arrays to construct a 2D leaf geometry (polygon) corresponding to each instant in order_
+| MovingPointCloud | [ [[x11,y11,z11], [x12,y12,z12], ...], [[x21,y21,z21], [x22,y22,z22], ...], ... ] | _a list of MultiPoint 3D coordinate arrays to construct a set of points as a leaf geometry corresponding to each instant in order_
+|=========
+
+[NOTE]
+==========
+* A single position is represented by a JSON array of numbers, which must contain two or more elements.
+The first two elements are longitude/easting (x) and latitude/northing (y), precisely in that order and using decimal numbers.
+altitude/elevation (z) MAY be included as an optional third element.
+* A Point coordinate is a single position.
+* A LineString coordinate array is expressed as a JSON array of two or more single positions, allowing the same positions.
+* A Polygon coordinate array is expressed as a JSON array of LinearRing coordinate arrays. A LinearRing is closed LineString with 4 or more single positions, allowing the same positions.
+The first and last positions are equivalent (they represent equivalent points). For Polygons with multiple rings, the first must be the exterior ring and any others must be interior rings or holes.
+* A MultiPoint 3D coordinate array is a JSON array of single positions with altitude/elevation (z).
+==========
+
+* `"interpolation"`: The `"interpolation"` member is default and the most important member
+to represent various types of dynamic movements.
+Its value is a MotionCurve object that is described
+by a case-sensitive string as one of predefined five motion curves (i.e., `"Discrete"`, `"Step"`, `"Linear"`, `"Quadratic"`, and `"Cube"`) or
+a URL (e.g., `"http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve"`).
+The URL indicates a JSON document containing a user-defined curve of parametric motion
+for the movement of a feature in two- or three-space.
+The detail interpretation and representation of method is described in <<interpolation>>.
+If the TemporalPrimitiveGeometry object has no member with the name `"interpolation"`,
+it is interpreted by `"Linear"`.
+
+* `"base"`: The `"base"` member is optional and it value is a URL to address an OBJ<<OBJ>>
+file of a 3D model data. It allows a JSON `null` value.
+The 3D model represents a base geometry of a 3D rigid shape, and
+the combination of the `"base"` and `"orientations"` members represents a 3D temporal geometry
+of the MF_RigidTemporalGeometry type in ISO 19141. In MF-JSON Prism, the 3D model is transformed
+into the fixed local coordinate reference system whose bound is *-0.5 to 0.5* for each axis and unit is *meter*.
+The origin of the local coordinate reference system is 0 for each axis is transformed
+into the centroid of each leaf geometry of a temporal geometry.
+
+* `"orientations"`:  The `"orientations"` member is optional and always accompanied
+with the `"base"` member. Its value is a JSON array as a sequence of transform matrices
+for rotating and scaling of the base representation of a member named `"base"`,
+having the same number of elements of the `"datetimes"` value.
+It allows a JSON `null` value or an empty array
+if and only if the `"base"` member has a JSON `null` value.
+A transformation matrix is defined by a linear transformation
+from the local engineering coordinate reference system to the Universal Transverse Mercartor (UTM) system as a type of plane rectangular coordinate system.
+A coordinate of the base 3D model, latexmath:[(x, y, z)], transforms into a target 3D coordinate,
+latexmath:[(x', y', z')], by using the quaternions and the scaling factors,
+latexmath:[(x, y, z) \rightarrow (x', y', z')], as follows:
+ $$
+\begin{matrix}
+\begin{bmatrix}
+	x'\\  y'\\  z'\\ 1
+\end{bmatrix}
+&
+=
+&
+\begin{bmatrix}
+S_x(1 - 2(Y^2+Z^2)) & 2S_y(XY + ZW) & 2S_z(XZ-YW) & 0 \\
+2S_x(XY - ZW) & S_y(1 - 2(X^2+Z^2)) & 2S_z(YZ+XW) & 0 \\
+2S_x(XZ + YW) & 2S_y(YZ - XW) & S_z(1 - 2(X^2+Y^2)) & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+&
+\begin{bmatrix}
+	x\\ y\\ z\\ 1
+\end{bmatrix}
+\\
+\end{matrix}
+ $$
+
+The scaling factor takes the form of a vector latexmath:[S = <S_x, S_y, S_z>], where latexmath:[S_x], latexmath:[S_y] and latexmath:[S_z]
+respectively is a coefficient against each axis to extend or shrink the base representation from the local coordinate reference system
+to the UTM system.
+The quaternion takes the form of a vector latexmath:[Q = <X, Y, Z, W>], where latexmath:[X], latexmath:[Y] and latexmath:[Z] are coefficients
+defining an axis of rotation in an imaginary spherical space surrounding the moving feature,
+and latexmath:[W] is a scalar representation of the amount of rotation applied around the axis.
+At this point it should be noted that the latexmath:[X], latexmath:[Y] and latexmath:[Z] components of a quaternion are not the same as the components
+of a three-dimensional unit vector, nor is latexmath:[W] a direct representation of a rotation in degree.
+To convert Euler angles to quaternion form, defining the angle around the X-axis (roll) as latexmath:[\psi], the Y-axix (pitch) as latexmath:[\theta], and the Z-axis (yaw) as latexmath:[\phi].
+The quaternion latexmath:[Q] can then be calculated as follow:
+
+[latexmath]
++++++++++++
+[X = sin(\dfrac{\psi}{2})cos(\dfrac{\theta}{2})cos(\dfrac{\phi}{2}) - cos(\dfrac{\psi}{2})sin(\dfrac{\theta}{2})sin(\dfrac{\phi}{2})]
++++++++++++
+[latexmath]
++++++++++++
+[Y = cos(\dfrac{\psi}{2})sin(\dfrac{\theta}{2})cos(\dfrac{\phi}{2}) + sin(\dfrac{\psi}{2})cos(\dfrac{\theta}{2})sin(\dfrac{\phi}{2})]
++++++++++++
+[latexmath]
++++++++++++
+[Z = cos(\dfrac{\psi}{2})cos(\dfrac{\theta}{2})sin(\dfrac{\phi}{2}) - sin(\dfrac{\psi}{2})sin(\dfrac{\theta}{2})cos(\dfrac{\phi}{2})]
++++++++++++
+[latexmath]
++++++++++++
+[W = cos(\dfrac{\psi}{2})cos(\dfrac{\theta}{2})cos(\dfrac{\phi}{2}) + sin(\dfrac{\psi}{2})sin(\dfrac{\theta}{2})sin(\dfrac{\phi}{2})]
++++++++++++
+
+[#mf-orientation,reftext='{figure-caption} {counter:figure-num}']
+.The transformation of a 3D model by using the orientation matrices (Need to fix).
+image::mf-orientation.png[mf-orientation, pdfwidth=65%, width=65%, align="center"]
+
+include::requirements/requirements_premitive.adoc[]
+
+[#taggregate, reftext='7.5. TemporalAggregateGeometry Object']
+===== TemporalAggregateGeometry Object
+A TemporalAggregateGeometry object represents a set of TemporalPrimitiveGeometry objects.
+When a TemporalGeometry object has a `"type"` member with one of the value
+of `"MultiMovingPoint"`, `"MultiMovingLineString"`, `"MultiMovingPolygon"`, and `"MovingGeometryCollection"`,
+the object is specialized as a TemporalAggregateGeometry object with one additional *mandatory* member
+named `"prisms"`. The value of the `"prisms"` member is represented by
+a JSON array of a set of TemporalPrimitiveGeometry instances, having at least one element in the array.
+
+[source, javascript]
+{
+    "type": "MultiMovingPoint | MultiMovingLineString | MultiMovingPolygon" | "MovingGeometryCollection",  // (MANDATORY) vbar | as a means to select ONE type.
+    "prisms": [  //(MANDATORY)
+        {
+            "type": "MovingPoint | MovingLineString | MovingPolygon",  // (MANDATORY) vbar | as a means to select ONE type.
+            "datetimes" : [...],    //(MANDATORY)
+            "coordinates": [...],   //(MANDATORY)
+            "interpolation": [...], //(DEFAULT)
+            ...
+        },
+        ...
+    ],
+    "trs": {}, //(OPTIONAL)
+    "crs": {}  //(OPTIONAL)
+}
+
+* *MultiMovingPoint*: An element of the "prisms" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingPoint"`.
+The leaf geometry at a time position must be an instance of type "MultiPoint" of GeoJSON, which is the union of each leaf of moving point members at the same time.
+* *MultiMovingLineString*: An element of the "prisms" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingLineString"`.
+The leaf geometry at a time position must be an instance of type "MultiLineString" of GeoJSON, which is the union of each leaf of moving linestring members at the same time.
+* *MultiMovingPolygon*: An element of the "prisms" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingPolygon"`.
+The leaf geometry at a time position must be an instance of type "MultiPolygon" of GeoJSON, which is the union of each leaf of moving polygon members at the same time.
+* *MovingGeometryCollection*: Each element of "prisms" can be an TemporalPrimitiveGeometry with one of types of `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
+The leaf geometry at a time position must be an instance of type `"GeometryCollection"` of GeoJSON, which is the union of each leaf of any temporal geometries at the same time.
+
+
+include::requirements/requirements_aggregation.adoc[]
+
+//////////////
+<<appendix-b1>> shows examples of TemporalPrimitiveGeometry instances.
+<<appendix-b2>> shows examples of TemporalAggregateGeometry instances.
+//////////////

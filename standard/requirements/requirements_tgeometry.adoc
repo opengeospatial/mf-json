@@ -1,0 +1,8 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 2.4* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry +
+A TemporalGeometry object SHALL have at least one mandatory members of `"type"` and its value SHALL be one of
+string "MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".
+{set:cellbgcolor:#FFFFFF}
+|===

@@ -1,0 +1,100 @@
+=== MF-JSON Trajectory Encoding
+
+MF-JSON Trajectory specifies how to map/interpret linear trajectories of moving points into/from the *GeoJSON* https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]] object.
+It is based on the data model of _mf:MovingFeatures_ defined in http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC Moving Features XML Core].
+
+[NOTE]
+The _mf:MovingFeatures_ Class is implemented by _mf:Foliation_ including movements of moving points, which are instances of _mf:LinearTrajectory_.
+In XML Core, the _mf:LinearTrajectory_ Class is expressed by a single spatiotemporal segment with linear interpolation, having two elements of _gml:PosList_ and _mf:Attr_,
+as well as three attributes of _mfIdRef_, _start_, and _end_. The _mfIdRef_ attribute is the text specifying the moving feature (i.e. person ID, vehicle ID, etc.).
+The _start_ and _end_ attribute of _mf:LinearTrajectory_ describes the temporal offset from the _gml:beginPosition_ element in the _mf:sTBoundedBy_ Class.
+Two or more coordinate tuples are specified in _gml:posList_ and linearly interpolated from time _start_ to _end_.
+The _mf:Attr_ element contains the attribute information as a text. The values of the attributes are constant while the feature moves along the _mf:LinearTrajectory_.
+The detailed description refers to http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC Moving Features XML Core].
+
+Comparing to the segment-based encodings of http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC XML Core] and http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[CSV],
+MF-JSON Trajectory encodes a spatiotemporal linestring or a collection of linestrings to reduce the size of a GeoJSON document.
+The spatiotemporal linestring is a one-dimensional object representing a sequence of spatiotemporal points and the trajectory segments connecting them.
+The GeoJSON encoding rules of MF-JSON Trajectory are set as follows:
+
+* An MF-JSON Trajectory document presents an instance of the _mf:LinearTrajectory_ Class or a set of those instances as a GeoJSON FeatureCollection object.
+An _mf:LinearTrajectory_ instance is mapped into a GeoJSON Feature object with a linestring geometry;
+i.e., the value of member `"type"` in the Geometry object is "LineString".
+[NOTE]
+(GeoJSON) A Feature object represents a spatially bounded thing. A Feature object has, at least 3 members:
+a "type" member with the value "Feature", a "geometry" member, and a "properties" member.
+Geometry only has 2 members: "type" and "coordinates". The "type" value of geometry can
+be one of "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon", and "GeometryCollection".
+The GeoJSON extensibility is limited by the interpretation of the sentence in the IETF RFC 7946
+"Implementations MUST NOT extend the fixed set of GeoJSON types: FeatureCollection, Feature, Point, LineString, MultiPoint, Polygon,
+MultiLineString, MultiPolygon, and GeometryCollection."
+
+* The identifier of a moving feature (i.e., _mfIdRef_) is mapped into the member named `"id"` of the GeoJSON Feature object.
+[NOTE]
+(GeoJSON) If a Feature has a commonly used identifier, that identifier is included as a member of the Feature object with the name "id",
+and the value of this member is either a JSON string or number.
+
+* The value of the `"coordinates"` member of a linestring geometry object has two or more positions that draws a sequence of trajectory segments.
+Each position is each projection in spatial domain. All trajectory segments that have the same identifier are merged into a linestring geometry object
+as long as any consecutive segments meet each other at a time instant.
+[NOTE]
+(GeoJSON) A position is an array of numbers. There MUST be two or more elements. The first two elements are longitude and latitude, or easting and northing,
+precisely in that order and using decimal numbers. Altitude or elevation MAY be included as an optional third element.
+The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84)
+<<WGS84>> datum, with longitude and latitude units of decimal degrees.
+
+* The `"properties"` member of a GeoJSON Feature object has a member with the name `"datetimes"`. The value of the `"datetimes"` member is an array of a sequence of
+monotonic increasing time instants, having the same number of positions of the "coordinates" member. The value of a time instant is a JSON string
+encoded as a JSON string of https://www.iso.org/iso-8601-date-and-time-format.html[ISO 8601] field-based formats using Z (e.g., 2016-09-11T06:10:32Z)
+or incremental time as the number of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., 1465621816590).
+[NOTE]
+(GeoJSON) A Feature object has a member with the name "properties".  The value of the properties member is an object (any JSON object or a JSON null value).
+
+* If a Feature has any variable attribute by time and its value (i.e., _mf:AttrDef_ and _mf:Attr_),
+the attribute can be a member inside the `"properties"` member with the value of a JSON arrray,
+having one less than the number of positions of the `"coordinates"` member.
+
+* A set of _mf:LinearTrajectory_ instances is packed in the elements of the `"features"` member of a FeatureCollection object.
+[NOTE]
+(GeoJSON) A FeatureCollection object has a member with the name "features".  The value of "features" is a JSON array of Feature objects.
+It is possible for this array to be empty.
+
+
+<<mf-geojson>> illustrates an example of the MF-JSON Trajectory encoding corresponding to two moving points, as shown in <<mf-ogc>> to be replaceable with <<mf-xml>> and <<mf-csv>>.
+
+[#mf-geojson, reftext='{example-caption} {counter:example-num}']
+.Example {counter:example-num}: Example of the MF-JSON Trajectory encoding
+[source, javascript]
+{
+   "type": "FeatureCollection",
+   "features": [
+       {
+           "type": "Feature",
+           "id": "A",
+           "geometry": {
+               "type": "LineString",
+               "coordinates": [[11.0,2.0], [12.0,3.0], [10.0,3.0]]
+           },
+           "properties": {
+               "datetimes": ["2012-01-17T12:33:51Z", "2012-01-17T12:33:56Z", "2012-01-17T12:34:00Z"],
+               "state": ["walking","walking"],
+               "typecode": [1, 2]
+           }
+       },
+       {
+           "type": "Feature",
+           "id": "B",
+           "geometry": {
+               "type": "LineString",
+               "coordinates": [[10.0,2.0], [11.0,3.0]]
+           },
+           "properties": {
+               "datetimes": ["2012-01-17T12:33:51Z", "2012-01-17T12:34:00Z"],
+               "state": ["walking"],
+               "typecode": [2]
+           }
+       }
+   ]
+}
+
+include::requirements/requirements_trajectory.adoc[]

@@ -1,0 +1,102 @@
+[#crs, reftext='7.2.3']
+==== CoordinateReferenceSystem Object
+A coordinate reference system is usually comprised of two components: one coordinate system and one datum (reference frame).
+The IETF GeoJSON format recommends that the coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system,
+using the World Geodetic System 1984 (WGS 84)<<WGS84>> datum, with longitude and latitude units of decimal degrees.
+This is equivalent to the coordinate reference system identified by the http://spatialreference.org/ref/epsg/wgs-84[EPSG:4326] with the axis Lat-Long.
+For a 3D coordinate with an altitude/elevation value, the value refers to distance above mean sea level (MSL or AMSL).
+However, a moving feature needs a temporal coordinate system and may be described by an engineering or parametric coordinates
+in a certain application, such as robot or vessel navigation.
+Therefore, MF-JSON Prism allows the `"crs"` member to describe an alternative coordinate reference system
+whose representation follows the way as described in GeoJSON(2008)<<GJSON2008>>.
+Also it defines the `"trs"` member to describe a temporal coordinate reference system
+against which time is measured.
+
+* A non-null CoordinateReferenceSystem (CRS) object is a JSON object
+with two mandatory members of the name `"type"` and `"properties"`.
+* The value of the `"type"` member is a JSON string as one of the string `"name"` and `"link"`, indicating the type of CRS object.
+* The value of the `"properties"` member is a JSON object with three optional members
+named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON `null` value.
+* CRS shall not change coordinate ordering.
+
+Depending on the value of `"type"`, there are three expressions: Named CRS, Linked CRS, and Default CRS.
+
+===== Named CRS
+A Named CRS object indicates a coordinate reference system by name.
+In this case, the value of its `"type"` member is the string `"name"`.
+The value of its `"properties"` member is a JSON object containing a "name" member
+whose value is a string identifying a coordinate reference system (not JSON `null` value).
+The value of `"href"` and `"type"` is a JSON `null` value.
+
+[#namedcrs, reftext='{example-caption} {counter:example-num}']
+.Example {counter:example-num}: Example of a named CRS object
+[source, javascript]
+{
+  "type": "name",
+  "properties": {
+    "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+  }
+}
+
+===== Linked CRS
+A linked CRS object has one required member: `"href"` and one optional member: `"type"`.
+The value of the required `"href"` member is a dereferenceable URI.
+The value of the optional `"type"` member is a string that hints at the format
+used to represent CRS parameters at the provided URI.
+Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.
+
+[#linkedcrs, reftext='{example-caption} {counter:example-num}']
+.Example {counter:example-num}: Example of a linked CRS object
+[source, javascript]
+{
+  "type": "link",
+  "properties": {
+    "href": "http://example.com/crs/42",
+    "type": "proj4"
+  }
+}
+
+[#auxiliarycrs, reftext='{example-caption} {counter:example-num}']
+.Example {counter:example-num}: Example of a relative linked CRS object with an auxiliary file
+[source, javascript]
+{
+  "type": "link",
+  "properties": {
+    "href": "data.crs",
+    "type": "ogcwkt"
+  }
+}
+
+===== Default CRS
+
+MF-JSON Prism defines two default CRS objects for a spatial CRS and a temporal CRS as follows:
+
+* http://www.opengis.net/def/crs/OGC/1.3/CRS84[WGS 84] with longitude and latitude units of decimal degrees:
+This CRS object is the default value of the `"crs"` member.
+
+[source, javascript]
+-----
+    "crs" : {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+        }
+    }
+-----
+
+* http://www.iso.org/iso/home/standards/iso8601.htm[ISO 8601] of dates and times using the Gregorian calendar and 24 hour local or Coordinated Universal Time (UTC):
+This CRS object is the default value of the `"trs"` member.
+
+[source, javascript]
+-----
+    "trs" : {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:data:time:iso8601"
+        }
+    }
+-----
+
+A JSON `null` value of the `"crs"` and `"trs"` is considered as WGS 84 and ISO 8601, respectively.
+
+include::requirements/requirement_crs.adoc[]
