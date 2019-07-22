@@ -18,7 +18,7 @@ The number of elements in the array of the `"coordinates"` value in the Geometry
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 1.4* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/propeties +
 The value of member `"properties"` SHALL be a GeoJSON object that has at least a member with the named `"datetimes"`.
-The value of the "datetimes" member is a JSON array.
+The value of the `"datetimes"` member is a JSON array.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 1.5* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/datetimes +
 Each element in the array of the `"datetimes"` value SHALL be a Instant object

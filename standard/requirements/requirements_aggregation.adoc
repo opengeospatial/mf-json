@@ -2,32 +2,38 @@
 |===
 |*Requirement 2.11* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/aggregation +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+A TemporalAggregateGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
+The value of the `"type"` member SHALL be one of string "MultiMovingPoint", "MultiMovingLineString",
+"MultiMovingPolygon", and "MovingGeometryCollection".
+The value of the `"prisms"` member SHALL be a JSON array of a set of TemporalPrimitiveGeometry instances,
+having at least one element in the array.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.12* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/multimovingpoint +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+If the value of the `"type"` = `"MultiMovingPoint"`, an element of the `"prisms"` member
+SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingPoint"`.
+The leaf geometry at a time position must be an instance of type "MultiPoint" of GeoJSON,
+which is the union of each leaf of moving point members at the same time.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.13* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/multimovinglinestring +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+If the value of the `"type"` = `"MultiMovingLineString"`, an element of the `"prisms"` member
+SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingLineString"`.
+The leaf geometry at a time position must be an instance of type "MultiLineString" of GeoJSON,
+which is the union of each leaf of moving linestring members at the same time.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.14* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/multimovingpolygon +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+If the value of the `"type"` = `"MultiMovingPolygon"`, an element of the `"prisms"` member
+SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingPolygon"`.
+The leaf geometry at a time position must be an instance of type "MultiPolygon" of GeoJSON,
+which is the union of each leaf of moving polygon members at the same time.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.15* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movinggeometrycollection +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+If the value of the `"type"` = `"MovingGeometryCollection"`, each element of `"prisms"` can be an TemporalPrimitiveGeometry
+with one of types of `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
+The leaf geometry at a time position must be an instance of type `"GeometryCollection"` of GeoJSON,
+which is the union of each leaf of any temporal geometries at the same time.
 {set:cellbgcolor:#FFFFFF}
 |===

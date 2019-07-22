@@ -1,6 +1,6 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 2.#* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.16* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/prism/crs +
 A CoordinateReferenceSystem object SHALL have two mandatory members of `"type"` and `"properties"`
 to describe an instance of Named CRS, Linked CRS, or Default CRS.

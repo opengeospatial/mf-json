@@ -266,14 +266,15 @@ a JSON array of a set of TemporalPrimitiveGeometry instances, having at least on
     "crs": {}  //(OPTIONAL)
 }
 
-* *MultiMovingPoint*: An element of the "prisms" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingPoint"`.
-The leaf geometry at a time position must be an instance of type "MultiPoint" of GeoJSON, which is the union of each leaf of moving point members at the same time.
-* *MultiMovingLineString*: An element of the "prisms" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingLineString"`.
-The leaf geometry at a time position must be an instance of type "MultiLineString" of GeoJSON, which is the union of each leaf of moving linestring members at the same time.
-* *MultiMovingPolygon*: An element of the "prisms" member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingPolygon"`.
-The leaf geometry at a time position must be an instance of type "MultiPolygon" of GeoJSON, which is the union of each leaf of moving polygon members at the same time.
+* *MultiMovingPoint*: The type represents a trajectory of a set of time-parametered 0-dimensional (0D)
+geometric primitive (Point), representing a multi-position at a time position (instant) within its temporal domain.
+The leaf geometry at a time position is the union of each leaf of moving point members at the same time.
+* *MultiMovingLineString*: The type represents the prism of a set of time-parametered 1-dimensional (1D)
+geometric primitive (LineString), whose leaf geometry at a time position is the union of each leaf of moving linestring members at the same time.
+* *MultiMovingPolygon*: The type represents the prism of a set of time-parametered 2-dimensional (2D)
+geometric primitive (Polygon), whose leaf geometry at a time position is the union of each leaf of moving polygon members at the same time.
 * *MovingGeometryCollection*: Each element of "prisms" can be an TemporalPrimitiveGeometry with one of types of `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
-The leaf geometry at a time position must be an instance of type `"GeometryCollection"` of GeoJSON, which is the union of each leaf of any temporal geometries at the same time.
+The leaf geometry at a time position is the union of each leaf of any temporal geometries at the same time.
 
 
 include::requirements/requirements_aggregation.adoc[]
