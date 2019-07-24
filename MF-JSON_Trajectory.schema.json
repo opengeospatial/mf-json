@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/MF-JSON_Trajectory.schema.json",
+  "type": "object",
+  "title": "OGC Moving Feature JSON Trajecotry schema",
+  "required": [
+    "type",
+    "features"
+  ],
+  "properties": {
+    "type": {
+      "$id": "#/properties/type",
+      "type": "string",
+      "enum": ["FeatureCollection"],
+      "default": "FeatureCollection"
+    },
+    "features": {
+      "$id": "#/properties/features",
+      "type": "array",
+      "minItems": 1,
+      "items": [
+        {
+          "$id": "#/properties/features/feature",
+          "type": "object",
+          "required": [
+            "type",
+            "id",
+            "geometry",
+            "properties"
+          ],
+          "properties": {
+            "type": {
+              "$id": "#/properties/features/feature/type",
+              "type": "string",
+              "enum": ["Feature"],
+              "default": "Feature"
+            },
+            "id": {
+              "$id": "#/properties/features/feature/id",
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            },
+            "geometry": {
+              "$id": "#/properties/features/feature/geometry",
+              "type": "object",
+              "required": [
+                "type",
+                "coordinates"
+              ],
+              "properties": {
+                "type": {
+                  "$id": "#/properties/features/feature/geometry/type",
+                  "type": "string",
+                  "enum": ["LineString"],
+                  "default": "LineString"
+                },
+                "coordinates": {
+                  "$id": "#/properties/features/feature/geometry/coordinates",
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {
+                    "$id": "#/properties/features/feature/geometry/coordinates/coordinate",
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 3,
+                    "items": {
+                      "$id": "#/properties/features/feature/geometry/coordinates/coordinate/value",
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            },
+            "properties": {
+              "$id": "#/properties/features/feature/properties",
+              "type": "object",
+              "required": [
+                "datetimes"
+              ],
+              "properties": {
+                "datetimes": {
+                  "$id": "#/properties/features/feature/properties/datetimes",
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 2,
+                  "items": {
+                    "$id": "#/properties/features/feature/properties/datetimes/value",
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
