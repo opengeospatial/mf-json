@@ -8,6 +8,7 @@ The expression of an element in the array refers to the default temporal CRS obj
 -----
 ["2011-07-14T22:01:01Z", "2011-07-15T01:11:22Z"]
 -----
+include::requirements/requirement_lifespan.adoc[]
 
 [#bbox, reftext='7.2.7']
 ==== BoundingBox Object
@@ -21,7 +22,7 @@ The expression of an element in the array refers to the default spatial CRS obje
 -----
 [139.757083, 35.627483, 0.0, 139.757716, 35.627701, 4.5]
 -----
-
+include::requirements/requirement_bboxs.adoc[]
 
 [#geometry, reftext='7.2.8']
 ==== Geometry Object

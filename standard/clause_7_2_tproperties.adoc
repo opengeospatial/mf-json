@@ -71,3 +71,5 @@ a standard of measurement [ISO 19103:2015] or a URI denoting a unit-of-measure d
 This member is applied only for a temporal property whose value type is `measure`.
 
 * `"description"`: The `"description"` member is optional and its value is any string to describe a short description.
+
+include::requirements/requirements_tproperties.adoc[]

@@ -180,7 +180,7 @@ having the same number of elements of the `"datetimes"` value.
 It allows a JSON `null` value or an empty array
 if and only if the `"base"` member has a JSON `null` value.
 A transformation matrix is defined by a linear transformation
-from the local engineering coordinate reference system to the Universal Transverse Mercartor (UTM) system as a type of plane rectangular coordinate system.
+from the right-handed local engineering coordinate reference system to the Universal Transverse Mercartor (UTM) system as a type of plane rectangular coordinate system.
 A coordinate of the base 3D model, latexmath:[(x, y, z)], transforms into a target 3D coordinate,
 latexmath:[(x', y', z')], by using the quaternions and the scaling factors,
 latexmath:[(x, y, z) \rightarrow (x', y', z')], as follows:
@@ -235,7 +235,7 @@ The quaternion latexmath:[Q] can then be calculated as follow:
 +++++++++++
 
 [#mf-orientation,reftext='{figure-caption} {counter:figure-num}']
-.The transformation of a 3D model by using the orientation matrices (Need to fix).
+.The transformation of a 3D model by using the orientation matrices
 image::mf-orientation.png[mf-orientation, pdfwidth=65%, width=65%, align="center"]
 
 include::requirements/requirements_premitive.adoc[]
