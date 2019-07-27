@@ -1,0 +1,15 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 2.43* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time +
+A LifeSpan object SHALL be a JSON array to represent a time interval latexmath:[[t_s, t_e]].
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.44* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time/element +
+The elements in the array SHALL be two time instants of latexmath:[t_s, t_e] and latexmath:[t_s \leq t_e].
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.45* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time/crs +
+The expression of an element in the array SHALL refer to the default temporal CRS object (ISO 8601:2004).
+{set:cellbgcolor:#FFFFFF}
+|===

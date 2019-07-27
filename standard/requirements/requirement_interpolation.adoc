@@ -1,0 +1,26 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 2.49* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation +
+The `"coordinate"` member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
+The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be
+one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or a URL.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.50* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined +
+The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be
+a URL to address a user-defined parametric curve.
+A user-defined parametric curve SHALL be a JSON object which has two members of `"coefficients"` and `"time"`.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.51* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/coefficients +
+The value of `"coefficients"` member SHALL be a JSON array whose element is
+an array of coefficients of the interpolation formula of a temporal position.
+The order of arrays for the interpolation formula of a temporal position SHALL
+follow x (longitude), y (latitude), z (altitude) order.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.52* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/time +
+The expression of an element in the array SHALL refer to the default temporal CRS object (ISO 8601:2004).
+{set:cellbgcolor:#FFFFFF}
+|===
