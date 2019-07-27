@@ -53,7 +53,7 @@ where latexmath:[v] is a value of measurement and latexmath:[t] is its sampling 
 
 * `"interpolation"`: The temporal property also needs to define an interpolation method like the TemporalPrimitiveGeometry object.
 This standard defines the following interpolation methods for the temporal property by referring to http://docs.opengeospatial.org/is/15-042r3/15-042r3.html#75[InterpolationCode]
-defined in OGC http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[TimeseriesML 1.0].
+defined in OGC http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[TimeseriesML 1.0][OGC 15-042r3].
 
 [width="98%", cols="2,8", options="header"]
 |=========
@@ -71,3 +71,5 @@ a standard of measurement [ISO 19103:2015] or a URI denoting a unit-of-measure d
 This member is applied only for a temporal property whose value type is `measure`.
 
 * `"description"`: The `"description"` member is optional and its value is any string to describe a short description.
+
+include::requirements/requirements_tproperties.adoc[]

@@ -5,9 +5,7 @@
   "title": "OGC Moving Feature JSON Prism schema",
   "required": [
     "type",
-    "temporalGeometry",
-    "crs",
-    "trs"
+    "temporalGeometry"
   ],
   "properties": {
     "type": {
@@ -27,8 +25,7 @@
           "required": [
             "type",
             "datetimes",
-            "coordinates",
-            "interpolation"
+            "coordinates"
           ],
           "properties": {
             "type": {
@@ -72,7 +69,14 @@
                     "type": "array",
                     "minItems": 1,
                     "items": {
-                      "$ref": "#/properties/temporalGeometry/primitive/properties/coordinates/movingPoint/point"
+                      "$id": "#/properties/temporalGeometry/primitive/properties/coordinates/movingOtherPrimitive/points/point",
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 3,
+                      "items": {
+                        "$id": "#/properties/temporalGeometry/primitive/properties/coordinates/movingOtherPrimitive/points/point/coordinate",
+                        "type": "number"
+                      }
                     }
                   }
                 }
@@ -318,9 +322,7 @@
                   "$id": "#/properties/temporalProperties/temporalProperty/measure",
                   "type": "object",
                   "required": [
-                    "type",
-                    "values",
-                    "interpolation"
+                    "type"
                   ],
                   "properties": {
                     "type": {
@@ -356,8 +358,7 @@
                   "type": "object",
                   "required": [
                     "type",
-                    "values",
-                    "interpolation"
+                    "values"
                   ],
                   "properties": {
                     "type": {

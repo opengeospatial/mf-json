@@ -2,13 +2,13 @@
 
 This standard defines 2 requirements classes with URI:
 
-http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/req
-http://www.opengis.net/spec/movingfeatures/json/1.0/prism/req
+* http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory
+* http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism
 
 with two accompanying conformance classes with URI:
 
-http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/conf
-http://www.opengis.net/spec/movingfeatures/json/1.0/prism/conf
+* http://www.opengis.net/spec/movingfeatures/json/1.0/conf/trajectory
+* http://www.opengis.net/spec/movingfeatures/json/1.0/conf/prism
 
 Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document.
 The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified

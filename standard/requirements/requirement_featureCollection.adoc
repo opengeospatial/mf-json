@@ -1,0 +1,35 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 2.37* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection +
+A MovingFeatureCollection object SHALL be a GeoJSON FeatureCollection object that have
+at least a mandatory member with named `"features"`.
+The value of the `"features"` member SHALL be a JSON array whose element is a MovingFeature object.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.38* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/constraints +
+The number of elements in an array of the `"features"` value SHALL be more than 1.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.39* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/crs +
+The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
+If no CRS instance can be so acquired in a file, the default spatial CRS (and temporal CRS) SHALL be applied to the object.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.40* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/bbox +
+The value of the `"bbox"` member SHALL be a JSON array to represent a BoundingBox object.
+It SHALL be represented as a spatial coordinate range to cover all element instances of the collection.
+It allows a JSON null value.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.41* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/time +
+The value of the `"time"` member SHALL be a JSON array to represent a LifeSpan object.
+It SHALL be represented as a temporal coordinate range to cover all element instances of the collection.
+It allows a JSON null value.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.42* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/name +
+The value of the `"name"` member SHALL be a JSON string to indicate an alias of the collection.
+It allows a JSON null value.
+{set:cellbgcolor:#FFFFFF}
+|===

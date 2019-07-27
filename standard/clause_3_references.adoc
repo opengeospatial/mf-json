@@ -3,7 +3,7 @@ The following normative documents contain provisions that, through reference in 
 
 * OGC: https://portal.opengeospatial.org/files/?artifact_id=39049[OGC 08-015r2], _OGC Abstract Specifications - Topic 2 - Spatial referencing by coordinates_, version 4.0, 2010.
 * OGC: https://portal.opengeospatial.org/files/?artifact_id=37761[OGC 10-020], _OGC Abstract Specifications - Topic 2.1 - Spatial referencing by coordinates - Extension for Parametric Values_, version 1.0, 2014.
-* OGC: http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[OGC 15-042r3] ,_TimeseriesML 1.0 – XML Encoding of the Timeseries Profile of Observations and Measurements_, version 1.0, 2016.
+* OGC: http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[OGC 15-042r3],_TimeseriesML 1.0 – XML Encoding of the Timeseries Profile of Observations and Measurements_, version 1.0, 2016.
 * OGC: http://www.opengeospatial.org/standards/movingfeatures[OGC 14-083r2], _OGC Moving Features Encoding Part I: XML Core_, 2015.
 * OGC: http://www.opengeospatial.org/standards/movingfeatures[OGC 14-084r2], _OGC Moving Features Encoding Extension: Simple Comma Separated Values (CSV)_, 2015.
 * OGC: http://www.opengeospatial.org/standards/movingfeatures[OGC 16-120r3], _OGC Moving Features Access_, 2017.
@@ -14,6 +14,7 @@ The following normative documents contain provisions that, through reference in 
 * ISO: http://www.iso.org/iso/catalogue_detail?csnumber=26012[ISO 19108:2002] _Geographic Information - Temporal schema_, 2002.
 * ISO: http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008], _Geographic information - Schema for moving features_, 2008.
 * ISO/IEC: https://www.iso.org/standard/35343.html[ISO 11179-1:2004], _Information technology — Metadata registries (MDR) — Part 1: Framework_, 2004.
+* IETF: https://www.ietf.org/rfc/rfc3339.txt[IETF RFC 3339], _Date and Time on the Internet: Timestamps_, 2002.
 * IETF: https://www.ietf.org/rfc/rfc3986.txt[IETF RFC 3986], _Uniform Resource Identifier (URI): Generic Syntax_, 2005.
 * IETF: https://www.ietf.org/rfc/rfc7159.txt[IETF RFC 7159], _The JavaScript Object Notation (JSON) Data Interchange Format_, 2014.
 * IETF: https://www.ietf.org/rfc/rfc7464.txt[IETF RFC 7464], _JavaScript Object Notation (JSON) Text Sequences_, 2015.
