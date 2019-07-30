@@ -7,13 +7,13 @@ It bundles a collection of moving features into a logical abstraction with a cer
 .Example {counter:example-num}: Members of a MovingFeatureCollection object
 [source, javascript]
 {
-  "type": "FeatureCollection", //(mandatory)
-  "features": [...], //(mandatory)
-  "crs" : {...}, //(default)
-  "trs" : {...}, //(default)
-  "bbox": [...], //(optional)
-  "time": [...], //(optional)
-  "name": "..."  //(optional)
+  "type": "FeatureCollection", //(MANDATORY)
+  "features": [...], //(MANDATORY)
+  "crs" : {...}, //(DEFAULT)
+  "trs" : {...}, //(DEFAULT)
+  "bbox": [...], //(OPTIONAL)
+  "time": [...], //(OPTIONAL)
+  "label": "..."  //(OPTIONAL)
 }
 
 * A MovingFeatureCollection object has a mandatory member with the name `"type"` whose value is the `"FeatureCollection"` string.
@@ -28,7 +28,7 @@ for the spatial coordinate range and the temporal coordinate range of the life s
 all element instances of the collection respectively.
 The value of `"bbox"` and `"time"` is a BoundingBox object and a LifeSpan object, respectively.
 They allow a JSON `null` value.
-* A MovingFeatureCollection object may optionally have a `"name"` member with a JSON string value to indicate an alias of the collection.
+* A MovingFeatureCollection object may optionally have a `"label"` member with a JSON string value to indicate an alias of the collection.
 It allows a JSON `null` value.
 
 include::requirements/requirement_featureCollection.adoc[]

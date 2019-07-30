@@ -1,5 +1,6 @@
 {
     "type": "Feature",
+    "geometry": null,
     "properties": {
       "name": "car1",
       "state":"test1"

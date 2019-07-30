@@ -7,6 +7,7 @@
 :toc-placement!:
 :toclevels: 3
 :numbered:
+:sectnums:
 :sectanchors:
 :icons: font
 :source-highlighter: coderay
@@ -25,13 +26,13 @@ ifndef::backend-pdf[]
 |===
 |{set:cellbgcolor:#FFFFFF}
 |[big]*Open Geospatial Consortium*
-|Submission Date: <yyyy-mm-dd>
+|Submission Date: 2019-07-30
 |Approval Date:   <yyyy-mm-dd>
 |Publication Date:   <yyyy-mm-dd>
 |External identifier of this OGC® document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
-|Internal reference number of this OGC® document:    YY-nnnrx
+|Internal reference number of this OGC® document:    19-045
 |Version: n.n
-|Category: OGC® Implementation
+|Category: OGC® Implementation Standard
 |Editor: Kyoung-Sook KIM, Nobuhiro ISHIMARU
 |===
 
@@ -111,8 +112,10 @@ add or remove annexes after "A" as necessary
 ////
 include::annex-a.adoc[]
 
+////
 <<<
 include::annex-n.adoc[]
+////
 
 <<<
 ////

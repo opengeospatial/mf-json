@@ -28,23 +28,27 @@ The following symbols and abbreviated terms are used in this best practice paper
 
 [width="99%", cols="2,8"]
 |=========
-|API	| Application Program Interface
 |CRS	| Coordinate Reference Systems
-|CRUD | Create, Read, Update, Delete
 |CSV	| Comma Separated Values
-|HTTP	| Hypertext Transfer Protocol
 |IETF | Internet Engineering Task Force
 |ISO	| International Organization for Standardization
 |JSON | JavaScript Object Notation
-|OASIS|	Organization for the Advancement of Structured Information Standards
 |OGC	| Open Geospatial Consortium
-|REST | Representational State Transfer
 |UML  | Unified Modeling Language
 |URI  | Uniform Resource Identifiers
 |URL  | Uniform Resource Locators
-|WKT  |	Well Known Text
 |XML	| Extensible Markup Language
 |1D   | One Dimensional
 |2D	  | Two Dimensional
 |3D	  | Three Dimensional
 |=========
+
+
+/////////
+|API	| Application Program Interface
+|CRUD | Create, Read, Update, Delete
+|HTTP	| Hypertext Transfer Protocol
+|OASIS|	Organization for the Advancement of Structured Information Standards
+|REST | Representational State Transfer
+|WKT  |	Well Known Text
+/////////

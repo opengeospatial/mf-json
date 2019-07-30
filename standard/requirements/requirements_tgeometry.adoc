@@ -10,6 +10,6 @@ string "MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud",
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/crs +
 The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
 If no CRS instance can be so acquired from upper-level braces of a JSON object,
-the default spatial CRS (and temporal CRS) SHALL be applied.
+the default spatial and temporal CRS SHALL be applied for the `"crs"` and `"trs"` member, respectively.
 {set:cellbgcolor:#FFFFFF}
 |===

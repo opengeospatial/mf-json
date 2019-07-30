@@ -10,7 +10,7 @@ If an application focuses on only the linear movement (i.e., the spatiotemporal 
 based on World Geodetic System 1984, with longitude and latitude units of decimal degrees,
 the application can share the trajectory data by using *only* GeoJSON, called *MF-JSON Trajectory*.
 For other cases, *MF-JSON Prism* can be used for expressing more complex movements of moving features.
-*MF-JSON Prism* is an extension of GeoJSON formats reserving new members of JSON objects (`"temporalGeometry", "temporalProperties", "crs", "trs", and "time"`) as "foreign members"
+*MF-JSON Prism* is an extension of GeoJSON formats reserving new members of JSON objects (`"temporalGeometry", "temporalProperties", "crs", "trs", "time"`, and etc.) as "foreign members"
 to represent spatiotemporal geometries, variations of measure, coordinate reference systems, and the time interval of moving features in the GeoJSON document.
 <<mf-encodings>> presents the overview of two forms of Moving Features JSON encodings.
 
@@ -22,7 +22,7 @@ image::mf-encodings.png[mf-encodings, pdfwidth=65%, width=65%, align="center"]
 .Coordinate Reference System (CRS)
 The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees.
 However, a moving feature needs a temporal coordinate system and may require an engineering coordinate reference system or parametric coordinate reference system
-to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes "crs" field as described in GeoJSON(2008)[[GEOJSON]].
+to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON(2008)[[GEOJSON]].
 
 TIP: The existing GeoJSON implementation can ignore the new members of "temporalGeometry", "temporalProperties", "trs", and "time" in an MF-JSON document
 if there is no processing module for foreign members. Accordingly, MF-JSON is compatible with the GeoJSON encoding.

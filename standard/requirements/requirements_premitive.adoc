@@ -56,9 +56,9 @@ The value of the `"base"` member SHALL be a URL to address an OBJ file of a 3D m
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.15* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations +
+The value of the `"orientations"` member SHALL be a JSON array to represent a transformation matrix.
+The size of the element in array of the `"orientations"` value SHALL be latexmath:[16] (latexmath:[4 \times 4]).
 The `"orientations"` member SHALL be accompanied with the `"base"` member.
-The element in array of the `"orientations"` value SHALL be a transformation matrix.
-The size of the element in array of the `"orientations"` value SHALL be 16.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.16* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/crs +

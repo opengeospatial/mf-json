@@ -44,9 +44,9 @@ The coordinate reference system for all GeoJSON coordinates is a geographic coor
 <<WGS84>> datum, with longitude and latitude units of decimal degrees.
 
 * The `"properties"` member of a GeoJSON Feature object has a member with the name `"datetimes"`. The value of the `"datetimes"` member is an array of a sequence of
-monotonic increasing time instants, having the same number of positions of the "coordinates" member. The value of a time instant is a JSON string
-encoded as a JSON string of https://www.iso.org/iso-8601-date-and-time-format.html[ISO 8601] field-based formats using Z (e.g., 2016-09-11T06:10:32Z)
-or incremental time as the number of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., 1465621816590).
+monotonic increasing time instants, having the same number of positions of the "coordinates" member. The value of a time instant is a JSON string using Z (e.g., 1985-04-12T23:20:50.52Z)
+encoded by https://www.ietf.org/rfc/rfc3339.txt[IETF RFC 3339], an Internet profile of the https://www.iso.org/iso-8601-date-and-time-format.html[ISO 8601] standard
+for representation of dates and times using the Gregorian calendar, or a numeric value of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., 1465621816590).
 [NOTE]
 (GeoJSON) A Feature object has a member with the name "properties".  The value of the properties member is an object (any JSON object or a JSON null value).
 
