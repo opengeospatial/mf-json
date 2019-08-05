@@ -63,7 +63,7 @@ Each method interpolates (or extrapolates) from sample values as follows.
 [width="98%", cols="2,8", options="header"]
 |=========
 | Names | Descriptions
-| Discrete| The sampling of the attribute occurs such that it is not possible to regard the series as continuous; Thus, there is no interplated value if latexmath:[t] is not an element in `"datetimes"`.
+| Discrete| The sampling of the attribute occurs such that it is not possible to regard the series as continuous; Thus, there is no interpolated value if latexmath:[t] is not an element in `"datetimes"`.
 | Step| The values are not connected at the end of a subinterval with two successive instants. The value just jumps from one value to the other at the end of a subinterval.
 | Linear | The values are essentially connected and a linear interpolation estimates the value of the property at the indicated instant during a subinterval.
 | Regression | The value of the attribute at the indicated instant is extrapolated from a simple linear regression model with the whole values corresponding to the all elements in "datetimes".

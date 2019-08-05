@@ -14,7 +14,7 @@ A JSON object in an MF-JSON Prism file SHALL be encoded by one of the Object typ
 MovingFeature, MovingFeatureCollection, LifeSpan, BoundingBox, Geometry, Properties, and MotionCurve.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.3* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/conflict +
-The MF-JSON Prism format SHALL be taken precedence has priority over MF-JSON Trajectory.
+The MF-JSON Prism format SHALL be taken priority over MF-JSON Trajectory.
 {set:cellbgcolor:#FFFFFF}
 |===
 

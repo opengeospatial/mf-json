@@ -14,7 +14,7 @@ The TemporalGeometry object is spefified with additional members depending upon 
 * The value of the `"crs"` and `"trs"` member is a JSON object to represent a CoordinateReferenceSystem (CRS) object (see <<crs>>).
 If an object has no `"crs"` and `"trs"` member, then it may acquire the CRS instances of
 the `"crs"` and `"trs"` member from upper-level braces of a JSON object.
-If no CRS instance can be so acquired in a file, the TemporalGeometry object assumes the default CRSs.
+If no CRS instance can be so acquired in a file, the TemporalGeometry object assumes the default CRSs (see 7.2.3.3).
 
 [#tgeometryjson, reftext='{example-caption} {counter:example-num}']
 .Example {counter:example-num}: Common members of a TemporalGeometry object
@@ -164,13 +164,13 @@ The detail interpretation and representation of method is described in <<interpo
 If the TemporalPrimitiveGeometry object has no member with the name `"interpolation"`,
 it is interpreted by `"Linear"`.
 
-* `"base"`: The `"base"` member is optional and it value is a URL to address an OBJ<<OBJ>>
+* `"base"`: The `"base"` member is optional and its value is a URL to address an OBJ<<OBJ>>
 file of a 3D model data. It allows a JSON `null` value.
 The 3D model represents a base geometry of a 3D rigid shape, and
 the combination of the `"base"` and `"orientations"` members represents a 3D temporal geometry
 of the MF_RigidTemporalGeometry type in ISO 19141. In MF-JSON Prism, the 3D model is transformed
 into the fixed local coordinate reference system whose bound is *-0.5 to 0.5* for each axis concerning the right-handed local engineering coordinate reference syste
-and unit is *meter*. The origin of the local coordinate reference system is 0 for each axis is transformed
+and unit is *meter*. The origin of the local coordinate reference system is 0 for each axis and is transformed
 into the centroid of each leaf geometry of a temporal geometry.
 
 * `"orientations"`:  The `"orientations"` member is optional and always accompanied

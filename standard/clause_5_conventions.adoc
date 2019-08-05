@@ -1,6 +1,6 @@
 == Conventions
 This sections provides details and examples for any conventions used in the document.
-Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+Examples of conventions are symbols, abbreviations, or special notes regarding how to read the document.
 
 === Identifiers
 The normative provisions in this specification are denoted by the URI
@@ -24,7 +24,7 @@ Unified Modeling Language (UML) static structure diagrams appearing in this docu
 
 === Abbreviated terms
 
-The following symbols and abbreviated terms are used in this best practice paper:
+The following symbols and abbreviated terms are used in this standard:
 
 [width="99%", cols="2,8"]
 |=========
@@ -38,6 +38,7 @@ The following symbols and abbreviated terms are used in this best practice paper
 |URI  | Uniform Resource Identifiers
 |URL  | Uniform Resource Locators
 |XML	| Extensible Markup Language
+|0D   | Zero Dimensional
 |1D   | One Dimensional
 |2D	  | Two Dimensional
 |3D	  | Three Dimensional

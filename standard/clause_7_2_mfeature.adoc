@@ -26,7 +26,7 @@ If a GeoJSON document has no foreign member defined in this specification,
 applications can interpret the data by the semantics of GeoJSON members and types.
 
 * A MovingFeature object has a mandatory member with the name `"temporalGeometry"`
-and its value is a TemporalGeometry object as defined below (see <<tgeometry>>).
+and its value is a TemporalGeometry object as defined above (see <<tgeometry>>).
 * A MovingFeature object has an optional member with the name `"temporalProperties"`
 as additional dynamic non-spatial attributes whose value varies over time.
 The `"temporalProperties"` member has a TemporalProperties object as defined in <<tproperties>> or a JSON `null` value.

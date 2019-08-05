@@ -5,9 +5,9 @@
 [NOTE]
 Ensure that there is a conformance class for each requirements class and a test for each requirement (identified by requirement name and number)
 
-=== A.1 Conformance Test Class: MF-JSON Trajectory Encoding
+=== Conformance Test Class: MF-JSON Trajectory Encoding
 
-==== A.1.1 MF-JSON Trajectory file
+==== MF-JSON Trajectory file
 A MF-JSON Trajectory file SHALL contain a LinearTrajectory object or a set of LinearTrajectory objects having a compliance with the IETF GeoJSON specification.
 [cols=">20h,<80a",width="100%"]
 |===
@@ -17,7 +17,7 @@ A MF-JSON Trajectory file SHALL contain a LinearTrajectory object or a set of Li
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.1.2 LinearTrajectory object
+==== LinearTrajectory object
 A LinearTrajectory object SHALL be a GeoJSON Feature object that has two MANDATORY members of `"geometry"` and `"properties"`.
 The value of the `"geometry"` member SHALL be a LineString Geometry object, having `"type"` = `"LineString"`.
 The value of the `"properties"` member SHALL be a GeoJSON object that has at least a member with the named `"datetimes"`.
@@ -34,7 +34,7 @@ The number of elements in the array of the `"coordinates"` value in the Geometry
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.1.3 Datetimes
+==== Datetimes
 Each element in the array of the `"datetimes"` value SHALL be a instant object.
 An instant object is only a JSON string encoded by ISO 8601 field-based formats using `Z` or the number of milliseconds since midnight (00:00 a.m.) on January 1, 1970, in UTC.
 The array of the `"datetimes"` value SHALL be a monotonic increasing sequence.
@@ -49,7 +49,7 @@ There is no instant object that has the same value as any other element.
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.1.4 Constraints
+==== Constraints
 The number of elements in both arrays of the `"coordinates"` value and the `"datetimes"` value SHALL be equal.
 [cols=">20h,<80a",width="100%"]
 |===
@@ -59,9 +59,9 @@ The number of elements in both arrays of the `"coordinates"` value and the `"dat
 |Test method: | Inspect the document to verify the above.
 |===
 
-=== A.2 Conformance Test Class: MF-JSON Prism Encoding
+=== Conformance Test Class: MF-JSON Prism Encoding
 
-==== A.2.1 MF-JSON Prism file
+==== MF-JSON Prism file
 A MF-JSON Prism file SHALL be compatible with the IETF GeoJSON Format.
 A JSON object in an MF-JSON Prism file SHALL be encoded by one of the Object types defined in this standard,
 i.e., TemporalGeometry, TemporalProperties, CoordinateReferenceSystem, MovingFeature, MovingFeatureCollection, LifeSpan, BoundingBox, Geometry, Properties, and MotionCurve.
@@ -75,7 +75,7 @@ i.e., TemporalGeometry, TemporalProperties, CoordinateReferenceSystem, MovingFea
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.2 Conflict
+==== Conflict
 Two encodings of MF-JSON Prism and MF-JSON Trajectory SHALL be not able to coexist with each other in a GeoJSON Feature object.
 [cols=">20h,<80a",width="100%"]
 |===
@@ -85,7 +85,7 @@ Two encodings of MF-JSON Prism and MF-JSON Trajectory SHALL be not able to coexi
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.3 TemporalGeometry object
+==== TemporalGeometry object
 A TemporalGeometry object SHALL have at least a mandatory member with the named `"type"` and its value SHALL be one of string
 "MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".
 The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
@@ -100,7 +100,7 @@ If no CRS instance can be so acquired from upper-level braces of a JSON object, 
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.4 TemporalPrimitiveGeometry object
+==== TemporalPrimitiveGeometry object
 A TemporalPrimitiveGeometry object SHALL have at least three mandatory members of `"type"`, `"datetimes"`, and `"coordinates"`.
 The value of the `"type"` member SHALL be one of string "MovingPoint", "MovingLineString", "MovingPolygon", and "MovingPointCloud".
 The value of the `"datetimes"` member SHALL be a JSON array of a sequence of monotonic increasing instants, having at least one element that is not `null`.
@@ -123,7 +123,7 @@ The number of elements in both arrays of the `"orientations"` value and the `"da
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.5 TemporalPrimitiveGeometry object type
+==== TemporalPrimitiveGeometry object type
 A MovingPoint object SHALL have the value of the `"type"` = `"MovingPoint"` and the value of the `"coordinates"` member SHALL be a list of Point coordinates to construct a 0D leaf geometry (point) corresponding to each instant in order.
 A MovingLineString object SHALL have the value of the `"type"` = `"MovingLineString"` and the value of the `"coordinates"` member SHALL be a list of LineString coordinate arrays to construct a 1D leaf geometry (linestring) corresponding to each instant in order.
 A MovingPolygon object SHALL have the value of the `"type"` = `"MovingPolygon"` and the value of the `"coordinates"` member SHALL be a list of Polygon coordinate arrays to construct a 2D leaf geometry (polygon) corresponding to each instant in order.
@@ -140,7 +140,7 @@ A MovingPointCloud object SHALL have the value of the `"type"` = `"MovingPointCl
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.6 3D model
+==== 3D model
 The 3D model SHALL be transformed into the fixed local coordinate reference system whose bound is -0.5 to 0.5 for each axis and unit is meter.
 The coordinate reference system for the 3D model SHALL be a right-handed coordinate system.
 The value of the `"base"` member SHALL be a URL to address an OBJ file of a 3D model data.
@@ -158,7 +158,7 @@ The `"orientations"` member SHALL be accompanied with the `"base"` member.
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.7 TemporalAggregateGeometry object
+==== TemporalAggregateGeometry object
 A TemporalAggregateGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
 The value of the `"type"` member SHALL be one of string "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".
 The value of the `"prisms"` member SHALL be a JSON array of a set of TemporalPrimitiveGeometry instances, having at least one element in the array.
@@ -174,7 +174,7 @@ If no CRS instance can be so acquired from upper-level braces of a JSON object, 
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.8 TemporalAggregateGeometry object type
+==== TemporalAggregateGeometry object type
 A TemporalAggregateGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
 A MultiMovingPoint object SHALL have the value of the `"type"` = `"MultiMovingPoint"` and an element of the `"prisms"` member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingPoint"`.
 The leaf geometry at a time position must be an instance of type `"MultiPoint"` of GeoJSON, which is the union of each leaf of moving point members at the same time.
@@ -196,7 +196,7 @@ The leaf geometry at a time position must be an instance of type `"GeometryColle
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.8 TemporalProperties object
+==== TemporalProperties object
 A TemporalProperties object SHALL be a JSON array of ParametricValues objects.
 A ParametricValues object SHALL have at least a mandatory member with the named `"datetimes"`
 and more than one member with the name latexmath:[@propertyN],
@@ -211,7 +211,7 @@ where latexmath:[@propertyN] is any string defined by an application as a tempor
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.9 latexmath:[@propertyN] object
+==== latexmath:[@propertyN] object
 A latexmath:[@propertyN] object SHALL have at least two mandatory members of `"type"` and `"values"`.
 The value of the `"type"` member SHALL be one of string "measure", "text", and "image".
 The value of the `"values"` member SHALL be a JSON array whose element is a string (including null, true and false) or numeric value.
@@ -231,7 +231,7 @@ The number of elements in both arrays of the `"datetimes"` value and the `"value
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.10 CoordinateReferenceSystem object
+==== CoordinateReferenceSystem object
 A CoordinateReferenceSystem object SHALL have two mandatory members of `"type"` and `"properties"`.
 The value of the `"type"` member SHALL be one of string "name" and "link".
 The value of the `"properties"` member SHALL be a JSON object with three optional members named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON null value.
@@ -248,7 +248,7 @@ A linked CRS object SHALL have the value of the `"type"` = `"link"` and the valu
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.11 MovingFeature object
+==== MovingFeature object
 A MovingFeature object SHALL be a GeoJSON Feature object that have two mandatory members of `"type"` and `"temporalGeometry"`.
 The value of the `"type"` member SHALL be a `"Feature"` string.
 The value of the `"temporalGeometry"` member SHALL be a JSON object to represent a TemporalGeometry object, not allowing the JSON `null`.
@@ -274,7 +274,7 @@ If no CRS instance can be so acquired in a file, the default spatial CRS (and te
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.12 MovingFeatureCollection object
+==== MovingFeatureCollection object
 A MovingFeatureCollection object SHALL be a GeoJSON FeatureCollection object that have two mandatory members of `"type"` and `"features"`.
 The value of the `"type"` member SHALL be a `"FeatureCollection"` string.
 The value of the `"features"` member SHALL be a JSON array whose element is a MovingFeature object.
@@ -298,7 +298,7 @@ The number of elements in an array of the `"features"` value SHALL be more than 
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.13 LifeSpan object
+==== LifeSpan object
 A LifeSpan object SHALL be a JSON array to represent a time interval with two instants of latexmath:[t_s] and latexmath:[t_e].
 Two elements of latexmath:[t_s, t_e] SHALL be latexmath:[t_s \leq t_e].
 The expression of an element in the array SHALL refer to the default temporal CRS object (ISO8601).
@@ -313,7 +313,7 @@ The expression of an element in the array SHALL refer to the default temporal CR
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.14 BoundingBox object
+==== BoundingBox object
 A BoundingBox object SHALL be a JSON array of length latexmath:[2*n] where latexmath:[n] is the number of dimensions represented in the spatial bounding box.
 The elements in the array SHALL be two coordinates (lower-bound coordinate and upper-bound coordinate).
 The order of values SHALL follow the axes order of single position of longitude, latitude, and elevation.
@@ -329,7 +329,7 @@ The expression of an element in the array SHALL refer to the default spatial CRS
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== A.2.15 MotionCurve object
+==== MotionCurve object
 The `"coordinate"` member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
 The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or
 a URL to address a user-defined parametric curve. A user-defined parametric curve SHALL be a JSON object which has three members of `"crs"`, `"trs"`, and `"equations"`.
