@@ -158,40 +158,21 @@ The `"orientations"` member SHALL be accompanied with the `"base"` member.
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== TemporalAggregateGeometry object
-A TemporalAggregateGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
-The value of the `"type"` member SHALL be one of string "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".
+==== TemporalComplexGeometry object
+A TemporalComplexGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
+The value of the `"type"` member SHALL be a "MovingGeometryCollection" string.
 The value of the `"prisms"` member SHALL be a JSON array of a set of TemporalPrimitiveGeometry instances, having at least one element in the array.
 The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
 If no CRS instance can be so acquired from upper-level braces of a JSON object, the default spatial CRS (and temporal CRS) SHALL be applied.
-[cols=">20h,<80a",width="100%"]
-|===
-|Test id: | conf/prism/tgeometry/aggregation
-|Requirement: |
-* req/prism/tgeometry/aggregation
-* req/prism/tgeometry/aggregation/crs
-|Test purpose: | Verify that this requirement is satisfied.
-|Test method: | Inspect the document to verify the above.
-|===
-
-==== TemporalAggregateGeometry object type
-A TemporalAggregateGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
-A MultiMovingPoint object SHALL have the value of the `"type"` = `"MultiMovingPoint"` and an element of the `"prisms"` member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingPoint"`.
-The leaf geometry at a time position must be an instance of type `"MultiPoint"` of GeoJSON, which is the union of each leaf of moving point members at the same time.
-A MultiMovingLineString object SHALL have the value of the `"type"` = `"MultiMovingLineString"` and an element of the `"prisms"` member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingLineString"`.
-The leaf geometry at a time position must be an instance of type `"MultiLineString"` of GeoJSON, which is the union of each leaf of moving linestring members at the same time.
-A MultiMovingPolygon object SHALL have the value of the `"type"` = `"MultiMovingPolygon"` and an element of the `"prisms"` member SHALL be a JSON array of TemporalPrimitiveGeometry instances of type `"MovingPolygon"`.
-The leaf geometry at a time position must be an instance of type `"MultiPolygon"` of GeoJSON, which is the union of each leaf of moving polygon members at the same time.
 A MovingGeometryCollection object SHALL the value of the `"type"` = `"MovingGeometryCollection"` and each element of `"prisms"` SHALL be an TemporalPrimitiveGeometry with one of types of `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
 The leaf geometry at a time position must be an instance of type `"GeometryCollection"` of GeoJSON, which is the union of each leaf of any temporal geometries at the same time.
 [cols=">20h,<80a",width="100%"]
 |===
-|Test id: | conf/prism/tgeometry/aggregation/type
+|Test id: | conf/prism/tgeometry/complex
 |Requirement: |
-* req/prism/tgeometry/aggregation/multimovingpoint
-* req/prism/tgeometry/aggregation/multimovinglinestring
-* req/prism/tgeometry/aggregation/multimovingpolygon
-* req/prism/tgeometry/aggregation/movinggeometrycollection
+* req/prism/tgeometry/complex
+* req/prism/tgeometry/complex/crs
+* req/prism/tgeometry/complex/movinggeometrycollection
 |Test purpose: | Verify that this requirement is satisfied.
 |Test method: | Inspect the document to verify the above.
 |===

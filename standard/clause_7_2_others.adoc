@@ -4,8 +4,9 @@ A LifeSpan object is a JSON array of two strings encoded by https://www.ietf.org
 to represent a time interval latexmath:[[t_s, t_e]] and latexmath:[t_s \leq t_e].
 Namely, its expression of an element in the array refers to the default temporal CRS object, i.e., ISO8601.
 
+[#timeExam, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: An example of LifeSpan object with ISO 8601:2004
 [source]
-.Example {counter:example-num}: An example of LifeSpan object with ISO 8601:2004
 -----
 ["2011-07-14T22:01:01Z", "2011-07-15T01:11:22Z"]
 -----
@@ -18,8 +19,9 @@ is the number of dimensions represented in the spatial bounding box.
 The order of values follows the axes order of single position of longitude, latitude, and elevation.
 The expression of an element in the array refers to the default spatial CRS object, i.e., WGS84.
 
+[#bboxExam, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: An example of BoundingBox object with WGS 84
 [source]
-.Example {counter:example-num}: An example of BoundingBox object with WGS 84
 -----
 [139.757083, 35.627483, 0.0, 139.757716, 35.627701, 4.5]
 -----

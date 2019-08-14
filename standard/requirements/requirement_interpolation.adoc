@@ -1,23 +1,23 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 2.50* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.48* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation +
 The `"coordinate"` member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
 The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be
 one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or a URL.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.51* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.49* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined +
 A URL to address a user-defined parametric curve SHALL address a JSON document containing a JSON object, which has three members with name
 `"crs"`, `"trs"`, and `"equations"`. The value of the `"crs"` and `"trs"` member SHALL be a spatial and temporal CRS object, respectively.
 The value of the `"equations"` member SHALL be not empty and be a JSON array whose element is a user-defined parametric segment having two members of `"coefficients"` and `"time"`.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.52* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.50* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/coefficients +
 The value of `"coefficients"` member SHALL be a JSON array whose element is an array of coefficients of the interpolation formula of a temporal position.
 The order of elements in array of the `"coefficients"` value for the interpolation formula of a temporal position SHALL follow the order of the spatial CRS.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.53* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.51* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/time +
 The expression of an element in the array of the `"time"` value SHALL refer to the temporal CRS object.
 {set:cellbgcolor:#FFFFFF}

@@ -3,7 +3,7 @@
 A coordinate reference system (CRS) is usually comprised of two components: one coordinate system and one datum (reference frame).
 The IETF GeoJSON format recommends that the CRS for all GeoJSON coordinates is a geographic coordinate reference system,
 using the World Geodetic System 1984 (WGS 84)<<WGS84>> datum, with longitude and latitude units of decimal degrees.
-This is equivalent to the CRS identified by the http://spatialreference.org/ref/epsg/wgs-84[EPSG:4326] with the axis Lat-Long.
+This is equivalent to the CRS identified by the http://www.epsg-registry.org/?display=entity&urn=urn:ogc:def:crs:EPSG::4326[EPSG:4326] with the axis Lat-Long.
 For a 3D coordinate with an altitude/elevation value, the value refers to distance above mean sea level (MSL or AMSL).
 However, a moving feature needs a temporal coordinate system and may be described by an engineering or parametric coordinates
 in a certain application, such as robot or vessel navigation.
@@ -27,7 +27,7 @@ whose value is a string identifying a coordinate reference system (not JSON `nul
 The value of `"href"` and `"type"` is a JSON `null` value.
 
 [#namedcrs, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: Example of a named CRS object
+.Example {example-num}: Example of a named CRS object
 [source, javascript]
 {
   "type": "name",
@@ -44,7 +44,7 @@ used to represent CRS parameters at the provided URI.
 Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.
 
 [#linkedcrs, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: Example of a linked CRS object
+.Example {example-num}: Example of a linked CRS object
 [source, javascript]
 {
   "type": "link",
@@ -55,7 +55,7 @@ Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.
 }
 
 [#auxiliarycrs, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: Example of a relative linked CRS object with an auxiliary file
+.Example {example-num}: Example of a relative linked CRS object with an auxiliary file
 [source, javascript]
 {
   "type": "link",

@@ -9,7 +9,7 @@ A leaf represents the geometry of the moving feature at a particular value of th
 a trajectory is a curve that represents the path of a point in the geometry of the moving feature as it moves with respect to the parameter (e.g., time).
 
 [#mf-concept,reftext='{figure-caption} {counter:figure-num}']
-.Feature Movement: Trajectory, Leaf, Foliation, and Prism [ISO 19141:2008]
+.Feature Movement: trajectory, leaf, foliation, and prism [ISO 19141:2008]
 image::mf-concept.png[Conceptual Moving Feature, pdfwidth=60%, width=60%, align="center"]
 
 In the illustration above, a 2D rectangle moves, rotates, and shrink through time.
@@ -26,13 +26,13 @@ or feature collection in a JSON document as follows:
 * _Temporal property_: The thematic change over time, representing the variation of the value of any descriptive characteristic of a feature.
 
 The JSON encodings provide an alternative to the OGC(R) Moving Features Encodings XML Core http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[[OGC 14-083r2]] and
-Simple Comma Separated Values (CSV) http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[[OGC 14-084r2]] standards by using GeoJSON https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]].
+Simple Comma Separated Values (CSV) http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[[OGC 14-084r2]] standards by using IETF GeoJSON https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]].
 Moreover, it can encompass the movement of 1-dimensional, 2-dimensional, 3-dimensional geometric primitives, and their aggregation, as well as moving points and their trajectories.
-For exmaple, the representation of the following phenomena in a spatiotemporal domain is scope of this specification:
+For example, the representation of the following phenomena in a spatiotemporal domain is scope of this specification:
 
 * _Discrete phenomena_, which exist only on a set of instants, such as road accidents;
 * _Stepwise phenomena_, where the changes of locations are abrupt at an instant, such as administrative boundaries;
 * _Continuous phenomena_, whose locations move continuously for a period in time, such as vehicles, typhoons, or floods.
 
-This specification does not address partial motions of parts of bodies and the dimensonal deformation of the feature (e.g., from 1-d geometry to 0-d geometry).
+This specification does not address partial motions of parts of bodies in a primitive movement and the dimensional deformation of the feature (e.g., from 1-d geometry to 0-d geometry).
 Also the succession of either features or their association is out of scope in this specification.

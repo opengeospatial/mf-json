@@ -17,7 +17,7 @@ the `"crs"` and `"trs"` member from upper-level braces of a JSON object.
 If no CRS instance can be so acquired in a file, the TemporalGeometry object assumes the default CRSs (see 7.2.3.3).
 
 [#tgeometryjson, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: Common members of a TemporalGeometry object
+.Example {example-num}: Common members of a TemporalGeometry object
 [source, javascript]
 {
   "type": "...", //(MANDATORY)
@@ -43,7 +43,7 @@ the object is specialized as a TemporalPrimitiveGeometry object with.
 /////////////
 
 [#tprimitivejson, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: Members of a TemporalPrimitiveGeometry Object
+.Example {example-num}: Members of a TemporalPrimitiveGeometry Object
 [source, javascript]
 {
   // vbar | as a means to select ONE type.
@@ -67,21 +67,21 @@ for the interpretation of the array value of the "coordinates" member. Each type
 | Types   |    Description
 | MovingPoint |  The type represents a trajectory of a time-parametered 0-dimensional (0D) geometric primitive (Point),
 representing a single position at a time position (instant) within its temporal domain.
-Intuitively a temporal geometry of this type depicts a curve in a spatiotemporal domain.
+Intuitively a temporal geometry of a continuous movement of point depicts a set of curves in a spatiotemporal domain.
 It supports more complex movements of moving features, as well as linear movement like MF-JSON Trajectory.
 For example, the non-linear movement information of people, vehicles, or hurricanes can
 be shared as a TemporalPrimitiveGeometry object with the `"MovingPoint"` type.
 | MovingLineString | The type represents the prism of a time-parametered 1-dimensional (1D) geometric primitive (LineString),
 whose leaf geometry at a time position is a 1D linear object in a particular time period.
-Intuitively a temporal geometry of this type depicts a set of surfaces in a spatiotemporal domain.
+Intuitively a temporal geometry of a continuous movement of curve depicts a set of surfaces in a spatiotemporal domain.
 For example, the movement information of weather fronts or traffic congestion on roads can be shared
 as a TemporalPrimitiveGeometry object with the `"MovingLineString"` type.
 | MovingPolygon | The type represents the prism of a time-parametered 2-dimensional (2D) geometric primitive (Polygon),
 whose leaf geometry at a time position is a 2D polygonal object in a particular time period.
-Intuitively a temporal geometry of this type depicts a set of polyhedrons that are the convex hulls of two congruent polygons in a spatiotemporal domain.
+Intuitively a temporal geometry of a continuous movement of polygon depicts a set of volumes in a spatiotemporal domain.
 For example, the changes of flooding areas or the movement information of air pollution can be shared as a TemporalPrimitiveGeometry object with the `"MovingPolygon"` type.
 | MovingPointCloud | The type represents the prism of a time-parametered point cloud whose leaf geometry at a time position is a set of points in a particular time period.
-Intuitively a temporal geometry of this type depicts a set of curves in a spatiotemporal domain.
+Intuitively a temporal geometry of a continuous movement of point set depicts a set of curves in a spatiotemporal domain.
 For example, the tacking information by using Light Detection and Ranging (LiDAR) can be shared as a TemporalPrimitiveGeometry object with the `"MovingPointCloud"` type.
 |=========
 
@@ -159,7 +159,7 @@ to represent various types of dynamic movements. Its value is a MotionCurve obje
 by a case-sensitive string as one of predefined five motion curves (i.e., `"Discrete"`, `"Step"`, `"Linear"`, `"Quadratic"`, and `"Cube"`) or
 a URL (e.g., `"http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve"`).
 The URL indicates a JSON document containing a user-defined curve of parametric motion
-for the movement of a feature in two- or three-space.
+for the movement of a feature in two- or three-dimensional space.
 The detail interpretation and representation of method is described in <<interpolation>>.
 If the TemporalPrimitiveGeometry object has no member with the name `"interpolation"`,
 it is interpreted by `"Linear"`.
@@ -169,7 +169,7 @@ file of a 3D model data. It allows a JSON `null` value.
 The 3D model represents a base geometry of a 3D rigid shape, and
 the combination of the `"base"` and `"orientations"` members represents a 3D temporal geometry
 of the MF_RigidTemporalGeometry type in ISO 19141. In MF-JSON Prism, the 3D model is transformed
-into the fixed local coordinate reference system whose bound is *-0.5 to 0.5* for each axis concerning the right-handed local engineering coordinate reference syste
+into the fixed local coordinate reference system whose bound is *-0.5 to 0.5* for each axis concerning the right-handed local engineering coordinate reference system
 and unit is *meter*. The origin of the local coordinate reference system is 0 for each axis and is transformed
 into the centroid of each leaf geometry of a temporal geometry.
 
@@ -180,7 +180,8 @@ having the same number of elements of the `"datetimes"` value.
 It allows a JSON `null` value or an empty array
 if and only if the `"base"` member has a JSON `null` value.
 A transformation matrix is defined by a linear transformation
-from the right-handed local engineering coordinate reference system to the Universal Transverse Mercator (UTM) system as a type of plane rectangular coordinate system.
+from the right-handed local engineering coordinate reference system
+to the Cartesian coordinate system, such as the Universal Transverse Mercator (UTM) system.
 A coordinate of the base 3D model, latexmath:[(x, y, z)], transforms into a target 3D coordinate,
 latexmath:[(x', y', z')], by using the quaternions and the scaling factors,
 latexmath:[(x, y, z) \rightarrow (x', y', z')], as follows:
@@ -214,7 +215,7 @@ defining an axis of rotation in an imaginary spherical space surrounding the mov
 and latexmath:[W] is a scalar representation of the amount of rotation applied around the axis.
 At this point it should be noted that the latexmath:[X], latexmath:[Y] and latexmath:[Z] components of a quaternion are not the same as the components
 of a three-dimensional unit vector, nor is latexmath:[W] a direct representation of a rotation in degree.
-To convert Euler angles to quaternion form, defining the angle around the X-axis (roll) as latexmath:[\psi], the Y-axix (pitch) as latexmath:[\theta], and the Z-axis (yaw) as latexmath:[\phi].
+To convert Euler angles to quaternion form, defining the angle around the X-axis (roll) as latexmath:[\psi], the Y-axis (pitch) as latexmath:[\theta], and the Z-axis (yaw) as latexmath:[\phi].
 The quaternion latexmath:[Q] can then be calculated as follow:
 
 [latexmath]
@@ -236,25 +237,24 @@ The quaternion latexmath:[Q] can then be calculated as follow:
 
 [#mf-orientation,reftext='{figure-caption} {counter:figure-num}']
 .The transformation of a 3D model by using the orientation matrices
-image::mf-orientation.png[mf-orientation, pdfwidth=65%, width=65%, align="center"]
+image::mf-orientation.png[mf-orientation, pdfwidth=90%, width=90%, align="center"]
 
 include::requirements/requirements_premitive.adoc[]
 
-[#taggregate, reftext='7.2.1.2']
-===== 7.2.1.2. TemporalAggregateGeometry Object
-A TemporalAggregateGeometry object represents a set of TemporalPrimitiveGeometry objects.
-When a TemporalGeometry object has a `"type"` member with one of the value
-of `"MultiMovingPoint"`, `"MultiMovingLineString"`, `"MultiMovingPolygon"`, and `"MovingGeometryCollection"`,
-the object is specialized as a TemporalAggregateGeometry object with one additional *mandatory* member
-named `"prisms"`. The value of the `"prisms"` member is represented by
-a JSON array of a set of TemporalPrimitiveGeometry instances, having at least one element in the array.
+[#tcomplex, reftext='7.2.1.2']
+===== 7.2.1.2. TemporalComplexGeometry Object
+A TemporalComplexGeometry object represents a set of TemporalPrimitiveGeometry objects.
+When a TemporalGeometry object has a `"type"` member is`"MovingGeometryCollection"`,
+the object is specialized as a TemporalComplexGeometry object with one additional *mandatory* member named `"prisms"`.
+The value of the `"prisms"` member is represented by a JSON array of a set of TemporalPrimitiveGeometry instances,
+having at least one element in the array.
 
 [source, javascript]
 {
-    "type": "MultiMovingPoint | MultiMovingLineString | MultiMovingPolygon" | "MovingGeometryCollection",  // (MANDATORY) vbar | as a means to select ONE type.
+    "type": "MovingGeometryCollection",  // (MANDATORY)
     "prisms": [  //(MANDATORY)
         {
-            "type": "MovingPoint | MovingLineString | MovingPolygon",  // (MANDATORY) vbar | as a means to select ONE type.
+            "type": "MovingPoint | MovingLineString | MovingPolygon | MovingPointCloud",  // (MANDATORY) vbar | as a means to select ONE type.
             "datetimes" : [...],    //(MANDATORY)
             "coordinates": [...],   //(MANDATORY)
             "interpolation": [...], //(DEFAULT)
@@ -266,16 +266,8 @@ a JSON array of a set of TemporalPrimitiveGeometry instances, having at least on
     "trs": {...}  //(DEFAULT)
 }
 
-* *MultiMovingPoint*: The type represents a trajectory of a set of time-parametered 0-dimensional (0D)
-geometric primitive (Point), representing a multi-position at a time position (instant) within its temporal domain.
-The leaf geometry at a time position is the union of each leaf of moving point members at the same time.
-* *MultiMovingLineString*: The type represents the prism of a set of time-parametered 1-dimensional (1D)
-geometric primitive (LineString), whose leaf geometry at a time position is the union of each leaf of moving linestring members at the same time.
-* *MultiMovingPolygon*: The type represents the prism of a set of time-parametered 2-dimensional (2D)
-geometric primitive (Polygon), whose leaf geometry at a time position is the union of each leaf of moving polygon members at the same time.
 * *MovingGeometryCollection*: Each element of "prisms" can be an TemporalPrimitiveGeometry with one of types of `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
 The leaf geometry at a time position is the union of each leaf of any temporal geometries at the same time.
-
 
 include::requirements/requirements_aggregation.adoc[]
 

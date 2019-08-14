@@ -10,7 +10,7 @@ Even though the parametric value may depends on the spatiotemporal location,
 MF-JSON Prism only considers the temporal dependencies of their changes of value.
 
 [#pvaluesjson, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: Examples of a ParametricValues object
+.Example {example-num}: Examples of a ParametricValues object
 [source, javascript]
 {
   "datetimes": [...], //(MANDATORY) a JSON Array of time instants
@@ -34,7 +34,7 @@ MF-JSON Prism only considers the temporal dependencies of their changes of value
 
 A ParametricValues object has one `"datetimes"` member and
 more than one member with the name latexmath:[@propertyN], where latexmath:[@propertyN]
-is any string defined by an application as a dynamic attribure.
+is any string defined by an application as a dynamic attribute.
 The value of the "latexmath:[@propertyN]" member is a JSON object that has the following fields:
 
 * `"type"`: The `"type"` member is mandatory and has a string as one of the followings:
@@ -54,7 +54,7 @@ There is an one-to-one correspondence between the elements of `"values"` of a la
 and `"datetimes"` as a temporal sequence of pairs latexmath:[(v,t)],
 where latexmath:[v] is a value of measurement and latexmath:[t] is its sampling time.
 
-* `"interpolation"`: The `"interpolation"` member is default and has a JSON string or a URL to descirbe an interpolation method.
+* `"interpolation"`: The `"interpolation"` member is default and has a JSON string or a URL to describe an interpolation method.
 A dynamic attribute also needs an interpolation method to estimate its value at any time between two successive instants like the TemporalPrimitiveGeometry object.
 Given the same number of latexmath:[V=(v_0, v_1, v_2, ..., v_n)] in `"values"` and latexmath:[T=(t_0, t_1, t_2, ..., t_n)] in `"datetimes"`,
 this standard defines four predefined methods for a parametric value with time: `"Discrete"`, `"Step"`, `"Linear"`, and `"Regression"`.

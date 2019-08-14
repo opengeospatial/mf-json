@@ -13,8 +13,9 @@ For example, if a leaf linestring consists of two single positions in a temporal
 the other leaves also have two single positions. If a leaf polygon in a temporal geometry of type `"MovingPolygon"` has
 one interior ring, the others also have one interior ring and the number of positions of rings is same.
 
+[#predefineExam, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: Predefined motion curves of a TemporalPrimitiveGeometry object
 [source, javascript]
-.Example {counter:example-num}: Predefined motion curves of a TemporalPrimitiveGeometry object
 {
     ....,
     "datetimes": [...],  //T={t_0, t_1, ..., t_n}
@@ -132,7 +133,7 @@ Note that latexmath:[C(t_0) = P_0, C(t_1) = P_1,..., C(t_{n})=P_n].
     P'(t_{i})=V(t_{i})=SC'_i(t_{i})=SC'_{i+1}(t_i), \quad a_0 = 0.
   \]
  $$
- It means the curve of a temporal trajectory is continuous and has continuous first derivative at the positions in latexmath:[P] except two end positons.
+ It means the curve of a temporal trajectory is continuous and has a continuous first derivative at the positions in latexmath:[P] except two end positions.
  For this interpolation, at least three leaves at particular times are required, i.e., latexmath:[N \geq 3].
  .. `"Cube"`: This method interpolates the position at time latexmath:[t] by
  using a Catmull–Rom (cubic) spline on each interval latexmath:[[t_{i}, t_{i+1}]]
@@ -178,8 +179,15 @@ Note that latexmath:[C(t_0) = P_0, C(t_1) = P_1,..., C(t_{n})=P_n].
    \]
  $$
  This matrix representation defines the cubic curve that represents the portion of the total curve between
- two successive control positions: latexmath:[P_i] and latexmath:[P_{i+1}], specifying the tagent
+ two successive control positions: latexmath:[P_i] and latexmath:[P_{i+1}], specifying the tangent
  latexmath:[\frac{P_{i+1}-P_{i-1}}{2}] and latexmath:[\frac{P_{i+2}-P_{i}}{2}] at each control position, respectively.
+
+[width="99%", cols="1,3,1,3", options="header"]
+|=========
+| Names | Curves | Names | Curves
+| Step | image:mf-interpolation-step.png[Step, pdfwidth=100%, width=100%] |Linear |image:mf-interpolation-linear.png[Linear, pdfwidth=100%, width=100%]
+| Quadratic   | image:mf-interpolation-quadratic.png[Quadratic, pdfwidth=100%, width=100%] | Cube   | image:mf-interpolation-cube.png[CatmullRom, pdfwidth=100%, width=100%]
+|=========
 
 /////////////
  $$
@@ -259,8 +267,9 @@ If applications need to define their own interpolation methods, the `"interpolat
 in the TemporalPrimitiveGeometry object has a URL to
 address a JSON array of parametric equations defined on a set of intervals of parameter latexmath:[t]-value.
 
+[#userdefineExam, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: A TemporalPrimitiveGeometry instance of with a user-defined parametric curve
 [source, javascript]
-.Example {counter:example-num}: A TemporalPrimitiveGeometry instance of with a user-defined parametric curve
 "temporalGeometry": {
     "type": "MovingPoint",
     "datetimes": [...],  //T={t_0, t_1, ..., t_n}
@@ -270,8 +279,9 @@ address a JSON array of parametric equations defined on a set of intervals of pa
 }
 
 The URL indicates a JSON object having three members of `"crs"`, `"trs"`, and `"equations"` as follows.
+[#userdefineMemberExam, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: The members of a user-defined parametric curve
 [source, javascript]
-.Example {counter:example-num}: The mebers of a user-defined parametric curve
 {
     "crs": {...},
     "trs": {...},
@@ -304,15 +314,16 @@ coordinates during a particular time interval.
 +++++++++++
 
 If a time position does not belong to any time interval of the elements of equations, there is no interpolation equations at that time.
-The order of arrays for the interpolation formula of a temporal position SHALL be follwed by the order of axes of the CRS.
-For example, when the CRS is the default spatial CRS (i.e., WGS84), the order of axes is sequencially latexmath:[x] (longitude), latexmath:[y] (latitude), and latexmath:[z] (altitude).
+The order of arrays for the interpolation formula of a temporal position SHALL be followed by the order of axes of the CRS.
+For example, when the CRS is the default spatial CRS (i.e., WGS84), the order of axes is sequentially latexmath:[x] (longitude), latexmath:[y] (latitude), and latexmath:[z] (altitude).
 The time intervals between any two elements of equations only allows empty or 0-dimensional intersection.
 The unit of measure of the temporal CRS is applied for computing parametric equations.
 For example, a time position encoded by IETF RFC 3339 is converted into a signed 64-bit integer(long) value that represents milliseconds,
 when it refers to the default temporal CRS (i.e., ISO8601).
 
+[#motioncurveExam, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: Example of MotionCurve object (http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve)
 [source, javascript]
-.Example {counter:example-num}: http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve
 {
     "crs" : {
          "type": "name",

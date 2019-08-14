@@ -12,6 +12,12 @@ Two or more coordinate tuples are specified in _gml:posList_ and linearly interp
 The _mf:Attr_ element contains the attribute information as a text. The values of the attributes are constant while the feature moves along the _mf:LinearTrajectory_.
 The detailed description refers to http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC Moving Features XML Core].
 
+The UML diagram for MF-JSON Trajectory is depicted in <<mf-trajectory-uml>>.
+
+[#mf-trajectory-uml,reftext='{figure-caption} {counter:figure-num}']
+.Class diagram for MF-JSON Trajectory
+image::mf-geojson-trajectory.png[mf-trajectory-uml, pdfwidth=95%, width=95%, align="center"]
+
 Comparing to the segment-based encodings of http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC XML Core] and http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[CSV],
 MF-JSON Trajectory encodes a spatiotemporal linestring or a collection of linestrings to reduce the size of a GeoJSON document.
 The spatiotemporal linestring is a one-dimensional object representing a sequence of spatiotemporal points and the trajectory segments connecting them.
@@ -51,50 +57,15 @@ for representation of dates and times using the Gregorian calendar, or a numeric
 (GeoJSON) A Feature object has a member with the name "properties".  The value of the properties member is an object (any JSON object or a JSON null value).
 
 * If a Feature has any variable attribute by time and its value (i.e., _mf:AttrDef_ and _mf:Attr_),
-the attribute can be a member inside the `"properties"` member with the value of a JSON arrray,
-having one less than the number of positions of the `"coordinates"` member.
+the attribute can be a member inside the `"properties"` member with the value of a JSON array, the size of its array can be distinguished into three types as below:
+** Time-varying attributes having one less than the number of positions of the `"coordinates"` member.
+** Time-varying attributes having the same number of positions of the `"coordinates"` member.
+** Not time-varying attributes having only one.
 
 * A set of _mf:LinearTrajectory_ instances is packed in the elements of the `"features"` member of a FeatureCollection object.
 [NOTE]
 (GeoJSON) A FeatureCollection object has a member with the name "features".  The value of "features" is a JSON array of Feature objects.
 It is possible for this array to be empty.
 
-
-<<mf-geojson>> illustrates an example of the MF-JSON Trajectory encoding corresponding to two moving points, as shown in <<mf-ogc>> to be replaceable with <<mf-xml>> and <<mf-csv>>.
-
-[#mf-geojson, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: Example of the MF-JSON Trajectory encoding
-[source, javascript]
-{
-   "type": "FeatureCollection",
-   "features": [
-       {
-           "type": "Feature",
-           "id": "A",
-           "geometry": {
-               "type": "LineString",
-               "coordinates": [[11.0,2.0], [12.0,3.0], [10.0,3.0]]
-           },
-           "properties": {
-               "datetimes": ["2012-01-17T12:33:51Z", "2012-01-17T12:33:56Z", "2012-01-17T12:34:00Z"],
-               "state": ["walking","walking"],
-               "typecode": [1, 2]
-           }
-       },
-       {
-           "type": "Feature",
-           "id": "B",
-           "geometry": {
-               "type": "LineString",
-               "coordinates": [[10.0,2.0], [11.0,3.0]]
-           },
-           "properties": {
-               "datetimes": ["2012-01-17T12:33:51Z", "2012-01-17T12:34:00Z"],
-               "state": ["walking"],
-               "typecode": [2]
-           }
-       }
-   ]
-}
-
+A sample data of MF-JSON Trajectory is provided in <<sampleJSONTra>>.
 include::requirements/requirements_trajectory.adoc[]

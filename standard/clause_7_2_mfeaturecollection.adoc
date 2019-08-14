@@ -4,7 +4,7 @@ MovingFeatureCollection object is a JSON object with the following members as sh
 It bundles a collection of moving features into a logical abstraction with a certain alias.
 
 [#mfeaturecollectionjson, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: Members of a MovingFeatureCollection object
+.Example {example-num}: Members of a MovingFeatureCollection object
 [source, javascript]
 {
   "type": "FeatureCollection", //(MANDATORY)

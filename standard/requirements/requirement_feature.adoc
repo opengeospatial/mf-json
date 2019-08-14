@@ -1,37 +1,37 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 2.32* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.29* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature +
 A MovingFeature object SHALL be a GeoJSON Feature object that have two mandatory members of `"type"` and `"temporalGeometry"`.
 The value of the `"type"` member SHALL be a `"Feature"` string.
 The value of the `"temporalGeometry"` member SHALL be a JSON object to represent a TemporalGeometry object, not allowing the JSON `null`.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.33* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.30* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/temporalProperties +
 The value of the `"temporalProperties"` member SHALL be a JSON array of TemporalProperties objects. It allows a JSON null value.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.34* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.31* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/crs +
 The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
 If no CRS instance can be so acquired in a file, the default spatial CRS (and temporal CRS) SHALL be applied to the object.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.35* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.32* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/time +
 The value of the `"time"` member SHALL be a JSON array to represent a LifeSpan object.
 It SHALL be represented as a temporal domain to cover a temporal geometry or a collection of temporal geometries.
 It allows a JSON null value.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.36* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.33* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/bbox +
 The value of the `"bbox"` member SHALL be a JSON array to represent a BoundingBox object.
 It SHALL be represented as a spatial domain to cover a temporal geometry or a collection of temporal geometries.
 It allows a JSON null value.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.37* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.34* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/geometry +
 The value of the `"geometry"` member SHALL be any JSON object or a JSON null value for the `"geometry"` member in a GeoJSON Feature object.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.38* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.35* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/properties +
 The value of the `"properties"` member SHALL be any JSON object or a JSON null value for the `"properties"` member in a GeoJSON Feature object.
 {set:cellbgcolor:#FFFFFF}

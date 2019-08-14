@@ -1,11 +1,15 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 2.45* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.42* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time +
 A LifeSpan object SHALL be a JSON array having two elements of string encoded by https://www.ietf.org/rfc/rfc3339.txt[IETF RFC 3339].
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.46* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.43* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time/element +
 The first element SHALL be less than or equal to the second element.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.44* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time/crs +
+The expression of an element in the array SHALL refer to the default temporal CRS object (ISO8601).
 {set:cellbgcolor:#FFFFFF}
 |===

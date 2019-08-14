@@ -52,7 +52,7 @@ The coordinate reference system for the 3D model SHALL be a right-handed coordin
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.14* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/base +
-The value of the `"base"` member SHALL be a URL to address an OBJ file of a 3D model data.
+The value of the `"base"` member SHALL be a web accessible URL to address an OBJ file of a 3D model data.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.15* {set:cellbgcolor:#CACCCE} |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations +

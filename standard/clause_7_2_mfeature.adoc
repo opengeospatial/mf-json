@@ -5,7 +5,7 @@ a moving feature that is spatially and temporally bounded,
 and its position (continuously) changes over time with the members as shown in <<mfeaturejson>>.
 
 [#mfeaturejson, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: Members of a MovingFeature object
+.Example {example-num}: Members of a MovingFeature object
 [source, javascript]
 {
   "type": "Feature", //(MANDATORY)

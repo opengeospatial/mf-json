@@ -23,22 +23,22 @@ software component that can invoke an operation from a server +
 
 === *coordinate*
 one of a sequence of n numbers designating the position of a point in n-dimensional space +
-[ OGC 08-015r2 ]
+[ OGC 18-005r4 ]
 
  NOTE: In a coordinate reference system, the coordinate numbers are qualified by units.
 
 === *coordinate reference system*
 coordinate system that is related to an object by a datum +
-[ OGC 08-015r2 ]
+[ OGC 18-005r4 ]
 
  NOTE: For geodetic and vertical datums, the object will be the Earth.
 
 === *curve*
-1-dimensional geometric primitive, representing the countinous image of a line +
+1-dimensional geometric primitive, representing the continuous image of a line +
 [ ISO 19107:2003 ]
 
- NOTE: The boudary of a curve is the set of points at either end of the curve. If the curve is a cycle, the two ends are identical, and the curve (if toplogically closed) is considered to not have a boudary.
- The first point is called the start point, and the last is the end point. Connectivity of the curve is guarateed by the "continuous image of a line" clause. A topological theorem states that a continous image of a connected set is connected.
+ NOTE: The boundary of a curve is the set of points at either end of the curve. If the curve is a cycle, the two ends are identical, and the curve (if topologically closed) is considered to not have a boundary.
+ The first point is called the start point, and the last is the end point. Connectivity of the curve is guaranteed by the "continuous image of a line" clause. A topological theorem states that a continuous image of a connected set is connected.
 
 === *domain*
 well-defined set +
@@ -53,7 +53,7 @@ Conversion of data into a series of codes +
 
 === *engineering coordinate reference system*
 coordinate reference system based on an engineering datum
-[ OGC 08-015r2 ]
+[ OGC 18-005r4 ]
 
  EXAMPLES: Local engineering and architectural grids; coordinate reference system local to a ship or an orbiting spacecraft.
 
@@ -131,11 +131,11 @@ function latexmath:[f] from an interval latexmath:[t \in [a, b]] such that latex
 
 === *parametric coordinate reference system*
 coordinate reference system based on a parametric datum +
-[ OGC 10-020 ]
+[ OGC 18-005r4 ]
 
 === *parametric datum*
 datum describing the relationship of a parametric coordinate system to an object +
-[ OGC 10-020 ]
+[ OGC 18-005r4 ]
 
  NOTE The object is normally the Earth.
 

@@ -1,44 +1,22 @@
 [width="90%",cols="2,6"]
 |===
 |*Requirement 2.17* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/aggregation +
-A TemporalAggregateGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
-The value of the `"type"` member SHALL be one of string "MultiMovingPoint", "MultiMovingLineString",
-"MultiMovingPolygon", and "MovingGeometryCollection".
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex +
+A TemporalComplexGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
+The value of the `"type"` member SHALL be a "MovingGeometryCollection" string.
 The value of the `"prisms"` member SHALL be a JSON array of a set of TemporalPrimitiveGeometry instances,
 having at least one element in the array.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.18* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/aggregation/multimovingpoint +
-A MultiMovingPoint object SHALL have the value of the `"type"` = `"MultiMovingPoint"`.
-An element of the `"prisms"` member SHALL be a TemporalPrimitiveGeometry instance of type `"MovingPoint"`.
-The leaf geometry at a time position must be an instance of type `"MultiPoint"` of GeoJSON,
-which is the union of each leaf of moving point members at the same time.
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.19* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/aggregation/multimovinglinestring +
-A MultiMovingLineString object SHALL have the value of the `"type"` = `"MultiMovingLineString"`.
-An element of the `"prisms"` member SHALL be a TemporalPrimitiveGeometry instance of type `"MovingLineString"`.
-The leaf geometry at a time position must be an instance of type `"MultiLineString"` of GeoJSON,
-which is the union of each leaf of moving linestring members at the same time.
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.20* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/aggregation/multimovingpolygon +
-A MultiMovingPolygon object SHALL have the value of the `"type"` = `"MultiMovingPolygon"`.
-An element of the `"prisms"` member SHALL be a TemporalPrimitiveGeometry instance of type `"MovingPolygon"`.
-The leaf geometry at a time position must be an instance of type `"MultiPolygon"` of GeoJSON,
-which is the union of each leaf of moving polygon members at the same time.
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.21* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/aggregation/movinggeometrycollection +
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex/movinggeometrycollection +
 A MovingGeometryCollection object SHALL the value of the `"type"` = `"MovingGeometryCollection"`.
 Each element of `"prisms"` SHALL be a TemporalPrimitiveGeometry instance with one of types of
 `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
 The leaf geometry at a time position must be an instance of type `"GeometryCollection"` of GeoJSON,
 which is the union of each leaf of any temporal geometries at the same time.
 {set:cellbgcolor:#FFFFFF}
-|*Requirement 2.22* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/aggregation/crs +
+|*Requirement 2.19* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex/crs +
 The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
 If no CRS instance can be so acquired from upper-level braces of a JSON object,
 the default spatial CRS (and temporal CRS) SHALL be applied.
