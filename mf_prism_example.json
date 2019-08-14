@@ -1,0 +1,81 @@
+{
+    "type": "Feature",
+    "geometry": null,
+    "properties": {
+      "name": "car1",
+      "state":"test1"
+    },
+    "crs" : {
+      "type": "name",
+      "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}
+    },
+    "trs" : {
+      "type": "link",
+      "properties": {
+          "type": "ogcdef",
+          "href": "http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"
+      }
+    },
+    "bbox": [139.757083, 35.627483, 0.0, 139.757716, 35.627701, 4.5],
+    "time": ["2011-07-14T22:01:01Z", "2011-07-15T01:11:22Z"],
+    "temporalGeometry": {
+        "type": "MovingPoint",
+        "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T22:01:02Z", "2011-07-14T22:01:03Z", "2011-07-14T22:01:04Z", "2011-07-14T22:01:05Z"],
+        "coordinates": [ [139.757083, 35.627701, 0.5], [139.757399, 35.627701, 2.0], [139.757555, 35.627688, 4.0], [139.757651, 35.627596, 4.0], [139.757716, 35.627483, 4.0] ],
+        "interpolation": "Linear",
+        "orientations": [
+          [0.000012 , 0.0 , 0.0 , 0.0 ,
+            0.0 , 0.0000089 , 0.0 , 0.0 ,
+            0.0 , 0.0 , 1.0 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0],
+          [0.00000119543363771009 , 0.0 , 0.0871557427476583 , 0.0 ,
+            0.0 , 0.0000089 , 0.0 , 0.0 ,
+            -0.0000010458689129719 , 0.0 , 0.996194698091746 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0],
+          [0.0000103923048454133 , -0.00000445 , 0.0 , 0.0 ,
+            0.000006 , 0.0000077076260936815 , 0.0 , 0.0 ,
+            0.0 , 0.0 , 1.0 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0],
+          [0.000006 , -0.0000077076260936815 , 0.0 , 0.0 ,
+            0.0000103923048454133 , 0.00000445 , 0.0 , 0.0 ,
+            0.0 , 0.0 , 1.0 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0],
+          [0.0 , -0.0000089 , 0.0 , 0.0 ,
+            0.000012 , 0.0 , 0.0 , 0.0 ,
+            0.0 , 0.0 , 1.0 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0]
+        ],
+        "base": "http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/car3dmodel.zip"
+    },
+    "temporalProperties": [
+      {
+        "datetimes": ["2011-07-14T22:01:01.450Z", "2011-07-14T23:01:01.450Z", "2011-07-15T00:01:01.450Z"],
+        "length": {
+            "type": "measure",
+            "form": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length",
+            "values": [1.0, 2.4, 1.0],
+            "interpolation": "Linear",
+            "description": "description1"
+        },
+        "message":{
+            "type": "text",
+            "values": ["A", "B", "C"],
+            "interpolation": "Discrete",
+            "description": "description2"
+        }
+      },{
+        "datetimes" : [1465621816590, 1465711526300],
+        "discharge" : {
+            "type" : "measure",
+            "form" : "m^3/s",
+            "values" : [3.0, 4.0],
+            "interpolation": "Minimum"
+        },
+        "camera" : {
+            "type" : "image",
+            "values" : ["http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/image1", "iVBORw0KGgoAAAANSUhEU......"],
+            "interpolation": "Discrete"
+        }
+      }
+    ]
+}

@@ -1,0 +1,348 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://www.opengis.net/spec/movingfeatures/json/1.0/prism/MF-JSON_Prism.schema.json",
+  "title": "OGC Moving Feature JSON Prism schema",
+  "oneOf":[
+    {"$ref": "#/definitions/temporalGeometry"},
+    {"$ref": "#/definitions/temporalProperties"},
+    {"$ref": "#/definitions/crs"},
+    {"$ref": "#/definitions/trs"},
+    {"$ref": "#/definitions/movingFeature"},
+    {"$ref": "#/definitions/movingFeatureCollection"},
+    {"$ref": "#/definitions/time"},
+    {"$ref": "#/definitions/bbox"},
+    {"$ref": "#/definitions/geometry"}
+  ],
+  "definitions": {
+    "temporalGeometry": {
+      "$id": "#/definitions/temporalGeometry",
+      "title": "TemporalGeometry Object",
+      "oneOf": [
+        {"$ref": "#/definitions/temporalPrimitiveGeometry"},
+        {"$ref": "#/definitions/temporalComplexGeometry"}
+      ]
+    },
+    "temporalProperties": {
+      "$id": "#/definitions/temporalProperties",
+      "title": "TemporalProperties Objects",
+      "type": ["null", "array"],
+      "items": [{"$ref": "#/definitions/prametricValues"}]
+    },
+    "crs": {
+      "$id": "#/definitions/crs",
+      "title": "Coordinate Reference System",
+      "type": "object",
+      "required": ["type", "properties"],
+      "oneOf":[
+        {"$ref": "#/definitions/namedCRS"},
+        {"$ref": "#/definitions/linkedCRS"}
+      ]
+    },
+    "trs": {
+      "$id": "#/definitions/trs",
+      "title": "Temporal Coordinate Reference System",
+      "type": "object",
+      "required": ["type", "properties"],
+      "oneOf":[
+        {"$ref": "#/definitions/namedTRS"},
+        {"$ref": "#/definitions/linkedCRS"}
+      ]
+    },
+    "movingFeature": {
+      "$id": "#/definitions/movingFeature",
+      "title": "MovingFeature object in a MF-JSON Prism",
+      "type": "object",
+      "required": ["type", "temporalGeometry", "geometry", "properties"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["Feature"]
+        },
+        "temporalGeometry": {"$ref": "#/definitions/temporalGeometry"},
+        "crs": {"$ref": "#/definitions/crs"},
+        "trs": {"$ref": "#/definitions/trs"},
+        "temporalProperties": {"$ref": "#/definitions/temporalProperties"},
+        "bbox": {"$ref": "#/definitions/bbox"},
+        "time": {"$ref": "#/definitions/time"},
+        "geometry": {"$ref": "#/definitions/geometry"},
+        "properties": {"$ref": "#/definitions/properties"}
+      }
+    },
+    "movingFeatureCollection": {
+      "$id": "#/definitions/movingFeatureCollection",
+      "title": "MovingFeatureCollection object in a MF-JSON Prism",
+      "type": "object",
+      "required": ["type", "features"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["FeatureCollection"]
+        },
+        "features": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/definitions/movingFeature"}
+        },
+        "crs": {"$ref": "#/definitions/crs"},
+        "trs": {"$ref": "#/definitions/trs"},
+        "bbox": {"$ref": "#/definitions/bbox"},
+        "time": {"$ref": "#/definitions/time"},
+        "label": {"type": ["null", "string"]}
+      }
+    },
+    "lifeSpan": {
+      "$id": "#/definitions/time",
+      "title": "LifeSpan Object",
+      "type": ["null", "array"],
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "boundingBox": {
+      "$id": "#/definitions/bbox",
+      "title": "BoundingBox Object",
+      "type": ["null", "array"],
+      "minItems": 4,
+      "items": {"type": "number"}
+    },
+    "geometry": {
+      "$id": "#/definitions/geometry",
+      "title": "GeoJSON Geometry object",
+      "oneOf": [
+        {"type": "null"},
+        {"$ref": "https://geojson.org/schema/Geometry.json"},
+        {"$ref": "https://geojson.org/schema/GeometryCollection.json"}
+      ]
+    },
+    "properties": {
+      "$id": "#/definitions/properties",
+      "title": "Properties object",
+      "type": ["null", "object"]
+    },
+
+    "datetimes": {
+      "$id": "#/definitions/datetimes",
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 2,
+      "items": {"type": "string"}
+    },
+    "temporalPrimitiveGeometry": {
+      "$id": "#/definitions/temporalPrimitiveGeometry",
+      "type": "object",
+      "title": "TemporalPrimitiveGeometry Object",
+      "required": ["type", "datetimes", "coordinates"],
+      "dependencies": {"orientations": ["base"]},
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud"]
+        },
+        "datetimes": {"$ref": "#/definitions/datetimes"},
+        "coordinates": {
+          "oneOf": [
+            {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {"type": "number"}
+              }
+            },
+            {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "array",
+                  "minItems": 2,
+                  "items": {"type": "number"}
+                }
+              }
+            },
+            {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "minItems": 4,
+                  "items": {
+                    "type": "array",
+                    "minItems": 2,
+                    "items": {"type": "number"}
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "interpolation": {"$ref": "#/definitions/geometryInterpolation"},
+        "base": {"type": ["null", "string"], "format": "uri"},
+        "orientations": {
+          "type": ["null", "array"],
+          "items": {
+            "type": "array",
+            "maxItems": 16,
+            "items": {"type": "number"}
+          }
+        },
+        "crs": {"$ref": "#/definitions/crs"},
+        "trs": {"$ref": "#/definitions/trs"}
+      }
+    },
+    "motionCurve": {
+      "$id": "#/definitions/geometryInterpolation",
+      "title": "Interpolation method for TemporalPrimitiveGeometry",
+      "oneOf":[
+        {
+          "type": "string",
+          "enum": ["Discrete", "Step", "Linear", "Quadratic", "Cube"],
+          "default": "Linear"
+        },
+        {"type": "string", "format": "uri"}
+      ]
+    },
+    "temporalComplexGeometry": {
+      "$id": "#/definitions/temporalComplexGeometry",
+      "type": "object",
+      "title": "TemporalComplexGeometry Object",
+      "required": ["type", "prisms"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["MovingGeometryCollection"]
+        },
+        "prisms": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/temporalPrimitiveGeometry"}
+        },
+        "crs": {"$ref": "#/definitions/crs"},
+        "trs": {"$ref": "#/definitions/trs"}
+      }
+    },
+    "prametricValues": {
+      "$id": "#/definitions/prametricValues",
+      "type": "object",
+      "required": ["datetimes"],
+      "properties": {
+        "datetimes": {"$ref": "#/definitions/datetimes"}
+      },
+      "patternProperties": {
+        "^S_": {
+          "oneOf": [
+            {"$ref": "#/definitions/measureType"},
+            {"$ref": "#/definitions/textType"},
+            {"$ref": "#/definitions/imageType"}
+          ]
+        }
+      }
+    },
+    "measureType": {
+      "$id": "#/definitions/measureType",
+      "type": "object",
+      "required": ["type", "values"],
+      "properties": {
+        "type": {"type": "string", "enum": ["measure"]},
+        "values": {"type": "array", "items": {"type": ["null", "number"]}},
+        "interpolation": {"$ref": "#/definitions/propertyInterpolation"},
+        "form": {
+            "oneOf": [
+              {"type": "string", "minLength": 3, "maxLength": 3},
+              {"type": "string", "format": "uri"}
+            ]
+          },
+        "description": {"type": "string"}
+      }
+    },
+    "textType": {
+      "$id": "#/definitions/textType",
+      "type": "object",
+      "required": ["type", "values"],
+      "properties": {
+        "type": {"type": "string", "enum": ["text"]},
+        "values": {"type": "array", "items": {"type": ["null", "string", "boolean"]}},
+        "interpolation": {"$ref": "#/definitions/propertyInterpolation"},
+        "description": {"type": "string"}
+      }
+    },
+    "imageType": {
+      "$id": "#/definitions/imageType",
+      "type": "object",
+      "required": ["type", "values"],
+      "properties": {
+        "type": {"type": "string", "enum": ["image"]},
+        "values": {"type": "array", "items": {"type": ["null", "string"]}},
+        "interpolation": {
+          "$ref": "#/definitions/propertyInterpolation"
+        },
+        "description": {"type": "string"}
+      }
+    },
+    "propertyInterpolation": {
+      "$id": "#/definitions/propertyInterpolation",
+      "title": "Interpolation method for ParametricValues",
+      "oneOf":[
+        {
+          "type": "string",
+          "enum": ["Discrete", "Step", "Linear", "Regression"],
+          "default": "Linear"
+        },
+        {"type": "string", "format": "uri"}
+      ]
+    },
+    "namedCRS": {
+      "$id": "#/definitions/namedCRS",
+      "type": "object",
+      "required": ["type", "properties"],
+      "properties": {
+        "type": {"type": "string", "enum": ["name"]},
+        "properties": {
+          "type": "object",
+          "required": ["name"],
+          "additionalProperties": false,
+          "properties": {
+            "name": {"type": "string", "default": "urn:ogc:def:crs:OGC:1.3:CRS84"}
+          }
+        }
+      }
+    },
+    "linkedCRS": {
+      "$id": "#/definitions/linkedCRS",
+      "type": "object",
+      "required": ["type", "properties"],
+      "properties": {
+        "type": {"type": "string", "enum": ["link"]},
+        "properties": {
+          "type": "object",
+          "required": ["href", "type"],
+          "properties": {
+            "href": {"type": "string", "format": "uri"},
+            "type": {"type": "string"}
+          }
+        }
+      }
+    },
+    "namedTRS": {
+      "$id": "#/definitions/namedTRS",
+      "type": "object",
+      "required": ["type", "properties"],
+      "properties": {
+        "type": {"type": "string", "enum": ["name"]},
+        "properties": {
+          "type": "object",
+          "required": ["name"],
+          "additionalProperties": false,
+          "properties": {
+            "name": {"type": "string", "default": "urn:ogc:data:time:iso8601"}
+          }
+        }
+      }
+    }
+  }
+}

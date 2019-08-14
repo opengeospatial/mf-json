@@ -1,0 +1,189 @@
+[appendix]
+:appendix-caption: Annex
+== Sample Data of Moving Feature (Informative)
+
+[#sampleXML,reftext='{appendix-caption} B.{counter:appendix-num}']
+=== Sample Data of OGC Moving Features XML and CSV encoding
+<<mf-ogc>> shows an example for linear trajectories of two moving points A and B.
+Each trajectory has the start time and the end time. Both points start to move at t=10sec and end at t=19sec. While the movement of B does not change, the movement of A is changed at t=15sec.
+<<mf-xml>> and <<mf-csv>> shows how to encode the trajectories shown in <<mf-ogc>> by using two OGC Moving Features encoding standards.
+However, XML and CSV encoding standards have limitation on the representation of prism geometries such as *MF_PrismGeometry* and *MF_RigidTemporalGeometry*.
+They describe the implementation of only a type of *MF_TemporalTrajectory* with linear interpolation of movement.
+This MF-JSON standard specifies how to encode the same information by using GeoJSON; Additionally, it defines new JSON members to support applications that need more power expression of
+the movement of a feature whose geometry may be 0D, 1D, 2D, 3D geometric primitives, or their aggregations and continuously changes over time with various temporal interpolation methods.
+
+[#mf-ogc,reftext='{figure-caption} {counter:figure-num}']
+.Example for two linear trajectories
+image::mf-ogc.png[Components, pdfwidth=70%, width=70%, align="center"]
+
+[#mf-xml, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: OGC Moving Features XML Core encoding of linear trajectories.
+[source, xml]
+<?xml version="1.0" encoding="UTF-8"?>
+  <mf:MovingFeatures>
+    <mf:sTBoundedBy offset="sec">
+         <gml:EnvelopeWithTimePeriod srsName="urn:ogc:def:crs:EPSG:6.6:4326">
+           <gml:lowerCorner>50.23 9.23</gml:lowerorner>
+           <gml:upperCorner>50.31 9.27</gml:upperCorner>
+           <gml:beginPosition>2012-01-17T12:33:41Z</gml:beginPosition>
+           <gml:endPosition>2012-01-17T12:37:00Z </gml:endPosition>
+        </gml:EnvelopeWithTimePeriod>
+    </mf:sTBoundedBy>
+    ......
+    <mf:foliation>
+        <mf:LinearTrajectory gml:id="LT0001" mfIdRef="A" start="10" end="15">
+            <gml:posList>11.0 2.0 12.0 3.0</gml:posList>
+            <mf:Attr>walking,1</mf:Attr>
+        </mf:LinearTrajectory>
+        <mf:LinearTrajectory gml:id="LT0002" mfIdRef="B" start="10" end="19">
+            <gml:posList>10.0 2.0 11.0 3.0</gml:posList>
+            <mf:Attr>walking,2</mf:Attr>
+        </mf:LinearTrajectory>
+        <mf:LinearTrajectory gml:id="LT0003" mfIdRef="A" start="15" end="19">
+           <gml:posList>12.0 3.0 10.0 3.0</gml:posList>
+           <mf:Attr>walking,2</mf:Attr>
+        </mf:LinearTrajectory>
+    </mf:foliation>
+ </mf:MovingFeatures>
+
+
+[#mf-csv, reftext='{example-caption} {counter:example-num}']
+[source, csv]
+.Example {example-num}: OGC Moving Features CSV encoding of linear trajectories.
+@stboundedby,urn:x-ogc:def:crs:EPSG:6.6:4326,2D,50.23 9.23,50.31 9.27,2012-01-17T12:33:41Z,2012-01-17T12:37:00Z,sec
+@columns,mfidref,trajectory,state,xsd:token,”type code”,xsd:integer
+A,10,15,11.0 2.0 12.0 3.0,walking,1
+B,10,19,10.0 2.0 11.0 3.0,walking,2
+A,15,19,12.0 3.0 10.0 3.0,walking,2
+
+[#sampleJSONTra,reftext='{appendix-caption} B.{counter:appendix-num}']
+=== Sample Data of OGC Moving Features JSON Trajectory encoding
+<<mf-geojson>> illustrates an example of the MF-JSON Trajectory encoding corresponding to two moving points, as shown in <<mf-ogc>> to be replaceable with <<mf-xml>> and <<mf-csv>>.
+
+[#mf-geojson, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: Example of the MF-JSON Trajectory encoding
+[source, javascript]
+{
+   "type": "FeatureCollection",
+   "features": [
+       {
+           "type": "Feature",
+           "id": "A",
+           "geometry": {
+               "type": "LineString",
+               "coordinates": [[11.0,2.0], [12.0,3.0], [10.0,3.0]]
+           },
+           "properties": {
+               "datetimes": ["2012-01-17T12:33:51Z", "2012-01-17T12:33:56Z", "2012-01-17T12:34:00Z"],
+               "state": ["walking","walking"],
+               "typecode": [1, 2]
+           }
+       },
+       {
+           "type": "Feature",
+           "id": "B",
+           "geometry": {
+               "type": "LineString",
+               "coordinates": [[10.0,2.0], [11.0,3.0]]
+           },
+           "properties": {
+               "datetimes": ["2012-01-17T12:33:51Z", "2012-01-17T12:34:00Z"],
+               "state": ["walking"],
+               "typecode": [2]
+           }
+       }
+   ]
+}
+
+[#sampleJSONPrism,reftext='{appendix-caption} B.{counter:appendix-num}']
+=== Sample Data of OGC Moving Features JSON Prism encoding
+<<mf-car>> shows the movement of a car which has a rigid 3D solid, and <<mf-prism>> is an example of moving-feature instances encoded by the MF-JSON Prism format.
+
+[#mf-car,reftext='{figure-caption} {counter:figure-num}']
+.Example of the movement of a car which has a rigid 3D solid
+image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
+
+[#mf-prism, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: Example of the MF-JSON Prism encoding
+[source, javascript]
+{
+    "type": "Feature", //(MANDATORY)
+    "properties": { //(OPTIONAL)
+      "name": "car1",
+      "state":"test1",
+      "video": "http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg"
+    },
+    "crs" : { //(DEFAULT) If there is no "crs" member, the default crs is "WGS84" with longitude and latitude units of decimal degrees
+      "type": "name",
+      "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}
+    },
+    "trs" : { //(DEFAULT) If there is no "trs", the default trs is "Gregorian".
+      "type": "link",
+      "properties": {
+          "type": "ogcdef",
+          "href": "http://www.opengis.net/def/uom/ISO-8601/0/Gregorian",
+      }
+    },
+    "bbox": [139.757083, 35.627483, 0.0, 139.757716, 35.627701, 4.5], //(OPTIONAL) 2*n array with the lowest values for all axes followed by the highest values
+    "time": ["2011-07-14T22:01:01Z", "2011-07-15T01:11:22Z"], //(OPTIONAL) min and max time instant to cover all temporal positions in `"temporalGeometry"` and `"temporalProperties"`
+    "temporalGeometry": { //(MANDATORY) one parameter set of geometries of a moving feature
+        "type": "MovingPoint",
+        "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T22:01:02Z", "2011-07-14T22:01:03Z", "2011-07-14T22:01:04Z", "2011-07-14T22:01:05Z"],
+        "coordinates": [ [139.757083, 35.627701, 0.5], [139.757399, 35.627701, 2.0], [139.757555, 35.627688, 4.0], [139.757651, 35.627596, 4.0], [139.757716, 35.627483, 4.0] ],
+        "interpolation": "Linear",
+        "base": "http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/car3dmodel.zip",
+        "orientations": [
+          [0.000012 , 0.0 , 0.0 , 0.0 ,
+            0.0 , 0.0000089 , 0.0 , 0.0 ,
+            0.0 , 0.0 , 1.0 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0],  // same as original
+          [0.00000119543363771009 , 0.0 , 0.0871557427476583 , 0.0 ,
+            0.0 , 0.0000089 , 0.0 , 0.0 ,
+            -0.0000010458689129719 , 0.0 , 0.996194698091746 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0],  // Pitch rotation angle: 355 degree
+          [0.0000103923048454133 , -0.00000445 , 0.0 , 0.0 ,
+            0.000006 , 0.0000077076260936815 , 0.0 , 0.0 ,
+            0.0 , 0.0 , 1.0 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0], // Yaw rotation angle: 330 degree
+          [0.000006 , -0.0000077076260936815 , 0.0 , 0.0 ,
+            0.0000103923048454133 , 0.00000445 , 0.0 , 0.0 ,
+            0.0 , 0.0 , 1.0 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0], // Yaw rotation angle: 300 degree
+          [0.0 , -0.0000089 , 0.0 , 0.0 ,
+            0.000012 , 0.0 , 0.0 , 0.0 ,
+            0.0 , 0.0 , 1.0 , 0.0 ,
+            0.0 , 0.0 , 0.0 , 1.0]  // Yaw rotation angle: 270 degree
+        ]
+    },
+    "temporalProperties": [  //(OPTIONAL) dynamic non-spatial attributes, extended from 'properties'
+      { // a group of temporal properties that are measured at the same times
+        "datetimes": ["2011-07-14T22:01:01.450Z", "2011-07-14T23:01:01.450Z", "2011-07-15T00:01:01.450Z"],
+        "length": {
+            "type": "measure",
+            "form": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length", // a URI denoting a unit-of-measure
+            "values": [1.0, 2.4, 1.0], // the array of values for "length", with the same number of elements as "datetimes"
+            "interpolation": "Linear",
+            "description": "description1" //(OPTIONAL)
+        },
+        "discharge" : {
+            "type" : "measure",
+            "form" : "MQS", // a symbol from UCUM for m^3/s(a cubic metre per second)
+            "values" : [3.0, 4.0, 5.0],
+            "interpolation": "Step"
+        }
+      },{
+        "datetimes" : [1465621816590, 1465711526300],
+        "camera" : {
+            "type" : "image",
+            "values" : ["http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/image1", "iVBORw0KGgoAAAANSUhEU......"],
+            "interpolation": "Discrete"
+        },
+        "labels":{
+            "type": "text", // a predefined unit for a string value
+            "values": ["car", "human"], // the array of values for "labels", with the same number of elements as "datetimes"
+            "interpolation": "Discrete",
+            "description": "description2" //(OPTIONAL)
+        }
+      }
+    ]
+}

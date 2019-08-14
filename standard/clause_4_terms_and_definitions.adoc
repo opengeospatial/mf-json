@@ -23,23 +23,22 @@ software component that can invoke an operation from a server +
 
 === *coordinate*
 one of a sequence of n numbers designating the position of a point in n-dimensional space +
-[ OGC 08-015r2 ]
+[ OGC 18-005r4 ]
 
  NOTE: In a coordinate reference system, the coordinate numbers are qualified by units.
 
 === *coordinate reference system*
 coordinate system that is related to an object by a datum +
-[ OGC 08-015r2 ]
+[ OGC 18-005r4 ]
 
  NOTE: For geodetic and vertical datums, the object will be the Earth.
 
 === *curve*
-1-dimensional geometric primitive, representing the countinous image of a line +
+1-dimensional geometric primitive, representing the continuous image of a line +
 [ ISO 19107:2003 ]
 
- NOTE: The boudary of a curve is the set of points at either end of the curve. If the curve is a cycle, the two ends are identical, and the curve (if toplogically closed) is considered to not have a boudary.
- The first point is called the start point, and the last is the end point. Connectivity of the curve is guarateed by the "continuous image of a line" clause. A topological theorem states that a
- continous image of a connected set is connected.
+ NOTE: The boundary of a curve is the set of points at either end of the curve. If the curve is a cycle, the two ends are identical, and the curve (if topologically closed) is considered to not have a boundary.
+ The first point is called the start point, and the last is the end point. Connectivity of the curve is guaranteed by the "continuous image of a line" clause. A topological theorem states that a continuous image of a connected set is connected.
 
 === *domain*
 well-defined set +
@@ -54,7 +53,7 @@ Conversion of data into a series of codes +
 
 === *engineering coordinate reference system*
 coordinate reference system based on an engineering datum
-[ OGC 08-015r2 ]
+[ OGC 18-005r4 ]
 
  EXAMPLES: Local engineering and architectural grids; coordinate reference system local to a ship or an orbiting spacecraft.
 
@@ -66,8 +65,7 @@ abstraction of real world phenomena +
 characteristic of a feature +
 [ ISO 19109:2015 ]
 
- Note: A feature attribute type has a name, a data type and a domain associated with it. A feature attribute instance has an attribute value taken
- from the domain of the feature attribute type.
+ Note: A feature attribute type has a name, a data type and a domain associated with it. A feature attribute instance has an attribute value taken from the domain of the feature attribute type.
 
 === *feature collection; collection*
 a set of features from a dataset +
@@ -84,8 +82,7 @@ trajectory and in one and only one leaf +
 spatial object representing a geometric set +
 [ ISO 19107:2003 ]
 
- NOTE: A geometric object consists of a geometric primitive, a collection of geometric primitives,
- or a geometric complex treated as a single entity. A geometric object may be the spatial representation of an object such as a feature or a significant part of a feature.
+ NOTE: A geometric object consists of a geometric primitive, a collection of geometric primitives, or a geometric complex treated as a single entity. A geometric object may be the spatial representation of an object such as a feature or a significant part of a feature.
 
 === *geometric primitive*
 geometric object representing a single, connected, homogeneous element of space +
@@ -134,11 +131,11 @@ function latexmath:[f] from an interval latexmath:[t \in [a, b]] such that latex
 
 === *parametric coordinate reference system*
 coordinate reference system based on a parametric datum +
-[ OGC 10-020 ]
+[ OGC 18-005r4 ]
 
 === *parametric datum*
 datum describing the relationship of a parametric coordinate system to an object +
-[ OGC 10-020 ]
+[ OGC 18-005r4 ]
 
  NOTE The object is normally the Earth.
 
@@ -163,7 +160,7 @@ one-dimensional geometric primitive representing extent in time +
  NOTE: A period is bounded by two different temporal positions.
 
 === *position*
-data type that describes a point or geometry potentially occupied by an object or person
+data type that describes a point or geometry potentially occupied by an object
 
 === *prism*
 <one parameter set of geometries> set of points in the union of the geometries (or the union of the
@@ -204,7 +201,7 @@ datum describing the relationship of a temporal coordinate system to an object
 one parameter set of geometries in which the parameter is time
 
 === *trajectory*
-path of a moving *point* described by a one parameter set of points +
+path of a moving point described by a one parameter set of points +
 [ ISO 19141:2008 ]
 
 /////

@@ -1,39 +1,69 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 2.5* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/primitive +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
-{set:cellbgcolor:#FFFFFF}
 |*Requirement 2.6* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/primitive/constraint +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive +
+A TemporalPrimitiveGeometry object SHALL have at least three mandatory members of `"type"`, `"datetimes"`, and `"coordinates"`.
+The value of the `"type"` member SHALL be one of string "MovingPoint", "MovingLineString", "MovingPolygon", and "MovingPointCloud".
+The value of the `"datetimes"` member SHALL be a JSON array of a sequence of monotonic increasing instants,
+having at least one element that is not `null`.
+The value of the `"coordinates"` member SHALL be a JSON array of a sequence of leaf geometries of a temporal geometry,
+having at least one element that is not `null` and its expression is depending on the `"type"`.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.7* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpoint +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/constraint +
+The number of elements in both arrays of the `"coordinates"` value and the `"datetimes"` value SHALL be equal.
+The number of elements in both arrays of the `"orientations"` value and the `"datetimes"` value SHALL be equal.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.8* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movinglinestring +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/movingpoint +
+A MovingPoint object SHALL have the value of the `"type"` = `"MovingPoint"`.
+And the value of the `"coordinates"` member SHALL be a list of Point coordinates to
+construct a 0D leaf geometry (point) corresponding to each instant in order.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.9* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpolygon +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/movinglinestring +
+A MovingLineString object SHALL have the value of the `"type"` = `"MovingLineString"`.
+And the value of the `"coordinates"` member SHALL be a list of LineString coordinate arrays to
+construct a 1D leaf geometry (linestring) corresponding to each instant in order.
 {set:cellbgcolor:#FFFFFF}
 |*Requirement 2.10* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/prism/tgeometry/movingpointcloud +
-A MovingFeatureCollection object SHALL have at least two mandatory members of `"type"` and `"features"`.
-The value of the `"type"` member SHALL be string `"FeatureCollection"` string.
-The value of the `"features"` member SHALL be a JSON array whose element is a TemporalGeometry object, allowing the empty array.
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/movingpolygon +
+A MovingPolygon object SHALL have the value of the `"type"` = `"MovingPolygon"`.
+And the value of the `"coordinates"` member SHALL be a list of Polygon coordinate arrays to
+construct a 2D leaf geometry (polygon) corresponding to each instant in order.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.11* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/movingpointcloud +
+A MovingPointCloud object SHALL have the value of the `"type"` = `"MovingPointCloud"`.
+And the value of the `"coordinates"` member SHALL be a list of MultiPoint 3D coordinate arrays to
+construct a set of points as a leaf geometry corresponding to each instant in order.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.12* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/interpolation +
+The value of the `"interpolation"` member SHALL be a MotionCurve object.
+If the TemporalPrimitiveGeometry object has no member with the name `"interpolation"`,
+the default MotionCurve object (`"Linear"`) SHALL be applied.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.13* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/3dmodel +
+The 3D model SHALL be transformed into the fixed local coordinate reference system
+whose bound is -0.5 to 0.5 for each axis and unit is meter.
+The coordinate reference system for the 3D model SHALL be a right-handed coordinate system.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.14* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/base +
+The value of the `"base"` member SHALL be a web accessible URL to address an OBJ file of a 3D model data.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.15* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations +
+The value of the `"orientations"` member SHALL be a JSON array to represent a transformation matrix.
+The size of the element in array of the `"orientations"` value SHALL be latexmath:[16] (latexmath:[4 \times 4]).
+The `"orientations"` member SHALL be accompanied with the `"base"` member.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.16* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/crs +
+The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
+If no CRS instance can be so acquired from upper-level braces of a JSON object,
+the default spatial CRS (and temporal CRS) SHALL be applied.
 {set:cellbgcolor:#FFFFFF}
 |===

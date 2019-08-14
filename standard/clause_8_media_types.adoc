@@ -1,5 +1,5 @@
 == Media Types
-The MIME media type for MF-JSON text is "application/json" https://www.iana.org/assignments/media-types/application/json[[RFC4627]],
-"application/json-seq" https://www.iana.org/assignments/media-types/application/json-seq[[RFC7464]],
-"application/geo+json" https://www.iana.org/assignments/media-types/application/geo+json[[RFC7946]], or
-"application/geo+json-seq" https://www.iana.org/assignments/media-types/application/geo+json-seq[[RFC8142]]. The default encoding is UTF-8.
+The MIME media type for MF-JSON text is "application/json" https://www.iana.org/assignments/media-types/application/json[[RFC 4627]],
+"application/json-seq" https://www.iana.org/assignments/media-types/application/json-seq[[RFC 7464]],
+"application/geo+json" https://www.iana.org/assignments/media-types/application/geo+json[[RFC 7946]], or
+"application/geo+json-seq" https://www.iana.org/assignments/media-types/application/geo+json-seq[[RFC 8142]]. The default encoding is UTF-8.

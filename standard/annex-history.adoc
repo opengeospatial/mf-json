@@ -5,8 +5,9 @@
 [width="90%",options="header"]
 |===
 |Date |Release |Editor | Primary clauses modified |Description
-|2018-12-01 |0.1 |Kyoung-Sook Kim |all |initial version
-|2018-01-25 |0.1 |Kyoung-Sook Kim, Taehoon Kim |all |first draft
-|2019-04-21 |0.1 |Kyoung-Sook Kim |trajectory |revision
-|2019-06-20 |0.1 |Kyoung-Sook Kim |prism |revision
+|2018-12-01 |1.0 |Kyoung-Sook Kim |all |initial version
+|2018-01-25 |1.0 |Kyoung-Sook Kim, Taehoon Kim |all |first draft
+|2019-04-21 |1.0 |Kyoung-Sook Kim |trajectory |revision
+|2019-06-20 |1.0 |Kyoung-Sook Kim |prism |revision
+|2019-07-27 |1.0 |Kyoung-Sook Kim, Taehoon Kim |requirement, conformance |addition
 |===

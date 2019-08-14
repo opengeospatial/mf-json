@@ -3,6 +3,7 @@
 [[Bibliography]]
 = Bibliography
 
+////
 [NOTE]
 .Example Bibliography (Delete this note).
 ===============================================
@@ -19,13 +20,14 @@ Springer LNCS is widely used in technical and computer science journals and othe
 [n] Web: Author Surname, A.: Title, http://Website-Url
 
 ===============================================
+////
 
 ((( Example )))
 [#WGS84, reftext='[{counter:ref-num}]']
 [1] National Imagery and Mapping Agency, "Department of Defense World Geodetic System 1984: Its Definition and Relationships with Local Geodetic Systems", Third Edition, 1984.
 
-[#UCUM, reftext='[{counter:ref-num}]']
-[2] Unified Code for Units of Measure (UCUM), https://unitsofmeasure.org
+[#UNCODES, reftext='[{counter:ref-num}]']
+[2] Rec 20 – Codes for Units of Measure Used in International Trade, UN Centre for Trade Facilitation and Electronic Business (UN/CEFACT), https://www.unece.org/uncefact/codelistrecs.html
 
 [#EPSG, reftext='[{counter:ref-num}]']
 [3] EPSG Geodetic Parameter Dataset, http://www.epsg.org
@@ -38,3 +40,10 @@ Springer LNCS is widely used in technical and computer science journals and othe
 
 [#OBJ, reftext='[{counter:ref-num}]']
 [6] Wavefront OBJ, https://en.wikipedia.org/wiki/Wavefront_.obj_file
+
+
+//////////////
+https://qroph.github.io/2018/07/30/smooth-paths-using-catmull-rom-splines.html
+[#UCUM, reftext='[{counter:ref-num}]']
+[2] Unified Code for Units of Measure (UCUM), https://unitsofmeasure.org
+//////////////

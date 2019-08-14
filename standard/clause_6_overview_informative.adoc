@@ -3,14 +3,14 @@
 This document provides an alternative to the OGC(R) Moving Features Encodings XML Core http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[[OGC 14-083r2]]
 and Simple Comma Separated Values (CSV) http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[[OGC 14-084r2]] standards
 by using JSON objects that is easily readable by machines and by humans.
-The JSON encoding formats for sharing moving feature data specified in this document leverages *GeoJSON* https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]]
+The JSON encoding formats for sharing moving feature data specified in this document leverages *IETF GeoJSON* https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]]
 that has already been commonly used in many applications and well supported by tools and software libraries.
 This standard defines two JSON encoding forms: *MF-JSON Trajectory* and *MF-JSON Prism*.
 If an application focuses on only the linear movement (i.e., the spatiotemporal line string) of moving points
 based on World Geodetic System 1984, with longitude and latitude units of decimal degrees,
 the application can share the trajectory data by using *only* GeoJSON, called *MF-JSON Trajectory*.
 For other cases, *MF-JSON Prism* can be used for expressing more complex movements of moving features.
-*MF-JSON Prism* is an extension of GeoJSON formats reserving new members of JSON objects (`"temporalGeometry", "temporalProperties", "crs", "trs", and "time"`) as "foreign members"
+*MF-JSON Prism* is an extension of GeoJSON formats reserving new members of JSON objects (`"temporalGeometry", "temporalProperties", "crs", "trs", "time"`, and etc.) as "foreign members"
 to represent spatiotemporal geometries, variations of measure, coordinate reference systems, and the time interval of moving features in the GeoJSON document.
 <<mf-encodings>> presents the overview of two forms of Moving Features JSON encodings.
 
@@ -22,10 +22,10 @@ image::mf-encodings.png[mf-encodings, pdfwidth=65%, width=65%, align="center"]
 .Coordinate Reference System (CRS)
 The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees.
 However, a moving feature needs a temporal coordinate system and may require an engineering coordinate reference system or parametric coordinate reference system
-to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes "crs" field as described in GeoJSON(2008)[[GEOJSON]].
+to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON:2008[4][[GEOJSON]].
 
 TIP: The existing GeoJSON implementation can ignore the new members of "temporalGeometry", "temporalProperties", "trs", and "time" in an MF-JSON document
-if there is no processing module for foreign members. Accordingly, MF-JSON is compatible with the GeoJSON encoding.
+if there is no processing module for foreign members. Accordingly, MF-JSON is compatible with the IETF GeoJSON encoding.
 
 <<mf-hurricane>> illustrates an example of the movement of a hurricane with a time-varying 2-dimensional geometry as a moving feature. Suppose the pressure centroid of the hurricane reported four locations
 at latexmath:[t_1, t_2, t_3], and latexmath:[t_4]. Its trajectory may be drawn depending on the interpolation method between two consecutive locations, such as latexmath:[A] (linear) or latexmath:[B] (Quadratic).
@@ -47,54 +47,4 @@ A leaf of a one parameter set of geometries is the geometry latexmath:[f(t)] at 
 *MF_OneParamGeometry* and *MF_Trajectory* is specialized as *MF_TemporalGeometry* and *MF_TemporalTrajectory* respectively, when the parameter is time representing a multiple of a single unit of measure
 such as year, day, or second for those types. *MF_TemporalTrajectory* is also a sub-type of *MF_TemporalGeometry*.
 The OGC Moving Features XML and CSV standard provide the encoding formats to represent linear trajectories of moving points, typically representing vehicles or pedestrians.
-<<mf-ogc>> shows an example for linear trajectories of two moving points A and B.
-Each trajectory has the start time and the end time. Both points start to move at t=10sec and end at t=19sec. While the movement of B does not change, the movement of A is changed at t=15sec.
-<<mf-xml>> and <<mf-csv>> shows how to encode the trajectories shown in <<mf-ogc>> by using two OGC Moving Features encoding standards.
-However, XML and CSV encoding standards have limitation on the representation of prism geometries such as *MF_PrismGeometry* and *MF_RigidTemporalGeometry*.
-They describe the implementation of only a type of *MF_TemporalTrajectory* with linear interpolation of movement.
-This MF-JSON standard specifies how to encode the same information by using GeoJSON; Additionally, it defines new JSON members to support applications that need more power expression of
-the movement of a feature whose geometry may be 0D, 1D, 2D, 3D geometric primitives, or their aggregations and continuously changes over time with various temporal interpolation methods.
-
-[#mf-ogc,reftext='{figure-caption} {counter:figure-num}']
-.Example for two linear trajectories
-image::mf-ogc.png[Components, pdfwidth=70%, width=70%, align="center"]
-
-[#mf-xml, reftext='{example-caption} {counter:example-num}']
-.Example {counter:example-num}: OGC Moving Features XML Core encoding of linear trajectories.
-[source, xml]
-<?xml version="1.0" encoding="UTF-8"?>
-  <mf:MovingFeatures>
-    <mf:sTBoundedBy offset="sec">
-         <gml:EnvelopeWithTimePeriod srsName="urn:ogc:def:crs:EPSG:6.6:4326">
-           <gml:lowerCorner>50.23 9.23</gml:lowerorner>
-           <gml:upperCorner>50.31 9.27</gml:upperCorner>
-           <gml:beginPosition>2012-01-17T12:33:41Z</gml:beginPosition>
-           <gml:endPosition>2012-01-17T12:37:00Z </gml:endPosition>
-        </gml:EnvelopeWithTimePeriod>
-    </mf:sTBoundedBy>
-    ......
-    <mf:foliation>
-        <mf:LinearTrajectory gml:id="LT0001" mfIdRef="A" start="10" end="15">
-            <gml:posList>11.0 2.0 12.0 3.0</gml:posList>
-            <mf:Attr>walking,1</mf:Attr>
-        </mf:LinearTrajectory>
-        <mf:LinearTrajectory gml:id="LT0002" mfIdRef="B" start="10" end="19">
-            <gml:posList>10.0 2.0 11.0 3.0</gml:posList>
-            <mf:Attr>walking,2</mf:Attr>
-        </mf:LinearTrajectory>
-        <mf:LinearTrajectory gml:id="LT0003" mfIdRef="A" start="15" end="19">
-           <gml:posList>12.0 3.0 10.0 3.0</gml:posList>
-           <mf:Attr>walking,2</mf:Attr>
-        </mf:LinearTrajectory>
-    </mf:foliation>
- </mf:MovingFeatures>
-
-
-[#mf-csv, reftext='{example-caption} {counter:example-num}']
-[source, csv]
-.Example {counter:example-num}: OGC Moving Features CSV encoding of linear trajectories.
-@stboundedby,urn:x-ogc:def:crs:EPSG:6.6:4326,2D,50.23 9.23,50.31 9.27,2012-01-17T12:33:41Z,2012-01-17T12:37:00Z,sec
-@columns,mfidref,trajectory,state,xsd:token,”type code”,xsd:integer
-A,10,15,11.0 2.0 12.0 3.0,walking,1
-B,10,19,10.0 2.0 11.0 3.0,walking,2
-A,15,19,12.0 3.0 10.0 3.0,walking,2
+A sample data of OGC Moving Features XML and CSV encoding is provided in <<sampleXML>>.

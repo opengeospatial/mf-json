@@ -1,6 +1,6 @@
 == Conventions
 This sections provides details and examples for any conventions used in the document.
-Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+Examples of conventions are symbols, abbreviations, or special notes regarding how to read the document.
 
 === Identifiers
 The normative provisions in this specification are denoted by the URI
@@ -24,27 +24,32 @@ Unified Modeling Language (UML) static structure diagrams appearing in this docu
 
 === Abbreviated terms
 
-The following symbols and abbreviated terms are used in this best practice paper:
+The following symbols and abbreviated terms are used in this standard:
 
 [width="99%", cols="2,8"]
 |=========
-|API	| Application Program Interface
 |CRS	| Coordinate Reference Systems
-|CRUD | Create, Read, Update, Delete
 |CSV	| Comma Separated Values
-|HTTP	| Hypertext Transfer Protocol
 |IETF | Internet Engineering Task Force
 |ISO	| International Organization for Standardization
 |JSON | JavaScript Object Notation
-|OASIS|	Organization for the Advancement of Structured Information Standards
 |OGC	| Open Geospatial Consortium
-|REST | Representational State Transfer
 |UML  | Unified Modeling Language
 |URI  | Uniform Resource Identifiers
 |URL  | Uniform Resource Locators
-|WKT  |	Well Known Text
 |XML	| Extensible Markup Language
+|0D   | Zero Dimensional
 |1D   | One Dimensional
 |2D	  | Two Dimensional
 |3D	  | Three Dimensional
 |=========
+
+
+/////////
+|API	| Application Program Interface
+|CRUD | Create, Read, Update, Delete
+|HTTP	| Hypertext Transfer Protocol
+|OASIS|	Organization for the Advancement of Structured Information Standards
+|REST | Representational State Transfer
+|WKT  |	Well Known Text
+/////////

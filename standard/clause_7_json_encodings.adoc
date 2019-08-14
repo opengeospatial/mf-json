@@ -2,8 +2,8 @@
 
 This clause specifies the structure and content of JSON (JavaScript Object Notation) [https://www.ietf.org/rfc/rfc7159.txt[IETF RFC7159]]
 encoding implementation for the conceptual model of moving features described in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008].
-Moving Features JSON Encodings (MF-JSON) has two encoding formats: *MF-JSON Trajectory* for instances of the MF_TemporalGeometry type with linear interpoation and
-*MF-JSON Prism* that contains new members to describe instances of the MF_PrismGeometry (or MF_RigidTemporalGeometry) type in the ISO coneptual model.
+Moving Features JSON Encodings (MF-JSON) has two encoding formats: *MF-JSON Trajectory* for instances of the MF_TemporalGeometry type with linear interpolation and
+*MF-JSON Prism* that contains new members to describe instances of the MF_PrismGeometry (or MF_RigidTemporalGeometry) type in the ISO conceptual model.
 
 
 [IMPORTANT]

@@ -2,14 +2,14 @@
 This document defines the structure and content of JSON (JavaScript Object Notation) [https://www.ietf.org/rfc/rfc7159.txt[IETF RFC7159]]
 encoding implementation of the conceptual model for moving features described in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008].
 In common, a moving feature is a geographic feature whose location changes over time containing zero or more thematic attributes.
-Such a feature may be a car, an airplane, a ship, or something alike.
+Such a feature may be a car, a pedestrian, an airplane, a ship, or something alike.
 The geometry of a moving feature to express its motion is defined as a one parameter set of geometries that may be viewed as a set of leaves or
 a set of trajectories as shown in the <<mf-concept>>.
 A leaf represents the geometry of the moving feature at a particular value of the parameter (e.g., a point in time) and
 a trajectory is a curve that represents the path of a point in the geometry of the moving feature as it moves with respect to the parameter (e.g., time).
 
 [#mf-concept,reftext='{figure-caption} {counter:figure-num}']
-.Feature Movement: Trajectory, Leaf, Foliation, and Prism [ISO 19141:2008]
+.Feature Movement: trajectory, leaf, foliation, and prism [ISO 19141:2008]
 image::mf-concept.png[Conceptual Moving Feature, pdfwidth=60%, width=60%, align="center"]
 
 In the illustration above, a 2D rectangle moves, rotates, and shrink through time.
@@ -22,17 +22,17 @@ If viewed in a 4 dimensional spatiotemporal coordinate system, the points on the
 This specification of Moving Features JSON encodings extends IETF GeoJSON Format https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]] to describe two types of dynamic attribute of a feature
 or feature collection in a JSON document as follows:
 
-* _The spatial change over time (temporal geometry)_, representing the movement of the rigid or nonrigid body of a feature; and
-* _The thematic change over time (temporal property)_, representing the variation of the value of any descriptive characteristic of a feature.
+* _Temporal geometry_: The spatial change over time, representing the movement of the rigid or nonrigid body of a feature; and
+* _Temporal property_: The thematic change over time, representing the variation of the value of any descriptive characteristic of a feature.
 
 The JSON encodings provide an alternative to the OGC(R) Moving Features Encodings XML Core http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[[OGC 14-083r2]] and
-Simple Comma Separated Values (CSV) http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[[OGC 14-084r2]] standards by using GeoJSON https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]].
+Simple Comma Separated Values (CSV) http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[[OGC 14-084r2]] standards by using IETF GeoJSON https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]].
 Moreover, it can encompass the movement of 1-dimensional, 2-dimensional, 3-dimensional geometric primitives, and their aggregation, as well as moving points and their trajectories.
-For exmaple, the representation of the following phenomena in a spatiotemporal domain is scope of this specification:
+For example, the representation of the following phenomena in a spatiotemporal domain is scope of this specification:
 
 * _Discrete phenomena_, which exist only on a set of instants, such as road accidents;
 * _Stepwise phenomena_, where the changes of locations are abrupt at an instant, such as administrative boundaries;
 * _Continuous phenomena_, whose locations move continuously for a period in time, such as vehicles, typhoons, or floods.
 
-This specification does not address partial motions of parts of bodies and the dimensonal deformation of the feature (e.g., from 1-d geometry to 0-d geometry).
+This specification does not address partial motions of parts of bodies in a primitive movement and the dimensional deformation of the feature (e.g., from 1-d geometry to 0-d geometry).
 Also the succession of either features or their association is out of scope in this specification.

@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://www.opengis.net/spec/movingfeatures/json/1.0/trajectory/MF-JSON_Trajectory.schema.json",
+  "type": "object",
+  "title": "OGC Moving Feature JSON Trajecotry schema",
+  "required": [ "type" ],
+  "oneOf":[
+    {"$ref": "#/definitions/feature"},
+    {"$ref": "#/definitions/featureCollection"}
+  ],
+  "definitions": {
+    "feature": {
+      "title": "Feature",
+      "description": "A MF-JSON trajectory feature",
+      "$id": "#/definitions/feature",
+      "type": "object",
+      "required": ["geometry", "properties"],
+      "properties": {
+        "type": {"type": "string", "enum": ["Feature"]},
+        "id": {"type": ["string", "number"]},
+        "geometry": {"$ref": "#/definitions/trajectory"}
+        },
+        "properties": {
+          "type": "object",
+          "required": ["datetimes"],
+          "properties": {
+            "datetimes": {
+              "type": "array",
+              "uniqueItems": true,
+              "minItems": 2,
+              "items": {"type": "string", "format": "date-time"}
+            }
+          }
+        }
+      }
+    },
+    "featureCollection": {
+      "title": "FeatureCollection",
+      "description": "A MF-JSON trajectory feature collection",
+      "$id": "#/definitions/featureCollection",
+      "type": "object",
+      "required": ["features"],
+      "properties": {
+        "type": {"type": "string", "enum": ["FeatureCollection"]},
+        "features": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/feature"}
+        }
+      }
+    },
+    "trajectory": {
+      "title": "Geometry of trajectory (LineString)",
+      "$id": "#/definitions/trajectory",
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": {"type": "string", "enum": ["LineString"]},
+        "coordinates": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "items": {"type": "number"}
+          }
+        }
+    }
+  }
+}

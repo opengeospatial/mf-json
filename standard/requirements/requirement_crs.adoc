@@ -1,8 +1,22 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 2.#* {set:cellbgcolor:#CACCCE} |
-http://www.opengis.net/spec/movingfeatures/json/1.0/prism/crs +
-A CoordinateReferenceSystem object SHALL have two mandatory members of `"type"` and `"properties"`
-to describe an instance of Named CRS, Linked CRS, or Default CRS.
+|*Requirement 2.26* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs +
+A CoordinateReferenceSystem object SHALL have two mandatory members of `"type"` and `"properties"`.
+The value of the `"type"` member SHALL be one of string "name" and "link".
+The value of the `"properties"` member SHALL be a JSON object with three optional members
+named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON null value.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.27* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/named +
+A named CRS object SHALL have the value of the `"type"` = `"name"`.
+And the value of the `"properties"` member SHALL be a JSON object containing
+a `"name"` member whose value is a string identifying a coordinate reference system.
+{set:cellbgcolor:#FFFFFF}
+|*Requirement 2.28* {set:cellbgcolor:#CACCCE} |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/linked +
+A linked CRS object SHALL have the value of the `"type"` = `"link"`.
+And the value of the `"properties"` member SHALL be a JSON object containing
+a `"href"` member whose value is a dereferenceable URI.
 {set:cellbgcolor:#FFFFFF}
 |===

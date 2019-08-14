@@ -5,15 +5,327 @@
 [NOTE]
 Ensure that there is a conformance class for each requirements class and a test for each requirement (identified by requirement name and number)
 
-=== Conformance Class A
+=== Conformance Test Class: MF-JSON Trajectory Encoding
 
-==== Requirement 1
-[cols=">20h,<80d",width="100%"]
+==== MF-JSON Trajectory file
+A MF-JSON Trajectory file SHALL contain a LinearTrajectory object or a set of LinearTrajectory objects having a compliance with the IETF GeoJSON specification.
+[cols=">20h,<80a",width="100%"]
 |===
-|Test id: |/conf/conf-class-a/req-name-1
-|Requirement: |/req/req-class-a/req-name-1
-|Test purpose: | Verify that...
-|Test method: | Inspect...
+|Test id: | conf/trajectory
+|Requirement: | req/trajectory/GeoJSON
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
 |===
 
-==== Requirement 2
+==== LinearTrajectory object
+A LinearTrajectory object SHALL be a GeoJSON Feature object that has two MANDATORY members of `"geometry"` and `"properties"`.
+The value of the `"geometry"` member SHALL be a LineString Geometry object, having `"type"` = `"LineString"`.
+The value of the `"properties"` member SHALL be a GeoJSON object that has at least a member with the named `"datetimes"`.
+The value of the `"datetimes"` member is a JSON array.
+The number of elements in the array of the `"coordinates"` value in the Geometry object SHALL more than two positions.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/trajectory/lineartrajectory
+|Requirement: |
+* req/trajectory/lineartrajectory
+* req/trajectory/lineartrajectory/geometry
+* req/trajectory/lineartrajectory/propeties
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== Datetimes
+Each element in the array of the `"datetimes"` value SHALL be a instant object.
+An instant object is only a JSON string encoded by ISO 8601 field-based formats using `Z` or the number of milliseconds since midnight (00:00 a.m.) on January 1, 1970, in UTC.
+The array of the `"datetimes"` value SHALL be a monotonic increasing sequence.
+There is no instant object that has the same value as any other element.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/trajectory/datetimes
+|Requirement: |
+* req/trajectory/datetimes
+* req/trajectory/datetimes/monotonic
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== Constraints
+The number of elements in both arrays of the `"coordinates"` value and the `"datetimes"` value SHALL be equal.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/trajectory/constraints
+|Requirement: | req/trajectory/constraints
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+=== Conformance Test Class: MF-JSON Prism Encoding
+
+==== MF-JSON Prism file
+A MF-JSON Prism file SHALL be compatible with the IETF GeoJSON Format.
+A JSON object in an MF-JSON Prism file SHALL be encoded by one of the Object types defined in this standard,
+i.e., TemporalGeometry, TemporalProperties, CoordinateReferenceSystem, MovingFeature, MovingFeatureCollection, LifeSpan, BoundingBox, Geometry, Properties, and MotionCurve.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism
+|Requirement: |
+* req/prism/GeoJSON
+* req/prism/object
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== Conflict
+Two encodings of MF-JSON Prism and MF-JSON Trajectory SHALL be not able to coexist with each other in a GeoJSON Feature object.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/conflict
+|Requirement: | req/prism/conflict
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== TemporalGeometry object
+A TemporalGeometry object SHALL have at least a mandatory member with the named `"type"` and its value SHALL be one of string
+"MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".
+The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
+If no CRS instance can be so acquired from upper-level braces of a JSON object, the default spatial CRS (and temporal CRS) SHALL be applied.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/tgeometry
+|Requirement: |
+* req/prism/tgeometry
+* req/prism/tgeometry/crs
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== TemporalPrimitiveGeometry object
+A TemporalPrimitiveGeometry object SHALL have at least three mandatory members of `"type"`, `"datetimes"`, and `"coordinates"`.
+The value of the `"type"` member SHALL be one of string "MovingPoint", "MovingLineString", "MovingPolygon", and "MovingPointCloud".
+The value of the `"datetimes"` member SHALL be a JSON array of a sequence of monotonic increasing instants, having at least one element that is not `null`.
+The value of the `"coordinates"` member SHALL be a JSON array of a sequence of leaf geometries of a temporal geometry, having at least one element that is not `null` and its expression is depending on the `"type"`.
+The value of the `"interpolation"` member SHALL be a MotionCurve object.
+The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
+If the TemporalPrimitiveGeometry object has no member with the name `"interpolation"`, the default MotionCurve object (`"Linear"`) SHALL be applied.
+If no CRS instance can be so acquired from upper-level braces of a JSON object, the default spatial CRS (and temporal CRS) SHALL be applied.
+The number of elements in both arrays of the `"coordinates"` value and the `"datetimes"` value SHALL be equal.
+The number of elements in both arrays of the `"orientations"` value and the `"datetimes"` value SHALL be equal.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/tgeometry/primitive
+|Requirement: |
+* req/prism/tgeometry/primitive
+* req/prism/tgeometry/primitive/interpolation
+* req/prism/tgeometry/primitive/crs
+* req/prism/tgeometry/primitive/constraint
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== TemporalPrimitiveGeometry object type
+A MovingPoint object SHALL have the value of the `"type"` = `"MovingPoint"` and the value of the `"coordinates"` member SHALL be a list of Point coordinates to construct a 0D leaf geometry (point) corresponding to each instant in order.
+A MovingLineString object SHALL have the value of the `"type"` = `"MovingLineString"` and the value of the `"coordinates"` member SHALL be a list of LineString coordinate arrays to construct a 1D leaf geometry (linestring) corresponding to each instant in order.
+A MovingPolygon object SHALL have the value of the `"type"` = `"MovingPolygon"` and the value of the `"coordinates"` member SHALL be a list of Polygon coordinate arrays to construct a 2D leaf geometry (polygon) corresponding to each instant in order.
+A MovingPointCloud object SHALL have the value of the `"type"` = `"MovingPointCloud"` and the value of the `"coordinates"` member SHALL be a list of MultiPoint 3D coordinate arrays to construct a set of points as a leaf geometry corresponding to each instant in order.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/tgeometry/primitive/type
+|Requirement: |
+* req/prism/tgeometry/primitive/movingpoint
+* req/prism/tgeometry/primitive/movinglinestring
+* req/prism/tgeometry/primitive/movingpolygon
+* req/prism/tgeometry/primitive/movingpointcloud
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== 3D model
+The 3D model SHALL be transformed into the fixed local coordinate reference system whose bound is -0.5 to 0.5 for each axis and unit is meter.
+The coordinate reference system for the 3D model SHALL be a right-handed coordinate system.
+The value of the `"base"` member SHALL be a URL to address an OBJ file of a 3D model data.
+The value of the `"orientations"` member SHALL be a JSON array to represent a transformation matrix.
+The size of the element in array of the `"orientations"` value SHALL be 16.
+The `"orientations"` member SHALL be accompanied with the `"base"` member.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/tgeometry/primitive/3dmodel
+|Requirement: |
+* req/prism/tgeometry/primitive/3dmodel
+* req/prism/tgeometry/primitive/base
+* req/prism/tgeometry/primitive/orientations
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== TemporalComplexGeometry object
+A TemporalComplexGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
+The value of the `"type"` member SHALL be a "MovingGeometryCollection" string.
+The value of the `"prisms"` member SHALL be a JSON array of a set of TemporalPrimitiveGeometry instances, having at least one element in the array.
+The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
+If no CRS instance can be so acquired from upper-level braces of a JSON object, the default spatial CRS (and temporal CRS) SHALL be applied.
+A MovingGeometryCollection object SHALL the value of the `"type"` = `"MovingGeometryCollection"` and each element of `"prisms"` SHALL be an TemporalPrimitiveGeometry with one of types of `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
+The leaf geometry at a time position must be an instance of type `"GeometryCollection"` of GeoJSON, which is the union of each leaf of any temporal geometries at the same time.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/tgeometry/complex
+|Requirement: |
+* req/prism/tgeometry/complex
+* req/prism/tgeometry/complex/crs
+* req/prism/tgeometry/complex/movinggeometrycollection
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== TemporalProperties object
+A TemporalProperties object SHALL be a JSON array of ParametricValues objects.
+A ParametricValues object SHALL have at least a mandatory member with the named `"datetimes"`
+and more than one member with the name latexmath:[@propertyN],
+where latexmath:[@propertyN] is any string defined by an application as a temporal property.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/tproperties
+|Requirement: |
+* req/prism/tproperties
+* req/prism/tproperties/pvalues
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== latexmath:[@propertyN] object
+A latexmath:[@propertyN] object SHALL have at least two mandatory members of `"type"` and `"values"`.
+The value of the `"type"` member SHALL be one of string "measure", "text", and "image".
+The value of the `"values"` member SHALL be a JSON array whose element is a string (including null, true and false) or numeric value.
+The value of the `"interpolation"` member SHALL be only one of string "Discrete", "Step", "Linear", and "Regression" or a URL indicating an InterpolationCode defined in OGC TimeseriesML 1.0 [OGC 15-042r3].
+The value of the `"form"` member SHALL be a JSON string as a common code (3 characters) described in the list of Code List Rec 20 by the UN Centre for Trade Facilitation and Electronic Business (UN/CEFACT)
+or a URI denoting a unit-of-measure defined in a web resource.
+The number of elements in both arrays of the `"datetimes"` value and the `"values"` value SHALL be equal.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/tproperties/property
+|Requirement: |
+* req/prism/tproperties/pvalues/property
+* req/prism/tproperties/pvalues/property/interpolation
+* req/prism/tproperties/pvalues/property/form
+* req/prism/tproperties/pvalues/property/constraint
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== CoordinateReferenceSystem object
+A CoordinateReferenceSystem object SHALL have two mandatory members of `"type"` and `"properties"`.
+The value of the `"type"` member SHALL be one of string "name" and "link".
+The value of the `"properties"` member SHALL be a JSON object with three optional members named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON null value.
+A named CRS object SHALL have the value of the `"type"` = `"name"` and the value of the `"properties"` member SHALL be a JSON object containing a `"name"` member whose value is a string identifying a coordinate reference system.
+A linked CRS object SHALL have the value of the `"type"` = `"link"` and the value of the `"properties"` member SHALL be a JSON object containing a `"href"` member whose value is a dereferenceable URI.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/crs
+|Requirement: |
+* req/prism/crs
+* req/prism/crs/named
+* req/prism/crs/linked
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== MovingFeature object
+A MovingFeature object SHALL be a GeoJSON Feature object that have two mandatory members of `"type"` and `"temporalGeometry"`.
+The value of the `"type"` member SHALL be a `"Feature"` string.
+The value of the `"temporalGeometry"` member SHALL be a JSON object to represent a TemporalGeometry object, not allowing the JSON `null`.
+The value of the `"temporalProperties"` member SHALL be a JSON array of TemporalProperties objects, allowing the JSON `null`.
+The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
+The value of the `"bbox"` member SHALL be a JSON array to represent a BoundingBox object, allowing the JSON `null`.
+The value of the `"time"` member SHALL be a JSON array to represent a LifeSpan object, allowing the JSON `null`.
+The value of the `"geometry"` member SHALL be any JSON object or a JSON null value for the `"geometry"` member in a GeoJSON Feature object.
+The value of the `"properties"` member SHALL be any JSON object or a JSON null value for the `"properties"` member in a GeoJSON Feature object.
+If no CRS instance can be so acquired in a file, the default spatial CRS (and temporal CRS) SHALL be applied to the object.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/feature
+|Requirement: |
+* req/prism/feature
+* req/prism/feature/temporalProperties
+* req/prism/feature/crs
+* req/prism/feature/bbox
+* req/prism/feature/time
+* req/prism/feature/geometry
+* req/prism/feature/properties
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== MovingFeatureCollection object
+A MovingFeatureCollection object SHALL be a GeoJSON FeatureCollection object that have two mandatory members of `"type"` and `"features"`.
+The value of the `"type"` member SHALL be a `"FeatureCollection"` string.
+The value of the `"features"` member SHALL be a JSON array whose element is a MovingFeature object.
+The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
+The value of the `"bbox"` member SHALL be a JSON array to represent a BoundingBox object, allowing the JSON `null`.
+The value of the `"time"` member SHALL be a JSON array to represent a LifeSpan object, allowing the JSON `null`.
+The value of the `"label"` member SHALL be a JSON string to indicate an alias of the collection, allowing the JSON `null`.
+If no CRS instance can be so acquired in a file, the default spatial CRS (and temporal CRS) SHALL be applied to the object.
+The number of elements in an array of the `"features"` value SHALL be more than 1.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/featurecollection
+|Requirement: |
+* req/prism/featurecollection
+* req/prism/featurecollection/crs
+* req/prism/featurecollection/bbox
+* req/prism/featurecollection/time
+* req/prism/featurecollection/label
+* req/prism/featurecollection/constraints
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== LifeSpan object
+A LifeSpan object SHALL be a JSON array to represent a time interval with two instants of latexmath:[t_s] and latexmath:[t_e].
+Two elements of latexmath:[t_s, t_e] SHALL be latexmath:[t_s \leq t_e].
+The expression of an element in the array SHALL refer to the default temporal CRS object (ISO8601).
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/time
+|Requirement: |
+* req/prism/time
+* req/prism/time/element
+* req/prism/time/crs
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== BoundingBox object
+A BoundingBox object SHALL be a JSON array of length latexmath:[2*n] where latexmath:[n] is the number of dimensions represented in the spatial bounding box.
+The elements in the array SHALL be two coordinates (lower-bound coordinate and upper-bound coordinate).
+The order of values SHALL follow the axes order of single position of longitude, latitude, and elevation.
+The expression of an element in the array SHALL refer to the default spatial CRS object (WGS84).
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/bbox
+|Requirement: |
+* req/prism/bbox
+* req/prism/bbox/element
+* req/prism/bbox/crs
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
+
+==== MotionCurve object
+The `"coordinate"` member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
+The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or
+a URL to address a user-defined parametric curve. A user-defined parametric curve SHALL be a JSON object which has three members of `"crs"`, `"trs"`, and `"equations"`.
+The value of the `"equations"` member SHALL be not empty and be a JSON array whose element is a user-defined parametric segment having two members of `"coefficients"` and `"time"`.
+The value of `"coefficients"` member SHALL be a JSON array whose element is an array of coefficients of the interpolation formula of a temporal position.
+The order of elements in array of the `"coefficients"` value for the interpolation formula of a temporal position SHALL follow the order of the spatial CRS.
+The expression of an element in the array of the `"time"` value SHALL refer to the temporal CRS object.
+[cols=">20h,<80a",width="100%"]
+|===
+|Test id: | conf/prism/tgeometry/interpolation
+|Requirement: |
+* req/prism/tgeometry/interpolation
+* req/prism/tgeometry/interpolation/userdefined
+* req/prism/tgeometry/interpolation/userdefined/coefficients
+* req/prism/tgeometry/interpolation/userdefined/time
+|Test purpose: | Verify that this requirement is satisfied.
+|Test method: | Inspect the document to verify the above.
+|===
