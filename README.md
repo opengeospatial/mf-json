@@ -51,7 +51,8 @@ in the change request form will help the SWG adjudicate and prioritize the reque
 2. On command line: asciidoctor -a stylesheet=./example.css index.adoc
 
 **asciidoctor standard\standard_document.adoc
-**asciidoctor-pdf -r asciidoctor-mathematical -a pdf-stylesdir=. -a pdf-style=asciidoctor -o output.pdf index.adoc
+
+**asciidoctor-pdf -r asciidoctor-mathematical standard\standard_document.adoc
 
 
 [Document rendering example](https://ksookim.github.io/mf-json)

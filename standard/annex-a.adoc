@@ -59,6 +59,8 @@ The number of elements in both arrays of the `"coordinates"` value and the `"dat
 |Test method: | Inspect the document to verify the above.
 |===
 
+<<<
+
 === Conformance Test Class: MF-JSON Prism Encoding
 
 ==== MF-JSON Prism file
@@ -87,7 +89,7 @@ Two encodings of MF-JSON Prism and MF-JSON Trajectory SHALL be not able to coexi
 
 ==== TemporalGeometry object
 A TemporalGeometry object SHALL have at least a mandatory member with the named `"type"` and its value SHALL be one of string
-"MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", "MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".
+"MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", and "MovingGeometryCollection".
 The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
 If no CRS instance can be so acquired from upper-level braces of a JSON object, the default spatial CRS (and temporal CRS) SHALL be applied.
 [cols=">20h,<80a",width="100%"]
@@ -192,7 +194,7 @@ where latexmath:[@propertyN] is any string defined by an application as a tempor
 |Test method: | Inspect the document to verify the above.
 |===
 
-==== latexmath:[@propertyN] object
+==== @propertyN object
 A latexmath:[@propertyN] object SHALL have at least two mandatory members of `"type"` and `"values"`.
 The value of the `"type"` member SHALL be one of string "measure", "text", and "image".
 The value of the `"values"` member SHALL be a JSON array whose element is a string (including null, true and false) or numeric value.

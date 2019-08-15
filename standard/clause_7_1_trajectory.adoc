@@ -46,8 +46,8 @@ as long as any consecutive segments meet each other at a time instant.
 [NOTE]
 (GeoJSON) A position is an array of numbers. There MUST be two or more elements. The first two elements are longitude and latitude, or easting and northing,
 precisely in that order and using decimal numbers. Altitude or elevation MAY be included as an optional third element.
-The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84)
-<<WGS84>> datum, with longitude and latitude units of decimal degrees.
+The coordinate reference system for all GeoJSON coordinates is a geographic coordinate reference system, using the World Geodetic System 1984 (WGS 84)<<WGS84>> datum,
+with longitude and latitude units of decimal degrees.
 
 * The `"properties"` member of a GeoJSON Feature object has a member with the name `"datetimes"`. The value of the `"datetimes"` member is an array of a sequence of
 monotonic increasing time instants, having the same number of positions of the "coordinates" member. The value of a time instant is a JSON string using Z (e.g., 1985-04-12T23:20:50.52Z)

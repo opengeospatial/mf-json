@@ -22,7 +22,7 @@ image::mf-encodings.png[mf-encodings, pdfwidth=65%, width=65%, align="center"]
 .Coordinate Reference System (CRS)
 The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees.
 However, a moving feature needs a temporal coordinate system and may require an engineering coordinate reference system or parametric coordinate reference system
-to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON:2008[4][[GEOJSON]].
+to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON:2008<<GJSON2008>>.
 
 TIP: The existing GeoJSON implementation can ignore the new members of "temporalGeometry", "temporalProperties", "trs", and "time" in an MF-JSON document
 if there is no processing module for foreign members. Accordingly, MF-JSON is compatible with the IETF GeoJSON encoding.
@@ -34,14 +34,14 @@ The ISO conceptual schema represents the motion consisting of translation and/or
 
 [#mf-hurricane,reftext='{figure-caption} {counter:figure-num}']
 .Example of a moving feature: a hurricane and its properties
-image::mf-hurricane.png[mf-hurricane, pdfwidth=70%, width=70%, align="center"]
+image::mf-hurricane.png[mf-hurricane, pdfwidth=90%, width=90%, align="center"]
 
 [#mf-iso,reftext='{figure-caption} {counter:figure-num}']
 .Components of the moving feature packages in ISO 19141:2008
 image::mf-iso.png[Components, pdfwidth=95%, width=95%, align="center"]
 
 The data model defined in https://www.iso.org/standard/41445.html[ISO 19141:2008] is based on two geometric types: *MF_OneParamGeometry* and *MF_Trajectory*.
-*MF_OneParamGeometry* is the type to describe a function latexmath:[f] from an interval latexmath:[t \in [a, b]] such that latexmath:[f(t)] is a geometry.
+*MF_OneParamGeometry* is the type to describe a function latexmath:[f] from an interval latexmath:[t \in][latexmath:[a, b]] such that latexmath:[f(t)] is a geometry.
 A leaf of a one parameter set of geometries is the geometry latexmath:[f(t)] at a particular value latexmath:[t] of the parameter.
 *MF_Trajectory* describes a one-parameter geometry whose cross section is a point as a leaf.
 *MF_OneParamGeometry* and *MF_Trajectory* is specialized as *MF_TemporalGeometry* and *MF_TemporalTrajectory* respectively, when the parameter is time representing a multiple of a single unit of measure

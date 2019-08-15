@@ -16,12 +16,13 @@
 :stem: latexmath, pass
 :toc-title: Contents
 :linkcss:
+:autofit-option:
 :example-caption: Example
 
 = {title}
 
-ifndef::backend-pdf[]
 <<<
+
 [cols = ">",frame = "none",grid = "none"]
 |===
 |{set:cellbgcolor:#FFFFFF}
@@ -66,6 +67,7 @@ Recipients of this document are invited to submit, with their comments, notifica
 |===
 
 <<<
+
 License Agreement
 
 [small]#Permission is hereby granted by the Open Geospatial Consortium, ("Licensor"), free of charge and subject to the terms set forth below, to any person obtaining a copy of this Intellectual Property and any associated documentation, to deal in the Intellectual Property without restriction (except as set forth below), including without limitation the rights to implement, use, copy, modify, merge, publish, distribute, and/or sublicense copies of the Intellectual Property, and to permit persons to whom the Intellectual Property is furnished to do so, provided that all copyright notices on the intellectual property are retained intact and that each person to whom the Intellectual Property is furnished agrees to the terms of this Agreement.#
@@ -81,6 +83,7 @@ Recipients of this document are invited to submit, with their comments, notifica
 [small]#Except as contained in this notice, the name of LICENSOR or of any other holder of a copyright in all or part of the Intellectual Property shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Intellectual Property without prior written authorization of LICENSOR or such copyright holder. LICENSOR is and shall at all times be the sole entity that may authorize you or any third party to use certification marks, trademarks or other special designations to indicate compliance with any LICENSOR standards or specifications. This Agreement is governed by the laws of the Commonwealth of Massachusetts. The application to this Agreement of the United Nations Convention on Contracts for the International Sale of Goods is hereby expressly excluded. In the event any provision of this Agreement shall be deemed unenforceable, void or invalid, such provision shall be modified so as to make it valid and enforceable, and as so modified the entire Agreement shall remain in full force and effect. No decision, action or inaction by LICENSOR shall be construed to be a waiver of any rights or remedies available to it.#
 
 <<<
+
 toc::[]
 
 <<<

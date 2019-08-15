@@ -1,33 +1,27 @@
-[width="90%",cols="2,6"]
+[cols="1h,3a",width="100%"]
 |===
-|*Requirement 2.20* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.20* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties +
 A TemporalProperties object SHALL be a JSON array of ParametricValues objects.
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.21* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.21* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues +
 A ParametricValues object SHALL have at least a mandatory member with the named `"datetimes"`
 and more than one member with the name latexmath:[@propertyN], where latexmath:[@propertyN]
 is any string defined by an application as a temporal property.
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.22* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.22* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property +
 A latexmath:[@propertyN] object SHALL have at least two mandatory members of `"type"` and `"values"`.
 The value of the `"type"` member SHALL be one of string "measure", "text", and "image".
 The value of the `"values"` member SHALL be a JSON array whose element is a string
 (including null, true and false) or numeric value.
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.23* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.23* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/constraint +
 The number of elements in both arrays of the `"datetimes"` value and the `"values"` value SHALL be equal.
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.24* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.24* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/interpolation +
 The value of the `"interpolation"` member SHALL be one of string
-"Discrete", "Step", "Linear", and "Regression" or a URL to address a codelist defined in OGC TimeseriesML 1.0 between neighboring points in a timeseries.
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.25* {set:cellbgcolor:#CACCCE} |
+"Discrete", "Step", "Linear", and "Regression" or a URL to address a code list defined in OGC TimeseriesML 1.0 between neighboring points in a timeseries.
+|*Requirement 2.25* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/form +
 The value of the `"form"` member SHALL be a common code (3 characters) described in the list of Code List Rec 20 [UN/CEFACT] or a URI denoting a unit-of-measure defined in a web resource.
-{set:cellbgcolor:#FFFFFF}
 |===
