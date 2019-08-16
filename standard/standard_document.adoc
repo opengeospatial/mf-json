@@ -31,7 +31,7 @@
 |Approval Date:   <yyyy-mm-dd>
 |Publication Date:   <yyyy-mm-dd>
 |External identifier of this OGC® document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
-|Internal reference number of this OGC® document:    19-045
+|Internal reference number of this OGC® document:    19-045r1
 |Version: n.n
 |Category: OGC® Implementation Standard
 |Editor: Kyoung-Sook KIM, Nobuhiro ISHIMARU
