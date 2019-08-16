@@ -22,9 +22,10 @@ Depending on the value of `"type"`, there are three expressions: Named CRS, Link
 ===== 7.2.3.1. Named CRS
 A Named CRS object indicates a coordinate reference system by name.
 In this case, the value of its `"type"` member is the string `"name"`.
-The value of its `"properties"` member is a JSON object containing a "name" member
+The value of its `"properties"` member is a JSON object containing a `"name"` member
 whose value is a string identifying a coordinate reference system (not JSON `null` value).
 The value of `"href"` and `"type"` is a JSON `null` value.
+This standard recommends an EPSG<<EPSG>> code as the value of `"name"`, such as "EPSG::4326."
 
 [#namedcrs, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Example of a named CRS object
@@ -65,8 +66,8 @@ Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.
   }
 }
 
+[#defaultcrs, reftext='7.2.3.3']
 ===== 7.2.3.3. Default CRS
-
 MF-JSON Prism defines two default CRS objects for a spatial CRS and a temporal CRS as follows:
 
 * http://www.opengis.net/def/crs/OGC/1.3/CRS84[WGS84] with longitude and latitude units of decimal degrees:

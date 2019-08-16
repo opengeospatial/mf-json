@@ -4,17 +4,15 @@ A TemporalGeometry object represents the movement of a moving feature, i.e., cha
 Comparing to MF-JSON Trajectory, MF-JSON Prism provides an encoding rule for conceptual schemas specifying
 prisms of the set of leaves (*MF_PrismGeometry* in ISO 19141) or trajectories (*MF_TemporalTrajectory* in ISO 19141).
 The TemporalGeometry object is modeled as a mapping function from latexmath:[t\in time]
-to a Geometry object latexmath:[g] of Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon,
-or GeometryCollection.
+to a Geometry object latexmath:[g] of Point, LineString, Polygon, or GeometryCollection.
 
 * A TemporalGeometry object is a JSON object that has at least three members with the name `"type"`, `"crs"`, and `"trs"` as shown in <<tgeometryjson>>.
-* The value of the `"type"` member is one of string `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, `"MovingPointCloud"`,
-`"MultiMovingPoint"`, `"MultiMovingLineString"`, `"MultiMovingPolygon"`, and `"MovingGeometryCollection"`.
+* The value of the `"type"` member is one of string `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, `"MovingPointCloud"`, and `"MovingGeometryCollection"`.
 The TemporalGeometry object is spefified with additional members depending upon the value of the `"type"` member.
 * The value of the `"crs"` and `"trs"` member is a JSON object to represent a CoordinateReferenceSystem (CRS) object (see <<crs>>).
 If an object has no `"crs"` and `"trs"` member, then it may acquire the CRS instances of
 the `"crs"` and `"trs"` member from upper-level braces of a JSON object.
-If no CRS instance can be so acquired in a file, the TemporalGeometry object assumes the default CRSs (see 7.2.3.3).
+If no CRS instance can be so acquired in a file, the TemporalGeometry object assumes the default CRSs (see <<defaultcrs>>).
 
 [#tgeometryjson, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Common members of a TemporalGeometry object
@@ -62,7 +60,7 @@ the object is specialized as a TemporalPrimitiveGeometry object with.
 The value specifies the type of a TemporalPrimitiveGeometry object
 for the interpretation of the array value of the "coordinates" member. Each type represents as follows:
 +
-[width="99%", cols="1,9", options="header"]
+[width="99%", cols="1,3a", options="header"]
 |=========
 | Types   |    Description
 | MovingPoint |  The type represents a trajectory of a time-parametered 0-dimensional (0D) geometric primitive (Point),
@@ -90,7 +88,7 @@ a sequence of monotonic increasing instants, having at least one element that is
 It does NOT allow a JSON `null` value. The expression of element instant is based on
 its temporal coordinate reference system that is given by the `"trs"` member.
 +
-[width="99%", cols="2,^4,4", options="header"]
+[width="99%", cols="2,^4,4a", options="header"]
 |=========
 | Types   |      Formats of the `"datetimes"` value  |  _Comments_
 | TimeInstant | [t1, t2, t3, ...]| _a list of monotonic increasing instants, i.e., latexmath:[t1 < t2 < t3 <...]_
@@ -131,7 +129,7 @@ of leaf geometries of a temporal geometry, having the same number of elements as
 Each leaf geometry corresponds to each instant element in the array value of `"datetimes"` in order.
 The value expression of this member is different depending on the `"type"` value as follows:
 +
-[width="99%", cols="1,^5,4", options="header"]
+[width="99%", cols="1,^5,4a", options="header"]
 |=========
 | Types   |      Formats of the `"coordinates"` value  |  _Comments_
 | MovingPoint | [ [x1,y1(,z1)], [x2,y2(,z2)], ... ] | _a list of Point coordinates to construct a 0D leaf geometry (point) corresponding to each instant in order_
@@ -185,27 +183,28 @@ to the Cartesian coordinate system, such as the Universal Transverse Mercator (U
 A coordinate of the base 3D model, latexmath:[(x, y, z)], transforms into a target 3D coordinate,
 latexmath:[(x', y', z')], by using the quaternions and the scaling factors,
 latexmath:[(x, y, z) \rightarrow (x', y', z')], as follows:
- $$
+
+[latexmath]
++++++++++++
 \begin{matrix}
-\begin{bmatrix}
-	x'\\  y'\\  z'\\ 1
-\end{bmatrix}
+  \begin{bmatrix}
+  	x'\\  y'\\  z'\\ 1
+  \end{bmatrix}
 &
 =
 &
-\begin{bmatrix}
-S_x(1 - 2(Y^2+Z^2)) & 2S_y(XY + ZW) & 2S_z(XZ-YW) & 0 \\
-2S_x(XY - ZW) & S_y(1 - 2(X^2+Z^2)) & 2S_z(YZ+XW) & 0 \\
-2S_x(XZ + YW) & 2S_y(YZ - XW) & S_z(1 - 2(X^2+Y^2)) & 0 \\
-0 & 0 & 0 & 1
-\end{bmatrix}
+  \begin{bmatrix}
+    S_x(1 - 2(Y^2+Z^2)) & 2S_y(XY + ZW) & 2S_z(XZ-YW) & 0 \\
+    2S_x(XY - ZW) & S_y(1 - 2(X^2+Z^2)) & 2S_z(YZ+XW) & 0 \\
+    2S_x(XZ + YW) & 2S_y(YZ - XW) & S_z(1 - 2(X^2+Y^2)) & 0 \\
+    0 & 0 & 0 & 1
+  \end{bmatrix}
 &
-\begin{bmatrix}
-	x\\ y\\ z\\ 1
-\end{bmatrix}
-\\
+  \begin{bmatrix}
+  	x\\ y\\ z\\ 1
+  \end{bmatrix}
 \end{matrix}
- $$
++++++++++++
 
 The scaling factor takes the form of a vector latexmath:[S = <S_x, S_y, S_z>], where latexmath:[S_x], latexmath:[S_y] and latexmath:[S_z]
 respectively is a coefficient against each axis to extend or shrink the base representation from the local engineer coordinate reference system

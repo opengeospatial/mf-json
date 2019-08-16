@@ -38,24 +38,3 @@ GeoJSON https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946].
 A Properties object is any JSON object or a JSON null value for
 the "properties" member in a GeoJSON Feature object defined in
 GeoJSON https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946].
-
-
-
-////////////////
-==== Requirement 2
-Paragraph - intro text for the requirement.
-
-Use the following table for Requirements, number sequentially.
-
-include::requirements/requirement.adoc[]
-
-Dictionary tables for requirements can be added as necessary. Modify the following example as needed.
-
-[width="90%",options="header"]
-|===
-|Names |Definition |Data types and values |Multiplicity and use
-|name 1 |definition of name 1 |float |One or more (mandatory)
-|name 2 |definition of name 2 |character string type, not empty |Zero or one (optional)
-|name 3 |definition of name 3 |GML:: Point PropertyType |One (mandatory)
-|===
-////////////////

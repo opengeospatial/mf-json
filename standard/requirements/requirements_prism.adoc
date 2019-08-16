@@ -1,23 +1,17 @@
-[cols="1,4",width="90%"]
+[cols="1h,3a",width="100%"]
 |===
-2+|*Requirements Class: MF-JSON Prism* {set:cellbgcolor:#CACCCE}
-2+|http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism {set:cellbgcolor:#FFFFFF}
+2+|*Requirements Class: MF-JSON Prism*
+2+|http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism
 |Target type | JSON object
-|Dependency |ISO 19141
-|Dependency |IETF RFC 3339
-|Dependency |IETF RFC 7946
-|*Requirement 2.1* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/GeoJSON +
+|Dependency |
+* ISO 19141
+* IETF RFC 3339
+* IETF RFC 7946
+|*Requirement 2.1*  |http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/GeoJSON +
 A MF-JSON Prism file SHALL be compatible with GeoJSON[IETF RFC 7946].
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.2* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/object +
+|*Requirement 2.2*  |http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/object +
 A JSON object in an MF-JSON Prism file SHALL be encoded by one of the Object types defined in this standard, i.e., TemporalGeometry, TemporalProperties, CoordinateReferenceSystem,
 MovingFeature, MovingFeatureCollection, LifeSpan, BoundingBox, Geometry, Properties, and MotionCurve.
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.3* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/conflict +
+|*Requirement 2.3*  |http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/conflict +
 The MF-JSON Prism format SHALL be taken priority over MF-JSON Trajectory when interpreting the movement of a feature.
-{set:cellbgcolor:#FFFFFF}
 |===
-
-///////////////
-SHALL be not able to coexist with each other in a GeoJSON Feature object.
-///////////////

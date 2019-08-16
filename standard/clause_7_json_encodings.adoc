@@ -17,7 +17,11 @@ MANDATORY:: If an object member is *mandatory*, its value SHOULD NOT be a JSON `
 OPTIONAL:: If an object member is *optional*, its value allows a JSON `null` value. The optional member and its `null` value can be excluded from a MF-JSON document.
 DEFAULT:: If an object member has a *default* value defined in this specification, the pair of member and value can be omitted in a MF-JSON document.
 
+<<<
+
 include::clause_7_1_trajectory.adoc[]
+
+<<<
 
 include::clause_7_2_prism.adoc[]
 

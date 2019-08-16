@@ -1,15 +1,12 @@
-[width="90%",cols="2,6"]
+[cols="1h,3a",width="100%"]
 |===
-|*Requirement 2.4* {set:cellbgcolor:#CACCCE} |
+|*Requirement 2.4*  |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry +
 A TemporalGeometry object SHALL have at least a mandatory member with the named `"type"` and its value SHALL be one of
-string "MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud",
-"MultiMovingPoint", "MultiMovingLineString", "MultiMovingPolygon", and "MovingGeometryCollection".
-{set:cellbgcolor:#FFFFFF}
-|*Requirement 2.5* {set:cellbgcolor:#CACCCE} |
+string "MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", and "MovingGeometryCollection".
+|*Requirement 2.5*  |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/crs +
 The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
 If no CRS instance can be so acquired from upper-level braces of a JSON object,
 the default spatial and temporal CRS SHALL be applied for the `"crs"` and `"trs"` member, respectively.
-{set:cellbgcolor:#FFFFFF}
 |===

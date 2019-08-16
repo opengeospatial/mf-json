@@ -14,7 +14,7 @@ software component that can invoke an operation from a server +
 /////
 
 === *base representation*
-<moving features> representation, using a local origin and local ordinate vectors, of a geometric object at a given reference time.
+<moving features> representation, using a local origin and local ordinate vectors, of a geometric object at a given reference time +
 [ ISO 19141:2008 ]
 
  NOTE 1: A rigid geometric object many undergo translation or rotation, but remains congruent with its base representation.
@@ -52,7 +52,7 @@ Conversion of data into a series of codes +
 [ ISO 11179-1:2004 ]
 
 === *engineering coordinate reference system*
-coordinate reference system based on an engineering datum
+coordinate reference system based on an engineering datum +
 [ OGC 18-005r4 ]
 
  EXAMPLES: Local engineering and architectural grids; coordinate reference system local to a ship or an orbiting spacecraft.
@@ -119,14 +119,14 @@ feature whose position changes over time +
 
 
 === *one parameter set of geometries*
-function latexmath:[f] from an interval latexmath:[t \in [a, b]] such that latexmath:[f(t)] is a geometry and for each point latexmath:[P \in f(a)] there is a one
-parameter set of points (called the trajectory of latexmath:[P]) latexmath:[P(t)]: latexmath:[[a, b]] latexmath:[\rightarrow P(t)] such that latexmath:[P(t) \in f(t)] +
+function latexmath:[f] from an interval latexmath:[t \in][latexmath:[a, b]] such that latexmath:[f(t)] is a geometry and for each point latexmath:[P \in f(a)] there is a one
+parameter set of points (called the trajectory of latexmath:[P]) latexmath:[P(t)]: [latexmath:[a, b]] latexmath:[\rightarrow P(t)] such that latexmath:[P(t) \in f(t)] +
 [ ISO 19141:2008 ]
 
  EXAMPLE: A curve C with constructive parameter (variable) t is a one parameter set of points c(t).
 
 === *one parameter set of values*
-function latexmath:[f] from an interval latexmath:[t \in [a, b]] such that latexmath:[f(t)] is a measure value latexmath:[m] in a plane with coordinate latexmath:[(t, m)]
+function latexmath:[f] from an interval latexmath:[t \in][latexmath:[a, b]] such that latexmath:[f(t)] is a measure value latexmath:[m] in a plane with coordinate latexmath:[(t, m)]
 
 
 === *parametric coordinate reference system*

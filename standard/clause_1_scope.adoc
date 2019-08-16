@@ -19,14 +19,14 @@ The set of points contained in all of the leaves, and in all of the trajectories
 The set of leaves also forms a foliation, meaning that there is a complete and separate representation of the geometry of the feature for each specific time.
 If viewed in a 4 dimensional spatiotemporal coordinate system, the points on the feature's geometry at different times are different points.
 
-This specification of Moving Features JSON encodings extends IETF GeoJSON Format https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]] to describe two types of dynamic attribute of a feature
+This specification of Moving Features JSON encodings extends IETF GeoJSON Format [https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946]] to describe two types of dynamic attribute of a feature
 or feature collection in a JSON document as follows:
 
 * _Temporal geometry_: The spatial change over time, representing the movement of the rigid or nonrigid body of a feature; and
 * _Temporal property_: The thematic change over time, representing the variation of the value of any descriptive characteristic of a feature.
 
-The JSON encodings provide an alternative to the OGC(R) Moving Features Encodings XML Core http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[[OGC 14-083r2]] and
-Simple Comma Separated Values (CSV) http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[[OGC 14-084r2]] standards by using IETF GeoJSON https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]].
+The JSON encodings provide an alternative to the OGC(R) Moving Features Encodings XML Core [http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC 14-083r2]] and
+Simple Comma Separated Values (CSV) [http://docs.opengeospatial.org/is/14-084r2/14-084r2.html[OGC 14-084r2]] standards by using IETF GeoJSON [https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946]].
 Moreover, it can encompass the movement of 1-dimensional, 2-dimensional, 3-dimensional geometric primitives, and their aggregation, as well as moving points and their trajectories.
 For example, the representation of the following phenomena in a spatiotemporal domain is scope of this specification:
 

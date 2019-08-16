@@ -28,12 +28,6 @@ The IETF GeoJSON format recommends a single coordinate reference system based o
 However, a moving feature needs a temporal coordinate system and may require an engineering/parametric coordinate reference system to represent the movement
 of the feature's geometry (positions) in the case of an application request.
 
-The UML diagram for MF-JSON Prism is depicted in <<mf-prism-uml>>.
-
-[#mf-prism-uml,reftext='{figure-caption} {counter:figure-num}']
-.Class diagram for MF-JSON Trajectory
-image::mf-geojson-prism.png[mf-prism-uml, pdfwidth=95%, width=95%, align="center"]
-
 A MF-JSON Prism document may contain JSON objects that represent instances with the following types,
 as well as primitives types of JSON null, true, false, string, number, and array.
 
@@ -50,6 +44,12 @@ as well as primitives types of JSON null, true, false, string, number, and array
 * Geometry object (see <<geometry>>)
 * Properties object (see <<properties>>)
 * MotionCurve object (see <<interpolation>>)
+
+The UML diagram for MF-JSON Prism is depicted in <<mf-prism-uml>>.
+
+[#mf-prism-uml,reftext='{figure-caption} {counter:figure-num}']
+.Class diagram for MF-JSON Trajectory
+image::mf-geojson-prism.png[mf-prism-uml, pdfwidth=100%, width=95%, align="center"]
 
 When a document mixed two formats of MF-JSON Prism and MF-JSON Trajectory, MF-JSON Prism has priority to interpret the movement of a feature.
 A sample data of MF-JSON Prism is provided in <<sampleJSONPrism>>.
