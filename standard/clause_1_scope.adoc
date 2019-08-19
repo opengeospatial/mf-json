@@ -31,7 +31,7 @@ Moreover, it can encompass the movement of 1-dimensional, 2-dimensional, 3-dimen
 For example, the representation of the following phenomena in a spatiotemporal domain is scope of this specification:
 
 * _Discrete phenomena_, which exist only on a set of instants, such as road accidents;
-* _Stepwise phenomena_, where the changes of locations are abrupt at an instant, such as administrative boundaries;
+* _Step phenomena_, where the changes of locations are abrupt at an instant, such as administrative boundaries;
 * _Continuous phenomena_, whose locations move continuously for a period in time, such as vehicles, typhoons, or floods.
 
 This specification does not address partial motions of parts of bodies in a primitive movement and the dimensional deformation of the feature (e.g., from 1-d geometry to 0-d geometry).

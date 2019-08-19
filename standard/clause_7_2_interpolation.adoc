@@ -87,7 +87,7 @@ P(t) =
 \end{cases}
 +++++++++++
 
-"Step":: It just jumps from one position to the next halfway through for a subinterval.
+"Step":: It just jumps from one position to the next at the end of a subinterval.
 The curve is not continuous but would be useful for representing an accident or event.
 This interpolation requires at least two positions, i.e., latexmath:[N \geq 2].
 
@@ -95,7 +95,7 @@ This interpolation requires at least two positions, i.e., latexmath:[N \geq 2].
 +++++++++++
 \forall t \in [t_{i-1}, t_{i}]: P(t) =
 \begin{cases}
-    P_{i-1}   & \quad \text{if } \frac{t-t_{i-1}}{t_{i}-t_{i-1}} < \text{0.5} \\
+    P_{i-1}   & \quad \text{if } t < t_{i} \\
     P_{i}     & \quad \text{otherwise.}
 \end{cases}
 +++++++++++

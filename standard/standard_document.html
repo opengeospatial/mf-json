@@ -404,7 +404,7 @@ For example, the representation of the following phenomena in a spatiotemporal d
 <p><em>Discrete phenomena</em>, which exist only on a set of instants, such as road accidents;</p>
 </li>
 <li>
-<p><em>Stepwise phenomena</em>, where the changes of locations are abrupt at an instant, such as administrative boundaries;</p>
+<p><em>Step phenomena</em>, where the changes of locations are abrupt at an instant, such as administrative boundaries;</p>
 </li>
 <li>
 <p><em>Continuous phenomena</em>, whose locations move continuously for a period in time, such as vehicles, typhoons, or floods.</p>
@@ -2963,7 +2963,7 @@ Namely, a temporal trajectory is implemented by a set of piecewise low-degree po
 <dl>
 <dt class="hdlist1">"Step"</dt>
 <dd>
-<p>It just jumps from one position to the next halfway through for a subinterval.
+<p>It just jumps from one position to the next at the end of a subinterval.
 The curve is not continuous but would be useful for representing an accident or event.
 This interpolation requires at least two positions, i.e., \(N \geq 2\).</p>
 </dd>
@@ -2973,7 +2973,7 @@ This interpolation requires at least two positions, i.e., \(N \geq 2\).</p>
 <div class="content">
 \[\forall t \in [t_{i-1}, t_{i}]: P(t) =
 \begin{cases}
-    P_{i-1}   &amp; \quad \text{if } \frac{t-t_{i-1}}{t_{i}-t_{i-1}} &lt; \text{0.5} \\
+    P_{i-1}   &amp; \quad \text{if } t &lt; t_{i} \\
     P_{i}     &amp; \quad \text{otherwise.}
 \end{cases}\]
 </div>
@@ -4232,8 +4232,8 @@ The expression of an element in the array SHALL refer to the default spatial CRS
 <h4 id="_motioncurve_object"><a class="anchor" href="#_motioncurve_object"></a>A.2.15. MotionCurve object</h4>
 <div class="paragraph">
 <p>The <code>"coordinate"</code> member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
-The value of the <code>"interpolation"</code> member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or
-a URL to address a user-defined parametric curve. A user-defined parametric curve SHALL be a JSON object which has three members of <code>"crs"</code>, <code>"trs"</code>, and <code>"equations"</code>.
+The value of the <code>"interpolation"</code> member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or a URL to address a user-defined parametric curve.
+A user-defined parametric curve SHALL be a JSON object which has three members of <code>"crs"</code>, <code>"trs"</code>, and <code>"equations"</code>.
 The value of the <code>"equations"</code> member SHALL be not empty and be a JSON array whose element is a user-defined parametric segment having two members of <code>"coefficients"</code> and <code>"time"</code>.
 The value of <code>"coefficients"</code> member SHALL be a JSON array whose element is an array of coefficients of the interpolation formula of a temporal position.
 The order of elements in array of the <code>"coefficients"</code> value for the interpolation formula of a temporal position SHALL follow the order of the spatial CRS.
