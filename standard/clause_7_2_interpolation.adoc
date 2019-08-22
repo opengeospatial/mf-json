@@ -61,7 +61,7 @@ Given latexmath:[N=(n+1)] leaf geometries latexmath:[G=\{G_0, G_1, ..., G_n\}] a
 A temporal trajectory latexmath:[C] is drawn for each position in latexmath:[P=\{P_0, P_1, ..., P_n\}] at each time instant in latexmath:[T=\{t_0, t_1, ..., t_n\}] such that latexmath:[P_i \in G_i] and latexmath:[0 \leq i \leq n], and its curve is realized by spline interpolation on subintervals.
 Namely, a temporal trajectory is implemented by a set of piecewise low-degree polynomials latexmath:[\{ SC_{1}, SC_{2}, ..., SC_{n}\}] whose derivatives satisfy some continuity constraints across sub-curve boundaries.
 
-Each type of built-in parametric curves interpolates a time-varying position latexmath:[P(t)] for any time instant latexmath:[t] in the time interval latexmath:[I=][latexmath:[t_0, t_n]] on the temporal trajectory as follows:
+Each type of built-in parametric curves interpolates a time-varying position latexmath:[P(t)] for any time instant latexmath:[t] in the particular period latexmath:[I=][latexmath:[t_0, t_n]] on the temporal trajectory as follows:
 
 [latexmath]
 +++++++++++
@@ -179,10 +179,10 @@ P'(t_0)=P_1-P_0, \quad P'(t_n)=P_n-P_{n-1}.
 [width="100%", cols="1,3a,1,3a", options="header"]
 |=========
 | Names | Curves | Names | Curves
-| Step 	    | image:mf-interpolation-step.png[Step, height=100%, align="center"]
-| Linear    | image:mf-interpolation-linear.png[Linear, height=100%, align="center"]
-| Quadratic | image:mf-interpolation-quadratic.png[Quadratic, height=100%, align="center"]
-| Cube      | image:mf-interpolation-cube.png[CatmullRom, height=100%, align="center"]
+| Step 	    | image:mf-interpolation-step.png[Step, height=80%, align="center"]
+| Linear    | image:mf-interpolation-linear.png[Linear, height=80%, align="center"]
+| Quadratic | image:mf-interpolation-quadratic.png[Quadratic, height=80%, align="center"]
+| Cube      | image:mf-interpolation-cube.png[CatmullRom, height=80%, align="center"]
 |=========
 
 /////////////
@@ -286,11 +286,8 @@ The URL indicates a JSON object having three members of `"crs"`, `"trs"`, and `"
 
 * The value of the `"crs"` member is a spatial CRS object to indicate the order of axes and the position expression.
 * The value of the `"trs"` member is a temporal CRS object to indicate how to use the time instant in the equations to interpolate a new position at a certain time.
-* The value of the `"equations"` is a JSON array composing of a JSON object which has two members of `"coefficients"` and `"time"`
-to represent a parametric equation within a temporal interval.
-The position latexmath:[P(t)] at time position latexmath:[t] is derived
-from a `"coefficients"` value as a multidimensional array of *polynomials* of latexmath:[(A_1(t), A_2(t), A_3(t), ..., A_k(t))]
-coordinates during a particular time interval.
+* The value of the `"equations"` is a JSON array composing of a JSON object which has three members of `"coefficients"`, `"time"`,  and `"enclosed"` to represent a parametric equation within a temporal interval.
+The position latexmath:[P(t)] at time position latexmath:[t] is derived from a `"coefficients"` value as a multidimensional array of *polynomials* of latexmath:[(A_1(t), A_2(t), A_3(t), ..., A_k(t))] coordinates during a particular period.
 
 [latexmath]
 +++++++++++
@@ -309,10 +306,10 @@ coordinates during a particular time interval.
 [A_k(t) = a_{k,n-1}t^{n-1} + a_{k,n-2}t^{n-2} + ... + a_{k,0}t^0]
 +++++++++++
 
-If a time position does not belong to any time interval of the elements of equations, there is no interpolation equations at that time.
+If a time position does not belong to any particular period of the elements of equations, there is no interpolation equations at that time.
 The order of arrays for the interpolation formula of a temporal position SHALL be followed by the order of axes of the CRS.
 For example, when the CRS is the default spatial CRS (i.e., WGS84), the order of axes is sequentially latexmath:[x] (longitude), latexmath:[y] (latitude), and latexmath:[z] (altitude).
-The time intervals between any two elements of equations only allows empty or 0-dimensional intersection.
+The particular periods between any two elements of equations only allows empty or 0-dimensional intersection.
 The unit of measure of the temporal CRS is applied for computing parametric equations.
 For example, a time position encoded by IETF RFC 3339 is converted into a signed 64-bit integer(long) value that represents milliseconds,
 when it refers to the default temporal CRS (i.e., ISO8601).
@@ -332,22 +329,22 @@ when it refers to the default temporal CRS (i.e., ISO8601).
         "properties": {
             "name": "urn:ogc:data:time:iso8601"
         }
-    }
+    },
     "equations" :[
       {
-        "coefficients": [[1.0, 3.0, 4.1], [2.0, 2.1, 3.0]],
-        // x = 1.0*t^2 + 3.0*t + 4.1 , y = 2.0*t^2 + 2.1*t + 3.0
-        "time": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z"]
+        "coefficients": [[1.0, 3.0, 4.1], [2.0, 2.1, 3.0]], // x = 1.0*t^2 + 3.0*t + 4.1 , y = 2.0*t^2 + 2.1*t + 3.0
+        "time": ["2011-07-14T22:01:01Z", "2011-07-14T23:01:01Z"],
+        "enclosed": [false, true]
       },
       {
-        "coefficients": [[4.0, 2.0], [1.0, 2.0]],
-          // x = 4.0*t + 2.0 , y = 1.0*t + 2.0
-        "time": ["2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"]
+        "coefficients": [[4.0, 2.0], [1.0, 2.0]], // x = 4.0*t + 2.0 , y = 1.0*t + 2.0
+        "time": ["2011-07-14T23:01:01Z", "2011-07-15T00:01:01Z"],
+        "enclosed": [true, true]
       },
       {
-        "coefficients": [["sin", "0.0"], ["cos", "0.0"]],
-          // x = sin*t , y = cos*t
-        "time": ["2011-07-15T00:01:01Z", "2011-07-16T00:01:01Z"]
+        "coefficients": [["sin", "0.0"], ["cos", "0.0"]], // x = sin*t , y = cos*t
+        "time": ["2011-07-15T00:01:01Z", "2011-07-16T00:01:01Z"],
+        "enclosed": [true, false]
       }
     ]
 }

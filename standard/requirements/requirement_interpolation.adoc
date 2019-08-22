@@ -9,12 +9,16 @@ one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or a URL.
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined +
 A URL to address a user-defined parametric curve SHALL address a JSON document containing a JSON object, which has three members with name
 `"crs"`, `"trs"`, and `"equations"`. The value of the `"crs"` and `"trs"` member SHALL be a spatial and temporal CRS object, respectively.
-The value of the `"equations"` member SHALL be not empty and be a JSON array whose element is a user-defined parametric segment having two members of `"coefficients"` and `"time"`.
+The value of the `"equations"` member SHALL be not empty and be a JSON array whose element is a user-defined parametric segment having three members of `"coefficients"`, `"time"`,  and `"enclosed"`.
 |*Requirement 2.50* |
-http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/coefficients +
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/equations/coefficients +
 The value of `"coefficients"` member SHALL be a JSON array whose element is an array of coefficients of the interpolation formula of a temporal position.
 The order of elements in array of the `"coefficients"` value for the interpolation formula of a temporal position SHALL follow the order of the spatial CRS.
 |*Requirement 2.51* |
-http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/time +
-The expression of an element in the array of the `"time"` value SHALL refer to the temporal CRS object.
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/equations/time +
+The value of `"time"` member SHALL be a JSON array to represent a particular period with two instants of latexmath:[t_s] and latexmath:[t_e].
+The expression of an element in the `"time"` value SHALL refer to the `"trs"`.
+|*Requirement 2.52* |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/equations/enclosed +
+The value of `"enclosed"` member SHALL be a JSON array to represent an open (and closed) intervals of the `"time"` with two Boolean elements.
 |===

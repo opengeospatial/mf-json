@@ -11,7 +11,7 @@ based on World Geodetic System 1984, with longitude and latitude units of decima
 the application can share the trajectory data by using *only* GeoJSON, called *MF-JSON Trajectory*.
 For other cases, *MF-JSON Prism* can be used for expressing more complex movements of moving features.
 *MF-JSON Prism* is an extension of GeoJSON formats reserving new members of JSON objects (`"temporalGeometry", "temporalProperties", "crs", "trs", "time"`, and etc.) as "foreign members"
-to represent spatiotemporal geometries, variations of measure, coordinate reference systems, and the time interval of moving features in the GeoJSON document.
+to represent spatiotemporal geometries, variations of measure, coordinate reference systems, and the particular period of moving features in the GeoJSON document.
 <<mf-encodings>> presents the overview of two forms of Moving Features JSON encodings.
 
 [#mf-encodings,reftext='{figure-caption} {counter:figure-num}']

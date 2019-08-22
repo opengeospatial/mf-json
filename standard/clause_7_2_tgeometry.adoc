@@ -70,15 +70,15 @@ It supports more complex movements of moving features, as well as linear movemen
 For example, the non-linear movement information of people, vehicles, or hurricanes can
 be shared as a TemporalPrimitiveGeometry object with the `"MovingPoint"` type.
 | MovingLineString | The type represents the prism of a time-parametered 1-dimensional (1D) geometric primitive (LineString),
-whose leaf geometry at a time position is a 1D linear object in a particular time period.
+whose leaf geometry at a time position is a 1D linear object in a particular period.
 Intuitively a temporal geometry of a continuous movement of curve depicts a set of surfaces in a spatiotemporal domain.
 For example, the movement information of weather fronts or traffic congestion on roads can be shared
 as a TemporalPrimitiveGeometry object with the `"MovingLineString"` type.
 | MovingPolygon | The type represents the prism of a time-parametered 2-dimensional (2D) geometric primitive (Polygon),
-whose leaf geometry at a time position is a 2D polygonal object in a particular time period.
+whose leaf geometry at a time position is a 2D polygonal object in a particular period.
 Intuitively a temporal geometry of a continuous movement of polygon depicts a set of volumes in a spatiotemporal domain.
 For example, the changes of flooding areas or the movement information of air pollution can be shared as a TemporalPrimitiveGeometry object with the `"MovingPolygon"` type.
-| MovingPointCloud | The type represents the prism of a time-parametered point cloud whose leaf geometry at a time position is a set of points in a particular time period.
+| MovingPointCloud | The type represents the prism of a time-parametered point cloud whose leaf geometry at a time position is a set of points in a particular period.
 Intuitively a temporal geometry of a continuous movement of point set depicts a set of curves in a spatiotemporal domain.
 For example, the tacking information by using Light Detection and Ranging (LiDAR) can be shared as a TemporalPrimitiveGeometry object with the `"MovingPointCloud"` type.
 |=========

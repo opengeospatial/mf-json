@@ -147,7 +147,7 @@ The 3D model SHALL be transformed into the fixed local coordinate reference syst
 The coordinate reference system for the 3D model SHALL be a right-handed coordinate system.
 The value of the `"base"` member SHALL be a URL to address an OBJ file of a 3D model data.
 The value of the `"orientations"` member SHALL be a JSON array to represent a transformation matrix.
-The size of the element in array of the `"orientations"` value SHALL be 16.
+The number of the element in array of the `"orientations"` value SHALL be latexmath:[16] (latexmath:[4 \times 4]).
 The `"orientations"` member SHALL be accompanied with the `"base"` member.
 [cols=">20h,<80a",width="100%"]
 |===
@@ -282,7 +282,7 @@ The number of elements in an array of the `"features"` value SHALL be more than 
 |===
 
 ==== LifeSpan object
-A LifeSpan object SHALL be a JSON array to represent a time interval with two instants of latexmath:[t_s] and latexmath:[t_e].
+A LifeSpan object SHALL be a JSON array to represent a particular period with two instants of latexmath:[t_s] and latexmath:[t_e].
 Two elements of latexmath:[t_s, t_e] SHALL be latexmath:[t_s \leq t_e].
 The expression of an element in the array SHALL refer to the default temporal CRS object (ISO8601).
 [cols=">20h,<80a",width="100%"]
@@ -314,20 +314,23 @@ The expression of an element in the array SHALL refer to the default spatial CRS
 
 ==== MotionCurve object
 The `"coordinate"` member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
-The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or
-a URL to address a user-defined parametric curve. A user-defined parametric curve SHALL be a JSON object which has three members of `"crs"`, `"trs"`, and `"equations"`.
+The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or a URL to address a user-defined parametric curve.
+A user-defined parametric curve SHALL be a JSON object which has three members of `"crs"`, `"trs"`, and `"equations"`.
 The value of the `"equations"` member SHALL be not empty and be a JSON array whose element is a user-defined parametric segment having two members of `"coefficients"` and `"time"`.
 The value of `"coefficients"` member SHALL be a JSON array whose element is an array of coefficients of the interpolation formula of a temporal position.
 The order of elements in array of the `"coefficients"` value for the interpolation formula of a temporal position SHALL follow the order of the spatial CRS.
-The expression of an element in the array of the `"time"` value SHALL refer to the temporal CRS object.
+The value of `"time"` member SHALL be a JSON array to represent a particular period with two instants of latexmath:[t_s] and latexmath:[t_e].
+The expression of an element in the `"time"` value SHALL refer to the `"trs"`.
+The value of `"enclosed"` member SHALL be a JSON array to represent an open (and closed) intervals of the `"time"` with two Boolean elements.
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | conf/prism/tgeometry/interpolation
 |Requirement: |
 * req/prism/tgeometry/interpolation
 * req/prism/tgeometry/interpolation/userdefined
-* req/prism/tgeometry/interpolation/userdefined/coefficients
-* req/prism/tgeometry/interpolation/userdefined/time
+* req/prism/tgeometry/interpolation/userdefined/equations/coefficients
+* req/prism/tgeometry/interpolation/userdefined/equations/time
+* req/prism/tgeometry/interpolation/userdefined/equations/enclosed
 |Test purpose: | Verify that this requirement is satisfied.
 |Test method: | Inspect the document to verify the above.
 |===

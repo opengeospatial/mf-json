@@ -114,7 +114,7 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
     "type": "Feature", //(MANDATORY)
     "properties": { //(OPTIONAL)
       "name": "car1",
-      "state":"test1",
+      "state": "test1",
       "video": "http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg"
     },
     "crs" : { //(DEFAULT) If there is no "crs" member, the default crs is "WGS84" with longitude and latitude units of decimal degrees
@@ -144,19 +144,19 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
           [0.00000119543363771009 , 0.0 , 0.0871557427476583 , 0.0 ,
             0.0 , 0.0000089 , 0.0 , 0.0 ,
             -0.0000010458689129719 , 0.0 , 0.996194698091746 , 0.0 ,
-            0.0 , 0.0 , 0.0 , 1.0],  // Pitch rotation angle: 355 degree
+            0.0 , 0.0 , 0.0 , 1.0],  // Pitch rotation angle: 5 degree
           [0.0000103923048454133 , -0.00000445 , 0.0 , 0.0 ,
             0.000006 , 0.0000077076260936815 , 0.0 , 0.0 ,
             0.0 , 0.0 , 1.0 , 0.0 ,
-            0.0 , 0.0 , 0.0 , 1.0], // Yaw rotation angle: 330 degree
+            0.0 , 0.0 , 0.0 , 1.0], // Yaw rotation angle: 30 degree
           [0.000006 , -0.0000077076260936815 , 0.0 , 0.0 ,
             0.0000103923048454133 , 0.00000445 , 0.0 , 0.0 ,
             0.0 , 0.0 , 1.0 , 0.0 ,
-            0.0 , 0.0 , 0.0 , 1.0], // Yaw rotation angle: 300 degree
+            0.0 , 0.0 , 0.0 , 1.0], // Yaw rotation angle: 60 degree
           [0.0 , -0.0000089 , 0.0 , 0.0 ,
             0.000012 , 0.0 , 0.0 , 0.0 ,
             0.0 , 0.0 , 1.0 , 0.0 ,
-            0.0 , 0.0 , 0.0 , 1.0]  // Yaw rotation angle: 270 degree
+            0.0 , 0.0 , 0.0 , 1.0]  // Yaw rotation angle: 90 degree
         ]
     },
     "temporalProperties": [  //(OPTIONAL) dynamic non-spatial attributes, extended from 'properties'
@@ -189,5 +189,12 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
             "description": "description2" //(OPTIONAL)
         }
       }
-    ]
+    ],
+    "geometry": { //(MANDATORY) GeoJSON IETF RFC 7946 geometry object
+        "type": "LineString"
+        "coordinate": [ [139.757083, 35.627701, 0.5], [139.757399, 35.627701, 2.0], [139.757555, 35.627688, 4.0], [139.757651, 35.627596, 4.0], [139.757716, 35.627483, 4.0] ]
+    },
+    "properties": { //(MANDATORY) JSON object or null
+        "description": "Example of the MF-JSON Prism encoding"
+    }
 }

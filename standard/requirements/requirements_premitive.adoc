@@ -39,8 +39,7 @@ If the TemporalPrimitiveGeometry object has no member with the name `"interpolat
 the default MotionCurve object (`"Linear"`) SHALL be applied.
 |*Requirement 2.13* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/3dmodel +
-The 3D model SHALL be transformed into the fixed local coordinate reference system
-whose bound is -0.5 to 0.5 for each axis and unit is meter.
+The 3D model SHALL be transformed into the fixed local coordinate reference system whose bound is -0.5 to 0.5 for each axis and unit is meter.
 The coordinate reference system for the 3D model SHALL be a right-handed coordinate system.
 |*Requirement 2.14* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/base +
@@ -48,7 +47,7 @@ The value of the `"base"` member SHALL be a web accessible URL to address an OBJ
 |*Requirement 2.15* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations +
 The value of the `"orientations"` member SHALL be a JSON array to represent a transformation matrix.
-The size of the element in array of the `"orientations"` value SHALL be latexmath:[16] (latexmath:[4 \times 4]).
+The number of the element in array of the `"orientations"` value SHALL be latexmath:[16] (latexmath:[4 \times 4]).
 The `"orientations"` member SHALL be accompanied with the `"base"` member.
 |*Requirement 2.16* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/crs +
