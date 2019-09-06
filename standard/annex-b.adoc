@@ -118,13 +118,13 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
       "video": "http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg"
     },
     "crs" : { //(DEFAULT) If there is no "crs" member, the default crs is "WGS84" with longitude and latitude units of decimal degrees
-      "type": "name",
+      "type": "Name",
       "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}
     },
     "trs" : { //(DEFAULT) If there is no "trs", the default trs is "Gregorian".
-      "type": "link",
+      "type": "Link",
       "properties": {
-          "type": "ogcdef",
+          "type": "OGCDEF",
           "href": "http://www.opengis.net/def/uom/ISO-8601/0/Gregorian",
       }
     },
@@ -163,14 +163,14 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
       { // a group of temporal properties that are measured at the same times
         "datetimes": ["2011-07-14T22:01:01.450Z", "2011-07-14T23:01:01.450Z", "2011-07-15T00:01:01.450Z"],
         "length": {
-            "type": "measure",
+            "type": "Measure",
             "form": "http://www.qudt.org/qudt/owl/1.0.0/quantity/Length", // a URI denoting a unit-of-measure
             "values": [1.0, 2.4, 1.0], // the array of values for "length", with the same number of elements as "datetimes"
             "interpolation": "Linear",
             "description": "description1" //(OPTIONAL)
         },
         "discharge" : {
-            "type" : "measure",
+            "type" : "Measure",
             "form" : "MQS", // a symbol from UCUM for m^3/s(a cubic metre per second)
             "values" : [3.0, 4.0, 5.0],
             "interpolation": "Step"
@@ -178,12 +178,12 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
       },{
         "datetimes" : [1465621816590, 1465711526300],
         "camera" : {
-            "type" : "image",
+            "type" : "Image",
             "values" : ["http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/image1", "iVBORw0KGgoAAAANSUhEU......"],
             "interpolation": "Discrete"
         },
         "labels":{
-            "type": "text", // a predefined unit for a string value
+            "type": "Text", // a predefined unit for a string value
             "values": ["car", "human"], // the array of values for "labels", with the same number of elements as "datetimes"
             "interpolation": "Discrete",
             "description": "description2" //(OPTIONAL)

@@ -22,14 +22,16 @@ A LinearTrajectory object SHALL be a GeoJSON Feature object that has two MANDATO
 The value of the `"geometry"` member SHALL be a LineString Geometry object, having `"type"` = `"LineString"`.
 The value of the `"properties"` member SHALL be a GeoJSON object that has at least a member with the named `"datetimes"`.
 The value of the `"datetimes"` member is a JSON array.
+If a Feature has any variable attribute by time and its value, the attribute can be a member inside the `"properties"` member with the value of a JSON array, the size of its array SHALL be same as `1` or `N-1` or `N`.
+Note that `N` is the number of elements in the array of the `"coordinates"` value.
 The number of elements in the array of the `"coordinates"` value in the Geometry object SHALL more than two positions.
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | conf/trajectory/lineartrajectory
 |Requirement: |
 * req/trajectory/lineartrajectory
-* req/trajectory/lineartrajectory/geometry
-* req/trajectory/lineartrajectory/propeties
+* req/trajectory/geometry
+* req/trajectory/propeties
 |Test purpose: | Verify that this requirement is satisfied.
 |Test method: | Inspect the document to verify the above.
 |===
@@ -196,7 +198,7 @@ where latexmath:[@propertyN] is any string defined by an application as a tempor
 
 ==== @propertyN object
 A latexmath:[@propertyN] object SHALL have at least two mandatory members of `"type"` and `"values"`.
-The value of the `"type"` member SHALL be one of string "measure", "text", and "image".
+The value of the `"type"` member SHALL be one of string "Measure", "Text", and "Image".
 The value of the `"values"` member SHALL be a JSON array whose element is a string (including null, true and false) or numeric value.
 The value of the `"interpolation"` member SHALL be only one of string "Discrete", "Step", "Linear", and "Regression" or a URL indicating an InterpolationCode defined in OGC TimeseriesML 1.0 [OGC 15-042r3].
 The value of the `"form"` member SHALL be a JSON string as a common code (3 characters) described in the list of Code List Rec 20 by the UN Centre for Trade Facilitation and Electronic Business (UN/CEFACT)
@@ -216,10 +218,10 @@ The number of elements in both arrays of the `"datetimes"` value and the `"value
 
 ==== CoordinateReferenceSystem object
 A CoordinateReferenceSystem object SHALL have two mandatory members of `"type"` and `"properties"`.
-The value of the `"type"` member SHALL be one of string "name" and "link".
+The value of the `"type"` member SHALL be one of string "Name" and "Link".
 The value of the `"properties"` member SHALL be a JSON object with three optional members named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON null value.
-A named CRS object SHALL have the value of the `"type"` = `"name"` and the value of the `"properties"` member SHALL be a JSON object containing a `"name"` member whose value is a string identifying a coordinate reference system.
-A linked CRS object SHALL have the value of the `"type"` = `"link"` and the value of the `"properties"` member SHALL be a JSON object containing a `"href"` member whose value is a dereferenceable URI.
+A named CRS object SHALL have the value of the `"type"` = `"Name"` and the value of the `"properties"` member SHALL be a JSON object containing a `"name"` member whose value is a string identifying a coordinate reference system.
+A linked CRS object SHALL have the value of the `"type"` = `"Link"` and the value of the `"properties"` member SHALL be a JSON object containing a `"href"` member whose value is a dereferenceable URI.
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | conf/prism/crs

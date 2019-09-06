@@ -11,7 +11,7 @@ is any string defined by an application as a temporal property.
 |*Requirement 2.22* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property +
 A latexmath:[@propertyN] object SHALL have at least two mandatory members of `"type"` and `"values"`.
-The value of the `"type"` member SHALL be one of string "measure", "text", and "image".
+The value of the `"type"` member SHALL be one of string "Measure", "Text", and "Image".
 The value of the `"values"` member SHALL be a JSON array whose element is a string
 (including null, true and false) or numeric value.
 |*Requirement 2.23* |

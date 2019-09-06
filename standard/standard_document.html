@@ -1263,7 +1263,7 @@ A LinearTrajectory object SHALL be a GeoJSON Feature object that has two MANDATO
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 1.3</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/lineartrajectory/geometry" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/lineartrajectory/geometry</a><br>
+<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/geometry" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/geometry</a><br>
 The value of the <code>"geometry"</code> member SHALL be a LineString Geometry object, having <code>"type"</code> = <code>"LineString"</code>.
 The number of elements in the array of the <code>"coordinates"</code> value in the Geometry object SHALL more than two positions.</p>
 </div></div></td>
@@ -1271,9 +1271,11 @@ The number of elements in the array of the <code>"coordinates"</code> value in t
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 1.4</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/lineartrajectory/propeties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/lineartrajectory/propeties</a><br>
+<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/propeties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/propeties</a><br>
 The value of the <code>"properties"</code> member SHALL be a GeoJSON object that has at least a member with the named <code>"datetimes"</code>.
-The value of the <code>"datetimes"</code> member is a JSON array.</p>
+The value of the <code>"datetimes"</code> member is a JSON array.
+If a Feature has any variable attribute by time and its value, the attribute can be a member inside the <code>"properties"</code> member with the value of a JSON array, the size of its array SHALL be same as <code>1</code> or <code>N-1</code> or <code>N</code>.
+Note that <code>N</code> is the number of elements in the array of the <code>"coordinates"</code> value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2096,18 +2098,18 @@ MF-JSON Prism only considers the temporal dependencies of their changes of value
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(MANDATORY) a JSON Array of time instants</span>
   <span class="key"><span class="delimiter">&quot;</span><span class="content">@property0</span><span class="delimiter">&quot;</span></span>: {     <span class="comment">// @property0 whose name is any string defined by an application.</span>
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">measure</span><span class="delimiter">&quot;</span></span>,          <span class="comment">//(MANDATORY) a predefined string among `measure`, `text`, and `image`</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Measure</span><span class="delimiter">&quot;</span></span>,          <span class="comment">//(MANDATORY) a predefined string among `Measure`, `Text`, and `Image`</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [...],            <span class="comment">//(MANDATORY) a JSON Array of values</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>,     <span class="comment">//(DEFAULT) a predefined string or a URL</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">form</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>,              <span class="comment">//(OPTIONAL) a symbol from UCUM</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">any string</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL) any string content for an application</span>
   },
   <span class="key"><span class="delimiter">&quot;</span><span class="content">@property1</span><span class="delimiter">&quot;</span></span>: {     <span class="comment">// @property1 whose name is any string defined by an application, but the name is not the same as @property0.</span>
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span>, <span class="comment">// @property1 has values at the same time instants of @property0</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Text</span><span class="delimiter">&quot;</span></span>, <span class="comment">// @property1 has values at the same time instants of @property0</span>
       ...
   },
   <span class="key"><span class="delimiter">&quot;</span><span class="content">@property2</span><span class="delimiter">&quot;</span></span> : {    <span class="comment">// @property1 whose name is any string defined by an application, but the name is same neither @property0 nor @property1.</span>
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">image</span><span class="delimiter">&quot;</span></span>,
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Image</span><span class="delimiter">&quot;</span></span>,
     ....
   },
   ...
@@ -2140,19 +2142,19 @@ The value of the "\(@propertyN\)" member is a JSON object that has the following
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">measure</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Measure</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The <code>"values"</code> member contains any numeric values.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Text</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The <code>"values"</code> member contains any strings.</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">image</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Image</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The <code>"values"</code> member contains Base64 strings converted from images or URLs to address images.</p>
 </div></div></td>
@@ -2225,7 +2227,7 @@ between neighboring points in a timeseries, e.g., <code>"http://www.opengis.net/
 <li>
 <p><code>"form"</code>: The <code>"form"</code> member is optional and its value is a JSON string as a common code (3 characters) described in the Code List Rec 20
 by the UN Centre for Trade Facilitation and Electronic Business (UN/CEFACT)<a href="#UNCODES">[2]</a> or a URL specifying the unit of measurement.
-This member is applied only for a temporal property whose value type is <code>measure</code>.</p>
+This member is applied only for a temporal property whose value type is <code>Measure</code>.</p>
 </li>
 <li>
 <p><code>"description"</code>: The <code>"description"</code> member is optional and its value is any string to describe a short description.</p>
@@ -2259,7 +2261,7 @@ is any string defined by an application as a temporal property.</p>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property</a><br>
 A \(@propertyN\) object SHALL have at least two mandatory members of <code>"type"</code> and <code>"values"</code>.
-The value of the <code>"type"</code> member SHALL be one of string "measure", "text", and "image".
+The value of the <code>"type"</code> member SHALL be one of string "Measure", "Text", and "Image".
 The value of the <code>"values"</code> member SHALL be a JSON array whose element is a string
 (including null, true and false) or numeric value.</p>
 </div></div></td>
@@ -2310,7 +2312,7 @@ Also it defines the <code>"trs"</code> member to describe a temporal CRS against
 with two mandatory members of the name <code>"type"</code> and <code>"properties"</code>.</p>
 </li>
 <li>
-<p>The value of the <code>"type"</code> member is a JSON string as one of the string <code>"name"</code> and <code>"link"</code>, indicating the type of CRS object.</p>
+<p>The value of the <code>"type"</code> member is a JSON string as one of the string <code>"Name"</code> and <code>"Link"</code>, indicating the type of CRS object.</p>
 </li>
 <li>
 <p>The value of the <code>"properties"</code> member is a JSON object with three optional members
@@ -2328,7 +2330,7 @@ named <code>"name"</code>, <code>"href"</code>, and <code>"type"</code> whose va
 <h5 id="_7_2_3_1_named_crs"><a class="anchor" href="#_7_2_3_1_named_crs"></a>7.2.3.1. Named CRS</h5>
 <div class="paragraph">
 <p>A Named CRS object indicates a coordinate reference system by name.
-In this case, the value of its <code>"type"</code> member is the string <code>"name"</code>.
+In this case, the value of its <code>"type"</code> member is the string <code>"Name"</code>.
 The value of its <code>"properties"</code> member is a JSON object containing a <code>"name"</code> member
 whose value is a string identifying a coordinate reference system (not JSON <code>null</code> value).
 The value of <code>"href"</code> and <code>"type"</code> is a JSON <code>null</code> value.
@@ -2338,7 +2340,7 @@ This standard recommends an EPSG<a href="#EPSG">[3]</a> code as the value of <co
 <div class="title">Example 4: Example of a named CRS object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>,
   <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
     <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:def:crs:OGC:1.3:CRS84</span><span class="delimiter">&quot;</span></span>
   }
@@ -2353,16 +2355,16 @@ This standard recommends an EPSG<a href="#EPSG">[3]</a> code as the value of <co
 The value of the required <code>"href"</code> member is a dereferenceable URI.
 The value of the optional <code>"type"</code> member is a string that hints at the format
 used to represent CRS parameters at the provided URI.
-Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.</p>
+Suggested values are: "Proj4", "OGCWKT", "ESRIWKT", but others can be used.</p>
 </div>
 <div id="linkedcrs" class="listingblock">
 <div class="title">Example 5: Example of a linked CRS object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">link</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Link</span><span class="delimiter">&quot;</span></span>,
   <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
     <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://example.com/crs/42</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">proj4</span><span class="delimiter">&quot;</span></span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Proj4</span><span class="delimiter">&quot;</span></span>
   }
 }</code></pre>
 </div>
@@ -2371,10 +2373,10 @@ Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.</p>
 <div class="title">Example 6: Example of a relative linked CRS object with an auxiliary file</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">link</span><span class="delimiter">&quot;</span></span>,
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Link</span><span class="delimiter">&quot;</span></span>,
   <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
     <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">data.crs</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ogcwkt</span><span class="delimiter">&quot;</span></span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">OGCWKT</span><span class="delimiter">&quot;</span></span>
   }
 }</code></pre>
 </div>
@@ -2396,7 +2398,7 @@ This CRS object is the default value of the <code>"crs"</code> member.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">    <span class="string"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>,
         <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
             <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:def:crs:OGC:1.3:CRS84</span><span class="delimiter">&quot;</span></span>
         }
@@ -2414,7 +2416,7 @@ This CRS object is the default value of the <code>"trs"</code> member.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">    <span class="string"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span> : {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>,
         <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
             <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:data:time:iso8601</span><span class="delimiter">&quot;</span></span>
         }
@@ -2435,7 +2437,7 @@ This CRS object is the default value of the <code>"trs"</code> member.</p>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs</a><br>
 A CoordinateReferenceSystem object SHALL have two mandatory members of <code>"type"</code> and <code>"properties"</code>.
-The value of the <code>"type"</code> member SHALL be one of string "name" and "link".
+The value of the <code>"type"</code> member SHALL be one of string "Name" and "Link".
 The value of the <code>"properties"</code> member SHALL be a JSON object with three optional members
 named <code>"name"</code>, <code>"href"</code>, and <code>"type"</code> whose value is a JSON string or JSON null value.</p>
 </div></div></td>
@@ -2444,7 +2446,7 @@ named <code>"name"</code>, <code>"href"</code>, and <code>"type"</code> whose va
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.27</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/named" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/named</a><br>
-A named CRS object SHALL have the value of the <code>"type"</code> = <code>"name"</code>.
+A named CRS object SHALL have the value of the <code>"type"</code> = <code>"Name"</code>.
 And the value of the <code>"properties"</code> member SHALL be a JSON object containing
 a <code>"name"</code> member whose value is a string identifying a coordinate reference system.</p>
 </div></div></td>
@@ -2453,7 +2455,7 @@ a <code>"name"</code> member whose value is a string identifying a coordinate re
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.28</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/linked" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/linked</a><br>
-A linked CRS object SHALL have the value of the <code>"type"</code> = <code>"link"</code>.
+A linked CRS object SHALL have the value of the <code>"type"</code> = <code>"Link"</code>.
 And the value of the <code>"properties"</code> member SHALL be a JSON object containing
 a <code>"href"</code> member whose value is a dereferenceable URI.</p>
 </div></div></td>
@@ -3192,13 +3194,13 @@ when it refers to the default temporal CRS (i.e., ISO8601).</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
     <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : {
-         <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+         <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>,
          <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
              <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:def:crs:OGC:1.3:CRS84</span><span class="delimiter">&quot;</span></span>
          }
      },
      <span class="key"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span> : {
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>,
         <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
             <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:data:time:iso8601</span><span class="delimiter">&quot;</span></span>
         }
@@ -3351,6 +3353,8 @@ Ensure that there is a conformance class for each requirements class and a test 
 The value of the <code>"geometry"</code> member SHALL be a LineString Geometry object, having <code>"type"</code> = <code>"LineString"</code>.
 The value of the <code>"properties"</code> member SHALL be a GeoJSON object that has at least a member with the named <code>"datetimes"</code>.
 The value of the <code>"datetimes"</code> member is a JSON array.
+If a Feature has any variable attribute by time and its value, the attribute can be a member inside the <code>"properties"</code> member with the value of a JSON array, the size of its array SHALL be same as <code>1</code> or <code>N-1</code> or <code>N</code>.
+Note that <code>N</code> is the number of elements in the array of the <code>"coordinates"</code> value.
 The number of elements in the array of the <code>"coordinates"</code> value in the Geometry object SHALL more than two positions.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -3373,10 +3377,10 @@ The number of elements in the array of the <code>"coordinates"</code> value in t
 <p>req/trajectory/lineartrajectory</p>
 </li>
 <li>
-<p>req/trajectory/lineartrajectory/geometry</p>
+<p>req/trajectory/geometry</p>
 </li>
 <li>
-<p>req/trajectory/lineartrajectory/propeties</p>
+<p>req/trajectory/propeties</p>
 </li>
 </ul>
 </div></div></td>
@@ -3892,7 +3896,7 @@ where \(@propertyN\) is any string defined by an application as a temporal prope
 <h4 id="_propertyn_object"><a class="anchor" href="#_propertyn_object"></a>A.2.9. @propertyN object</h4>
 <div class="paragraph">
 <p>A \(@propertyN\) object SHALL have at least two mandatory members of <code>"type"</code> and <code>"values"</code>.
-The value of the <code>"type"</code> member SHALL be one of string "measure", "text", and "image".
+The value of the <code>"type"</code> member SHALL be one of string "Measure", "Text", and "Image".
 The value of the <code>"values"</code> member SHALL be a JSON array whose element is a string (including null, true and false) or numeric value.
 The value of the <code>"interpolation"</code> member SHALL be only one of string "Discrete", "Step", "Linear", and "Regression" or a URL indicating an InterpolationCode defined in OGC TimeseriesML 1.0 [OGC 15-042r3].
 The value of the <code>"form"</code> member SHALL be a JSON string as a common code (3 characters) described in the list of Code List Rec 20 by the UN Centre for Trade Facilitation and Electronic Business (UN/CEFACT)
@@ -3949,10 +3953,10 @@ The number of elements in both arrays of the <code>"datetimes"</code> value and 
 <h4 id="_coordinatereferencesystem_object"><a class="anchor" href="#_coordinatereferencesystem_object"></a>A.2.10. CoordinateReferenceSystem object</h4>
 <div class="paragraph">
 <p>A CoordinateReferenceSystem object SHALL have two mandatory members of <code>"type"</code> and <code>"properties"</code>.
-The value of the <code>"type"</code> member SHALL be one of string "name" and "link".
+The value of the <code>"type"</code> member SHALL be one of string "Name" and "Link".
 The value of the <code>"properties"</code> member SHALL be a JSON object with three optional members named <code>"name"</code>, <code>"href"</code>, and <code>"type"</code> whose value is a JSON string or JSON null value.
-A named CRS object SHALL have the value of the <code>"type"</code> = <code>"name"</code> and the value of the <code>"properties"</code> member SHALL be a JSON object containing a <code>"name"</code> member whose value is a string identifying a coordinate reference system.
-A linked CRS object SHALL have the value of the <code>"type"</code> = <code>"link"</code> and the value of the <code>"properties"</code> member SHALL be a JSON object containing a <code>"href"</code> member whose value is a dereferenceable URI.</p>
+A named CRS object SHALL have the value of the <code>"type"</code> = <code>"Name"</code> and the value of the <code>"properties"</code> member SHALL be a JSON object containing a <code>"name"</code> member whose value is a string identifying a coordinate reference system.
+A linked CRS object SHALL have the value of the <code>"type"</code> = <code>"Link"</code> and the value of the <code>"properties"</code> member SHALL be a JSON object containing a <code>"href"</code> member whose value is a dereferenceable URI.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -4425,13 +4429,13 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">video</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg</span><span class="delimiter">&quot;</span></span>
     },
     <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : { <span class="comment">//(DEFAULT) If there is no &quot;crs&quot; member, the default crs is &quot;WGS84&quot; with longitude and latitude units of decimal degrees</span>
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>,
       <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {<span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:def:crs:OGC:1.3:CRS84</span><span class="delimiter">&quot;</span></span>}
     },
     <span class="key"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span> : { <span class="comment">//(DEFAULT) If there is no &quot;trs&quot;, the default trs is &quot;Gregorian&quot;.</span>
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">link</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Link</span><span class="delimiter">&quot;</span></span>,
       <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
-          <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ogcdef</span><span class="delimiter">&quot;</span></span>,
+          <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">OGCDEF</span><span class="delimiter">&quot;</span></span>,
           <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/def/uom/ISO-8601/0/Gregorian</span><span class="delimiter">&quot;</span></span>,
       }
     },
@@ -4470,14 +4474,14 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
       { <span class="comment">// a group of temporal properties that are measured at the same times</span>
         <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01.450Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T23:01:01.450Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T00:01:01.450Z</span><span class="delimiter">&quot;</span></span>],
         <span class="key"><span class="delimiter">&quot;</span><span class="content">length</span><span class="delimiter">&quot;</span></span>: {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">measure</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Measure</span><span class="delimiter">&quot;</span></span>,
             <span class="key"><span class="delimiter">&quot;</span><span class="content">form</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.qudt.org/qudt/owl/1.0.0/quantity/Length</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a URI denoting a unit-of-measure</span>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="float">1.0</span>, <span class="float">2.4</span>, <span class="float">1.0</span>], <span class="comment">// the array of values for &quot;length&quot;, with the same number of elements as &quot;datetimes&quot;</span>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Linear</span><span class="delimiter">&quot;</span></span>,
             <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">description1</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL)</span>
         },
         <span class="key"><span class="delimiter">&quot;</span><span class="content">discharge</span><span class="delimiter">&quot;</span></span> : {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">measure</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Measure</span><span class="delimiter">&quot;</span></span>,
             <span class="key"><span class="delimiter">&quot;</span><span class="content">form</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">MQS</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a symbol from UCUM for m^3/s(a cubic metre per second)</span>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span> : [<span class="float">3.0</span>, <span class="float">4.0</span>, <span class="float">5.0</span>],
             <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Step</span><span class="delimiter">&quot;</span></span>
@@ -4485,12 +4489,12 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
       },{
         <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [<span class="integer">1465621816590</span>, <span class="integer">1465711526300</span>],
         <span class="key"><span class="delimiter">&quot;</span><span class="content">camera</span><span class="delimiter">&quot;</span></span> : {
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">image</span><span class="delimiter">&quot;</span></span>,
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Image</span><span class="delimiter">&quot;</span></span>,
             <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span> : [<span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/image1</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">iVBORw0KGgoAAAANSUhEU......</span><span class="delimiter">&quot;</span></span>],
             <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Discrete</span><span class="delimiter">&quot;</span></span>
         },
         <span class="key"><span class="delimiter">&quot;</span><span class="content">labels</span><span class="delimiter">&quot;</span></span>:{
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">text</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a predefined unit for a string value</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Text</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a predefined unit for a string value</span>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">car</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">human</span><span class="delimiter">&quot;</span></span>], <span class="comment">// the array of values for &quot;labels&quot;, with the same number of elements as &quot;datetimes&quot;</span>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Discrete</span><span class="delimiter">&quot;</span></span>,
             <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">description2</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL)</span>
