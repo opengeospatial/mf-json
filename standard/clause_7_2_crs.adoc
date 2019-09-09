@@ -12,7 +12,7 @@ Also it defines the `"trs"` member to describe a temporal CRS against which time
 
 * A non-null CoordinateReferenceSystem (CRS) object is a JSON object
 with two mandatory members of the name `"type"` and `"properties"`.
-* The value of the `"type"` member is a JSON string as one of the string `"name"` and `"link"`, indicating the type of CRS object.
+* The value of the `"type"` member is a JSON string as one of the string `"Name"` and `"Link"`, indicating the type of CRS object.
 * The value of the `"properties"` member is a JSON object with three optional members
 named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON `null` value.
 * CRS shall not change coordinate ordering.
@@ -21,7 +21,7 @@ Depending on the value of `"type"`, there are three expressions: Named CRS, Link
 
 ===== 7.2.3.1. Named CRS
 A Named CRS object indicates a coordinate reference system by name.
-In this case, the value of its `"type"` member is the string `"name"`.
+In this case, the value of its `"type"` member is the string `"Name"`.
 The value of its `"properties"` member is a JSON object containing a `"name"` member
 whose value is a string identifying a coordinate reference system (not JSON `null` value).
 The value of `"href"` and `"type"` is a JSON `null` value.
@@ -31,7 +31,7 @@ This standard recommends an EPSG<<EPSG>> code as the value of `"name"`, such as 
 .Example {example-num}: Example of a named CRS object
 [source, javascript]
 {
-  "type": "name",
+  "type": "Name",
   "properties": {
     "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
   }
@@ -42,16 +42,16 @@ A linked CRS object has one required member: `"href"` and one optional member: `
 The value of the required `"href"` member is a dereferenceable URI.
 The value of the optional `"type"` member is a string that hints at the format
 used to represent CRS parameters at the provided URI.
-Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.
+Suggested values are: "Proj4", "OGCWKT", "ESRIWKT", but others can be used.
 
 [#linkedcrs, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Example of a linked CRS object
 [source, javascript]
 {
-  "type": "link",
+  "type": "Link",
   "properties": {
     "href": "http://example.com/crs/42",
-    "type": "proj4"
+    "type": "Proj4"
   }
 }
 
@@ -59,10 +59,10 @@ Suggested values are: "proj4", "ogcwkt", "esriwkt", but others can be used.
 .Example {example-num}: Example of a relative linked CRS object with an auxiliary file
 [source, javascript]
 {
-  "type": "link",
+  "type": "Link",
   "properties": {
     "href": "data.crs",
-    "type": "ogcwkt"
+    "type": "OGCWKT"
   }
 }
 
@@ -76,7 +76,7 @@ This CRS object is the default value of the `"crs"` member.
 [source, javascript]
 -----
     "crs" : {
-        "type": "name",
+        "type": "Name",
         "properties": {
             "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
         }
@@ -89,7 +89,7 @@ This CRS object is the default value of the `"trs"` member.
 [source, javascript]
 -----
     "trs" : {
-        "type": "name",
+        "type": "Name",
         "properties": {
             "name": "urn:ogc:data:time:iso8601"
         }

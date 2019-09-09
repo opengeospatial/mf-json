@@ -15,18 +15,18 @@ MF-JSON Prism only considers the temporal dependencies of their changes of value
 {
   "datetimes": [...], //(MANDATORY) a JSON Array of time instants
   "@property0": {     // @property0 whose name is any string defined by an application.
-      "type": "measure",          //(MANDATORY) a predefined string among `measure`, `text`, and `image`
+      "type": "Measure",          //(MANDATORY) a predefined string among `Measure`, `Text`, and `Image`
       "values": [...],            //(MANDATORY) a JSON Array of values
       "interpolation": "...",     //(DEFAULT) a predefined string or a URL
       "form": "...",              //(OPTIONAL) a symbol from UCUM
       "description": "any string" //(OPTIONAL) any string content for an application
   },
   "@property1": {     // @property1 whose name is any string defined by an application, but the name is not the same as @property0.
-      "type": "text", // @property1 has values at the same time instants of @property0
+      "type": "Text", // @property1 has values at the same time instants of @property0
       ...
   },
   "@property2" : {    // @property1 whose name is any string defined by an application, but the name is same neither @property0 nor @property1.
-    "type": "image",
+    "type": "Image",
     ....
   },
   ...
@@ -42,9 +42,9 @@ The value of the "latexmath:[@propertyN]" member is a JSON object that has the f
 [width="98%", cols="2,8a", options="header"]
 |=========
 | type strings | Descriptions
-| measure | The `"values"` member contains any numeric values.
-| text | The `"values"` member contains any strings.
-| image| The `"values"` member contains Base64 strings converted from images or URLs to address images.
+| Measure | The `"values"` member contains any numeric values.
+| Text | The `"values"` member contains any strings.
+| Image| The `"values"` member contains Base64 strings converted from images or URLs to address images.
 |=========
 
 * `"values"`: The `"values"` member is mandatory and
@@ -74,7 +74,7 @@ between neighboring points in a timeseries, e.g., `"http://www.opengis.net/def/t
 
 * `"form"`: The `"form"` member is optional and its value is a JSON string as a common code (3 characters) described in the Code List Rec 20
 by the UN Centre for Trade Facilitation and Electronic Business (UN/CEFACT)<<UNCODES>> or a URL specifying the unit of measurement.
-This member is applied only for a temporal property whose value type is `measure`.
+This member is applied only for a temporal property whose value type is `Measure`.
 
 * `"description"`: The `"description"` member is optional and its value is any string to describe a short description.
 
