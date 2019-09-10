@@ -32,7 +32,7 @@ However, there are requirements to represent and share the movements of 1-dimens
 Disaster Risk Management Systems, and Smart City Applications. For example, the traffic congestion on roads and the hotspot of air pollution are typical moving features in the real world.
 
 Therefore, OGC Moving Features JSON encodings (MF-JSON) define data members for one-parameter geometries and properties of the moving feature in time not only trajectory.
-MF-JSON is compatible with the IETF GeoJSON Format [https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946]].
+MF-JSON are inspired by the IETF GeoJSON Format [https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946]].
 
 Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
 

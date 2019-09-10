@@ -115,7 +115,12 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
     "properties": { //(OPTIONAL)
       "name": "car1",
       "state": "test1",
-      "video": "http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg"
+      "video": "http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg",
+      "description": "Example of the MF-JSON Prism encoding"
+    },
+    "geometry": { //(OPTIONAL) GeoJSON IETF RFC 7946 geometry object
+        "type": "LineString"
+        "coordinate": [ [139.757083, 35.627701, 0.5], [139.757399, 35.627701, 2.0], [139.757555, 35.627688, 4.0], [139.757651, 35.627596, 4.0], [139.757716, 35.627483, 4.0] ]
     },
     "crs" : { //(DEFAULT) If there is no "crs" member, the default crs is "WGS84" with longitude and latitude units of decimal degrees
       "type": "Name",
@@ -171,7 +176,7 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
         },
         "discharge" : {
             "type" : "Measure",
-            "form" : "MQS", // a symbol from UCUM for m^3/s(a cubic metre per second)
+            "form" : "MQS", // a symbol for m^3/s(a cubic metre per second)
             "values" : [3.0, 4.0, 5.0],
             "interpolation": "Step"
         }
@@ -189,12 +194,5 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
             "description": "description2" //(OPTIONAL)
         }
       }
-    ],
-    "geometry": { //(MANDATORY) GeoJSON IETF RFC 7946 geometry object
-        "type": "LineString"
-        "coordinate": [ [139.757083, 35.627701, 0.5], [139.757399, 35.627701, 2.0], [139.757555, 35.627688, 4.0], [139.757651, 35.627596, 4.0], [139.757716, 35.627483, 4.0] ]
-    },
-    "properties": { //(MANDATORY) JSON object or null
-        "description": "Example of the MF-JSON Prism encoding"
-    }
+    ]
 }

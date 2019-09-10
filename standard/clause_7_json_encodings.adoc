@@ -11,11 +11,11 @@ An object in this specification is a JSON object.
 The JSON object is an unordered collection of zero or more name/value pairs, where a name is a string and a value can be a JSON `null`, `true`, `false`, string, number, array, or object.
 An array consists of elements where each element is a value as a JSON `null`, `true`, `false`, string, number, array, or object.
 
-In an object, there are three types of members: MANDATORY, OPTIONAL, and DEFAULT.
+In an MF-JSON object, there are three types of members: MANDATORY, OPTIONAL, and DEFAULT.
 [horizontal]
 MANDATORY:: If an object member is *mandatory*, its value SHOULD NOT be a JSON `null` value. The mandatory member of an object and its value SHOULD appear in a MF-JSON document.
-OPTIONAL:: If an object member is *optional*, its value allows a JSON `null` value. The optional member and its `null` value can be excluded from a MF-JSON document.
-DEFAULT:: If an object member has a *default* value defined in this specification, the pair of member and value can be omitted in a MF-JSON document.
+DEFAULT:: If an object member has a *default* value defined in this specification, the member has a default value and its pair (member/value) can be omitted in a MF-JSON document.
+OPTIONAL:: If an object member is *optional*, its value allows a JSON `null` value.
 
 <<<
 

@@ -18,7 +18,7 @@ MF-JSON Prism only considers the temporal dependencies of their changes of value
       "type": "Measure",          //(MANDATORY) a predefined string among `Measure`, `Text`, and `Image`
       "values": [...],            //(MANDATORY) a JSON Array of values
       "interpolation": "...",     //(DEFAULT) a predefined string or a URL
-      "form": "...",              //(OPTIONAL) a symbol from UCUM
+      "form": "...",              //(OPTIONAL) a unit of measurement
       "description": "any string" //(OPTIONAL) any string content for an application
   },
   "@property1": {     // @property1 whose name is any string defined by an application, but the name is not the same as @property0.

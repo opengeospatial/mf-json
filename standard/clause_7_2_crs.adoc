@@ -7,7 +7,7 @@ This is equivalent to the CRS identified by the http://www.epsg-registry.org/?di
 For a 3D coordinate with an altitude/elevation value, the value refers to distance above mean sea level (MSL or AMSL).
 However, a moving feature needs a temporal coordinate system and may be described by an engineering or parametric coordinates
 in a certain application, such as robot or vessel navigation.
-Therefore, MF-JSON Prism allows the `"crs"` member to describe an alternative CRS whose representation follows the way as described in GeoJSON(2008)<<GJSON2008>>.
+Therefore, MF-JSON Prism allows the `"crs"` member to describe an alternative CRS whose representation follows the way as described in GeoJSON-with-CRS<<GJSON2008>>.
 Also it defines the `"trs"` member to describe a temporal CRS against which time is measured. A temporal CRS is always 1D with a temporal datum (origin) and its time unit.
 
 * A non-null CoordinateReferenceSystem (CRS) object is a JSON object
