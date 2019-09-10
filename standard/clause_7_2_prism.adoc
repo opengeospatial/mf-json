@@ -35,7 +35,7 @@ as well as primitives types of JSON null, true, false, string, number, and array
 ** TemporalPrimitiveGeometry object (see <<tprimitive>>)
 ** TemporalComplexGeometry object (see <<tcomplex>>)
 * TemporalProperties object (see <<tproperties>>)
-** PrametricValues object (see <<pvalues>>)
+** ParametricValues object (see <<pvalues>>)
 * CoordinateReferenceSystem object (see <<crs>>)
 * MovingFeature object (see <<mfeature>>)
 * MovingFeatureCollection object (see <<mfeaturecollection>>)

@@ -42,7 +42,7 @@
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC® document: <a href="http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}" class="bare">http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC® document:    19-045r1</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC® document:    19-045r2</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: n.n</p></td>
@@ -284,7 +284,7 @@ Disaster Risk Management Systems, and Smart City Applications. For example, the 
 </div>
 <div class="paragraph">
 <p>Therefore, OGC Moving Features JSON encodings (MF-JSON) define data members for one-parameter geometries and properties of the moving feature in time not only trajectory.
-MF-JSON is compatible with the IETF GeoJSON Format [<a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>].</p>
+MF-JSON are inspired by the IETF GeoJSON Format [<a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>].</p>
 </div>
 <div class="paragraph">
 <p>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.</p>
@@ -379,7 +379,7 @@ The set of leaves also forms a foliation, meaning that there is a complete and s
 If viewed in a 4 dimensional spatiotemporal coordinate system, the points on the feature&#8217;s geometry at different times are different points.</p>
 </div>
 <div class="paragraph">
-<p>This specification of Moving Features JSON encodings extends IETF GeoJSON Format [<a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>] to describe two types of dynamic attribute of a feature
+<p>This specification of Moving Features JSON encodings are inspired by IETF GeoJSON Format [<a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>] to describe two types of dynamic attribute of a feature
 or feature collection in a JSON document as follows:</p>
 </div>
 <div class="ulist">
@@ -929,11 +929,12 @@ The JSON encoding formats for sharing moving feature data specified in this docu
 that has already been commonly used in many applications and well supported by tools and software libraries.
 This standard defines two JSON encoding forms: <strong>MF-JSON Trajectory</strong> and <strong>MF-JSON Prism</strong>.
 If an application focuses on only the linear movement (i.e., the spatiotemporal line string) of moving points
-based on World Geodetic System 1984, with longitude and latitude units of decimal degrees,
-the application can share the trajectory data by using <strong>only</strong> GeoJSON, called <strong>MF-JSON Trajectory</strong>.
+based on World Geodetic System 1984, with longitude and latitude units of decimal degrees, and the ISO 8601 standard
+for representation of dates and times using the Gregorian calendar,
+the application can share the trajectory data by using <strong>only</strong> IETF GeoJSON, called <strong>MF-JSON Trajectory</strong>.
 For other cases, <strong>MF-JSON Prism</strong> can be used for expressing more complex movements of moving features.
-<strong>MF-JSON Prism</strong> is an extension of GeoJSON formats reserving new members of JSON objects (<code>"temporalGeometry", "temporalProperties", "crs", "trs", "time"</code>, and etc.) as "foreign members"
-to represent spatiotemporal geometries, variations of measure, coordinate reference systems, and the particular period of moving features in the GeoJSON document.
+<strong>MF-JSON Prism</strong> is a GeoJSON-liked format reserving new members of JSON objects (<code>"temporalGeometry", "temporalProperties", "crs", "trs", "time"</code>, and etc.) as "foreign members"
+to represent spatiotemporal geometries, variations of measure, coordinate reference systems, and the particular period of moving features in a JSON document.
 <a href="#mf-encodings">Figure 2</a> presents the overview of two forms of Moving Features JSON encodings.</p>
 </div>
 <div id="mf-encodings" class="imageblock text-center">
@@ -952,7 +953,7 @@ to represent spatiotemporal geometries, variations of measure, coordinate refere
 <div class="title">Coordinate Reference System (CRS)</div>
 The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees.
 However, a moving feature needs a temporal coordinate system and may require an engineering coordinate reference system or parametric coordinate reference system
-to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON:2008<a href="#GJSON2008">[4]</a>.
+to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON "prior arrangement" (also known as GeoJSON:2008<a href="#GJSON2008">[4]</a>).
 </td>
 </tr>
 </table>
@@ -1024,7 +1025,7 @@ An array consists of elements where each element is a value as a JSON <code>null
 </table>
 </div>
 <div class="paragraph">
-<p>In an object, there are three types of members: MANDATORY, OPTIONAL, and DEFAULT.</p>
+<p>In an MF-JSON object, there are three types of members: MANDATORY, OPTIONAL, and DEFAULT.</p>
 </div>
 <div class="hdlist">
 <table>
@@ -1038,18 +1039,18 @@ MANDATORY
 </tr>
 <tr>
 <td class="hdlist1">
-OPTIONAL
+DEFAULT
 </td>
 <td class="hdlist2">
-<p>If an object member is <strong>optional</strong>, its value allows a JSON <code>null</code> value. The optional member and its <code>null</code> value can be excluded from a MF-JSON document.</p>
+<p>If an object member has a <strong>default</strong> value defined in this specification, the member has a default value and its pair (member/value) can be omitted in a MF-JSON document.</p>
 </td>
 </tr>
 <tr>
 <td class="hdlist1">
-DEFAULT
+OPTIONAL
 </td>
 <td class="hdlist2">
-<p>If an object member has a <strong>default</strong> value defined in this specification, the pair of member and value can be omitted in a MF-JSON document.</p>
+<p>If an object member is <strong>optional</strong>, its value allows a JSON <code>null</code> value.</p>
 </td>
 </tr>
 </table>
@@ -1059,7 +1060,7 @@ DEFAULT
 <h3 id="_mf_json_trajectory_encoding"><a class="anchor" href="#_mf_json_trajectory_encoding"></a>7.1. MF-JSON Trajectory Encoding</h3>
 <div class="paragraph">
 <p>MF-JSON Trajectory specifies how to map/interpret linear trajectories of moving points into/from the <strong>GeoJSON</strong> <a href="https://www.ietf.org/rfc/rfc7946.txt">[IETF RFC 7946</a>] object.
-It is based on the data model of <em>mf:MovingFeatures</em> defined in <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html">OGC Moving Features XML Core</a>.</p>
+It is based on the data model of <em>mf:MovingFeatures</em> defined in <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html">OGC Moving Features XML Core</a>[OGC 14-083r2].</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1074,7 +1075,7 @@ as well as three attributes of <em>mfIdRef</em>, <em>start</em>, and <em>end</em
 The <em>start</em> and <em>end</em> attribute of <em>mf:LinearTrajectory</em> describes the temporal offset from the <em>gml:beginPosition</em> element in the <em>mf:sTBoundedBy</em> Class.
 Two or more coordinate tuples are specified in <em>gml:posList</em> and linearly interpolated from time <em>start</em> to <em>end</em>.
 The <em>mf:Attr</em> element contains the attribute information as a text. The values of the attributes are constant while the feature moves along the <em>mf:LinearTrajectory</em>.
-The detailed description refers to <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html">OGC Moving Features XML Core</a>.
+The detailed description refers to <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html">OGC Moving Features XML Core</a>[OGC 14-083r2].
 </td>
 </tr>
 </table>
@@ -1274,7 +1275,7 @@ The number of elements in the array of the <code>"coordinates"</code> value in t
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/propeties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/propeties</a><br>
 The value of the <code>"properties"</code> member SHALL be a GeoJSON object that has at least a member with the named <code>"datetimes"</code>.
 The value of the <code>"datetimes"</code> member is a JSON array.
-If a Feature has any variable attribute by time and its value, the attribute can be a member inside the <code>"properties"</code> member with the value of a JSON array, the size of its array SHALL be same as <code>1</code> or <code>N-1</code> or <code>N</code>.
+If a Feature has any variable attribute by time and its value, the attribute can be a member inside the <code>"properties"</code> member with the value of a JSON array, the size of its array SHALL be same as <code>1</code>, <code>N-1</code>, or <code>N</code>.
 Note that <code>N</code> is the number of elements in the array of the <code>"coordinates"</code> value.</p>
 </div></div></td>
 </tr>
@@ -1387,7 +1388,7 @@ as well as primitives types of JSON null, true, false, string, number, and array
 <div class="ulist">
 <ul>
 <li>
-<p>PrametricValues object (see <a href="#pvalues">7.2.2.1</a>)</p>
+<p>ParametricValues object (see <a href="#pvalues">7.2.2.1</a>)</p>
 </li>
 </ul>
 </div>
@@ -2101,7 +2102,7 @@ MF-JSON Prism only considers the temporal dependencies of their changes of value
       <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Measure</span><span class="delimiter">&quot;</span></span>,          <span class="comment">//(MANDATORY) a predefined string among `Measure`, `Text`, and `Image`</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span>: [...],            <span class="comment">//(MANDATORY) a JSON Array of values</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>,     <span class="comment">//(DEFAULT) a predefined string or a URL</span>
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">form</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>,              <span class="comment">//(OPTIONAL) a symbol from UCUM</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">form</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>,              <span class="comment">//(OPTIONAL) a unit of measurement</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">any string</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL) any string content for an application</span>
   },
   <span class="key"><span class="delimiter">&quot;</span><span class="content">@property1</span><span class="delimiter">&quot;</span></span>: {     <span class="comment">// @property1 whose name is any string defined by an application, but the name is not the same as @property0.</span>
@@ -2302,7 +2303,7 @@ This is equivalent to the CRS identified by the <a href="http://www.epsg-registr
 For a 3D coordinate with an altitude/elevation value, the value refers to distance above mean sea level (MSL or AMSL).
 However, a moving feature needs a temporal coordinate system and may be described by an engineering or parametric coordinates
 in a certain application, such as robot or vessel navigation.
-Therefore, MF-JSON Prism allows the <code>"crs"</code> member to describe an alternative CRS whose representation follows the way as described in GeoJSON(2008)<a href="#GJSON2008">[4]</a>.
+Therefore, MF-JSON Prism allows the <code>"crs"</code> member to describe an alternative CRS whose representation follows the way as described in GeoJSON-with-CRS<a href="#GJSON2008">[4]</a>.
 Also it defines the <code>"trs"</code> member to describe a temporal CRS against which time is measured. A temporal CRS is always 1D with a temporal datum (origin) and its time unit.</p>
 </div>
 <div class="ulist">
@@ -4426,7 +4427,12 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
     <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(OPTIONAL)</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">car1</span><span class="delimiter">&quot;</span></span>,
       <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">test1</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">video</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg</span><span class="delimiter">&quot;</span></span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">video</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Example of the MF-JSON Prism encoding</span><span class="delimiter">&quot;</span></span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(OPTIONAL) GeoJSON IETF RFC 7946 geometry object</span>
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">LineString</span><span class="delimiter">&quot;</span></span>
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">coordinate</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">139.757083</span>, <span class="float">35.627701</span>, <span class="float">0.5</span>], [<span class="float">139.757399</span>, <span class="float">35.627701</span>, <span class="float">2.0</span>], [<span class="float">139.757555</span>, <span class="float">35.627688</span>, <span class="float">4.0</span>], [<span class="float">139.757651</span>, <span class="float">35.627596</span>, <span class="float">4.0</span>], [<span class="float">139.757716</span>, <span class="float">35.627483</span>, <span class="float">4.0</span>] ]
     },
     <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : { <span class="comment">//(DEFAULT) If there is no &quot;crs&quot; member, the default crs is &quot;WGS84&quot; with longitude and latitude units of decimal degrees</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>,
@@ -4482,7 +4488,7 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
         },
         <span class="key"><span class="delimiter">&quot;</span><span class="content">discharge</span><span class="delimiter">&quot;</span></span> : {
             <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">Measure</span><span class="delimiter">&quot;</span></span>,
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">form</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">MQS</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a symbol from UCUM for m^3/s(a cubic metre per second)</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">form</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">MQS</span><span class="delimiter">&quot;</span></span>, <span class="comment">// a symbol for m^3/s(a cubic metre per second)</span>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">values</span><span class="delimiter">&quot;</span></span> : [<span class="float">3.0</span>, <span class="float">4.0</span>, <span class="float">5.0</span>],
             <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Step</span><span class="delimiter">&quot;</span></span>
         }
@@ -4500,14 +4506,7 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">description2</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL)</span>
         }
       }
-    ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(MANDATORY) GeoJSON IETF RFC 7946 geometry object</span>
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">LineString</span><span class="delimiter">&quot;</span></span>
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">coordinate</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">139.757083</span>, <span class="float">35.627701</span>, <span class="float">0.5</span>], [<span class="float">139.757399</span>, <span class="float">35.627701</span>, <span class="float">2.0</span>], [<span class="float">139.757555</span>, <span class="float">35.627688</span>, <span class="float">4.0</span>], [<span class="float">139.757651</span>, <span class="float">35.627596</span>, <span class="float">4.0</span>], [<span class="float">139.757716</span>, <span class="float">35.627483</span>, <span class="float">4.0</span>] ]
-    },
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(MANDATORY) JSON object or null</span>
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Example of the MF-JSON Prism encoding</span><span class="delimiter">&quot;</span></span>
-    }
+    ]
 }</code></pre>
 </div>
 </div>
@@ -4603,7 +4602,7 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-08-16 15:26:15 +0900
+Last updated 2019-09-10 20:35:37 +0900
 </div>
 </div>
 <link rel="stylesheet" href="./coderay-asciidoctor.css">
