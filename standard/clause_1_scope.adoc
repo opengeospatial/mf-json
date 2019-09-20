@@ -19,7 +19,7 @@ The set of points contained in all of the leaves, and in all of the trajectories
 The set of leaves also forms a foliation, meaning that there is a complete and separate representation of the geometry of the feature for each specific time.
 If viewed in a 4 dimensional spatiotemporal coordinate system, the points on the feature's geometry at different times are different points.
 
-This specification of Moving Features JSON encodings extends IETF GeoJSON Format [https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946]] to describe two types of dynamic attribute of a feature
+This specification of Moving Features JSON encodings are inspired by IETF GeoJSON Format [https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946]] to describe two types of dynamic attribute of a feature
 or feature collection in a JSON document as follows:
 
 * _Temporal geometry_: The spatial change over time, representing the movement of the rigid or nonrigid body of a feature; and

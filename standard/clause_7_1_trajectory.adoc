@@ -1,7 +1,7 @@
 === MF-JSON Trajectory Encoding
 
 MF-JSON Trajectory specifies how to map/interpret linear trajectories of moving points into/from the *GeoJSON* https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]] object.
-It is based on the data model of _mf:MovingFeatures_ defined in http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC Moving Features XML Core].
+It is based on the data model of _mf:MovingFeatures_ defined in http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC Moving Features XML Core][OGC 14-083r2].
 
 [NOTE]
 The _mf:MovingFeatures_ Class is implemented by _mf:Foliation_ including movements of moving points, which are instances of _mf:LinearTrajectory_.
@@ -10,7 +10,7 @@ as well as three attributes of _mfIdRef_, _start_, and _end_. The _mfIdRef_ attr
 The _start_ and _end_ attribute of _mf:LinearTrajectory_ describes the temporal offset from the _gml:beginPosition_ element in the _mf:sTBoundedBy_ Class.
 Two or more coordinate tuples are specified in _gml:posList_ and linearly interpolated from time _start_ to _end_.
 The _mf:Attr_ element contains the attribute information as a text. The values of the attributes are constant while the feature moves along the _mf:LinearTrajectory_.
-The detailed description refers to http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC Moving Features XML Core].
+The detailed description refers to http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC Moving Features XML Core][OGC 14-083r2].
 
 The UML diagram for MF-JSON Trajectory is depicted in <<mf-trajectory-uml>>.
 

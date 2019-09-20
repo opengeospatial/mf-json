@@ -7,11 +7,12 @@ The JSON encoding formats for sharing moving feature data specified in this docu
 that has already been commonly used in many applications and well supported by tools and software libraries.
 This standard defines two JSON encoding forms: *MF-JSON Trajectory* and *MF-JSON Prism*.
 If an application focuses on only the linear movement (i.e., the spatiotemporal line string) of moving points
-based on World Geodetic System 1984, with longitude and latitude units of decimal degrees,
-the application can share the trajectory data by using *only* GeoJSON, called *MF-JSON Trajectory*.
+based on World Geodetic System 1984, with longitude and latitude units of decimal degrees, and the ISO 8601 standard
+for representation of dates and times using the Gregorian calendar,
+the application can share the trajectory data by using *only* IETF GeoJSON, called *MF-JSON Trajectory*.
 For other cases, *MF-JSON Prism* can be used for expressing more complex movements of moving features.
-*MF-JSON Prism* is an extension of GeoJSON formats reserving new members of JSON objects (`"temporalGeometry", "temporalProperties", "crs", "trs", "time"`, and etc.) as "foreign members"
-to represent spatiotemporal geometries, variations of measure, coordinate reference systems, and the particular period of moving features in the GeoJSON document.
+*MF-JSON Prism* is a GeoJSON-liked format reserving new members of JSON objects (`"temporalGeometry", "temporalProperties", "crs", "trs", "time"`, and etc.) as "foreign members"
+to represent spatiotemporal geometries, variations of measure, coordinate reference systems, and the particular period of moving features in a JSON document.
 <<mf-encodings>> presents the overview of two forms of Moving Features JSON encodings.
 
 [#mf-encodings,reftext='{figure-caption} {counter:figure-num}']
@@ -22,7 +23,7 @@ image::mf-encodings.png[mf-encodings, pdfwidth=65%, width=65%, align="center"]
 .Coordinate Reference System (CRS)
 The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees.
 However, a moving feature needs a temporal coordinate system and may require an engineering coordinate reference system or parametric coordinate reference system
-to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON:2008<<GJSON2008>>.
+to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON "prior arrangement" (also known as GeoJSON:2008<<GJSON2008>>).
 
 TIP: The existing GeoJSON implementation can ignore the new members of "temporalGeometry", "temporalProperties", "trs", and "time" in an MF-JSON document
 if there is no processing module for foreign members. Accordingly, MF-JSON is compatible with the IETF GeoJSON encoding.
