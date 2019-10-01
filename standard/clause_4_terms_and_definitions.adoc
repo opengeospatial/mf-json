@@ -48,7 +48,7 @@ well-defined set +
 characteristic of a feature in which its value taken from the domain of the feature attribute type varies with time
 
 === *encoding*
-Conversion of data into a series of codes +
+conversion of data into a series of codes +
 [ ISO 11179-1:2004 ]
 
 === *engineering coordinate reference system*

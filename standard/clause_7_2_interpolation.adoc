@@ -3,7 +3,7 @@
 In MF-JSON Prism, the concept of motion curves is important to represent various types of dynamic movements, especially non-linear movements of features.
 
 ===== 7.2.10.1. Predefined curves
-In order to reduce the encoding cost and the data size, the MF-JSON Prism encoding defines five strings of built-in motion curves for the value of the `"interpolation"` member in a TemporalPrimitiveGeometry object: `"Discrete"`, `"Step"`, `"Linear"`, `"Quadratic"`, and `"Cube"`.
+In order to reduce the encoding cost and the data size, the MF-JSON Prism encoding defines five strings of built-in motion curves for the value of the `"interpolation"` member in a TemporalPrimitiveGeometry object: `"Discrete"`, `"Step"`, `"Linear"`, `"Quadratic"`, and `"Cubic"`.
 For these built-in motion curves, each leaf geometry of the TemporalPrimitiveGeometry object has the same structure for the elements in the value array of the `"coordinates"` member and the same number of single positions in the elements, except `"MovingPointCloud"`.
 For example, if a leaf linestring consists of two single positions in a temporal geometry of type `"MovingLineString"`, the other leaves also have two single positions. If a leaf polygon in a temporal geometry of type `"MovingPolygon"` has one interior ring, the others also have one interior ring and the number of positions of rings is same.
 
@@ -14,7 +14,7 @@ For example, if a leaf linestring consists of two single positions in a temporal
     ....,
     "datetimes": [...],  //T={t_0, t_1, ..., t_n}
     "coordinates": [...], //G={G_0, G_1, ..., G_n}
-    "interpolation": "Discrete|Step|Linear|Quadratic|Cube", // vbar | as a means to select ONE.
+    "interpolation": "Discrete|Step|Linear|Quadratic|Cubic", // vbar | as a means to select ONE.
     ....
  }
 
@@ -130,7 +130,7 @@ SC_{i}(t_{i-1}) = P_{i-1}, \quad SC_{i}(t_{i}) = P_{i} = SC_{i+1}(t_i),
 P'(t_{i})=V(t_{i})=SC'_{i}(t_{i})=SC'_{i+1}(t_i), \quad a_0 = 0.
 +++++++++++
 
-"Cube":: This method interpolates the position at time latexmath:[t] by using a Catmull–Rom (cubic) spline on each interval [latexmath:[t_{i}, t_{i+1}]] with first-order parametric continuity (latexmath:[C^1]).
+"Cubic":: This method interpolates the position at time latexmath:[t] by using a Catmull–Rom (cubic) spline on each interval [latexmath:[t_{i}, t_{i+1}]] with first-order parametric continuity (latexmath:[C^1]).
 The Catmull-Rom splines is a method that approximate a set of positions with a smooth polynomial function that is piecewise-defined.
 This interpolation requires at least four positions, i.e., latexmath:[N \geq 4], i.e., position latexmath:[P_{i-1}] and latexmath:[P_{i+2}] are needed to calculate the spline between positions of latexmath:[P_i] and latexmath:[P_{i+1}].
 In order to promise the same interpolation way, this standard specifies a Catmull-Rom interpolation function by the following parametric equations in terms of the time variable:
@@ -182,7 +182,7 @@ P'(t_0)=P_1-P_0, \quad P'(t_n)=P_n-P_{n-1}.
 | Step 	    | image:mf-interpolation-step.png[Step, height=80%, align="center"]
 | Linear    | image:mf-interpolation-linear.png[Linear, height=80%, align="center"]
 | Quadratic | image:mf-interpolation-quadratic.png[Quadratic, height=80%, align="center"]
-| Cube      | image:mf-interpolation-cube.png[CatmullRom, height=80%, align="center"]
+| Cubic      | image:mf-interpolation-cube.png[CatmullRom, height=80%, align="center"]
 |=========
 
 /////////////
