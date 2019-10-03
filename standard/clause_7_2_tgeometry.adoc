@@ -49,7 +49,7 @@ the object is specialized as a TemporalPrimitiveGeometry object with.
   "datetimes" : [...],    //(MANDATORY)
   "coordinates": [...],   //(MANDATORY)
   "interpolation": "...", //(DEFAULT)
-  "base": {...},          //(OPTIONAL)
+  "base": "...",          //(OPTIONAL)
   "orientations": [...],  //(OPTIONAL)
   "crs": {...},           //(DEFAULT)
   "trs": {...}            //(DEFAULT)
@@ -97,7 +97,8 @@ its temporal coordinate reference system that is given by the `"trs"` member.
 [NOTE]
 ==========
 When the `"trs"` member has the default temporal CRS (i.e., ISO8601) object, an instant is generally as a a JSON string
-encoded by https://www.ietf.org/rfc/rfc3339.txt[IETF RFC 3339] or a numeric value of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., `1465621816590`).
+encoded by https://www.ietf.org/rfc/rfc3339.txt[IETF RFC 3339] (e.g., `"2016-09-11T06:10:32Z"`)
+or a numeric value of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., `1465621816590`).
 Here are some examples of instant.
 -----
    YYYY (e.g., 1997)
@@ -153,7 +154,7 @@ For Polygons with multiple rings, the first must be the exterior ring and any ot
 
 * `"interpolation"`: The `"interpolation"` member is default and the most important member
 to represent various types of dynamic movements. Its value is a MotionCurve object that is described
-by a case-sensitive string as one of predefined five motion curves (i.e., `"Discrete"`, `"Step"`, `"Linear"`, `"Quadratic"`, and `"Cubic"`) or
+by a case-sensitive string as one of predefined five motion curves (i.e., `"Discrete"`, `"Step"`, `"Linear"`, `"Quadratic"`, and `"Cube"`) or
 a URL (e.g., `"http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve"`).
 The URL indicates a JSON document containing a user-defined curve of parametric motion
 for the movement of a feature in two- or three-dimensional space.
@@ -161,9 +162,8 @@ The detail interpretation and representation of method is described in <<interpo
 If the TemporalPrimitiveGeometry object has no member with the name `"interpolation"`,
 it is interpreted by `"Linear"`.
 
-* `"base"`: The `"base"` member is optional, and its value is a JSON object or a JSON `null` value.
-The JSON object has two members: `"type"` and `"href"`. The `"type"` member has a JSON string to represent a 3D File format such as
-STL<<STL>>, OBJ<<OBJ>>, PLY<<PLY>>, and glTF<<GLTF>>. The `"href"` member has a URL to address a 3D model data.
+* `"base"`: The `"base"` member is optional and its value is a URL to address an OBJ<<OBJ>>
+file of a 3D model data. It allows a JSON `null` value.
 The 3D model represents a base geometry of a 3D rigid shape, and
 the combination of the `"base"` and `"orientations"` members represents a 3D temporal geometry
 of the MF_RigidTemporalGeometry type in ISO 19141. In MF-JSON Prism, the 3D model is transformed

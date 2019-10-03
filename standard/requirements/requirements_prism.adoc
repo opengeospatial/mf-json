@@ -8,7 +8,7 @@
 * IETF RFC 3339
 * IETF RFC 7946
 |*Requirement 2.1*  |http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/GeoJSON +
-A MF-JSON Prism SHALL use the same meaning of members defined in GeoJSON[IETF RFC 7946].
+A MF-JSON Prism file SHALL be compatible with GeoJSON[IETF RFC 7946].
 |*Requirement 2.2*  |http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/object +
 A JSON object in an MF-JSON Prism file SHALL be encoded by one of the Object types defined in this standard, i.e., TemporalGeometry, TemporalProperties, CoordinateReferenceSystem,
 MovingFeature, MovingFeatureCollection, LifeSpan, BoundingBox, Geometry, Properties, and MotionCurve.

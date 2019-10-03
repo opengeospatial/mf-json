@@ -26,7 +26,7 @@ However, a moving feature needs a temporal coordinate system and may require an 
 to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON "prior arrangement" (also known as GeoJSON:2008<<GJSON2008>>).
 
 TIP: The existing GeoJSON implementation can ignore the new members of "temporalGeometry", "temporalProperties", "trs", and "time" in an MF-JSON document
-if there is no processing module for foreign members.
+if there is no processing module for foreign members. Accordingly, MF-JSON is compatible with the IETF GeoJSON encoding.
 
 <<mf-hurricane>> illustrates an example of the movement of a hurricane with a time-varying 2-dimensional geometry as a moving feature. Suppose the pressure centroid of the hurricane reported four locations
 at latexmath:[t_1, t_2, t_3], and latexmath:[t_4]. Its trajectory may be drawn depending on the interpolation method between two consecutive locations, such as latexmath:[A] (linear) or latexmath:[B] (Quadratic).

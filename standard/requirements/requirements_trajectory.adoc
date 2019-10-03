@@ -17,11 +17,11 @@ The value of the `"geometry"` member SHALL be a LineString Geometry object, havi
 The number of elements in the array of the `"coordinates"` value in the Geometry object SHALL more than two positions.
 |*Requirement 1.4* |http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/propeties +
 The value of the `"properties"` member SHALL be a GeoJSON object that has at least a member with the named `"datetimes"`.
-The value of the `"datetimes"` member is a JSON array. If a Feature has any variable attribute by time and its value,
-the attribute can be a member inside the `"properties"` member with the value of a JSON array,
-the size of its array SHALL be same as `1`, `N-1`, or `N`. Note that `N` is the number of elements in the array of the `"coordinates"` value.
+The value of the `"datetimes"` member is a JSON array.
+If a Feature has any variable attribute by time and its value, the attribute can be a member inside the `"properties"` member with the value of a JSON array, the size of its array SHALL be same as `1`, `N-1`, or `N`.
+Note that `N` is the number of elements in the array of the `"coordinates"` value.
 |*Requirement 1.5* |http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/datetimes +
-Each element in the array of the `"datetimes"` value SHALL be an instant object.
+Each element in the array of the `"datetimes"` value SHALL be a instant object.
 An instant object SHALL be only a JSON string to represent a timestamp encoded by the IETF RFC 3339 format using `Z` or
 the numeric value of milliseconds since midnight (00:00 a.m.) on January 1, 1970, in UTC.
 |*Requirement 1.6* |http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/datetimes/monotonic +

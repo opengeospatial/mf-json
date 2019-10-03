@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.8">
+<meta name="generator" content="Asciidoctor 2.0.10">
 <title>OGC Moving Features Encoding Extension - JSON</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./coderay-asciidoctor.css">
 </head>
 <body class="book">
 <div id="header">
@@ -594,7 +593,7 @@ The first point is called the start point, and the last is the end point. Connec
 <div class="sect2">
 <h3 id="_encoding"><a class="anchor" href="#_encoding"></a>4.7. <strong>encoding</strong></h3>
 <div class="paragraph">
-<p>conversion of data into a series of codes<br>
+<p>Conversion of data into a series of codes<br>
 [ ISO 11179-1:2004 ]</p>
 </div>
 </div>
@@ -967,7 +966,7 @@ to represent the movement of the geometry of the feature in the case of an appli
 </td>
 <td class="content">
 The existing GeoJSON implementation can ignore the new members of "temporalGeometry", "temporalProperties", "trs", and "time" in an MF-JSON document
-if there is no processing module for foreign members.
+if there is no processing module for foreign members. Accordingly, MF-JSON is compatible with the IETF GeoJSON encoding.
 </td>
 </tr>
 </table>
@@ -1043,7 +1042,7 @@ MANDATORY
 DEFAULT
 </td>
 <td class="hdlist2">
-<p>If an object member is <strong>default</strong>, the member is mandatory and has a default value defined in this specification when its pair (member/value) does not appear in a MF-JSON document.</p>
+<p>If an object member has a <strong>default</strong> value defined in this specification, the member has a default value and its pair (member/value) can be omitted in a MF-JSON document.</p>
 </td>
 </tr>
 <tr>
@@ -1181,13 +1180,13 @@ the attribute can be a member inside the <code>"properties"</code> member with t
 <div class="ulist">
 <ul>
 <li>
-<p>The array of a time-varying attribute with step interpolation has elements with one less than the number of positions of the <code>"coordinates"</code> member.</p>
+<p>Time-varying attributes having one less than the number of positions of the <code>"coordinates"</code> member.</p>
 </li>
 <li>
-<p>The array of a time-varying attribute with linear interpolation has elements with the same number of positions of the <code>"coordinates"</code> member.</p>
+<p>Time-varying attributes having the same number of positions of the <code>"coordinates"</code> member.</p>
 </li>
 <li>
-<p>The array of a fixed attribute during the whole of <code>"datetimes"</code> has only one element.</p>
+<p>Not time-varying attributes having only one.</p>
 </li>
 </ul>
 </div>
@@ -1275,16 +1274,16 @@ The number of elements in the array of the <code>"coordinates"</code> value in t
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/propeties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/propeties</a><br>
 The value of the <code>"properties"</code> member SHALL be a GeoJSON object that has at least a member with the named <code>"datetimes"</code>.
-The value of the <code>"datetimes"</code> member is a JSON array. If a Feature has any variable attribute by time and its value,
-the attribute can be a member inside the <code>"properties"</code> member with the value of a JSON array,
-the size of its array SHALL be same as <code>1</code>, <code>N-1</code>, or <code>N</code>. Note that <code>N</code> is the number of elements in the array of the <code>"coordinates"</code> value.</p>
+The value of the <code>"datetimes"</code> member is a JSON array.
+If a Feature has any variable attribute by time and its value, the attribute can be a member inside the <code>"properties"</code> member with the value of a JSON array, the size of its array SHALL be same as <code>1</code>, <code>N-1</code>, or <code>N</code>.
+Note that <code>N</code> is the number of elements in the array of the <code>"coordinates"</code> value.</p>
 </div></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 1.5</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/datetimes" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/datetimes</a><br>
-Each element in the array of the <code>"datetimes"</code> value SHALL be an instant object.
+Each element in the array of the <code>"datetimes"</code> value SHALL be a instant object.
 An instant object SHALL be only a JSON string to represent a timestamp encoded by the IETF RFC 3339 format using <code>Z</code> or
 the numeric value of milliseconds since midnight (00:00 a.m.) on January 1, 1970, in UTC.</p>
 </div></div></td>
@@ -1471,7 +1470,7 @@ A sample data of MF-JSON Prism is provided in <a href="#sampleJSONPrism">Annex B
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.1</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/GeoJSON" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/GeoJSON</a><br>
-A MF-JSON Prism SHALL use the same meaning of members defined in GeoJSON[IETF RFC 7946].</p>
+A MF-JSON Prism file SHALL be compatible with GeoJSON[IETF RFC 7946].</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1518,7 +1517,7 @@ If no CRS instance can be so acquired in a file, the TemporalGeometry object ass
 </ul>
 </div>
 <div id="tgeometryjson" class="listingblock">
-<div class="title">Example {example-num}: Common members of a TemporalGeometry object</div>
+<div class="title">Example 1: Common members of a TemporalGeometry object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(MANDATORY)</span>
@@ -1563,7 +1562,7 @@ The TemporalPrimitiveGeometry object is defined with additional members
 named <code>"datetimes"</code>, <code>"coordinates"</code>, <code>"interpolation"</code>, <code>"base"</code>, and <code>"orientations"</code> as shown in <a href="#tprimitivejson">Example 2</a>, as well as the common members in <a href="#tgeometryjson">Example 1</a>.</p>
 </div>
 <div id="tprimitivejson" class="listingblock">
-<div class="title">Example {example-num}: Members of a TemporalPrimitiveGeometry Object</div>
+<div class="title">Example 2: Members of a TemporalPrimitiveGeometry Object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="comment">// vbar | as a means to select ONE type.</span>
@@ -1571,7 +1570,7 @@ named <code>"datetimes"</code>, <code>"coordinates"</code>, <code>"interpolation
   <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [...],    <span class="comment">//(MANDATORY)</span>
   <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [...],   <span class="comment">//(MANDATORY)</span>
   <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(DEFAULT)</span>
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">base</span><span class="delimiter">&quot;</span></span>: {...},          <span class="comment">//(OPTIONAL)</span>
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">base</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>,          <span class="comment">//(OPTIONAL)</span>
   <span class="key"><span class="delimiter">&quot;</span><span class="content">orientations</span><span class="delimiter">&quot;</span></span>: [...],  <span class="comment">//(OPTIONAL)</span>
   <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span>: {...},           <span class="comment">//(DEFAULT)</span>
   <span class="key"><span class="delimiter">&quot;</span><span class="content">trs</span><span class="delimiter">&quot;</span></span>: {...}            <span class="comment">//(DEFAULT)</span>
@@ -1678,7 +1677,8 @@ its temporal coordinate reference system that is given by the <code>"trs"</code>
 <td class="content">
 <div class="paragraph">
 <p>When the <code>"trs"</code> member has the default temporal CRS (i.e., ISO8601) object, an instant is generally as a a JSON string
-encoded by <a href="https://www.ietf.org/rfc/rfc3339.txt">IETF RFC 3339</a> or a numeric value of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., <code>1465621816590</code>).
+encoded by <a href="https://www.ietf.org/rfc/rfc3339.txt">IETF RFC 3339</a> (e.g., <code>"2016-09-11T06:10:32Z"</code>)
+or a numeric value of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., <code>1465621816590</code>).
 Here are some examples of instant.</p>
 </div>
 <div class="listingblock">
@@ -1803,7 +1803,7 @@ For Polygons with multiple rings, the first must be the exterior ring and any ot
 <li>
 <p><code>"interpolation"</code>: The <code>"interpolation"</code> member is default and the most important member
 to represent various types of dynamic movements. Its value is a MotionCurve object that is described
-by a case-sensitive string as one of predefined five motion curves (i.e., <code>"Discrete"</code>, <code>"Step"</code>, <code>"Linear"</code>, <code>"Quadratic"</code>, and <code>"Cubic"</code>) or
+by a case-sensitive string as one of predefined five motion curves (i.e., <code>"Discrete"</code>, <code>"Step"</code>, <code>"Linear"</code>, <code>"Quadratic"</code>, and <code>"Cube"</code>) or
 a URL (e.g., <code>"http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve"</code>).
 The URL indicates a JSON document containing a user-defined curve of parametric motion
 for the movement of a feature in two- or three-dimensional space.
@@ -1812,9 +1812,8 @@ If the TemporalPrimitiveGeometry object has no member with the name <code>"inter
 it is interpreted by <code>"Linear"</code>.</p>
 </li>
 <li>
-<p><code>"base"</code>: The <code>"base"</code> member is optional, and its value is a JSON object or a JSON <code>null</code> value.
-The JSON object has two members: <code>"type"</code> and <code>"href"</code>. The <code>"type"</code> member has a JSON string to represent a 3D File format such as
-STL<a href="#STL">[6]</a>, OBJ<a href="#OBJ">[7]</a>, PLY<a href="#PLY">[8]</a>, and glTF<a href="#GLTF">[9]</a>. The <code>"href"</code> member has a URL to address a 3D model data.
+<p><code>"base"</code>: The <code>"base"</code> member is optional and its value is a URL to address an OBJ<a href="#OBJ">[6]</a>
+file of a 3D model data. It allows a JSON <code>null</code> value.
 The 3D model represents a base geometry of a 3D rigid shape, and
 the combination of the <code>"base"</code> and <code>"orientations"</code> members represents a 3D temporal geometry
 of the MF_RigidTemporalGeometry type in ISO 19141. In MF-JSON Prism, the 3D model is transformed
@@ -1981,9 +1980,7 @@ The coordinate reference system for the 3D model SHALL be a right-handed coordin
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.14</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/base" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/base</a><br>
-The value of the <code>"base"</code> member SHALL be a JSON object having two members of <code>"type"</code> and <code>"href"</code>.
-The <code>"type"</code> member has a JSON string to represent a file format,
-and the <code>"href"</code> member has a web accessible URL to address a 3D model data.</p>
+The value of the <code>"base"</code> member SHALL be a web accessible URL to address an OBJ file of a 3D model data.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -2097,7 +2094,7 @@ Even though the parametric value may depends on the spatiotemporal location,
 MF-JSON Prism only considers the temporal dependencies of their changes of value.</p>
 </div>
 <div id="pvaluesjson" class="listingblock">
-<div class="title">Example {example-num}: Examples of a ParametricValues object</div>
+<div class="title">Example 3: Examples of a ParametricValues object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(MANDATORY) a JSON Array of time instants</span>
@@ -2341,7 +2338,7 @@ The value of <code>"href"</code> and <code>"type"</code> is a JSON <code>null</c
 This standard recommends an EPSG<a href="#EPSG">[3]</a> code as the value of <code>"name"</code>, such as "EPSG::4326."</p>
 </div>
 <div id="namedcrs" class="listingblock">
-<div class="title">Example {example-num}: Example of a named CRS object</div>
+<div class="title">Example 4: Example of a named CRS object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>,
@@ -2362,7 +2359,7 @@ used to represent CRS parameters at the provided URI.
 Suggested values are: "Proj4", "OGCWKT", "ESRIWKT", but others can be used.</p>
 </div>
 <div id="linkedcrs" class="listingblock">
-<div class="title">Example {example-num}: Example of a linked CRS object</div>
+<div class="title">Example 5: Example of a linked CRS object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Link</span><span class="delimiter">&quot;</span></span>,
@@ -2374,7 +2371,7 @@ Suggested values are: "Proj4", "OGCWKT", "ESRIWKT", but others can be used.</p>
 </div>
 </div>
 <div id="auxiliarycrs" class="listingblock">
-<div class="title">Example {example-num}: Example of a relative linked CRS object with an auxiliary file</div>
+<div class="title">Example 6: Example of a relative linked CRS object with an auxiliary file</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Link</span><span class="delimiter">&quot;</span></span>,
@@ -2476,7 +2473,7 @@ a moving feature that is spatially and temporally bounded,
 and its position (continuously) changes over time with the members as shown in <a href="#mfeaturejson">Example 7</a>.</p>
 </div>
 <div id="mfeaturejson" class="listingblock">
-<div class="title">Example {example-num}: Members of a MovingFeature object</div>
+<div class="title">Example 7: Members of a MovingFeature object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Feature</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(MANDATORY)</span>
@@ -2632,7 +2629,7 @@ The value of the <code>"properties"</code> member SHALL be any JSON object or a 
 It bundles a collection of moving features into a logical abstraction with a certain alias.</p>
 </div>
 <div id="mfeaturecollectionjson" class="listingblock">
-<div class="title">Example {example-num}: Members of a MovingFeatureCollection object</div>
+<div class="title">Example 8: Members of a MovingFeatureCollection object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
   <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">FeatureCollection</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(MANDATORY)</span>
@@ -2740,9 +2737,9 @@ to represent a particular period \([t_s, t_e\)] and \(t_s \leq t_e\).
 Namely, its expression of an element in the array refers to the default temporal CRS object, i.e., ISO8601.</p>
 </div>
 <div id="timeExam" class="listingblock">
-<div class="title">Example {example-num}: An example of LifeSpan object with ISO 8601:2004</div>
+<div class="title">Example 9: An example of LifeSpan object with ISO 8601:2004</div>
 <div class="content">
-<pre class="CodeRay highlight"><code>["2011-07-14T22:01:01Z", "2011-07-15T01:11:22Z"]</code></pre>
+<pre class="CodeRay highlight"><code>[&quot;2011-07-14T22:01:01Z&quot;, &quot;2011-07-15T01:11:22Z&quot;]</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -2784,7 +2781,7 @@ The order of values follows the axes order of single position of longitude, lati
 The expression of an element in the array refers to the default spatial CRS object, i.e., WGS84.</p>
 </div>
 <div id="bboxExam" class="listingblock">
-<div class="title">Example {example-num}: An example of BoundingBox object with WGS 84</div>
+<div class="title">Example 10: An example of BoundingBox object with WGS 84</div>
 <div class="content">
 <pre class="CodeRay highlight"><code>[139.757083, 35.627483, 0.0, 139.757716, 35.627701, 4.5]</code></pre>
 </div>
@@ -2843,18 +2840,18 @@ GeoJSON <a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>.</p>
 <div class="sect4">
 <h5 id="_7_2_10_1_predefined_curves"><a class="anchor" href="#_7_2_10_1_predefined_curves"></a>7.2.10.1. Predefined curves</h5>
 <div class="paragraph">
-<p>In order to reduce the encoding cost and the data size, the MF-JSON Prism encoding defines five strings of built-in motion curves for the value of the <code>"interpolation"</code> member in a TemporalPrimitiveGeometry object: <code>"Discrete"</code>, <code>"Step"</code>, <code>"Linear"</code>, <code>"Quadratic"</code>, and <code>"Cubic"</code>.
+<p>In order to reduce the encoding cost and the data size, the MF-JSON Prism encoding defines five strings of built-in motion curves for the value of the <code>"interpolation"</code> member in a TemporalPrimitiveGeometry object: <code>"Discrete"</code>, <code>"Step"</code>, <code>"Linear"</code>, <code>"Quadratic"</code>, and <code>"Cube"</code>.
 For these built-in motion curves, each leaf geometry of the TemporalPrimitiveGeometry object has the same structure for the elements in the value array of the <code>"coordinates"</code> member and the same number of single positions in the elements, except <code>"MovingPointCloud"</code>.
 For example, if a leaf linestring consists of two single positions in a temporal geometry of type <code>"MovingLineString"</code>, the other leaves also have two single positions. If a leaf polygon in a temporal geometry of type <code>"MovingPolygon"</code> has one interior ring, the others also have one interior ring and the number of positions of rings is same.</p>
 </div>
 <div id="predefineExam" class="listingblock">
-<div class="title">Example {example-num}: Predefined motion curves of a TemporalPrimitiveGeometry object</div>
+<div class="title">Example 11: Predefined motion curves of a TemporalPrimitiveGeometry object</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
     ....,
     <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [...],  <span class="comment">//T={t_0, t_1, ..., t_n}</span>
     <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//G={G_0, G_1, ..., G_n}</span>
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Discrete|Step|Linear|Quadratic|Cubic</span><span class="delimiter">&quot;</span></span>, <span class="comment">// vbar | as a means to select ONE.</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Discrete|Step|Linear|Quadratic|Cube</span><span class="delimiter">&quot;</span></span>, <span class="comment">// vbar | as a means to select ONE.</span>
     ....
  }</code></pre>
 </div>
@@ -3027,7 +3024,7 @@ For this interpolation, at least three leaves at particular times are required, 
 </div>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">"Cubic"</dt>
+<dt class="hdlist1">"Cube"</dt>
 <dd>
 <p>This method interpolates the position at time \(t\) by using a Catmull–Rom (cubic) spline on each interval [\(t_{i}, t_{i+1}\)] with first-order parametric continuity (\(C^1\)).
 The Catmull-Rom splines is a method that approximate a set of positions with a smooth polynomial function that is piecewise-defined.
@@ -3110,7 +3107,7 @@ This matrix representation defines the cubic curve that represents the portion o
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><span class="image"><img src="./images/mf-interpolation-quadratic.png" alt="Quadratic" height="80%"></span></p>
 </div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Cubic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cube</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><span class="image"><img src="./images/mf-interpolation-cube.png" alt="CatmullRom" height="80%"></span></p>
 </div></div></td>
@@ -3126,7 +3123,7 @@ in the TemporalPrimitiveGeometry object has a URL to
 address a JSON array of parametric equations defined on a set of intervals of parameter \(t\)-value.</p>
 </div>
 <div id="userdefineExam" class="listingblock">
-<div class="title">Example {example-num}: A TemporalPrimitiveGeometry instance of with a user-defined parametric curve</div>
+<div class="title">Example 12: A TemporalPrimitiveGeometry instance of with a user-defined parametric curve</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript"><span class="string"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: {
     <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint</span><span class="delimiter">&quot;</span></span>,
@@ -3141,7 +3138,7 @@ address a JSON array of parametric equations defined on a set of intervals of pa
 <p>The URL indicates a JSON object having three members of <code>"crs"</code>, <code>"trs"</code>, and <code>"equations"</code> as follows.</p>
 </div>
 <div id="userdefineMemberExam" class="listingblock">
-<div class="title">Example {example-num}: The members of a user-defined parametric curve</div>
+<div class="title">Example 13: The members of a user-defined parametric curve</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
     <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span>: {...},
@@ -3194,7 +3191,7 @@ For example, a time position encoded by IETF RFC 3339 is converted into a signed
 when it refers to the default temporal CRS (i.e., ISO8601).</p>
 </div>
 <div id="motioncurveExam" class="listingblock">
-<div class="title">Example {example-num}: Example of MotionCurve object (<a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve</a>)</div>
+<div class="title">Example 14: Example of MotionCurve object (<a href="http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve</a>)</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
     <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : {
@@ -3241,7 +3238,7 @@ when it refers to the default temporal CRS (i.e., ISO8601).</p>
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation</a><br>
 The <code>"coordinate"</code> member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
 The value of the <code>"interpolation"</code> member in the TemporalPrimitiveGeometry object SHALL be
-one of string "Discrete", "Step", "Linear", "Quadratic", and "Cubic", or a URL.</p>
+one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or a URL.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4244,7 +4241,7 @@ The expression of an element in the array SHALL refer to the default spatial CRS
 <h4 id="_motioncurve_object"><a class="anchor" href="#_motioncurve_object"></a>A.2.15. MotionCurve object</h4>
 <div class="paragraph">
 <p>The <code>"coordinate"</code> member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
-The value of the <code>"interpolation"</code> member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cubic", or a URL to address a user-defined parametric curve.
+The value of the <code>"interpolation"</code> member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or a URL to address a user-defined parametric curve.
 A user-defined parametric curve SHALL be a JSON object which has three members of <code>"crs"</code>, <code>"trs"</code>, and <code>"equations"</code>.
 The value of the <code>"equations"</code> member SHALL be not empty and be a JSON array whose element is a user-defined parametric segment having two members of <code>"coefficients"</code> and <code>"time"</code>.
 The value of <code>"coefficients"</code> member SHALL be a JSON array whose element is an array of coefficients of the interpolation formula of a temporal position.
@@ -4326,7 +4323,7 @@ the movement of a feature whose geometry may be 0D, 1D, 2D, 3D geometric primiti
 <div class="title">Figure 10. Example for two linear trajectories</div>
 </div>
 <div id="mf-xml" class="listingblock">
-<div class="title">Example {example-num}: OGC Moving Features XML Core encoding of linear trajectories.</div>
+<div class="title">Example 15: OGC Moving Features XML Core encoding of linear trajectories.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
   <span class="tag">&lt;mf:MovingFeatures&gt;</span>
@@ -4357,7 +4354,7 @@ the movement of a feature whose geometry may be 0D, 1D, 2D, 3D geometric primiti
 </div>
 </div>
 <div id="mf-csv" class="listingblock">
-<div class="title">Example {example-num}: OGC Moving Features CSV encoding of linear trajectories.</div>
+<div class="title">Example 16: OGC Moving Features CSV encoding of linear trajectories.</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="csv">@stboundedby,urn:x-ogc:def:crs:EPSG:6.6:4326,2D,50.23 9.23,50.31 9.27,2012-01-17T12:33:41Z,2012-01-17T12:37:00Z,sec
 @columns,mfidref,trajectory,state,xsd:token,”type code”,xsd:integer
@@ -4374,7 +4371,7 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
 <p><a href="#mf-geojson">Example 17</a> illustrates an example of the MF-JSON Trajectory encoding corresponding to two moving points, as shown in <a href="#mf-ogc">Figure 10</a> to be replaceable with <a href="#mf-xml">Example 15</a> and <a href="#mf-csv">Example 16</a>.</p>
 </div>
 <div id="mf-geojson" class="listingblock">
-<div class="title">Example {example-num}: Example of the MF-JSON Trajectory encoding</div>
+<div class="title">Example 17: Example of the MF-JSON Trajectory encoding</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">FeatureCollection</span><span class="delimiter">&quot;</span></span>,
@@ -4423,10 +4420,20 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
 <div class="title">Figure 11. Example of the movement of a car which has a rigid 3D solid</div>
 </div>
 <div id="mf-prism" class="listingblock">
-<div class="title">Example {example-num}: Example of the MF-JSON Prism encoding</div>
+<div class="title">Example 18: Example of the MF-JSON Prism encoding</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="javascript">{
     <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Feature</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(MANDATORY)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(OPTIONAL)</span>
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">car1</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">test1</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">video</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg</span><span class="delimiter">&quot;</span></span>,
+      <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Example of the MF-JSON Prism encoding</span><span class="delimiter">&quot;</span></span>
+    },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(OPTIONAL) GeoJSON IETF RFC 7946 geometry object</span>
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">LineString</span><span class="delimiter">&quot;</span></span>
+        <span class="string"><span class="delimiter">&quot;</span><span class="content">coordinate</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">139.757083</span>, <span class="float">35.627701</span>, <span class="float">0.5</span>], [<span class="float">139.757399</span>, <span class="float">35.627701</span>, <span class="float">2.0</span>], [<span class="float">139.757555</span>, <span class="float">35.627688</span>, <span class="float">4.0</span>], [<span class="float">139.757651</span>, <span class="float">35.627596</span>, <span class="float">4.0</span>], [<span class="float">139.757716</span>, <span class="float">35.627483</span>, <span class="float">4.0</span>] ]
+    },
     <span class="key"><span class="delimiter">&quot;</span><span class="content">crs</span><span class="delimiter">&quot;</span></span> : { <span class="comment">//(DEFAULT) If there is no &quot;crs&quot; member, the default crs is &quot;WGS84&quot; with longitude and latitude units of decimal degrees</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Name</span><span class="delimiter">&quot;</span></span>,
       <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {<span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">urn:ogc:def:crs:OGC:1.3:CRS84</span><span class="delimiter">&quot;</span></span>}
@@ -4438,6 +4445,8 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
           <span class="key"><span class="delimiter">&quot;</span><span class="content">href</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/def/uom/ISO-8601/0/Gregorian</span><span class="delimiter">&quot;</span></span>,
       }
     },
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">bbox</span><span class="delimiter">&quot;</span></span>: [<span class="float">139.757083</span>, <span class="float">35.627483</span>, <span class="float">0.0</span>, <span class="float">139.757716</span>, <span class="float">35.627701</span>, <span class="float">4.5</span>], <span class="comment">//(OPTIONAL) 2*n array with the lowest values for all axes followed by the highest values</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">time</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T01:11:22Z</span><span class="delimiter">&quot;</span></span>], <span class="comment">//(OPTIONAL) min and max time instant to cover all temporal positions in `&quot;temporalGeometry&quot;` and `&quot;temporalProperties&quot;`</span>
     <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(MANDATORY) one parameter set of geometries of a moving feature</span>
         <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint</span><span class="delimiter">&quot;</span></span>,
         <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:02Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:03Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:04Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:05Z</span><span class="delimiter">&quot;</span></span>],
@@ -4497,19 +4506,7 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">description2</span><span class="delimiter">&quot;</span></span> <span class="comment">//(OPTIONAL)</span>
         }
       }
-    ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(OPTIONAL) GeoJSON IETF RFC 7946 geometry object</span>
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">LineString</span><span class="delimiter">&quot;</span></span>
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">coordinate</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">139.757083</span>, <span class="float">35.627701</span>, <span class="float">0.5</span>], [<span class="float">139.757399</span>, <span class="float">35.627701</span>, <span class="float">2.0</span>], [<span class="float">139.757555</span>, <span class="float">35.627688</span>, <span class="float">4.0</span>], [<span class="float">139.757651</span>, <span class="float">35.627596</span>, <span class="float">4.0</span>], [<span class="float">139.757716</span>, <span class="float">35.627483</span>, <span class="float">4.0</span>] ]
-    },
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(OPTIONAL)</span>
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">car1</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">test1</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">video</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/video.mpeg</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Example of the MF-JSON Prism encoding</span><span class="delimiter">&quot;</span></span>
-    },
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">bbox</span><span class="delimiter">&quot;</span></span>: [<span class="float">139.757083</span>, <span class="float">35.627483</span>, <span class="float">0.0</span>, <span class="float">139.757716</span>, <span class="float">35.627701</span>, <span class="float">4.5</span>], <span class="comment">//(OPTIONAL) 2*n array with the lowest values for all axes followed by the highest values</span>
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">time</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T01:11:22Z</span><span class="delimiter">&quot;</span></span>] <span class="comment">//(OPTIONAL) min and max time instant to cover all temporal positions in `&quot;temporalGeometry&quot;` and `&quot;temporalProperties&quot;`</span>
+    ]
 }</code></pre>
 </div>
 </div>
@@ -4597,17 +4594,8 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
 <div id="INTER" class="paragraph">
 <p>[5] Rick Parent, Chapter 3 - Interpolating Values, Editor(s): Rick Parent, Computer Animation (Third Edition), Morgan Kaufmann, 2012, Pages 61-109, <a href="https://doi.org/10.1016/B978-0-12-415842-9.00003-4" class="bare">https://doi.org/10.1016/B978-0-12-415842-9.00003-4</a>.</p>
 </div>
-<div id="STL" class="paragraph">
-<p>[6] Standard Triangulated Language (STL), <a href="http://www.fabbers.com/tech/STL_Format" class="bare">http://www.fabbers.com/tech/STL_Format</a></p>
-</div>
 <div id="OBJ" class="paragraph">
-<p>[7] Wavefront OBJ, <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" class="bare">https://en.wikipedia.org/wiki/Wavefront_.obj_file</a></p>
-</div>
-<div id="PLY" class="paragraph">
-<p>[8] PLY - Polygon File Format, <a href="http://paulbourke.net/dataformats/ply/" class="bare">http://paulbourke.net/dataformats/ply/</a></p>
-</div>
-<div id="GLTF" class="paragraph">
-<p>[9] glTF™ (GL Transmission Format), <a href="https://github.com/KhronosGroup/glTF" class="bare">https://github.com/KhronosGroup/glTF</a></p>
+<p>[6] Wavefront OBJ, <a href="https://en.wikipedia.org/wiki/Wavefront_.obj_file" class="bare">https://en.wikipedia.org/wiki/Wavefront_.obj_file</a></p>
 </div>
 </div>
 </div>
@@ -4617,6 +4605,7 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
 Last updated 2019-09-10 20:35:37 +0900
 </div>
 </div>
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   messageStyle: "none",
@@ -4630,8 +4619,16 @@ MathJax.Hub.Config({
     ignoreClass: "nostem|noasciimath"
   },
   TeX: { equationNumbers: { autoNumber: "none" } }
-});
+})
+MathJax.Hub.Register.StartupHook("AsciiMath Jax Ready", function () {
+  MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data, node) {
+    if ((node = data.script.parentNode) && (node = node.parentNode) && node.classList.contains('stemblock')) {
+      data.math.root.display = "block"
+    }
+    return data
+  })
+})
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 </body>
 </html>

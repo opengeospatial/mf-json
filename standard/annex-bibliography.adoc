@@ -38,17 +38,8 @@ Springer LNCS is widely used in technical and computer science journals and othe
 [#INTER, reftext='[{counter:ref-num}]']
 [5] Rick Parent, Chapter 3 - Interpolating Values, Editor(s): Rick Parent, Computer Animation (Third Edition), Morgan Kaufmann, 2012, Pages 61-109, https://doi.org/10.1016/B978-0-12-415842-9.00003-4.
 
-[#STL, reftext='[{counter:ref-num}]']
-[6] Standard Triangulated Language (STL), http://www.fabbers.com/tech/STL_Format
-
 [#OBJ, reftext='[{counter:ref-num}]']
-[7] Wavefront OBJ, https://en.wikipedia.org/wiki/Wavefront_.obj_file
-
-[#PLY, reftext='[{counter:ref-num}]']
-[8] PLY - Polygon File Format, http://paulbourke.net/dataformats/ply/
-
-[#GLTF, reftext='[{counter:ref-num}]']
-[9] glTF™ (GL Transmission Format), https://github.com/KhronosGroup/glTF
+[6] Wavefront OBJ, https://en.wikipedia.org/wiki/Wavefront_.obj_file
 
 
 //////////////

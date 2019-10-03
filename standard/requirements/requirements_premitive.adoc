@@ -43,9 +43,7 @@ The 3D model SHALL be transformed into the fixed local coordinate reference syst
 The coordinate reference system for the 3D model SHALL be a right-handed coordinate system.
 |*Requirement 2.14* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/base +
-The value of the `"base"` member SHALL be a JSON object having two members of `"type"` and `"href"`.
-The `"type"` member has a JSON string to represent a file format,
-and the `"href"` member has a web accessible URL to address a 3D model data.
+The value of the `"base"` member SHALL be a web accessible URL to address an OBJ file of a 3D model data.
 |*Requirement 2.15* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations +
 The value of the `"orientations"` member SHALL be a JSON array to represent a transformation matrix.
