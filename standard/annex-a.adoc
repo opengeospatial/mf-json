@@ -316,7 +316,7 @@ The expression of an element in the array SHALL refer to the default spatial CRS
 
 ==== MotionCurve object
 The `"coordinate"` member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
-The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cube", or a URL to address a user-defined parametric curve.
+The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cubic", or a URL to address a user-defined parametric curve.
 A user-defined parametric curve SHALL be a JSON object which has three members of `"crs"`, `"trs"`, and `"equations"`.
 The value of the `"equations"` member SHALL be not empty and be a JSON array whose element is a user-defined parametric segment having two members of `"coefficients"` and `"time"`.
 The value of `"coefficients"` member SHALL be a JSON array whose element is an array of coefficients of the interpolation formula of a temporal position.

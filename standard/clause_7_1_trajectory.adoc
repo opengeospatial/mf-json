@@ -58,9 +58,9 @@ for representation of dates and times using the Gregorian calendar, or a numeric
 
 * If a Feature has any variable attribute by time and its value (i.e., _mf:AttrDef_ and _mf:Attr_),
 the attribute can be a member inside the `"properties"` member with the value of a JSON array, the size of its array can be distinguished into three types as below:
-** Time-varying attributes having one less than the number of positions of the `"coordinates"` member.
-** Time-varying attributes having the same number of positions of the `"coordinates"` member.
-** Not time-varying attributes having only one.
+** The array of a time-varying attribute with step interpolation has elements with one less than the number of positions of the `"coordinates"` member.
+** The array of a time-varying attribute with linear interpolation has elements with the same number of positions of the `"coordinates"` member.
+** The array of a fixed attribute during the whole of `"datetimes"` has only one element.
 
 * A set of _mf:LinearTrajectory_ instances is packed in the elements of the `"features"` member of a FeatureCollection object.
 [NOTE]
