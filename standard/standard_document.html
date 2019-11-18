@@ -191,18 +191,19 @@
 <li><a href="#_overview_of_moving_features_json_encodings_informative">6. Overview of Moving Features JSON Encodings (Informative)</a></li>
 <li><a href="#_moving_features_json_encodings_mf_json_specification">7. Moving Features JSON Encodings (MF-JSON) Specification</a>
 <ul class="sectlevel2">
-<li><a href="#_mf_json_trajectory_encoding">7.1. MF-JSON Trajectory Encoding</a>
+<li><a href="#_mf_json_trajectory_encoding">7.1. MF-JSON Trajectory Encoding</a></li>
+<li><a href="#_mf_json_prism_encoding">7.2. MF-JSON Prism Encoding</a>
 <ul class="sectlevel3">
-<li><a href="#tgeometry">7.1.1. TemporalGeometry Object</a></li>
-<li><a href="#tproperties">7.1.2. TemporalProperties Object</a></li>
-<li><a href="#crs">7.1.3. CoordinateReferenceSystem Object</a></li>
-<li><a href="#mfeature">7.1.4. MovingFeature Object</a></li>
-<li><a href="#mfeaturecollection">7.1.5. MovingFeatureCollection Object</a></li>
-<li><a href="#time">7.1.6. LifeSpan Object</a></li>
-<li><a href="#bbox">7.1.7. BoundingBox Object</a></li>
-<li><a href="#geometry">7.1.8. Geometry Object</a></li>
-<li><a href="#properties">7.1.9. Properties Object</a></li>
-<li><a href="#interpolation">7.1.10. MotionCurve Objects</a></li>
+<li><a href="#tgeometry">7.2.1. TemporalGeometry Object</a></li>
+<li><a href="#tproperties">7.2.2. TemporalProperties Object</a></li>
+<li><a href="#crs">7.2.3. CoordinateReferenceSystem Object</a></li>
+<li><a href="#mfeature">7.2.4. MovingFeature Object</a></li>
+<li><a href="#mfeaturecollection">7.2.5. MovingFeatureCollection Object</a></li>
+<li><a href="#time">7.2.6. LifeSpan Object</a></li>
+<li><a href="#bbox">7.2.7. BoundingBox Object</a></li>
+<li><a href="#geometry">7.2.8. Geometry Object</a></li>
+<li><a href="#properties">7.2.9. Properties Object</a></li>
+<li><a href="#interpolation">7.2.10. MotionCurve Objects</a></li>
 </ul>
 </li>
 </ul>
@@ -1305,18 +1306,18 @@ The number of elements in both arrays of the <code>"coordinates"</code> value an
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
-<div class="literalblock">
-<div class="content">
-<pre> === MF-JSON Prism Encoding
-This clause specifies the format of MF-JSON Prism to implement the package of Prism Geometry defined in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008] (&lt;&lt;mf-isoprism&gt;&gt;).
-The package contains five types used to describe the prism of a moving geometric object: *MF_PrismGeometry*, *MF_RigidTemporalGeometry*, *MF_LocalGeometry*,
-*MF_TemporalOrientation*, and *MF_RotationMatrix*. The type *MF_PrismGeometry* represents the movement of an object through geographic space.
-*MF_RigidTemporalGeometry* specializes *MF_PrismGeometry*, which in turn specializes *MF_TemporalGeometry* for the case of an object
-that moves without deformation, where the object’s basic shape is immutable and may be translated or rotated over time.
-The type *MF_LocalGeometry* is a geometric object to define the local geometry of the moving object in a design coordinate reference system (usually 3D).
-The design coordinate reference system is accessible through the Coordinate Reference System association inherited from GM_Object.
-The remaining types support description of the possible rotation of such an object.</pre>
 </div>
+<div class="sect2">
+<h3 id="_mf_json_prism_encoding"><a class="anchor" href="#_mf_json_prism_encoding"></a>7.2. MF-JSON Prism Encoding</h3>
+<div class="paragraph">
+<p>This clause specifies the format of MF-JSON Prism to implement the package of Prism Geometry defined in <a href="http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445">ISO 19141:2008</a> (<a href="#mf-isoprism">Figure 6</a>).
+The package contains five types used to describe the prism of a moving geometric object: <strong>MF_PrismGeometry</strong>, <strong>MF_RigidTemporalGeometry</strong>, <strong>MF_LocalGeometry</strong>,
+<strong>MF_TemporalOrientation</strong>, and <strong>MF_RotationMatrix</strong>. The type <strong>MF_PrismGeometry</strong> represents the movement of an object through geographic space.
+<strong>MF_RigidTemporalGeometry</strong> specializes <strong>MF_PrismGeometry</strong>, which in turn specializes <strong>MF_TemporalGeometry</strong> for the case of an object
+that moves without deformation, where the object’s basic shape is immutable and may be translated or rotated over time.
+The type <strong>MF_LocalGeometry</strong> is a geometric object to define the local geometry of the moving object in a design coordinate reference system (usually 3D).
+The design coordinate reference system is accessible through the Coordinate Reference System association inherited from GM_Object.
+The remaining types support description of the possible rotation of such an object.</p>
 </div>
 <div id="mf-isoprism" class="imageblock text-center">
 <div class="content">
@@ -1490,7 +1491,7 @@ The MF-JSON Prism format SHALL be taken priority over MF-JSON Trajectory when in
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="tgeometry"><a class="anchor" href="#tgeometry"></a>7.1.1. TemporalGeometry Object</h4>
+<h4 id="tgeometry"><a class="anchor" href="#tgeometry"></a>7.2.1. TemporalGeometry Object</h4>
 <div class="paragraph">
 <p>A TemporalGeometry object represents the movement of a moving feature, i.e., changes of the position.
 Comparing to MF-JSON Trajectory, MF-JSON Prism provides an encoding rule for conceptual schemas specifying
@@ -2082,7 +2083,7 @@ the default spatial CRS (and temporal CRS) SHALL be applied.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="tproperties"><a class="anchor" href="#tproperties"></a>7.1.2. TemporalProperties Object</h4>
+<h4 id="tproperties"><a class="anchor" href="#tproperties"></a>7.2.2. TemporalProperties Object</h4>
 <div class="paragraph">
 <p>A TemporalProperties object is a JSON array of ParametricValues objects that groups a collection of dynamic non-spatial attributes and its parametric values with time.</p>
 </div>
@@ -2295,7 +2296,7 @@ The value of the <code>"form"</code> member SHALL be a common code (3 characters
 </div>
 </div>
 <div class="sect3">
-<h4 id="crs"><a class="anchor" href="#crs"></a>7.1.3. CoordinateReferenceSystem Object</h4>
+<h4 id="crs"><a class="anchor" href="#crs"></a>7.2.3. CoordinateReferenceSystem Object</h4>
 <div class="paragraph">
 <p>A coordinate reference system (CRS) is usually comprised of two components: one coordinate system and one datum (reference frame).
 The IETF GeoJSON format recommends that the CRS for all GeoJSON coordinates is a geographic coordinate reference system,
@@ -2467,7 +2468,7 @@ a <code>"href"</code> member whose value is a dereferenceable URI.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="mfeature"><a class="anchor" href="#mfeature"></a>7.1.4. MovingFeature Object</h4>
+<h4 id="mfeature"><a class="anchor" href="#mfeature"></a>7.2.4. MovingFeature Object</h4>
 <div class="paragraph">
 <p>A MovingFeature object in a MF-JSON Prism document is a JSON object to represent
 a moving feature that is spatially and temporally bounded,
@@ -2485,7 +2486,8 @@ and its position (continuously) changes over time with the members as shown in <
   <span class="key"><span class="delimiter">&quot;</span><span class="content">time</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(OPTIONAL)</span>
   <span class="key"><span class="delimiter">&quot;</span><span class="content">bbox</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(OPTIONAL)</span>
   <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: {...},  <span class="comment">//(OPTIONAL)</span>
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {...} <span class="comment">//(OPTIONAL)</span>
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {...}, <span class="comment">//(OPTIONAL)</span>
+  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: ... <span class="comment">//(OPTIONAL)</span>
 }</code></pre>
 </div>
 </div>
@@ -2542,6 +2544,10 @@ as the same semantics of GeoJSON (see <a href="#geometry">7.2.8</a>).</p>
 <li>
 <p>A MovingFeature object has an optional member with the name <code>"properties"</code> allowing a JSON <code>null</code> value,
 as the same semantics of GeoJSON (see <a href="#properties">7.2.9</a>). The properties member is an object (i.e., any JSON object or a JSON <code>null</code> value).</p>
+</li>
+<li>
+<p>A MovingFeature object has an optional member with the name <code>"id"</code> to represent a commonly used identifier and the value of this member is either a JSON string or
+number.</p>
 </li>
 </ul>
 </div>
@@ -2624,7 +2630,7 @@ The value of the <code>"properties"</code> member SHALL be any JSON object or a 
 </table>
 </div>
 <div class="sect3">
-<h4 id="mfeaturecollection"><a class="anchor" href="#mfeaturecollection"></a>7.1.5. MovingFeatureCollection Object</h4>
+<h4 id="mfeaturecollection"><a class="anchor" href="#mfeaturecollection"></a>7.2.5. MovingFeatureCollection Object</h4>
 <div class="paragraph">
 <p>MovingFeatureCollection object is a JSON object with the following members as shown in <a href="#mfeaturecollectionjson">Example 8</a>.
 It bundles a collection of moving features into a logical abstraction with a certain alias.</p>
@@ -2731,7 +2737,7 @@ It allows a JSON <code>null</code> value.</p>
 </table>
 </div>
 <div class="sect3">
-<h4 id="time"><a class="anchor" href="#time"></a>7.1.6. LifeSpan Object</h4>
+<h4 id="time"><a class="anchor" href="#time"></a>7.2.6. LifeSpan Object</h4>
 <div class="paragraph">
 <p>A LifeSpan object is a JSON array of two strings encoded by <a href="https://www.ietf.org/rfc/rfc3339.txt">IETF RFC 3339</a> (e.g., "2016-09-11T06:10:32Z")
 to represent a particular period \([t_s, t_e\)] and \(t_s \leq t_e\).
@@ -2774,7 +2780,7 @@ The expression of an element in the array SHALL refer to the default temporal CR
 </table>
 </div>
 <div class="sect3">
-<h4 id="bbox"><a class="anchor" href="#bbox"></a>7.1.7. BoundingBox Object</h4>
+<h4 id="bbox"><a class="anchor" href="#bbox"></a>7.2.7. BoundingBox Object</h4>
 <div class="paragraph">
 <p>A BoundingBox object is a JSON array of length \(2*n\) where \(n\)
 is the number of dimensions represented in the spatial bounding box.
@@ -2819,14 +2825,14 @@ The expression of an element in the array SHALL refer to the default spatial CRS
 </table>
 </div>
 <div class="sect3">
-<h4 id="geometry"><a class="anchor" href="#geometry"></a>7.1.8. Geometry Object</h4>
+<h4 id="geometry"><a class="anchor" href="#geometry"></a>7.2.8. Geometry Object</h4>
 <div class="paragraph">
 <p>A Geometry object is the same as a GeoJSON Geometry object defined in
 GeoJSON <a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="properties"><a class="anchor" href="#properties"></a>7.1.9. Properties Object</h4>
+<h4 id="properties"><a class="anchor" href="#properties"></a>7.2.9. Properties Object</h4>
 <div class="paragraph">
 <p>A Properties object is any JSON object or a JSON null value for
 the "properties" member in a GeoJSON Feature object defined in
@@ -2834,7 +2840,7 @@ GeoJSON <a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="interpolation"><a class="anchor" href="#interpolation"></a>7.1.10. MotionCurve Objects</h4>
+<h4 id="interpolation"><a class="anchor" href="#interpolation"></a>7.2.10. MotionCurve Objects</h4>
 <div class="paragraph">
 <p>In MF-JSON Prism, the concept of motion curves is important to represent various types of dynamic movements, especially non-linear movements of features.</p>
 </div>
@@ -4507,7 +4513,8 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Example of the MF-JSON Prism encoding</span><span class="delimiter">&quot;</span></span>
     },
     <span class="key"><span class="delimiter">&quot;</span><span class="content">bbox</span><span class="delimiter">&quot;</span></span>: [<span class="float">139.757083</span>, <span class="float">35.627483</span>, <span class="float">0.0</span>, <span class="float">139.757716</span>, <span class="float">35.627701</span>, <span class="float">4.5</span>], <span class="comment">//(OPTIONAL) 2*n array with the lowest values for all axes followed by the highest values</span>
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">time</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T01:11:22Z</span><span class="delimiter">&quot;</span></span>] <span class="comment">//(OPTIONAL) min and max time instant to cover all temporal positions in `&quot;temporalGeometry&quot;` and `&quot;temporalProperties&quot;`</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">time</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-15T01:11:22Z</span><span class="delimiter">&quot;</span></span>], <span class="comment">//(OPTIONAL) min and max time instant to cover all temporal positions in `&quot;temporalGeometry&quot;` and `&quot;temporalProperties&quot;`</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span> : <span class="string"><span class="delimiter">&quot;</span><span class="content">A</span><span class="delimiter">&quot;</span></span>
 }</code></pre>
 </div>
 </div>

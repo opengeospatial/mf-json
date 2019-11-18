@@ -1,4 +1,4 @@
- === MF-JSON Prism Encoding
+=== MF-JSON Prism Encoding
 This clause specifies the format of MF-JSON Prism to implement the package of Prism Geometry defined in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008] (<<mf-isoprism>>).
 The package contains five types used to describe the prism of a moving geometric object: *MF_PrismGeometry*, *MF_RigidTemporalGeometry*, *MF_LocalGeometry*,
 *MF_TemporalOrientation*, and *MF_RotationMatrix*. The type *MF_PrismGeometry* represents the movement of an object through geographic space.

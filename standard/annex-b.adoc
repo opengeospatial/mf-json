@@ -194,5 +194,6 @@ image::mf-car.png[mf-car, pdfwidth=60%, width=60%, align="center"]
       "description": "Example of the MF-JSON Prism encoding"
     },
     "bbox": [139.757083, 35.627483, 0.0, 139.757716, 35.627701, 4.5], //(OPTIONAL) 2*n array with the lowest values for all axes followed by the highest values
-    "time": ["2011-07-14T22:01:01Z", "2011-07-15T01:11:22Z"] //(OPTIONAL) min and max time instant to cover all temporal positions in `"temporalGeometry"` and `"temporalProperties"`
+    "time": ["2011-07-14T22:01:01Z", "2011-07-15T01:11:22Z"], //(OPTIONAL) min and max time instant to cover all temporal positions in `"temporalGeometry"` and `"temporalProperties"`
+    "id" : "A"
 }

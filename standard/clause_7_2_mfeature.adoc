@@ -16,7 +16,8 @@ and its position (continuously) changes over time with the members as shown in <
   "time": [...], //(OPTIONAL)
   "bbox": [...], //(OPTIONAL)
   "geometry": {...},  //(OPTIONAL)
-  "properties": {...} //(OPTIONAL)
+  "properties": {...}, //(OPTIONAL)
+  "id": ... //(OPTIONAL)
 }
 
  * A MovingFeature object has a mandatory member with the name `"type"` whose value is the `"Feature"` string.
@@ -46,6 +47,8 @@ a temporal geometry or a collection of temporal geometries.
 as the same semantics of GeoJSON (see <<geometry>>).
 * A MovingFeature object has an optional member with the name `"properties"` allowing a JSON `null` value,
 as the same semantics of GeoJSON (see <<properties>>). The properties member is an object (i.e., any JSON object or a JSON `null` value).
+* A MovingFeature object has an optional member with the name `"id"` to represent a commonly used identifier and the value of this member is either a JSON string or
+number.
 
 [TIP]
 The difference from `"temporalProperties"` is that a `"properties"` member represents static attributes
