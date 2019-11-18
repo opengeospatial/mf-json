@@ -1,4 +1,4 @@
-=== MF-JSON Prism Encoding
+ === MF-JSON Prism Encoding
 This clause specifies the format of MF-JSON Prism to implement the package of Prism Geometry defined in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008] (<<mf-isoprism>>).
 The package contains five types used to describe the prism of a moving geometric object: *MF_PrismGeometry*, *MF_RigidTemporalGeometry*, *MF_LocalGeometry*,
 *MF_TemporalOrientation*, and *MF_RotationMatrix*. The type *MF_PrismGeometry* represents the movement of an object through geographic space.
@@ -48,7 +48,7 @@ as well as primitives types of JSON null, true, false, string, number, and array
 The UML diagram for MF-JSON Prism is depicted in <<mf-prism-uml>>.
 
 [#mf-prism-uml,reftext='{figure-caption} {counter:figure-num}']
-.Class diagram for MF-JSON Trajectory
+.Class diagram for MF-JSON Prism
 image::mf-geojson-prism.png[mf-prism-uml, pdfwidth=100%, width=95%, align="center"]
 
 When a document mixed two formats of MF-JSON Prism and MF-JSON Trajectory, MF-JSON Prism has priority to interpret the movement of a feature.
