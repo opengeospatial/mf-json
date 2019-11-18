@@ -11,7 +11,8 @@
     {"$ref": "#/definitions/movingFeatureCollection"},
     {"$ref": "#/definitions/time"},
     {"$ref": "#/definitions/bbox"},
-    {"$ref": "#/definitions/geometry"}
+    {"$ref": "#/definitions/geometry"},
+    {"$ref": "#/definitions/id"}
   ],
   "definitions": {
     "temporalGeometry": {
@@ -65,7 +66,18 @@
         "bbox": {"$ref": "#/definitions/bbox"},
         "time": {"$ref": "#/definitions/time"},
         "geometry": {"$ref": "#/definitions/geometry"},
-        "properties": {"$ref": "#/definitions/properties"}
+        "properties": {"$ref": "#/definitions/properties"},
+        "id": {
+          "description": "An identifier for the feature",
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            }
+          ]
+        },
       }
     },
     "movingFeatureCollection": {
