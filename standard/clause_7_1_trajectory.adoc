@@ -1,7 +1,7 @@
 === MF-JSON Trajectory Encoding
 
 MF-JSON Trajectory specifies how to map/interpret linear trajectories of moving points into/from the *GeoJSON* https://www.ietf.org/rfc/rfc7946.txt[[IETF RFC 7946]] object.
-It is based on the data model of _mf:MovingFeatures_ defined in http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC Moving Features XML Core][OGC 14-083r2].
+It is based on the data model of _mf:MovingFeatures_ defined in http://docs.opengeospatial.org/is/14-083r2/14-083r2.html[OGC Moving Features XML Core] [OGC 14-083r2].
 
 [NOTE]
 The _mf:MovingFeatures_ Class is implemented by _mf:Foliation_ including movements of moving points, which are instances of _mf:LinearTrajectory_.
@@ -58,9 +58,11 @@ for representation of dates and times using the Gregorian calendar, or a numeric
 
 * If a Feature has any variable attribute by time and its value (i.e., _mf:AttrDef_ and _mf:Attr_),
 the attribute can be a member inside the `"properties"` member with the value of a JSON array, the size of its array can be distinguished into three types as below:
-** The array of a time-varying attribute with step interpolation has elements with one less than the number of positions of the `"coordinates"` member.
-** The array of a time-varying attribute with linear interpolation has elements with the same number of positions of the `"coordinates"` member.
+** The array of a time-varying attribute with step interpolation has elements with one less than the number of positions of the `"datetimes"` member.
+** The array of a time-varying attribute with linear interpolation has elements with the same number of positions of the `"datetimes"` member.
 ** The array of a fixed attribute during the whole of `"datetimes"` has only one element.
+[WARNING]
+MF-JSON Trajectory considers that a member in the "properties" which has a JSON-array value is a temporal attribute.
 
 * A set of _mf:LinearTrajectory_ instances is packed in the elements of the `"features"` member of a FeatureCollection object.
 [NOTE]

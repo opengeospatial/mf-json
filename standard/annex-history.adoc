@@ -10,4 +10,5 @@
 |2019-04-21 |1.0 |Kyoung-Sook Kim |trajectory |revision
 |2019-06-20 |1.0 |Kyoung-Sook Kim |prism |revision
 |2019-07-27 |1.0 |Kyoung-Sook Kim, Taehoon Kim |requirement, conformance |addition
+|2019-12-20 |1.0 |Kyoung-Sook Kim |revised by public comments |revision
 |===

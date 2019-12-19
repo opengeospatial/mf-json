@@ -45,13 +45,13 @@ as well as primitives types of JSON null, true, false, string, number, and array
 * Properties object (see <<properties>>)
 * MotionCurve object (see <<interpolation>>)
 
-The UML diagram for MF-JSON Prism is depicted in <<mf-prism-uml>>.
+The schema of MF-JSON Prism is depicted by a UML diagram as shown in <<mf-prism-uml>>.
 
 [#mf-prism-uml,reftext='{figure-caption} {counter:figure-num}']
 .Class diagram for MF-JSON Prism
 image::mf-geojson-prism.png[mf-prism-uml, pdfwidth=100%, width=95%, align="center"]
 
-When a document mixed two formats of MF-JSON Prism and MF-JSON Trajectory, MF-JSON Prism has priority to interpret the movement of a feature.
+When a document combines two formats of MF-JSON Prism and MF-JSON Trajectory, MF-JSON Prism has priority to interpret the movement of a feature.
 A sample data of MF-JSON Prism is provided in <<sampleJSONPrism>>.
 
 include::requirements/requirements_prism.adoc[]

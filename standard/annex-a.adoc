@@ -149,7 +149,7 @@ The 3D model SHALL be transformed into the fixed local coordinate reference syst
 The coordinate reference system for the 3D model SHALL be a right-handed coordinate system.
 The value of the `"base"` member SHALL be a URL to address an OBJ file of a 3D model data.
 The value of the `"orientations"` member SHALL be a JSON array to represent a transformation matrix.
-The number of the element in array of the `"orientations"` value SHALL be latexmath:[16] (latexmath:[4 \times 4]).
+The number of the element in array of the `"orientations"` value SHALL be the same as the `"datetimes"` value.
 The `"orientations"` member SHALL be accompanied with the `"base"` member.
 [cols=">20h,<80a",width="100%"]
 |===
@@ -158,6 +158,8 @@ The `"orientations"` member SHALL be accompanied with the `"base"` member.
 * req/prism/tgeometry/primitive/3dmodel
 * req/prism/tgeometry/primitive/base
 * req/prism/tgeometry/primitive/orientations
+* req/prism/tgeometry/primitive/orientations/scales
+* req/prism/tgeometry/primitive/orientations/angles
 |Test purpose: | Verify that this requirement is satisfied.
 |Test method: | Inspect the document to verify the above.
 |===

@@ -1,17 +1,17 @@
 [cols="1h,3a",width="100%"]
 |===
-|*Requirement 2.26* |
+|*Requirement 2.28* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs +
 A CoordinateReferenceSystem object SHALL have two mandatory members of `"type"` and `"properties"`.
 The value of the `"type"` member SHALL be one of string "Name" and "Link".
 The value of the `"properties"` member SHALL be a JSON object with three optional members
 named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON null value.
-|*Requirement 2.27* |
+|*Requirement 2.29* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/named +
 A named CRS object SHALL have the value of the `"type"` = `"Name"`.
 And the value of the `"properties"` member SHALL be a JSON object containing
 a `"name"` member whose value is a string identifying a coordinate reference system.
-|*Requirement 2.28* |
+|*Requirement 2.30* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/linked +
 A linked CRS object SHALL have the value of the `"type"` = `"Link"`.
 And the value of the `"properties"` member SHALL be a JSON object containing

@@ -247,8 +247,9 @@
 <li><a href="#sampleJSONPrism">B.3. Sample Data of OGC Moving Features JSON Prism encoding</a></li>
 </ul>
 </li>
-<li><a href="#_revision_history">Annex C: Revision History</a></li>
-<li><a href="#Bibliography">Annex D: Bibliography</a></li>
+<li><a href="#_deformation_of_rigid_body_informative">Annex C: Deformation of Rigid Body (Informative)</a></li>
+<li><a href="#_revision_history">Annex D: Revision History</a></li>
+<li><a href="#Bibliography">Annex E: Bibliography</a></li>
 </ul>
 </div>
 <div style="page-break-after: always;"></div>
@@ -996,8 +997,8 @@ A leaf of a one parameter set of geometries is the geometry \(f(t)\) at a partic
 <strong>MF_Trajectory</strong> describes a one-parameter geometry whose cross section is a point as a leaf.
 <strong>MF_OneParamGeometry</strong> and <strong>MF_Trajectory</strong> is specialized as <strong>MF_TemporalGeometry</strong> and <strong>MF_TemporalTrajectory</strong> respectively, when the parameter is time representing a multiple of a single unit of measure
 such as year, day, or second for those types. <strong>MF_TemporalTrajectory</strong> is also a sub-type of <strong>MF_TemporalGeometry</strong>.
-The OGC Moving Features XML and CSV standard provide the encoding formats to represent linear trajectories of moving points, typically representing vehicles or pedestrians.
-A sample data of OGC Moving Features XML and CSV encoding is provided in <a href="#sampleXML">Annex B.1</a>.</p>
+The OGC Moving Features XML and CSV standard only provide the encoding formats to represent linear trajectories of moving points as instances of <strong>MF_TemporalTrajectory</strong>, typically representing vehicles or pedestrians.
+A sample data of OGC Moving Features XML and CSV encoding is provided in <a href="#sampleXML">Annex B.1</a>.~However, Moving Features JSON Encodings cover <strong>MF_TemporalGeometry</strong>, <strong>MF_PrismGeometry</strong>, and <strong>MF_RigidTemporalGeometry</strong>.</p>
 </div>
 </div>
 </div>
@@ -1060,7 +1061,7 @@ OPTIONAL
 <h3 id="_mf_json_trajectory_encoding"><a class="anchor" href="#_mf_json_trajectory_encoding"></a>7.1. MF-JSON Trajectory Encoding</h3>
 <div class="paragraph">
 <p>MF-JSON Trajectory specifies how to map/interpret linear trajectories of moving points into/from the <strong>GeoJSON</strong> <a href="https://www.ietf.org/rfc/rfc7946.txt">[IETF RFC 7946</a>] object.
-It is based on the data model of <em>mf:MovingFeatures</em> defined in <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html">OGC Moving Features XML Core</a>[OGC 14-083r2].</p>
+It is based on the data model of <em>mf:MovingFeatures</em> defined in <a href="http://docs.opengeospatial.org/is/14-083r2/14-083r2.html">OGC Moving Features XML Core</a> [OGC 14-083r2].</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1180,13 +1181,25 @@ the attribute can be a member inside the <code>"properties"</code> member with t
 <div class="ulist">
 <ul>
 <li>
-<p>The array of a time-varying attribute with step interpolation has elements with one less than the number of positions of the <code>"coordinates"</code> member.</p>
+<p>The array of a time-varying attribute with step interpolation has elements with one less than the number of positions of the <code>"datetimes"</code> member.</p>
 </li>
 <li>
-<p>The array of a time-varying attribute with linear interpolation has elements with the same number of positions of the <code>"coordinates"</code> member.</p>
+<p>The array of a time-varying attribute with linear interpolation has elements with the same number of positions of the <code>"datetimes"</code> member.</p>
 </li>
 <li>
 <p>The array of a fixed attribute during the whole of <code>"datetimes"</code> has only one element.</p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+MF-JSON Trajectory considers that a member in the "properties" which has a JSON-array value is a temporal attribute.
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ul>
 </div>
@@ -1272,11 +1285,11 @@ The number of elements in the array of the <code>"coordinates"</code> value in t
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 1.4</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/propeties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/propeties</a><br>
+<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/properties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/trajectory/properties</a><br>
 The value of the <code>"properties"</code> member SHALL be a GeoJSON object that has at least a member with the named <code>"datetimes"</code>.
 The value of the <code>"datetimes"</code> member is a JSON array. If a Feature has any variable attribute by time and its value,
 the attribute can be a member inside the <code>"properties"</code> member with the value of a JSON array,
-the size of its array SHALL be same as <code>1</code>, <code>N-1</code>, or <code>N</code>. Note that <code>N</code> is the number of elements in the array of the <code>"coordinates"</code> value.</p>
+the size of its array SHALL be same as <code>1</code> (const), <code>N-1</code> (step), or <code>N</code> (linear). Note that <code>N</code> is the number of elements in the array of the <code>"datetimes"</code> value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1420,7 +1433,7 @@ as well as primitives types of JSON null, true, false, string, number, and array
 </ul>
 </div>
 <div class="paragraph">
-<p>The UML diagram for MF-JSON Prism is depicted in <a href="#mf-prism-uml">Figure 7</a>.</p>
+<p>The schema of MF-JSON Prism is depicted by a UML diagram as shown in <a href="#mf-prism-uml">Figure 7</a>.</p>
 </div>
 <div id="mf-prism-uml" class="imageblock text-center">
 <div class="content">
@@ -1429,7 +1442,7 @@ as well as primitives types of JSON null, true, false, string, number, and array
 <div class="title">Figure 7. Class diagram for MF-JSON Prism</div>
 </div>
 <div class="paragraph">
-<p>When a document mixed two formats of MF-JSON Prism and MF-JSON Trajectory, MF-JSON Prism has priority to interpret the movement of a feature.
+<p>When a document combines two formats of MF-JSON Prism and MF-JSON Trajectory, MF-JSON Prism has priority to interpret the movement of a feature.
 A sample data of MF-JSON Prism is provided in <a href="#sampleJSONPrism">Annex B.3</a>.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -1506,6 +1519,7 @@ to a Geometry object \(g\) of Point, LineString, Polygon, or GeometryCollection.
 </li>
 <li>
 <p>The value of the <code>"type"</code> member is one of string <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, <code>"MovingPointCloud"</code>, and <code>"MovingGeometryCollection"</code>.
+The <code>"type"</code> member is a mandatory member of a TemporalGeometry object.
 The TemporalGeometry object is spefified with additional members depending upon the value of the <code>"type"</code> member.</p>
 </li>
 <li>
@@ -1545,9 +1559,9 @@ string "MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", a
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.5</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/crs</a><br>
-The value of the <code>"crs"</code> and <code>"trs"</code> member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
-If no CRS instance can be so acquired from upper-level braces of a JSON object,
-the default spatial and temporal CRS SHALL be applied for the <code>"crs"</code> and <code>"trs"</code> member, respectively.</p>
+A TemporalGeometry object has two default members: <code>"crs"</code> and <code>"trs"</code>. The value of the <code>"crs"</code> and <code>"trs"</code> member SHALL
+be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
+If no CRS instance can be so acquired from upper-level braces of a JSON object, the default spatial and temporal CRS SHALL be applied for the <code>"crs"</code> and <code>"trs"</code> member, respectively.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1583,7 +1597,7 @@ named <code>"datetimes"</code>, <code>"coordinates"</code>, <code>"interpolation
 <p><code>"type"</code>: The <code>"type"</code> member is <strong>mandatory</strong> and its value is one of string
 <code>"MovingPoint"</code>, <code>"MovingLineString"</code>, <code>"MovingPolygon"</code>, and <code>"MovingPointCloud"</code>.
 The value specifies the type of a TemporalPrimitiveGeometry object
-for the interpretation of the array value of the "coordinates" member. Each type represents as follows:</p>
+for the interpretation of the array value of the <code>"coordinates"</code> member. Each type represents as follows:</p>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1621,7 +1635,7 @@ as a TemporalPrimitiveGeometry object with the <code>"MovingLineString"</code> t
 <td class="tableblock halign-left valign-top"><p class="tableblock">MovingPolygon</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>The type represents the prism of a time-parametered 2-dimensional (2D) geometric primitive (Polygon),
-whose leaf geometry at a time position is a 2D polygonal object in a particular period.
+whose leaf geometry at a time position is a 2D polygonal object in a particular period. The list of points are in countclockwise order.
 Intuitively a temporal geometry of a continuous movement of polygon depicts a set of volumes in a spatiotemporal domain.
 For example, the changes of flooding areas or the movement information of air pollution can be shared as a TemporalPrimitiveGeometry object with the <code>"MovingPolygon"</code> type.</p>
 </div></div></td>
@@ -1713,7 +1727,8 @@ Here are some examples of instant.</p>
 <li>
 <p><code>"coordinates"</code>: The <code>"coordinates"</code> member is <strong>mandatory</strong>. Its value is a JSON array of a sequence
 of leaf geometries of a temporal geometry, having the same number of elements as <code>"datetimes"</code>. It does NOT allow a JSON <code>null</code> value nor an empty array.
-Each leaf geometry corresponds to each instant element in the array value of <code>"datetimes"</code> in order.
+Each leaf geometry corresponds to each instant element in the array value of <code>"datetimes"</code> in order. Also, it has the same structure for all elements in the array
+and the same number of single positions in the elements, except <code>"MovingPointCloud"</code>.
 The value expression of this member is different depending on the <code>"type"</code> value as follows:</p>
 <table class="tableblock frame-all grid-all" style="width: 99%;">
 <colgroup>
@@ -1784,9 +1799,11 @@ in that order and using decimal numbers. Altitude/elevation (z) MAY be included 
 <p>A LineString coordinate array is expressed as a JSON array of two or more single positions, allowing the same positions.</p>
 </li>
 <li>
-<p>A Polygon coordinate array is expressed as a JSON array of LinearRing coordinate arrays. A LinearRing is closed LineString with 4 or more single positions,
-allowing the same positions. The first and last position is equivalent (they represent equivalent points).
-For Polygons with multiple rings, the first must be the exterior ring and any others must be interior rings or holes.</p>
+<p>A Polygon coordinate array is expressed as a JSON array of LinearRing coordinate arrays.
+A LinearRing is closed LineString with 4 or more single positions to represent the boudary of a surface or the boundary of a hole in a surface, allowing the same positions.
+The first and last position is equivalent (they represent equivalent points).
+For Polygons with multiple rings, the first must be the exterior ring and any others must be interior rings (holes).
+A LinearRing  MUST follow the right-hand rule with respect to the area it bounds, i.e., exterior rings are counterclockwise, and interior rings are clockwise.</p>
 </li>
 <li>
 <p>A MultiPoint 3D coordinate array is a JSON array of single positions with altitude/elevation (z).</p>
@@ -1800,43 +1817,51 @@ For Polygons with multiple rings, the first must be the exterior ring and any ot
 <div class="ulist">
 <ul>
 <li>
-<p><code>"interpolation"</code>: The <code>"interpolation"</code> member is default and the most important member
-to represent various types of dynamic movements. Its value is a MotionCurve object that is described
-by a case-sensitive string as one of predefined five motion curves (i.e., <code>"Discrete"</code>, <code>"Step"</code>, <code>"Linear"</code>, <code>"Quadratic"</code>, and <code>"Cubic"</code>) or
-a URL (e.g., <code>"http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve"</code>).
-The URL indicates a JSON document containing a user-defined curve of parametric motion
-for the movement of a feature in two- or three-dimensional space.
+<p><code>"interpolation"</code>: MF-JSON Prism separates out translational motion and rotational motion.
+The <code>"interpolation"</code> member is default and represents the translational motion of the geometry described by the <code>"coordinates"</code> value.
+Its value is a MotionCurve object described by one of predefined five motion curves (i.e., <code>"Discrete"</code>, <code>"Step"</code>, <code>"Linear"</code>, <code>"Quadratic"</code>, and <code>"Cubic"</code>)
+or a URL (e.g., <code>"http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/motioncurve"</code>).
+The name of predefined five motion curves is a case-sensitive string. In order to support various types of dynamic movements,
+MF-JSON Prism allows the external reference encoding by the URL to represent a MotionCurve object.
+The URL indicates a JSON document containing a user-defined curve of parametric motion for the movement of a feature in two- or three-dimensional space.
 The detail interpretation and representation of method is described in <a href="#interpolation">7.2.10</a>.
 If the TemporalPrimitiveGeometry object has no member with the name <code>"interpolation"</code>,
-it is interpreted by <code>"Linear"</code>.</p>
+it is interpreted by <code>"Linear"</code> as the default value. The motion of the geometry of a moving feature requires both translational and rotational motion,
+MF-JSON Prism recommends using the <code>"base"</code> and <code>"orientations"</code> member with the <code>"coordinates"</code> that represents a MovingPoint for avoiding ambiguities of the object boundary.
+The only usage of <code>"interpolation"</code> may bring unintended consequences for object motion encoding.
+<a href="#annex-c">[annex-c]</a> shows some examples of unintended consequences of the linear interpolation without the values of <code>"base"</code> and <code>"orientations"</code>.</p>
 </li>
 <li>
 <p><code>"base"</code>: The <code>"base"</code> member is optional, and its value is a JSON object or a JSON <code>null</code> value.
 The JSON object has two members: <code>"type"</code> and <code>"href"</code>. The <code>"type"</code> member has a JSON string to represent a 3D File format such as
 STL<a href="#STL">[6]</a>, OBJ<a href="#OBJ">[7]</a>, PLY<a href="#PLY">[8]</a>, and glTF<a href="#GLTF">[9]</a>. The <code>"href"</code> member has a URL to address a 3D model data.
-The 3D model represents a base geometry of a 3D rigid shape, and
+The 3D model represents a base geometry of a 3D shape, and
 the combination of the <code>"base"</code> and <code>"orientations"</code> members represents a 3D temporal geometry
 of the MF_RigidTemporalGeometry type in ISO 19141. In MF-JSON Prism, the 3D model is transformed
-into the fixed local coordinate reference system whose bound is <strong>-0.5 to 0.5</strong> for each axis concerning the right-handed local engineering coordinate reference system
-and unit is <strong>meter</strong>. The origin of the local coordinate reference system is 0 for each axis and is transformed
-into the centroid of each leaf geometry of a temporal geometry.</p>
-</li>
-<li>
-<p><code>"orientations"</code>:  The <code>"orientations"</code> member is optional and always accompanied
-with the <code>"base"</code> member. Its value is a JSON array as a sequence of transform matrices
-for rotating and scaling of the base representation of a member named <code>"base"</code>,
-having the same number of elements of the <code>"datetimes"</code> value.
-It allows a JSON <code>null</code> value or an empty array
-if and only if the <code>"base"</code> member has a JSON <code>null</code> value.
-A transformation matrix is defined by a linear transformation
-from the right-handed local engineering coordinate reference system
-to the Cartesian coordinate system, such as the Universal Transverse Mercator (UTM) system.
-A coordinate of the base 3D model, \((x, y, z)\), transforms into a target 3D coordinate,
-\((x', y', z')\), by using the quaternions and the scaling factors,
-\((x, y, z) \rightarrow (x', y', z')\), as follows:</p>
+into the fixed local coordinate reference system whose bound is <strong>-0.5 to 0.5</strong> for
+each axis concerning the right-handed local engineering coordinate reference system (i.e., right-handed orthogonal axis system, \(Z=X\times Y\)) and unit is <strong>meter</strong>.
+The \(X\) axis points forward from the base model.
+The \(Y\) axis points to the left-hand side of the model, as viewed when facing forward.
+The \(Z\) axis points up from the ground as shown in <a href="#mf-orientation">Figure 8</a>.
+The origin of the local coordinate reference system is 0 for each axis and is translated into the centroid of each leaf geometry of a temporal geometry.</p>
 </li>
 </ul>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>"orientations"</code>: The <code>"orientations"</code> member is optional and represents rotational motion of the base representation of a member named <code>"base"</code>.
+It allows a JSON <code>null</code> value or an empty array if and only if the <code>"base"</code> member has a JSON <code>null</code> value.
+When the temporal geometry has the base representation, its value is a JSON array as a sequence of JSON objects which have two members of <code>"scales"</code> and <code>"angles"</code>,
+having the same number of elements of the "datetimes" value.
+The <code>"scales"</code> member has a JSON array value of numbers along the \(X\), \(Y\), and \(Z\) axis in order as three scale factors, and
+the <code>"angles"</code> member has a JSON array value of numbers along the \(X\), \(Y\), and \(Z\) axis in order as Euler angles in degree.
+A pair of <code>"scales"</code> and <code>"angles"</code> generates a transform matrix of the base representation at each time of the elements in <code>"datetimes"</code>.
+The transformation matrix at each time poses the base representation from the right-handed local engineering coordinate reference system
+to a geographical Cartesian coordinate system. This standard attaches to the Universal Transverse Mercator (UTM) system.
+A coordinate of the base 3D model, \((x, y, z)\), transforms into a target 3D coordinate,
+\((x', y', z')\), by using the vector rotations with quaternions and the scaling factors,
+\((x, y, z) \rightarrow (x', y', z')\), as follows:</p>
 <div class="stemblock">
 <div class="content">
 \[\begin{matrix}
@@ -1860,16 +1885,18 @@ A coordinate of the base 3D model, \((x, y, z)\), transforms into a target 3D co
 </div>
 </div>
 <div class="paragraph">
-<p>The scaling factor takes the form of a vector \(S = &lt;S_x, S_y, S_z&gt;\), where \(S_x\), \(S_y\) and \(S_z\)
+<p>The scale factor takes the form of a vector \(S = &lt;S_x, S_y, S_z&gt;\), where \(S_x\), \(S_y\) and \(S_z\)
 respectively is a coefficient against each axis to extend or shrink the base representation from the local engineer coordinate reference system
-to the UTM system.
-The quaternion takes the form of a vector \(Q = &lt;X, Y, Z, W&gt;\), where \(X\), \(Y\) and \(Z\) are coefficients
+to the UTM system. The quaternion takes the form of a vector \(Q = &lt;X, Y, Z, W&gt;\), where \(X\), \(Y\) and \(Z\) are coefficients
 defining an axis of rotation in an imaginary spherical space surrounding the moving feature,
 and \(W\) is a scalar representation of the amount of rotation applied around the axis.
 At this point it should be noted that the \(X\), \(Y\) and \(Z\) components of a quaternion are not the same as the components
 of a three-dimensional unit vector, nor is \(W\) a direct representation of a rotation in degree.
-To convert Euler angles to quaternion form, defining the angle around the X-axis (roll) as \(\psi\), the Y-axis (pitch) as \(\theta\), and the Z-axis (yaw) as \(\phi\).
+To convert Euler angles to quaternion form, defining the angles around the X-axis (roll) as \(\psi\), the Y-axis (pitch) as \(\theta\), and the Z-axis (yaw) as \(\phi\).
 The quaternion \(Q\) can then be calculated as follow:</p>
+</div>
+</li>
+</ul>
 </div>
 <div class="stemblock">
 <div class="content">
@@ -1989,13 +2016,29 @@ and the <code>"href"</code> member has a web accessible URL to address a 3D mode
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.15</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations</a><br>
-The value of the <code>"orientations"</code> member SHALL be a JSON array to represent a transformation matrix.
-The number of the element in array of the <code>"orientations"</code> value SHALL be \(16\) (\(4 \times 4\)).
+The value of the <code>"orientations"</code> member SHALL be a JSON array of JSON objects to represent a transformation matrix.
+The element object SHALL have two members of <code>"scales"</code> and <code>"angles"</code>.
+The number of the element in array of the <code>"orientations"</code> value SHALL be the same as <code>"datetimes"</code>.
 The <code>"orientations"</code> member SHALL be accompanied with the <code>"base"</code> member.</p>
 </div></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.16</strong></p></th>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations/scales" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations/scales</a><br>
+The value of the <code>"scales"</code> member SHALL a JSON array value of numbers along the \(X\), \(Y\) and \(Z\) axis in order.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.17</strong></p></th>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations/angles" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations/angles</a><br>
+The value of the <code>"angles"</code> member SHALL a JSON array value of numbers of Euler angles along the \(X\), \(Y\) and \(Z\) axis in order.
+The value unit is degree.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.18</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/crs</a><br>
 The value of the <code>"crs"</code> and <code>"trs"</code> member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
@@ -2049,7 +2092,7 @@ The leaf geometry at a time position is the union of each leaf of any temporal g
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.17</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.19</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex</a><br>
 A TemporalComplexGeometry object SHALL have at least two mandatory members of <code>"type"</code> and <code>"prisms"</code>.
@@ -2059,7 +2102,7 @@ having at least one element in the array.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.18</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.20</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex/movinggeometrycollection" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex/movinggeometrycollection</a><br>
 A MovingGeometryCollection object SHALL the value of the <code>"type"</code> = <code>"MovingGeometryCollection"</code>.
@@ -2070,7 +2113,7 @@ which is the union of each leaf of any temporal geometries at the same time.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.19</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.21</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex/crs</a><br>
 The value of the <code>"crs"</code> and <code>"trs"</code> member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
@@ -2244,14 +2287,14 @@ This member is applied only for a temporal property whose value type is <code>Me
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.20</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.22</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties</a><br>
 A TemporalProperties object SHALL be a JSON array of ParametricValues objects.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.21</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.23</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues</a><br>
 A ParametricValues object SHALL have at least a mandatory member with the named <code>"datetimes"</code>
@@ -2260,7 +2303,7 @@ is any string defined by an application as a temporal property.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.22</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.24</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property</a><br>
 A \(@propertyN\) object SHALL have at least two mandatory members of <code>"type"</code> and <code>"values"</code>.
@@ -2270,14 +2313,14 @@ The value of the <code>"values"</code> member SHALL be a JSON array whose elemen
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.23</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.25</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/constraint" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/constraint</a><br>
 The number of elements in both arrays of the <code>"datetimes"</code> value and the <code>"values"</code> value SHALL be equal.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.24</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.26</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/interpolation" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/interpolation</a><br>
 The value of the <code>"interpolation"</code> member SHALL be one of string
@@ -2285,7 +2328,7 @@ The value of the <code>"interpolation"</code> member SHALL be one of string
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.25</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.27</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/form" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/form</a><br>
 The value of the <code>"form"</code> member SHALL be a common code (3 characters) described in the list of Code List Rec 20 [UN/CEFACT] or a URI denoting a unit-of-measure defined in a web resource.</p>
@@ -2436,7 +2479,7 @@ This CRS object is the default value of the <code>"trs"</code> member.</p>
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.26</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.28</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs</a><br>
 A CoordinateReferenceSystem object SHALL have two mandatory members of <code>"type"</code> and <code>"properties"</code>.
@@ -2446,7 +2489,7 @@ named <code>"name"</code>, <code>"href"</code>, and <code>"type"</code> whose va
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.27</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.29</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/named" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/named</a><br>
 A named CRS object SHALL have the value of the <code>"type"</code> = <code>"Name"</code>.
@@ -2455,7 +2498,7 @@ a <code>"name"</code> member whose value is a string identifying a coordinate re
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.28</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.30</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/linked" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/crs/linked</a><br>
 A linked CRS object SHALL have the value of the <code>"type"</code> = <code>"Link"</code>.
@@ -2571,7 +2614,7 @@ whose value is fixed for the life span of a moving feature.
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.29</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.31</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature</a><br>
 A MovingFeature object SHALL be a GeoJSON Feature object that have two mandatory members of <code>"type"</code> and <code>"temporalGeometry"</code>.
@@ -2580,14 +2623,14 @@ The value of the <code>"temporalGeometry"</code> member SHALL be a JSON object t
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.30</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.32</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/temporalProperties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/temporalProperties</a><br>
 The value of the <code>"temporalProperties"</code> member SHALL be a JSON array of TemporalProperties objects. It allows a JSON null value.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.31</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.33</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/crs</a><br>
 The value of the <code>"crs"</code> and <code>"trs"</code> member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
@@ -2595,7 +2638,7 @@ If no CRS instance can be so acquired in a file, the default spatial CRS (and te
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.32</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.34</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/time" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/time</a><br>
 The value of the <code>"time"</code> member SHALL be a JSON array to represent a LifeSpan object.
@@ -2604,7 +2647,7 @@ It allows a JSON null value.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.33</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.35</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/bbox" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/bbox</a><br>
 The value of the <code>"bbox"</code> member SHALL be a JSON array to represent a BoundingBox object.
@@ -2613,14 +2656,14 @@ It allows a JSON null value.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.34</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.36</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/geometry" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/geometry</a><br>
 The value of the <code>"geometry"</code> member SHALL be any JSON object or a JSON null value for the <code>"geometry"</code> member in a GeoJSON Feature object.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.35</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.37</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/properties" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/feature/properties</a><br>
 The value of the <code>"properties"</code> member SHALL be any JSON object or a JSON null value for the <code>"properties"</code> member in a GeoJSON Feature object.</p>
@@ -2684,7 +2727,7 @@ It allows a JSON <code>null</code> value.</p>
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.36</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.38</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection</a><br>
 A MovingFeatureCollection object SHALL be a GeoJSON FeatureCollection object that have two mandatory members of <code>"type"</code> and <code>"features"</code>.
@@ -2693,14 +2736,14 @@ The value of the <code>"features"</code> member SHALL be a JSON array whose elem
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.37</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.39</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/constraints" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/constraints</a><br>
 The number of elements in an array of the <code>"features"</code> value SHALL be more than 1.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.38</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.40</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/crs</a><br>
 The value of the <code>"crs"</code> and <code>"trs"</code> member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
@@ -2708,7 +2751,7 @@ If no CRS instance can be so acquired in a file, the default spatial CRS (and te
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.39</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.41</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/bbox" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/bbox</a><br>
 The value of the <code>"bbox"</code> member SHALL be a JSON array to represent a BoundingBox object.
@@ -2717,7 +2760,7 @@ It allows a JSON <code>null</code> value.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.40</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.42</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/time" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/time</a><br>
 The value of the <code>"time"</code> member SHALL be a JSON array to represent a LifeSpan object.
@@ -2726,7 +2769,7 @@ It allows a JSON <code>null</code> value.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.41</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.43</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/label" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/featurecollection/label</a><br>
 The value of the <code>"label"</code> member SHALL be a JSON string to indicate an alias of the collection.
@@ -2756,21 +2799,21 @@ Namely, its expression of an element in the array refers to the default temporal
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.42</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.44</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time</a><br>
 A LifeSpan object SHALL be a JSON array having two elements of string encoded by <a href="https://www.ietf.org/rfc/rfc3339.txt">IETF RFC 3339</a>.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.43</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.45</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time/element" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time/element</a><br>
 The first element SHALL be less than or equal to the second element.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.44</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.46</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/time/crs</a><br>
 The expression of an element in the array SHALL refer to the default temporal CRS object (ISO8601).</p>
@@ -2800,14 +2843,14 @@ The expression of an element in the array refers to the default spatial CRS obje
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.45</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.47</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/bbox" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/bbox</a><br>
 A BoundingBox object SHALL be a JSON array of length \(2*n\) where \(n\) is the number of dimensions represented in the spatial bounding box.</p>
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.46</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.48</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/bbox/element" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/bbox/element</a><br>
 The elements in the array SHALL be two coordinates (lower-bound coordinate and upper-bound coordinate).
@@ -2815,7 +2858,7 @@ The order of values SHALL follow the axes order of single position of longitude,
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.47</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.49</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/bbox/crs" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/bbox/crs</a><br>
 The expression of an element in the array SHALL refer to the default spatial CRS object (WGS 84).</p>
@@ -2848,8 +2891,10 @@ GeoJSON <a href="https://www.ietf.org/rfc/rfc7946.txt">IETF RFC 7946</a>.</p>
 <h5 id="_7_2_10_1_predefined_curves"><a class="anchor" href="#_7_2_10_1_predefined_curves"></a>7.2.10.1. Predefined curves</h5>
 <div class="paragraph">
 <p>In order to reduce the encoding cost and the data size, the MF-JSON Prism encoding defines five strings of built-in motion curves for the value of the <code>"interpolation"</code> member in a TemporalPrimitiveGeometry object: <code>"Discrete"</code>, <code>"Step"</code>, <code>"Linear"</code>, <code>"Quadratic"</code>, and <code>"Cubic"</code>.
-For these built-in motion curves, each leaf geometry of the TemporalPrimitiveGeometry object has the same structure for the elements in the value array of the <code>"coordinates"</code> member and the same number of single positions in the elements, except <code>"MovingPointCloud"</code>.
-For example, if a leaf linestring consists of two single positions in a temporal geometry of type <code>"MovingLineString"</code>, the other leaves also have two single positions. If a leaf polygon in a temporal geometry of type <code>"MovingPolygon"</code> has one interior ring, the others also have one interior ring and the number of positions of rings is same.</p>
+For these built-in motion curves, each leaf geometry of the TemporalPrimitiveGeometry object has the same structure for the elements in the value array of the <code>"coordinates"</code> member
+and the same number of single positions in the elements, except <code>"MovingPointCloud"</code>.
+For example, if a leaf linestring consists of two single positions in a temporal geometry of type <code>"MovingLineString"</code>, the other leaves also have two single positions.
+If a leaf polygon in a temporal geometry of type <code>"MovingPolygon"</code> has one interior ring, the others also have one interior ring and the number of positions of rings is same.</p>
 </div>
 <div id="predefineExam" class="listingblock">
 <div class="title">Example 11: Predefined motion curves of a TemporalPrimitiveGeometry object</div>
@@ -2864,8 +2909,10 @@ For example, if a leaf linestring consists of two single positions in a temporal
 </div>
 </div>
 <div class="paragraph">
-<p>When a geographic feature is moving, each variable (i.e., \(x\), \(y\), \(z\)) of position can be expressed in terms of another variable called a parameter. The two most commonly used parameters are time and distance traveled along the path of motion.
-This standard interprets a value of the <code>"interpolation"</code> member in a TemporalPrimitiveGeometry object as parametric equations with the time parameter. In general, parametric equations of 3D movement are represented by any three such functions that depending on the same variable \(t\) as \(x = x(t)\), \(y = y(t)\), and \(z = z(t)\).
+<p>When a geographic feature is moving, each variable (i.e., \(x\), \(y\), \(z\)) of position can be expressed in terms of another variable called a parameter.
+The two most commonly used parameters are time and distance traveled along the path of motion.
+This standard interprets a value of the <code>"interpolation"</code> member in a TemporalPrimitiveGeometry object as parametric equations with the time parameter.
+In general, parametric equations of 3D movement are represented by any three such functions that depending on the same variable \(t\) as \(x = x(t)\), \(y = y(t)\), and \(z = z(t)\).
 In orther words, the position \(P(t)\) is described as</p>
 </div>
 <div class="stemblock">
@@ -2930,9 +2977,11 @@ The various order of parametric continuity can be described as follows:</p>
 <div class="title">Figure 9. The dynamic motion of a geographic feature on parametrized curves</div>
 </div>
 <div class="paragraph">
-<p>Given \(N=(n+1)\) leaf geometries \(G=\{G_0, G_1, ..., G_n\}\) at time instants in \(T=\{t_0, t_1, ..., t_n\}\) with the strictly increasing condition \(t_0 &lt; t_1 &lt; ...&lt; t_n\) and one-to-one correspondence, a temporal geometry \(TG\) can be drawn by a bundle of \(k\) temporal trajectories (i.e., parametric curves with the time parameter) \(\{C_0, C_1, ..., C_k\}\), where \(k\) is the number of single positions in any leaf geometry.
-A temporal trajectory \(C\) is drawn for each position in \(P=\{P_0, P_1, ..., P_n\}\) at each time instant in \(T=\{t_0, t_1, ..., t_n\}\) such that \(P_i \in G_i\) and \(0 \leq i \leq n\), and its curve is realized by spline interpolation on subintervals.
-Namely, a temporal trajectory is implemented by a set of piecewise low-degree polynomials \(\{ SC_{1}, SC_{2}, ..., SC_{n}\}\) whose derivatives satisfy some continuity constraints across sub-curve boundaries.</p>
+<p>Given \(N=(n+1)\) leaf geometries \(G=\{G_0, G_1, ..., G_n\}\) at time instants in \(T=\{t_0, t_1, ..., t_n\}\) with the strictly increasing condition \(t_0 &lt; t_1 &lt; ...&lt; t_n\)
+and one-to-one correspondence, a temporal geometry \(TG\) can be drawn by a bundle of \(k\) temporal trajectories (i.e., parametric curves with the time parameter) \(\{C_0, C_1, ..., C_k\}\),
+where \(k\) is the number of single positions in any leaf geometry. A temporal trajectory \(C\) is drawn for each position in \(P=\{P_0, P_1, ..., P_n\}\) at each time instant in \(T=\{t_0, t_1, ..., t_n\}\)
+such that \(P_i \in G_i\) and \(0 \leq i \leq n\), and its curve is realized by spline interpolation on subintervals.
+Namely, a temporal trajectory is implemented by a set of piecewise low-degree polynomials \(\{SC_{1}, SC_{2}, ..., SC_{n}\}\) whose derivatives satisfy some continuity constraints across sub-curve boundaries.</p>
 </div>
 <div class="paragraph">
 <p>Each type of built-in parametric curves interpolates a time-varying position \(P(t)\) for any time instant \(t\) in the particular period \(I=\)[\(t_0, t_n\)] on the temporal trajectory as follows:</p>
@@ -2949,7 +2998,7 @@ Namely, a temporal trajectory is implemented by a set of piecewise low-degree po
 </div>
 </div>
 <div class="paragraph">
-<p>Note that \(C(t_0) = P_0, C(t_1) = P_1,..., C(t_{n})=P_n\).</p>
+<p>Note that \(C(t_0) = P_0, C(t_1) = P_1,..., C(t_{n}) = P_n\).</p>
 </div>
 <div class="dlist">
 <dl>
@@ -3240,7 +3289,7 @@ when it refers to the default temporal CRS (i.e., ISO8601).</p>
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.48</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.50</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation</a><br>
 The <code>"coordinate"</code> member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
@@ -3249,7 +3298,7 @@ one of string "Discrete", "Step", "Linear", "Quadratic", and "Cubic", or a URL.<
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.49</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.51</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined</a><br>
 A URL to address a user-defined parametric curve SHALL address a JSON document containing a JSON object, which has three members with name
@@ -3258,7 +3307,7 @@ The value of the <code>"equations"</code> member SHALL be not empty and be a JSO
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.50</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.52</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/equations/coefficients" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/equations/coefficients</a><br>
 The value of <code>"coefficients"</code> member SHALL be a JSON array whose element is an array of coefficients of the interpolation formula of a temporal position.
@@ -3266,7 +3315,7 @@ The order of elements in array of the <code>"coefficients"</code> value for the 
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.51</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.53</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/equations/time" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/equations/time</a><br>
 The value of <code>"time"</code> member SHALL be a JSON array to represent a particular period with two instants of \(t_s\) and \(t_e\).
@@ -3274,7 +3323,7 @@ The expression of an element in the <code>"time"</code> value SHALL refer to the
 </div></div></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.52</strong></p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock"><strong>Requirement 2.54</strong></p></th>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p><a href="http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/equations/enclosed" class="bare">http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/interpolation/userdefined/equations/enclosed</a><br>
 The value of <code>"enclosed"</code> member SHALL be a JSON array to represent an open (and closed) intervals of the <code>"time"</code> with two Boolean elements.</p>
@@ -3752,7 +3801,7 @@ A MovingPointCloud object SHALL have the value of the <code>"type"</code> = <cod
 The coordinate reference system for the 3D model SHALL be a right-handed coordinate system.
 The value of the <code>"base"</code> member SHALL be a URL to address an OBJ file of a 3D model data.
 The value of the <code>"orientations"</code> member SHALL be a JSON array to represent a transformation matrix.
-The number of the element in array of the <code>"orientations"</code> value SHALL be \(16\) (\(4 \times 4\)).
+The number of the element in array of the <code>"orientations"</code> value SHALL be the same as the <code>"datetimes"</code> value.
 The <code>"orientations"</code> member SHALL be accompanied with the <code>"base"</code> member.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -3779,6 +3828,12 @@ The <code>"orientations"</code> member SHALL be accompanied with the <code>"base
 </li>
 <li>
 <p>req/prism/tgeometry/primitive/orientations</p>
+</li>
+<li>
+<p>req/prism/tgeometry/primitive/orientations/scales</p>
+</li>
+<li>
+<p>req/prism/tgeometry/primitive/orientations/angles</p>
 </li>
 </ul>
 </div></div></td>
@@ -4392,7 +4447,7 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
            },
            <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: {
                <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2012-01-17T12:33:51Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2012-01-17T12:33:56Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2012-01-17T12:34:00Z</span><span class="delimiter">&quot;</span></span>],
-               <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">walking</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">walking</span><span class="delimiter">&quot;</span></span>],
+               <span class="key"><span class="delimiter">&quot;</span><span class="content">state</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">walking</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">walking</span><span class="delimiter">&quot;</span></span>],
                <span class="key"><span class="delimiter">&quot;</span><span class="content">typecode</span><span class="delimiter">&quot;</span></span>: [<span class="integer">1</span>, <span class="integer">2</span>]
            }
        },
@@ -4449,26 +4504,11 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
         <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Linear</span><span class="delimiter">&quot;</span></span>,
         <span class="key"><span class="delimiter">&quot;</span><span class="content">base</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">http://www.opengis.net/spec/movingfeatures/json/1.0/prism/example/car3dmodel.zip</span><span class="delimiter">&quot;</span></span>,
         <span class="key"><span class="delimiter">&quot;</span><span class="content">orientations</span><span class="delimiter">&quot;</span></span>: [
-          [<span class="float">0.000012</span> , <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0000089</span> , <span class="float">0.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">1.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">1.0</span>],  <span class="comment">// same as original</span>
-          [<span class="float">0.00000119543363771009</span> , <span class="float">0.0</span> , <span class="float">0.0871557427476583</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0000089</span> , <span class="float">0.0</span> , <span class="float">0.0</span> ,
-            -<span class="float">0.0000010458689129719</span> , <span class="float">0.0</span> , <span class="float">0.996194698091746</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">1.0</span>],  <span class="comment">// Pitch rotation angle: 5 degree</span>
-          [<span class="float">0.0000103923048454133</span> , -<span class="float">0.00000445</span> , <span class="float">0.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.000006</span> , <span class="float">0.0000077076260936815</span> , <span class="float">0.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">1.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">1.0</span>], <span class="comment">// Yaw rotation angle: 30 degree</span>
-          [<span class="float">0.000006</span> , -<span class="float">0.0000077076260936815</span> , <span class="float">0.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0000103923048454133</span> , <span class="float">0.00000445</span> , <span class="float">0.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">1.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">1.0</span>], <span class="comment">// Yaw rotation angle: 60 degree</span>
-          [<span class="float">0.0</span> , -<span class="float">0.0000089</span> , <span class="float">0.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.000012</span> , <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">1.0</span> , <span class="float">0.0</span> ,
-            <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">0.0</span> , <span class="float">1.0</span>]  <span class="comment">// Yaw rotation angle: 90 degree</span>
+          {<span class="key"><span class="delimiter">&quot;</span><span class="content">scales</span><span class="delimiter">&quot;</span></span>:[<span class="integer">1</span>,<span class="integer">1</span>,<span class="integer">1</span>], <span class="key"><span class="delimiter">&quot;</span><span class="content">angles</span><span class="delimiter">&quot;</span></span>:[<span class="integer">0</span>,<span class="integer">0</span>,<span class="integer">0</span>]},
+          {<span class="key"><span class="delimiter">&quot;</span><span class="content">scales</span><span class="delimiter">&quot;</span></span>:[<span class="integer">1</span>,<span class="integer">1</span>,<span class="integer">1</span>], <span class="key"><span class="delimiter">&quot;</span><span class="content">angles</span><span class="delimiter">&quot;</span></span>:[<span class="integer">0</span>,<span class="integer">5</span>,<span class="integer">0</span>]},
+          {<span class="key"><span class="delimiter">&quot;</span><span class="content">scales</span><span class="delimiter">&quot;</span></span>:[<span class="integer">1</span>,<span class="integer">1</span>,<span class="integer">1</span>], <span class="key"><span class="delimiter">&quot;</span><span class="content">angles</span><span class="delimiter">&quot;</span></span>:[<span class="integer">0</span>,<span class="integer">0</span>,<span class="integer">30</span>]},
+          {<span class="key"><span class="delimiter">&quot;</span><span class="content">scales</span><span class="delimiter">&quot;</span></span>:[<span class="integer">1</span>,<span class="integer">1</span>,<span class="integer">1</span>], <span class="key"><span class="delimiter">&quot;</span><span class="content">angles</span><span class="delimiter">&quot;</span></span>:[<span class="integer">0</span>,<span class="integer">0</span>,<span class="integer">60</span>]},
+          {<span class="key"><span class="delimiter">&quot;</span><span class="content">scales</span><span class="delimiter">&quot;</span></span>:[<span class="integer">1</span>,<span class="integer">1</span>,<span class="integer">1</span>], <span class="key"><span class="delimiter">&quot;</span><span class="content">angles</span><span class="delimiter">&quot;</span></span>:[<span class="integer">0</span>,<span class="integer">0</span>,<span class="integer">90</span>]}
         ]
     },
     <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalProperties</span><span class="delimiter">&quot;</span></span>: [  <span class="comment">//(OPTIONAL) dynamic non-spatial attributes, extended from 'properties'</span>
@@ -4503,8 +4543,8 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
       }
     ],
     <span class="key"><span class="delimiter">&quot;</span><span class="content">geometry</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(OPTIONAL) GeoJSON IETF RFC 7946 geometry object</span>
-        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">LineString</span><span class="delimiter">&quot;</span></span>
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">coordinate</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">139.757083</span>, <span class="float">35.627701</span>, <span class="float">0.5</span>], [<span class="float">139.757399</span>, <span class="float">35.627701</span>, <span class="float">2.0</span>], [<span class="float">139.757555</span>, <span class="float">35.627688</span>, <span class="float">4.0</span>], [<span class="float">139.757651</span>, <span class="float">35.627596</span>, <span class="float">4.0</span>], [<span class="float">139.757716</span>, <span class="float">35.627483</span>, <span class="float">4.0</span>] ]
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">LineString</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [ [<span class="float">139.757083</span>, <span class="float">35.627701</span>, <span class="float">0.5</span>], [<span class="float">139.757399</span>, <span class="float">35.627701</span>, <span class="float">2.0</span>], [<span class="float">139.757555</span>, <span class="float">35.627688</span>, <span class="float">4.0</span>], [<span class="float">139.757651</span>, <span class="float">35.627596</span>, <span class="float">4.0</span>], [<span class="float">139.757716</span>, <span class="float">35.627483</span>, <span class="float">4.0</span>] ]
     },
     <span class="key"><span class="delimiter">&quot;</span><span class="content">properties</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(OPTIONAL)</span>
       <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">car1</span><span class="delimiter">&quot;</span></span>,
@@ -4522,7 +4562,81 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex C: Revision History</h2>
+<h2 id="_deformation_of_rigid_body_informative"><a class="anchor" href="#_deformation_of_rigid_body_informative"></a>Annex C: Deformation of Rigid Body (Informative)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If an application defines a wrong interpolation of motion, it brings unintended consequences.
+For example, the 2D triangle with a rigid body in <a href="#deform">Figure 12</a> has translational and rotational motion at the same time.
+It means when the application exports data with MF-JSON Prism, it needs to define the <code>"base"</code> and <code>"orientations"</code> member as well as <code>"interpolation"</code> for a temporal geometry.
+If the application exports data without <code>"base"</code> and <code>"orientations"</code> value like <a href="#mf-deform">Example 19</a>,
+the intermediate positions of the moving feature are interpolated with the linear interpolation function,
+as shown in <a href="#deform">Figure 12</a>. Even though the object has a rigid body, its boundary is deformed.
+<a href="#deform-complex">Figure 13</a> also shows the same phenomena that even the 2D polygon becomes 0D point in the middle time.</p>
+</div>
+<div id="mf-deform" class="listingblock">
+<div class="title">Example 19: Example of a wrong encoding</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="javascript">{
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Feature</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(MANDATORY)</span>
+    <span class="key"><span class="delimiter">&quot;</span><span class="content">temporalGeometry</span><span class="delimiter">&quot;</span></span>: { <span class="comment">//(MANDATORY) one parameter set of geometries of a moving feature</span>
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPolygon</span><span class="delimiter">&quot;</span></span>,
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span>: [<span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:01Z</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">2011-07-14T22:01:05Z</span><span class="delimiter">&quot;</span></span>],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [
+            [[[
+              <span class="float">139.77431058883667</span>,
+              <span class="float">35.621948192128826</span>
+            ],
+            [
+              <span class="float">139.77530837059018</span>,
+              <span class="float">35.62197435581956</span>
+            ],
+            [
+              <span class="float">139.7748255729675</span>,
+              <span class="float">35.62327380835506</span>
+            ],
+            [
+              <span class="float">139.77431058883667</span>,
+              <span class="float">35.621948192128826</span>
+            ]]],
+            [[[
+              <span class="float">139.77635979652405</span>,
+              <span class="float">35.62244966137756</span>
+            ],
+            [
+              <span class="float">139.77626860141754</span>,
+              <span class="float">35.621734521667385</span>
+            ],
+            [
+              <span class="float">139.77767407894135</span>,
+              <span class="float">35.62201796195175</span>
+            ],
+            [
+              <span class="float">139.77635979652405</span>,
+              <span class="float">35.62244966137756</span>
+            ]]]
+        ],
+        <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Linear</span><span class="delimiter">&quot;</span></span>
+    },
+    ...
+}</code></pre>
+</div>
+</div>
+<div id="deform" class="imageblock text-center">
+<div class="content">
+<img src="./images/deform.png" alt="Components" width="70%">
+</div>
+<div class="title">Figure 12. Example of deformation of rigid body with linear interpolation</div>
+</div>
+<div id="deform-complex" class="imageblock text-center">
+<div class="content">
+<img src="./images/deform-complex.png" alt="Components" width="70%">
+</div>
+<div class="title">Figure 13. Example of dimensional deformation of a 2D MovingPolygon feature with linear interpolation</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex D: Revision History</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -4577,12 +4691,19 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">requirement, conformance</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">addition</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2019-12-20</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Kyoung-Sook Kim</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">revised by public comments</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">revision</p></td>
+</tr>
 </tbody>
 </table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex D: Bibliography</h2>
+<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex E: Bibliography</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p></p>
@@ -4619,7 +4740,7 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-10-02 13:58:57 +0900
+Last updated 2019-12-19 23:46:47 +0900
 </div>
 </div>
 <link rel="stylesheet" href="./coderay-asciidoctor.css">

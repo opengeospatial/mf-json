@@ -48,10 +48,18 @@ The `"type"` member has a JSON string to represent a file format,
 and the `"href"` member has a web accessible URL to address a 3D model data.
 |*Requirement 2.15* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations +
-The value of the `"orientations"` member SHALL be a JSON array to represent a transformation matrix.
-The number of the element in array of the `"orientations"` value SHALL be latexmath:[16] (latexmath:[4 \times 4]).
+The value of the `"orientations"` member SHALL be a JSON array of JSON objects to represent a transformation matrix.
+The element object SHALL have two members of `"scales"` and `"angles"`.
+The number of the element in array of the `"orientations"` value SHALL be the same as `"datetimes"`.
 The `"orientations"` member SHALL be accompanied with the `"base"` member.
 |*Requirement 2.16* |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations/scales +
+The value of the `"scales"` member SHALL a JSON array value of numbers along the latexmath:[X], latexmath:[Y] and latexmath:[Z] axis in order.
+|*Requirement 2.17* |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/orientations/angles +
+The value of the `"angles"` member SHALL a JSON array value of numbers of Euler angles along the latexmath:[X], latexmath:[Y] and latexmath:[Z] axis in order.
+The value unit is degree.
+|*Requirement 2.18* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/primitive/crs +
 The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
 If no CRS instance can be so acquired from upper-level braces of a JSON object,
