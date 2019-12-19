@@ -198,11 +198,7 @@
         "base": {"type": ["null", "string"], "format": "uri"},
         "orientations": {
           "type": ["null", "array"],
-          "items": {
-            "type": "array",
-            "maxItems": 16,
-            "items": {"type": "number"}
-          }
+          "items": {"$ref": "#/definitions/orientation"}
         },
         "crs": {"$ref": "#/definitions/crs"},
         "trs": {"$ref": "#/definitions/trs"}
@@ -237,6 +233,25 @@
         "crs": {"$ref": "#/definitions/crs"},
         "trs": {"$ref": "#/definitions/trs"}
       }
+    },
+    "orientation":{
+      "$id": "#/definitions/orientation",
+      "type": "object",
+      "required": ["scales", "angles"],
+      "properties": {
+        "scales": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"type": "number"}
+        },
+        "angles": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {"type": "number"}
+        }
+      },
     },
     "prametricValues": {
       "$id": "#/definitions/prametricValues",
