@@ -998,7 +998,7 @@ A leaf of a one parameter set of geometries is the geometry \(f(t)\) at a partic
 <strong>MF_OneParamGeometry</strong> and <strong>MF_Trajectory</strong> is specialized as <strong>MF_TemporalGeometry</strong> and <strong>MF_TemporalTrajectory</strong> respectively, when the parameter is time representing a multiple of a single unit of measure
 such as year, day, or second for those types. <strong>MF_TemporalTrajectory</strong> is also a sub-type of <strong>MF_TemporalGeometry</strong>.
 The OGC Moving Features XML and CSV standard only provide the encoding formats to represent linear trajectories of moving points as instances of <strong>MF_TemporalTrajectory</strong>, typically representing vehicles or pedestrians.
-A sample data of OGC Moving Features XML and CSV encoding is provided in <a href="#sampleXML">Annex B.1</a>.~However, Moving Features JSON Encodings cover <strong>MF_TemporalGeometry</strong>, <strong>MF_PrismGeometry</strong>, and <strong>MF_RigidTemporalGeometry</strong>.</p>
+A sample data of OGC Moving Features XML and CSV encoding is provided in <a href="#sampleXML">Annex B.1</a>. However, Moving Features JSON Encodings cover <strong>MF_TemporalGeometry</strong>, <strong>MF_PrismGeometry</strong>, and <strong>MF_RigidTemporalGeometry</strong>.</p>
 </div>
 </div>
 </div>
@@ -2067,7 +2067,7 @@ having at least one element in the array.</p>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MovingPoint | MovingLineString | MovingPolygon | MovingPointCloud</span><span class="delimiter">&quot;</span></span>,  <span class="comment">// (MANDATORY) vbar | as a means to select ONE type.</span>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">datetimes</span><span class="delimiter">&quot;</span></span> : [...],    <span class="comment">//(MANDATORY)</span>
             <span class="key"><span class="delimiter">&quot;</span><span class="content">coordinates</span><span class="delimiter">&quot;</span></span>: [...],   <span class="comment">//(MANDATORY)</span>
-            <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: [...], <span class="comment">//(DEFAULT)</span>
+            <span class="key"><span class="delimiter">&quot;</span><span class="content">interpolation</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">...</span><span class="delimiter">&quot;</span></span>, <span class="comment">//(DEFAULT)</span>
             ...
         },
         ...
