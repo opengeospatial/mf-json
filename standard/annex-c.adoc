@@ -1,0 +1,66 @@
+[appendix]
+:appendix-caption: Annex
+== Deformation of Rigid Body (Informative)
+
+If an application defines a wrong interpolation of motion, it brings unintended consequences.
+For example, the 2D triangle with a rigid body in <<deform>> has translational and rotational motion at the same time.
+It means when the application exports data with MF-JSON Prism, it needs to define the `"base"` and `"orientations"` member as well as `"interpolation"` for a temporal geometry.
+If the application exports data without `"base"` and `"orientations"` value like <<mf-deform>>,
+the intermediate positions of the moving feature are interpolated with the linear interpolation function,
+as shown in <<deform>>. Even though the object has a rigid body, its boundary is deformed.
+<<deform-complex>> also shows the same phenomena that even the 2D polygon becomes 0D point in the middle time.
+
+[#mf-deform, reftext='{example-caption} {counter:example-num}']
+.Example {example-num}: Example of a wrong encoding
+[source, javascript]
+{
+    "type": "Feature", //(MANDATORY)
+    "temporalGeometry": { //(MANDATORY) one parameter set of geometries of a moving feature
+        "type": "MovingPolygon",
+        "datetimes": ["2011-07-14T22:01:01Z", "2011-07-14T22:01:05Z"],
+        "coordinates": [
+            [[[
+              139.77431058883667,
+              35.621948192128826
+            ],
+            [
+              139.77530837059018,
+              35.62197435581956
+            ],
+            [
+              139.7748255729675,
+              35.62327380835506
+            ],
+            [
+              139.77431058883667,
+              35.621948192128826
+            ]]],
+            [[[
+              139.77635979652405,
+              35.62244966137756
+            ],
+            [
+              139.77626860141754,
+              35.621734521667385
+            ],
+            [
+              139.77767407894135,
+              35.62201796195175
+            ],
+            [
+              139.77635979652405,
+              35.62244966137756
+            ]]]
+        ],
+        "interpolation": "Linear"
+    },
+    ...
+}
+
+[#deform,reftext='{figure-caption} {counter:figure-num}']
+.Example of deformation of rigid body with linear interpolation
+image::deform.png[Components, pdfwidth=70%, width=70%, align="center"]
+
+[#deform-complex,reftext='{figure-caption} {counter:figure-num}']
+.Example of dimensional deformation of a 2D MovingPolygon feature with linear interpolation
+image::deform-complex.png[Components, pdfwidth=70%, width=70%, align="center"]
