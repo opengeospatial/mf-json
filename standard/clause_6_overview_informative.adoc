@@ -48,4 +48,4 @@ A leaf of a one parameter set of geometries is the geometry latexmath:[f(t)] at 
 *MF_OneParamGeometry* and *MF_Trajectory* is specialized as *MF_TemporalGeometry* and *MF_TemporalTrajectory* respectively, when the parameter is time representing a multiple of a single unit of measure
 such as year, day, or second for those types. *MF_TemporalTrajectory* is also a sub-type of *MF_TemporalGeometry*.
 The OGC Moving Features XML and CSV standard only provide the encoding formats to represent linear trajectories of moving points as instances of *MF_TemporalTrajectory*, typically representing vehicles or pedestrians.
-A sample data of OGC Moving Features XML and CSV encoding is provided in <<sampleXML>>.~However, Moving Features JSON Encodings cover *MF_TemporalGeometry*, *MF_PrismGeometry*, and *MF_RigidTemporalGeometry*.
+A sample data of OGC Moving Features XML and CSV encoding is provided in <<sampleXML>>. However, Moving Features JSON Encodings cover *MF_TemporalGeometry*, *MF_PrismGeometry*, and *MF_RigidTemporalGeometry*.

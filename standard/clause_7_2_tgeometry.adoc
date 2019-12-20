@@ -281,7 +281,7 @@ having at least one element in the array.
             "type": "MovingPoint | MovingLineString | MovingPolygon | MovingPointCloud",  // (MANDATORY) vbar | as a means to select ONE type.
             "datetimes" : [...],    //(MANDATORY)
             "coordinates": [...],   //(MANDATORY)
-            "interpolation": [...], //(DEFAULT)
+            "interpolation": "...", //(DEFAULT)
             ...
         },
         ...
