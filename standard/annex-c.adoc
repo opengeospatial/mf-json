@@ -1,3 +1,4 @@
+[#annex-c, reftext='Annex C']
 [appendix]
 :appendix-caption: Annex
 == Deformation of Rigid Body (Informative)

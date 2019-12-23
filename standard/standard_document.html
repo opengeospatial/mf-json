@@ -247,7 +247,7 @@
 <li><a href="#sampleJSONPrism">B.3. Sample Data of OGC Moving Features JSON Prism encoding</a></li>
 </ul>
 </li>
-<li><a href="#_deformation_of_rigid_body_informative">Annex C: Deformation of Rigid Body (Informative)</a></li>
+<li><a href="#annex-c">Annex C: Deformation of Rigid Body (Informative)</a></li>
 <li><a href="#_revision_history">Annex D: Revision History</a></li>
 <li><a href="#Bibliography">Annex E: Bibliography</a></li>
 </ul>
@@ -532,7 +532,7 @@ In particular, the word “SHALL” (not “must”) is the verb form used to in
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>NOTE 1: A rigid geometric object many undergo translation or rotation, but remains congruent with its base representation.</pre>
+<pre>NOTE 1: A rigid geometric object may undergo translation or rotation, but remains congruent with its base representation.</pre>
 </div>
 </div>
 <div class="literalblock">
@@ -1829,7 +1829,7 @@ If the TemporalPrimitiveGeometry object has no member with the name <code>"inter
 it is interpreted by <code>"Linear"</code> as the default value. The motion of the geometry of a moving feature requires both translational and rotational motion,
 MF-JSON Prism recommends using the <code>"base"</code> and <code>"orientations"</code> member with the <code>"coordinates"</code> that represents a MovingPoint for avoiding ambiguities of the object boundary.
 The only usage of <code>"interpolation"</code> may bring unintended consequences for object motion encoding.
-<a href="#annex-c">[annex-c]</a> shows some examples of unintended consequences of the linear interpolation without the values of <code>"base"</code> and <code>"orientations"</code>.</p>
+<a href="#annex-c">Annex C</a> shows some examples of unintended consequences of the linear interpolation without the values of <code>"base"</code> and <code>"orientations"</code>. If a moving feature has two motions of translation and rotation, using <code>"base"</code> and <code>"orientations"</code> is recommended as well as <code>"interpolation"</code>.</p>
 </li>
 <li>
 <p><code>"base"</code>: The <code>"base"</code> member is optional, and its value is a JSON object or a JSON <code>null</code> value.
@@ -1890,7 +1890,7 @@ respectively is a coefficient against each axis to extend or shrink the base rep
 to the UTM system. The quaternion takes the form of a vector \(Q = &lt;X, Y, Z, W&gt;\), where \(X\), \(Y\) and \(Z\) are coefficients
 defining an axis of rotation in an imaginary spherical space surrounding the moving feature,
 and \(W\) is a scalar representation of the amount of rotation applied around the axis.
-At this point it should be noted that the \(X\), \(Y\) and \(Z\) components of a quaternion are not the same as the components
+At this point, it should be noted that the \(X\), \(Y\) and \(Z\) components of a quaternion are not the same as the components
 of a three-dimensional unit vector, nor is \(W\) a direct representation of a rotation in degree.
 To convert Euler angles to quaternion form, defining the angles around the X-axis (roll) as \(\psi\), the Y-axis (pitch) as \(\theta\), and the Z-axis (yaw) as \(\phi\).
 The quaternion \(Q\) can then be calculated as follow:</p>
@@ -4562,7 +4562,7 @@ A,15,19,12.0 3.0 10.0 3.0,walking,2</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_deformation_of_rigid_body_informative"><a class="anchor" href="#_deformation_of_rigid_body_informative"></a>Annex C: Deformation of Rigid Body (Informative)</h2>
+<h2 id="annex-c"><a class="anchor" href="#annex-c"></a>Annex C: Deformation of Rigid Body (Informative)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>If an application defines a wrong interpolation of motion, it brings unintended consequences.
