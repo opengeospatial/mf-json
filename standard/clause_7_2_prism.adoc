@@ -4,8 +4,8 @@ The package contains five types used to describe the prism of a moving geometric
 *MF_TemporalOrientation*, and *MF_RotationMatrix*. The type *MF_PrismGeometry* represents the movement of an object through geographic space.
 *MF_RigidTemporalGeometry* specializes *MF_PrismGeometry*, which in turn specializes *MF_TemporalGeometry* for the case of an object
 that moves without deformation, where the object’s basic shape is immutable and may be translated or rotated over time.
-The type *MF_LocalGeometry* is a geometric object to define the local geometry of the moving object in a design coordinate reference system (usually 3D).
-The design coordinate reference system is accessible through the Coordinate Reference System association inherited from GM_Object.
+The type *MF_LocalGeometry* is a geometric object to define the local geometry of the moving object in a engineering coordinate reference system (usually 3D).
+The engineering coordinate reference system is accessible through the Coordinate Reference System association inherited from GM_Object.
 The remaining types support description of the possible rotation of such an object.
 
 [#mf-isoprism,reftext='{figure-caption} {counter:figure-num}']
@@ -69,6 +69,3 @@ include::clause_7_2_mfeaturecollection.adoc[]
 include::clause_7_2_others.adoc[]
 
 include::clause_7_2_interpolation.adoc[]
-
-////////////
-////////////

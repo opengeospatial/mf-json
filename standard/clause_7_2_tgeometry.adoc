@@ -9,8 +9,8 @@ to a Geometry object latexmath:[g] of Point, LineString, Polygon, or GeometryCol
 * A TemporalGeometry object is a JSON object that has at least three members with the name `"type"`, `"crs"`, and `"trs"` as shown in <<tgeometryjson>>.
 * The value of the `"type"` member is one of string `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, `"MovingPointCloud"`, and `"MovingGeometryCollection"`.
 The `"type"` member is a mandatory member of a TemporalGeometry object.
-The TemporalGeometry object is spefified with additional members depending upon the value of the `"type"` member.
-* The value of the `"crs"` and `"trs"` member is a JSON object to represent a CoordinateReferenceSystem (CRS) object (see <<crs>>).
+The TemporalGeometry object is specified with additional members depending upon the value of the `"type"` member.
+* The value of the `"crs"` and `"trs"` member is a JSON object to represent a spatial and temporal CoordinateReferenceSystem (CRS) object respectively (see <<crs>>).
 If an object has no `"crs"` and `"trs"` member, then it may acquire the CRS instances of
 the `"crs"` and `"trs"` member from upper-level braces of a JSON object.
 If no CRS instance can be so acquired in a file, the TemporalGeometry object assumes the default CRSs (see <<defaultcrs>>).
@@ -34,12 +34,6 @@ leaf geometry at a time instant is drawn by a primitive geometry such as a point
 or a point cloud in the three-dimensional spatial coordinate system.
 The TemporalPrimitiveGeometry object is defined with additional members
 named `"datetimes"`, `"coordinates"`, `"interpolation"`, `"base"`, and `"orientations"` as shown in <<tprimitivejson>>, as well as the common members in <<tgeometryjson>>.
-
-/////////////
-When a TemporalGeometry object has a `"type"` member with the value of
-one of string `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`,
-the object is specialized as a TemporalPrimitiveGeometry object with.
-/////////////
 
 [#tprimitivejson, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Members of a TemporalPrimitiveGeometry Object
@@ -137,7 +131,7 @@ The value expression of this member is different depending on the `"type"` value
 | MovingLineString | [ [[x11,y11(,z11)], [x12,y12(,z12)], ...], [[x21,y21(,z21)], [x22,y22(,z22)], ...], ... ] | _a list of LineString coordinate arrays to construct a 1D leaf geometry (linestring) corresponding to each instant in order_
 | MovingPolygon | [ [[[ox11,oy11(,oz11)], [ox12,oy12(,oz12)], ...], [[ix11,iy11(,iz11)],[ix12,iy12(,iz12)], ...],...], [[[ox21,oy21(,oz21)], [ox22,oy22(,oz22)], ...], [[ix21,iy21(,iz21)],[ix22,iy22(,iz22)], ...], ...], ... ] |  _a list of Polygon
 coordinate arrays to construct a 2D leaf geometry (polygon) corresponding to each instant in order_
-| MovingPointCloud | [ [[x11,y11,z11], [x12,y12,z12], ...], [[x21,y21,z21], [x22,y22,z22], ...], ... ] | _a list of MultiPoint 3D coordinate arrays to construct a set of points as a leaf geometry corresponding to each instant in order_
+| MovingPointCloud | [ [[x11,y11(,z11)], [x12,y12(,z12)], ...], [[x21,y21(,z21)], [x22,y22(,z22)], ...], ... ] | _a list of MultiPoint coordinate arrays to construct a set of points as a leaf geometry corresponding to each instant in order_
 |=========
 
 
@@ -152,8 +146,8 @@ in that order and using decimal numbers. Altitude/elevation (z) MAY be included 
 A LinearRing is closed LineString with 4 or more single positions to represent the boudary of a surface or the boundary of a hole in a surface, allowing the same positions.
 The first and last position is equivalent (they represent equivalent points).
 For Polygons with multiple rings, the first must be the exterior ring and any others must be interior rings (holes).
-A LinearRing  MUST follow the right-hand rule with respect to the area it bounds, i.e., exterior rings are counterclockwise, and interior rings are clockwise.
-* A MultiPoint 3D coordinate array is a JSON array of single positions with altitude/elevation (z).
+A LinearRing MUST follow the right-hand rule with respect to the area it bounds, i.e., exterior rings are counterclockwise, and interior rings are clockwise.
+* A MultiPoint coordinate array is a JSON array of single positions.
 ==========
 
 * `"interpolation"`: MF-JSON Prism separates out translational motion and rotational motion.
@@ -165,44 +159,35 @@ MF-JSON Prism allows the external reference encoding by the URL to represent a M
 The URL indicates a JSON document containing a user-defined curve of parametric motion for the movement of a feature in two- or three-dimensional space.
 The detail interpretation and representation of method is described in <<interpolation>>.
 If the TemporalPrimitiveGeometry object has no member with the name `"interpolation"`,
-it is interpreted by `"Linear"` as the default value. The motion of the geometry of a moving feature requires both translational and rotational motion,
-MF-JSON Prism recommends using the `"base"` and `"orientations"` member with the `"coordinates"` that represents a MovingPoint for avoiding ambiguities of the object boundary.
+it is interpreted by `"Linear"` as the default value. If a moving feature has both translational and rotational motion,
+MF-JSON Prism recommends using the `"base"` and `"orientations"` member with the `"coordinates"`, which represents a MovingPoint for avoiding ambiguities of the object boundary.
 The only usage of `"interpolation"` may bring unintended consequences for object motion encoding.
 <<annex-c>> shows some examples of unintended consequences of the linear interpolation without the values of `"base"` and `"orientations"`. If a moving feature has two motions of translation and rotation, using `"base"` and `"orientations"` is recommended as well as `"interpolation"`.
 
 * `"base"`: The `"base"` member is optional, and its value is a JSON object or a JSON `null` value.
+When the moving feature has the base representation, the value of `"type"` is `"MovingPoint"` for its translational motion.
 The JSON object has two members: `"type"` and `"href"`. The `"type"` member has a JSON string to represent a 3D File format such as
 STL<<STL>>, OBJ<<OBJ>>, PLY<<PLY>>, and glTF<<GLTF>>. The `"href"` member has a URL to address a 3D model data.
 The 3D model represents a base geometry of a 3D shape, and
 the combination of the `"base"` and `"orientations"` members represents a 3D temporal geometry
 of the MF_RigidTemporalGeometry type in ISO 19141. In MF-JSON Prism, the 3D model is transformed
 into the fixed local coordinate reference system whose bound is *-0.5 to 0.5* for
-each axis concerning the right-handed local engineering coordinate reference system (i.e., right-handed orthogonal axis system, latexmath:[Z=X\times Y]) and unit is *meter*.
+each axis concerning the right-handed local engineering coordinate reference system
+(i.e., right-handed orthogonal axis system, latexmath:[Z=X\times Y]) and unit is *meter*.
 The latexmath:[X] axis points forward from the base model.
 The latexmath:[Y] axis points to the left-hand side of the model, as viewed when facing forward.
 The latexmath:[Z] axis points up from the ground as shown in <<mf-orientation>>.
-The origin of the local coordinate reference system is 0 for each axis and is translated into the centroid of each leaf geometry of a temporal geometry.
+The origin of the local coordinate reference system is 0 for each axis and is translated into the position of each leaf point in `"coordinates"`.
 
-//////////////
-* `"orientations"`:  The `"orientations"` member is optional and always accompanied
-with the `"base"` member. Its value is a JSON array as a sequence of transform matrices
-for rotating and scaling of the base representation of a member named `"base"`,
-having the same number of elements of the `"datetimes"` value.
-It allows a JSON `null` value or an empty array
-if and only if the `"base"` member has a JSON `null` value.
-A transformation matrix is defined by a linear transformation
-from the right-handed local engineering coordinate reference system
-to the Cartesian coordinate system, such as the Universal Transverse Mercator (UTM) system.
-A coordinate of the base 3D model, latexmath:[(x, y, z)], transforms into a target 3D coordinate,
-latexmath:[(x', y', z')], by using the quaternions and the scaling factors,
-latexmath:[(x, y, z) \rightarrow (x', y', z')], as follows:
-//////////////
 * `"orientations"`: The `"orientations"` member is optional and represents rotational motion of the base representation of a member named `"base"`.
 It allows a JSON `null` value or an empty array if and only if the `"base"` member has a JSON `null` value.
 When the temporal geometry has the base representation, its value is a JSON array as a sequence of JSON objects which have two members of `"scales"` and `"angles"`,
-having the same number of elements of the "datetimes" value.
+having the same number of elements of the `"datetimes"` value.
 The `"scales"` member has a JSON array value of numbers along the latexmath:[X], latexmath:[Y], and latexmath:[Z] axis in order as three scale factors, and
 the `"angles"` member has a JSON array value of numbers along the latexmath:[X], latexmath:[Y], and latexmath:[Z] axis in order as Euler angles in degree.
+Angles are defined according to the right-hand rule;
+a positive value represents a rotation that appears clockwise when looking in the positive direction of the axis,
+and a negative value represents a counter-clockwise rotation.
 A pair of `"scales"` and `"angles"` generates a transform matrix of the base representation at each time of the elements in `"datetimes"`.
 The transformation matrix at each time poses the base representation from the right-handed local engineering coordinate reference system
 to a geographical Cartesian coordinate system. This standard attaches to the Universal Transverse Mercator (UTM) system.
@@ -268,7 +253,7 @@ include::requirements/requirements_premitive.adoc[]
 [#tcomplex, reftext='7.2.1.2']
 ===== 7.2.1.2. TemporalComplexGeometry Object
 A TemporalComplexGeometry object represents a set of TemporalPrimitiveGeometry objects.
-When a TemporalGeometry object has a `"type"` member is`"MovingGeometryCollection"`,
+When a TemporalGeometry object has a `"type"` member is `"MovingGeometryCollection"`,
 the object is specialized as a TemporalComplexGeometry object with one additional *mandatory* member named `"prisms"`.
 The value of the `"prisms"` member is represented by a JSON array of a set of TemporalPrimitiveGeometry instances,
 having at least one element in the array.
@@ -290,12 +275,7 @@ having at least one element in the array.
     "trs": {...}  //(DEFAULT)
 }
 
-* *MovingGeometryCollection*: Each element of "prisms" can be an TemporalPrimitiveGeometry with one of types of `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
+* *MovingGeometryCollection*: Each element of `"prisms"` can be an TemporalPrimitiveGeometry with one of types of `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
 The leaf geometry at a time position is the union of each leaf of any temporal geometries at the same time.
 
 include::requirements/requirements_aggregation.adoc[]
-
-//////////////
-<<appendix-b1>> shows examples of TemporalPrimitiveGeometry instances.
-<<appendix-b2>> shows examples of TemporalAggregateGeometry instances.
-//////////////

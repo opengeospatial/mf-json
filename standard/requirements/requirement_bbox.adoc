@@ -1,13 +1,13 @@
 [cols="1h,3a",width="100%"]
 |===
-|*Requirement 2.47* |
+|*Requirement 2.48* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/bbox +
 A BoundingBox object SHALL be a JSON array of length latexmath:[2*n] where latexmath:[n] is the number of dimensions represented in the spatial bounding box.
-|*Requirement 2.48* |
+|*Requirement 2.49* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/bbox/element +
 The elements in the array SHALL be two coordinates (lower-bound coordinate and upper-bound coordinate).
 The order of values SHALL follow the axes order of single position of longitude, latitude, and elevation.
-|*Requirement 2.49* |
+|*Requirement 2.50* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/bbox/crs +
 The expression of an element in the array SHALL refer to the default spatial CRS object (WGS 84).
 |===

@@ -11,7 +11,7 @@ is any string defined by an application as a temporal property.
 |*Requirement 2.24* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property +
 A latexmath:[@propertyN] object SHALL have at least two mandatory members of `"type"` and `"values"`.
-The value of the `"type"` member SHALL be one of string "Measure", "Text", and "Image".
+The value of the `"type"` member SHALL be one of string `"Measure"`, `"Text"`, and `"Image"`.
 The value of the `"values"` member SHALL be a JSON array whose element is a string
 (including null, true and false) or numeric value.
 |*Requirement 2.25* |
@@ -19,9 +19,19 @@ http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalue
 The number of elements in both arrays of the `"datetimes"` value and the `"values"` value SHALL be equal.
 |*Requirement 2.26* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/interpolation +
-The value of the `"interpolation"` member SHALL be one of string
-"Discrete", "Step", "Linear", and "Regression" or a URL to address a code list defined in OGC TimeseriesML 1.0 between neighboring points in a timeseries.
+The value of the `"interpolation"` member SHALL be one of string `"Discrete"`, `"Step"`, `"Linear"`,
+and `"Regression"` or a URL to address a code list defined in OGC TimeseriesML 1.0
+between neighboring points in a timeseries.
+If the latexmath:[@propertyN] object has no member with the name `"interpolation"`,
+the default interpolation method (`"Discrete"`) SHALL be applied.
 |*Requirement 2.27* |
+http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/interpolation/constraint +
+The available interpolation method SHALL be restricted according to `"type"` value as follows.
+
+* Measure: Discrete, Step, Linear, Regression
+* Text: Discrete, Step
+* Image: Discrete, Step
+|*Requirement 2.28* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tproperties/pvalues/property/form +
 The value of the `"form"` member SHALL be a common code (3 characters) described in the list of Code List Rec 20 [UN/CEFACT] or a URI denoting a unit-of-measure defined in a web resource.
 |===

@@ -47,19 +47,10 @@ a temporal geometry or a collection of temporal geometries.
 as the same semantics of GeoJSON (see <<geometry>>).
 * A MovingFeature object has an optional member with the name `"properties"` allowing a JSON `null` value,
 as the same semantics of GeoJSON (see <<properties>>). The properties member is an object (i.e., any JSON object or a JSON `null` value).
-* A MovingFeature object has an optional member with the name `"id"` to represent a commonly used identifier and the value of this member is either a JSON string or
-number.
+* A MovingFeature object has an optional member with the name `"id"` to represent a commonly used identifier and the value of this member is either a JSON string or number.
 
 [TIP]
 The difference from `"temporalProperties"` is that a `"properties"` member represents static attributes
 whose value is fixed for the life span of a moving feature.
 
 include::requirements/requirement_feature.adoc[]
-
-/////////
- *An instance of `"geometry"` is represented by its own local CRS as a default CRS*.
- If a Feature object has no `"crs"` or `"trs"` member,
- the default CRS objects shall apply to the Feature object.
- If there is no CRS object for a spatial or temporal coordinate,
- a Feature object SHALL explicitly has `"crs"` or `"trs"` member with a JSON `null` value.
-/////////

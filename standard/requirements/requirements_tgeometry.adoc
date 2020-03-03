@@ -3,7 +3,7 @@
 |*Requirement 2.4*  |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry +
 A TemporalGeometry object SHALL have at least a mandatory member with the named `"type"` and its value SHALL be one of
-string "MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", and "MovingGeometryCollection".
+string `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, `"MovingPointCloud"`, and `"MovingGeometryCollection"`.
 |*Requirement 2.5*  |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/crs +
 A TemporalGeometry object has two default members: `"crs"` and `"trs"`. The value of the `"crs"` and `"trs"` member SHALL

@@ -42,7 +42,7 @@ A linked CRS object has one required member: `"href"` and one optional member: `
 The value of the required `"href"` member is a dereferenceable URI.
 The value of the optional `"type"` member is a string that hints at the format
 used to represent CRS parameters at the provided URI.
-Suggested values are: "Proj4", "OGCWKT", "ESRIWKT", but others can be used.
+Suggested values are: `"Proj4"`, `"OGCWKT"`, `"ESRIWKT"`, but others can be used.
 
 [#linkedcrs, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Example of a linked CRS object

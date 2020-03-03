@@ -43,13 +43,3 @@ The following symbols and abbreviated terms are used in this standard:
 |2D	  | Two Dimensional
 |3D	  | Three Dimensional
 |=========
-
-
-/////////
-|API	| Application Program Interface
-|CRUD | Create, Read, Update, Delete
-|HTTP	| Hypertext Transfer Protocol
-|OASIS|	Organization for the Advancement of Structured Information Standards
-|REST | Representational State Transfer
-|WKT  |	Well Known Text
-/////////

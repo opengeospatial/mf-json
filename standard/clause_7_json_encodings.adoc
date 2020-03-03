@@ -13,9 +13,9 @@ An array consists of elements where each element is a value as a JSON `null`, `t
 
 In an MF-JSON object, there are three types of members: MANDATORY, OPTIONAL, and DEFAULT.
 [horizontal]
-MANDATORY:: If an object member is *mandatory*, its value SHOULD NOT be a JSON `null` value. The mandatory member of an object and its value SHOULD appear in a MF-JSON document.
+MANDATORY:: If an object member is *mandatory*, its value SHALL NOT be a JSON `null` value. The mandatory member of an object and its value SHALL appear in a MF-JSON document.
 DEFAULT:: If an object member is *default*, the member is mandatory and has a default value defined in this specification when its pair (member/value) does not appear in a MF-JSON document.
-OPTIONAL:: If an object member is *optional*, its value allows a JSON `null` value.
+OPTIONAL:: If an object member is *optional*, its value allows a JSON `null` value. If the number has a JSON `null` value, its pair can be omitted from a MF-JSON document.
 
 <<<
 
@@ -24,8 +24,3 @@ include::clause_7_1_trajectory.adoc[]
 <<<
 
 include::clause_7_2_prism.adoc[]
-
-
-////////
-Two forms are incompatible, and MF-JSON Prism takes priority for the interpretation of the feature position.
-////////

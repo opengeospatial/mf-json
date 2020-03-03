@@ -23,13 +23,14 @@ image::mf-encodings.png[mf-encodings, pdfwidth=65%, width=65%, align="center"]
 .Coordinate Reference System (CRS)
 The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees.
 However, a moving feature needs a temporal coordinate system and may require an engineering coordinate reference system or parametric coordinate reference system
-to represent the movement of the geometry of the feature in the case of an application request. Therefore, MF-JSON includes the "crs" field as described in GeoJSON "prior arrangement" (also known as GeoJSON:2008<<GJSON2008>>).
+to represent the movement of the geometry of the feature in the case of an application request.
+Therefore, MF-JSON Prism includes the `"crs"` field as described in GeoJSON "prior arrangement" (also known as GeoJSON:2008<<GJSON2008>>).
 
-TIP: The existing GeoJSON implementation can ignore the new members of "temporalGeometry", "temporalProperties", "trs", and "time" in an MF-JSON document
+TIP: The existing GeoJSON implementation can ignore the new members of `"temporalGeometry"`, `"temporalProperties"`, `"trs"`, and `"time"` in an MF-JSON document
 if there is no processing module for foreign members.
 
 <<mf-hurricane>> illustrates an example of the movement of a hurricane with a time-varying 2-dimensional geometry as a moving feature. Suppose the pressure centroid of the hurricane reported four locations
-at latexmath:[t_1, t_2, t_3], and latexmath:[t_4]. Its trajectory may be drawn depending on the interpolation method between two consecutive locations, such as latexmath:[A] (linear) or latexmath:[B] (Quadratic).
+at time latexmath:[t_1, t_2, t_3], and latexmath:[t_4]. Its trajectory may be drawn depending on the interpolation method between two consecutive locations, such as latexmath:[A] (linear) or latexmath:[B] (Quadratic).
 https://www.iso.org/standard/41445.html[ISO 19141:2008] defines a conceptual schema of a moving feature based on geometry types as shown in <<mf-iso>>.
 The ISO conceptual schema represents the motion consisting of translation and/or rotation of a moving feature, but not including deformation of the geometry, over time.
 
@@ -48,4 +49,4 @@ A leaf of a one parameter set of geometries is the geometry latexmath:[f(t)] at 
 *MF_OneParamGeometry* and *MF_Trajectory* is specialized as *MF_TemporalGeometry* and *MF_TemporalTrajectory* respectively, when the parameter is time representing a multiple of a single unit of measure
 such as year, day, or second for those types. *MF_TemporalTrajectory* is also a sub-type of *MF_TemporalGeometry*.
 The OGC Moving Features XML and CSV standard only provide the encoding formats to represent linear trajectories of moving points as instances of *MF_TemporalTrajectory*, typically representing vehicles or pedestrians.
-A sample data of OGC Moving Features XML and CSV encoding is provided in <<sampleXML>>. However, Moving Features JSON Encodings cover *MF_TemporalGeometry*, *MF_PrismGeometry*, and *MF_RigidTemporalGeometry*.
+A sample data of OGC Moving Features XML and CSV encoding is provided in <<sampleXML>>. However, Moving Features JSON Encodings can cover *MF_TemporalGeometry*, *MF_PrismGeometry*, and *MF_RigidTemporalGeometry*.

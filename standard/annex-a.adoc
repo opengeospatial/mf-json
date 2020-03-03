@@ -91,7 +91,7 @@ Two encodings of MF-JSON Prism and MF-JSON Trajectory SHALL be not able to coexi
 
 ==== TemporalGeometry object
 A TemporalGeometry object SHALL have at least a mandatory member with the named `"type"` and its value SHALL be one of string
-"MovingPoint", "MovingLineString", "MovingPolygon", "MovingPointCloud", and "MovingGeometryCollection".
+`"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, `"MovingPointCloud"`, and `"MovingGeometryCollection"`.
 The value of the `"crs"` and `"trs"` member SHALL be a JSON object to represent a CoordinateReferenceSystem (CRS) object.
 If no CRS instance can be so acquired from upper-level braces of a JSON object, the default spatial CRS (and temporal CRS) SHALL be applied.
 [cols=">20h,<80a",width="100%"]
@@ -106,7 +106,7 @@ If no CRS instance can be so acquired from upper-level braces of a JSON object, 
 
 ==== TemporalPrimitiveGeometry object
 A TemporalPrimitiveGeometry object SHALL have at least three mandatory members of `"type"`, `"datetimes"`, and `"coordinates"`.
-The value of the `"type"` member SHALL be one of string "MovingPoint", "MovingLineString", "MovingPolygon", and "MovingPointCloud".
+The value of the `"type"` member SHALL be one of string `"MovingPoint"`, `"MovingLineString"`, `"MovingPolygon"`, and `"MovingPointCloud"`.
 The value of the `"datetimes"` member SHALL be a JSON array of a sequence of monotonic increasing instants, having at least one element that is not `null`.
 The value of the `"coordinates"` member SHALL be a JSON array of a sequence of leaf geometries of a temporal geometry, having at least one element that is not `null` and its expression is depending on the `"type"`.
 The value of the `"interpolation"` member SHALL be a MotionCurve object.
@@ -131,7 +131,7 @@ The number of elements in both arrays of the `"orientations"` value and the `"da
 A MovingPoint object SHALL have the value of the `"type"` = `"MovingPoint"` and the value of the `"coordinates"` member SHALL be a list of Point coordinates to construct a 0D leaf geometry (point) corresponding to each instant in order.
 A MovingLineString object SHALL have the value of the `"type"` = `"MovingLineString"` and the value of the `"coordinates"` member SHALL be a list of LineString coordinate arrays to construct a 1D leaf geometry (linestring) corresponding to each instant in order.
 A MovingPolygon object SHALL have the value of the `"type"` = `"MovingPolygon"` and the value of the `"coordinates"` member SHALL be a list of Polygon coordinate arrays to construct a 2D leaf geometry (polygon) corresponding to each instant in order.
-A MovingPointCloud object SHALL have the value of the `"type"` = `"MovingPointCloud"` and the value of the `"coordinates"` member SHALL be a list of MultiPoint 3D coordinate arrays to construct a set of points as a leaf geometry corresponding to each instant in order.
+A MovingPointCloud object SHALL have the value of the `"type"` = `"MovingPointCloud"` and the value of the `"coordinates"` member SHALL be a list of MultiPoint coordinate arrays to construct a set of points as a leaf geometry corresponding to each instant in order.
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | conf/prism/tgeometry/primitive/type
@@ -147,9 +147,14 @@ A MovingPointCloud object SHALL have the value of the `"type"` = `"MovingPointCl
 ==== 3D model
 The 3D model SHALL be transformed into the fixed local coordinate reference system whose bound is -0.5 to 0.5 for each axis and unit is meter.
 The coordinate reference system for the 3D model SHALL be a right-handed coordinate system.
-The value of the `"base"` member SHALL be a URL to address an OBJ file of a 3D model data.
-The value of the `"orientations"` member SHALL be a JSON array to represent a transformation matrix.
-The number of the element in array of the `"orientations"` value SHALL be the same as the `"datetimes"` value.
+The value of the `"base"` member SHALL be a JSON object having two members of `"type"` and `"href"`.
+The `"type"` member has a JSON string to represent a file format, and the `"href"` member has a web accessible URL to address a 3D model data.
+If the TemporalPrimitiveGeometry object has a member with the name `"base"`, the value of `"type"` in the TemporalPrimitiveGeometry object SHALL a `"MovingPoint"`.
+The value of the `"orientations"` member SHALL be a JSON array of a JSON object that has two members of `"scales"` and `"angles"`.
+The value of the `"scales"` member SHALL a JSON array value of numbers along the latexmath:[X], latexmath:[Y] and latexmath:[Z] axis in order.
+The value of the `"angles"` member SHALL a JSON array value of numbers of Euler angles along the latexmath:[X], latexmath:[Y] and latexmath:[Z] axis in order.
+The value of the `"angles"` member SHALL define according to the right-hand rule and unit is degree.
+The number of the element in array of the `"orientations"` value SHALL be the same as `"datetimes"`.
 The `"orientations"` member SHALL be accompanied with the `"base"` member.
 [cols=">20h,<80a",width="100%"]
 |===
@@ -200,12 +205,19 @@ where latexmath:[@propertyN] is any string defined by an application as a tempor
 
 ==== @propertyN object
 A latexmath:[@propertyN] object SHALL have at least two mandatory members of `"type"` and `"values"`.
-The value of the `"type"` member SHALL be one of string "Measure", "Text", and "Image".
+The value of the `"type"` member SHALL be one of string `"Measure"`, `"Text"`, and `"Image"`.
 The value of the `"values"` member SHALL be a JSON array whose element is a string (including null, true and false) or numeric value.
-The value of the `"interpolation"` member SHALL be only one of string "Discrete", "Step", "Linear", and "Regression" or a URL indicating an InterpolationCode defined in OGC TimeseriesML 1.0 [OGC 15-042r3].
+The value of the `"interpolation"` member SHALL be only one of string `"Discrete"`, `"Step"`, `"Linear"`, and `"Regression"` or a URL indicating an InterpolationCode defined in OGC TimeseriesML 1.0 [OGC 15-042r3].
+If the latexmath:[@propertyN] object has no member with the name `"interpolation"`, the default interpolation method (`"Discrete"`) SHALL be applied.
 The value of the `"form"` member SHALL be a JSON string as a common code (3 characters) described in the list of Code List Rec 20 by the UN Centre for Trade Facilitation and Electronic Business (UN/CEFACT)
 or a URI denoting a unit-of-measure defined in a web resource.
 The number of elements in both arrays of the `"datetimes"` value and the `"values"` value SHALL be equal.
+The available interpolation method SHALL be restricted according to `"type"` value as follows.
+
+* Measure: Discrete, Step, Linear, Regression
+* Text: Discrete, Step
+* Image: Discrete, Step
+
 [cols=">20h,<80a",width="100%"]
 |===
 |Test id: | conf/prism/tproperties/property
@@ -214,13 +226,14 @@ The number of elements in both arrays of the `"datetimes"` value and the `"value
 * req/prism/tproperties/pvalues/property/interpolation
 * req/prism/tproperties/pvalues/property/form
 * req/prism/tproperties/pvalues/property/constraint
+* req/prism/tproperties/pvalues/property/interpolation/constraint
 |Test purpose: | Verify that this requirement is satisfied.
 |Test method: | Inspect the document to verify the above.
 |===
 
 ==== CoordinateReferenceSystem object
 A CoordinateReferenceSystem object SHALL have two mandatory members of `"type"` and `"properties"`.
-The value of the `"type"` member SHALL be one of string "Name" and "Link".
+The value of the `"type"` member SHALL be one of string `"Name"` and `"Link"`.
 The value of the `"properties"` member SHALL be a JSON object with three optional members named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON null value.
 A named CRS object SHALL have the value of the `"type"` = `"Name"` and the value of the `"properties"` member SHALL be a JSON object containing a `"name"` member whose value is a string identifying a coordinate reference system.
 A linked CRS object SHALL have the value of the `"type"` = `"Link"` and the value of the `"properties"` member SHALL be a JSON object containing a `"href"` member whose value is a dereferenceable URI.
@@ -318,7 +331,7 @@ The expression of an element in the array SHALL refer to the default spatial CRS
 
 ==== MotionCurve object
 The `"coordinate"` member in the TemporalPrimitiveGeometry object SHALL be interpolated by MotionCurve object.
-The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be one of string "Discrete", "Step", "Linear", "Quadratic", and "Cubic", or a URL to address a user-defined parametric curve.
+The value of the `"interpolation"` member in the TemporalPrimitiveGeometry object SHALL be one of string `"Discrete"`, `"Step"`, `"Linear"`, `"Quadratic"`, and `"Cubic"`, or a URL to address a user-defined parametric curve.
 A user-defined parametric curve SHALL be a JSON object which has three members of `"crs"`, `"trs"`, and `"equations"`.
 The value of the `"equations"` member SHALL be not empty and be a JSON array whose element is a user-defined parametric segment having two members of `"coefficients"` and `"time"`.
 The value of `"coefficients"` member SHALL be a JSON array whose element is an array of coefficients of the interpolation formula of a temporal position.

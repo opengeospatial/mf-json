@@ -2,7 +2,7 @@
 
 This standard defines how to encode and share the various movements of geographic features by using JavaScript Object Notation (JSON).
 It provides an alternative encoding for OGC Moving Features instead of XML Core [http://www.opengeospatial.org/standards/movingfeatures[OGC 14-083r2]] and Simple CSV [http://www.opengeospatial.org/standards/movingfeatures[OGC 14-084r2]].
-A moving feature, typically like a vehicle and pedestrian, contains a temporal geometry
+A moving feature, typically like a vehicle and a pedestrian, contains a temporal geometry
 whose location continuously changes over time and dynamic non-spatial attributes whose values vary with time.
 This Moving Features JSON encoding defines a set of keywords to implement the conceptual schema of moving features defined in ISO 19141:2008 [ISO 19141:2008], accompanied with IETF GeoJSON Format [https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946]].
 

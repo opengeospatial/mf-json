@@ -4,15 +4,6 @@ In particular, the word “SHALL” (not “must”) is the verb form used to in
 
 For the purposes of this document, the following additional terms and definitions apply.
 
-/////
-=== *API*
-An interface that is defined in terms of a set of functions and procedures, and enables a program to gain access to facilities within an application. (Definition from Dictionary of Computer Science - Oxford Quick Reference, 2016)
-
-=== *client*
-software component that can invoke an operation from a server +
- [ OGC 06-121r9 ]
-/////
-
 === *base representation*
 <moving features> representation, using a local origin and local ordinate vectors, of a geometric object at a given reference time +
 [ ISO 19141:2008 ]
@@ -90,12 +81,6 @@ geometric object representing a single, connected, homogeneous element of space 
 
  NOTE: Geometric primitives are non-decomposed objects that present information about geometric configuration. They include points, curves, surfaces, and solids.
 
-////
-=== *interface*
-named set of operations that characterize the behaviour of an entity +
-[ ISO 19119:2006 ]
-////
-
 === *instant*
 zero-dimensional geometric primitive representing position in time +
 [ ISO 19108:2002 ]
@@ -139,20 +124,6 @@ datum describing the relationship of a parametric coordinate system to an object
 
  NOTE The object is normally the Earth.
 
-/////
-=== *parametric coordinate system*
-one-dimensonal coordinate system where the axis units are parameter values which are not inherently spatial +
-[ ISO 19111-2:2009 ]
-
-=== *spatio-parametric coordinate refernce system*
-compound coordinate reference system in which one constituent coordinate reference system is a parametric coordinate reference system and one is a spatial coordinate reference system +
-[ ISO 19111-2:2009 ]
-
-=== *spatio-parametric-temporal coordinate refernce system*
-compound coordinate reference system comprised of spatial, parametric and temporal coordinate reference systems +
-[ ISO 19111-2:2009 ]
-/////
-
 === *period*
 one-dimensional geometric primitive representing extent in time +
 [ ISO 19108:2002 ]
@@ -167,29 +138,6 @@ data type that describes a point or geometry potentially occupied by an object
 trajectories) of a one parameter set of geometries +
 [ ISO 19141:2008 ]
 
-/////
-=== *request*
-invocation of an operation by a client +
-[ OGC 06-121r9 ]
-
-=== *resource*
-any addressable unit of information or service +
-[ IETF RFC 3986 ]
-
-=== *response*
-result of an operation, returned from a server to a client +
-[ OGC 06-121r9 ]
-
-=== *server*
-a particular instance of a service +
-[ OGC 06-121r9 ]
-
-=== *service*
-distinct part of the functionality that is provided by an entity through interfaces +
-[ ISO 19119:2006 ]
-/////
-
-
 === *temporal coordinate reference system*
 coordinate reference system based on a temporal datum
 
@@ -203,12 +151,6 @@ one parameter set of geometries in which the parameter is time
 === *trajectory*
 path of a moving point described by a one parameter set of points +
 [ ISO 19141:2008 ]
-
-/////
-=== *valid time*
-time when a fact is true in the abstracted reality +
-[ ISO 19108:2002 ]
-/////
 
 === *value*
 element of a type domain +

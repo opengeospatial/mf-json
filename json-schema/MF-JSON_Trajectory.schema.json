@@ -18,8 +18,7 @@
       "properties": {
         "type": {"type": "string", "enum": ["Feature"]},
         "id": {"type": ["string", "number"]},
-        "geometry": {"$ref": "#/definitions/trajectory"}
-        },
+        "geometry": {"$ref": "#/definitions/trajectory"},
         "properties": {
           "type": "object",
           "required": ["datetimes"],
@@ -64,6 +63,7 @@
             "items": {"type": "number"}
           }
         }
+      }
     }
   }
 }

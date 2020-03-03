@@ -41,7 +41,7 @@ The value of the "latexmath:[@propertyN]" member is a JSON object that has the f
 
 [width="98%", cols="2,8a", options="header"]
 |=========
-| type strings | Descriptions
+| Type strings | Descriptions
 | Measure | The `"values"` member contains any numeric values.
 | Text | The `"values"` member contains any strings.
 | Image| The `"values"` member contains Base64 strings converted from images or URLs to address images.
@@ -49,7 +49,7 @@ The value of the "latexmath:[@propertyN]" member is a JSON object that has the f
 
 * `"values"`: The `"values"` member is mandatory and
 has a JSON array whose element is a string (including null, true and false) or numeric value to represent sample values.
-The number of elements is the same as the "datetimes" ones.
+The number of elements is the same as the `"datetimes"` ones.
 There is an one-to-one correspondence between the elements of `"values"` of a latexmath:[@propertyN] object
 and `"datetimes"` as a temporal sequence of pairs latexmath:[(v,t)],
 where latexmath:[v] is a value of measurement and latexmath:[t] is its sampling time.
@@ -66,9 +66,20 @@ Each method interpolates (or extrapolates) from sample values as follows.
 | Discrete| The sampling of the attribute occurs such that it is not possible to regard the series as continuous; Thus, there is no interpolated value if latexmath:[t] is not an element in `"datetimes"`.
 | Step| The values are not connected at the end of a subinterval with two successive instants. The value just jumps from one value to the other at the end of a subinterval.
 | Linear | The values are essentially connected and a linear interpolation estimates the value of the property at the indicated instant during a subinterval.
-| Regression | The value of the attribute at the indicated instant is extrapolated from a simple linear regression model with the whole values corresponding to the all elements in "datetimes".
+| Regression | The value of the attribute at the indicated instant is extrapolated from a simple linear regression model with the whole values corresponding to the all elements in `"datetimes"`.
 |=========
 
+The available interpolation method restricts according to `"type"` value as follows.
+
+[width="98%", cols="2,8a", options="header"]
+|=========
+| Type strings | Available interpolations
+| Measure | Discrete, Step, Linear, Regression
+| Text | Discrete, Step
+| Image| Discrete, Step
+|=========
+
+If the latexmath:[@propertyN] object has no member with the name `"interpolation"`, it is interpreted by `"Discrete"` as the default value.
 For a URL, this standard refers to the http://docs.opengeospatial.org/is/15-042r3/15-042r3.html#75[InterpolationCode Codelist] defined in http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[OGC TimeseriesML 1.0][OGC 15-042r3]
 between neighboring points in a timeseries, e.g., `"http://www.opengis.net/def/timeseries/InterpolationCode/Continuous"`, `"http://www.opengis.net/def/timeseries/InterpolationCode/Discontinuous"`, and etc.
 

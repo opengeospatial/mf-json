@@ -11,19 +11,18 @@
     "preasure" : {
       "type" : "Measure",
       "values" : [ 998.0, 998.0, 994.0, 994.0, 994.0, 994.0, 992.0, 992.0, 994.0, 994.0, 998.0, 1000.0, 1000.0 ],
-      "form" : "hPa",
+      "form" : "A97",
       "interpolation" : "Linear"
     },
     "wind" : {
       "type" : "Measure",
       "values" : [ 0.0, 0.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 35.0, 0.0, 0.0, 0.0 ],
-      "form" : "KT",
+      "form" : "KNT",
       "interpolation" : "Linear"
     },
     "class" : {
       "type" : "Measure",
       "values" : [ 2.0, 2.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 3.0, 2.0, 2.0, 2.0 ],
-      "form" : "class",
       "interpolation" : "Linear"
     }
   } ]

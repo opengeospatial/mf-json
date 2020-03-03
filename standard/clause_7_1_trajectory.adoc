@@ -23,9 +23,9 @@ MF-JSON Trajectory encodes a spatiotemporal linestring or a collection of linest
 The spatiotemporal linestring is a one-dimensional object representing a sequence of spatiotemporal points and the trajectory segments connecting them.
 The GeoJSON encoding rules of MF-JSON Trajectory are set as follows:
 
-* An MF-JSON Trajectory document presents an instance of the _mf:LinearTrajectory_ Class or a set of those instances as a GeoJSON FeatureCollection object.
+* An MF-JSON Trajectory document presents an instance of the _mf:LinearTrajectory_ Class or as a GeoJSON Feature or a set of those instances as a GeoJSON FeatureCollection object.
 An _mf:LinearTrajectory_ instance is mapped into a GeoJSON Feature object with a linestring geometry;
-i.e., the value of member `"type"` in the Geometry object is "LineString".
+i.e., the value of member `"type"` in the Geometry object is `"LineString"`.
 [NOTE]
 (GeoJSON) A Feature object represents a spatially bounded thing. A Feature object has, at least 3 members:
 a "type" member with the value "Feature", a "geometry" member, and a "properties" member.
@@ -41,7 +41,7 @@ MultiLineString, MultiPolygon, and GeometryCollection."
 and the value of this member is either a JSON string or number.
 
 * The value of the `"coordinates"` member of a linestring geometry object has two or more positions that draws a sequence of trajectory segments.
-Each position is each projection in spatial domain. All trajectory segments that have the same identifier are merged into a linestring geometry object
+Each position is each projection in the spatial domain. All trajectory segments that have the same identifier are merged into a linestring geometry object
 as long as any consecutive segments meet each other at a time instant.
 [NOTE]
 (GeoJSON) A position is an array of numbers. There MUST be two or more elements. The first two elements are longitude and latitude, or easting and northing,
@@ -50,7 +50,7 @@ The coordinate reference system for all GeoJSON coordinates is a geographic coor
 with longitude and latitude units of decimal degrees.
 
 * The `"properties"` member of a GeoJSON Feature object has a member with the name `"datetimes"`. The value of the `"datetimes"` member is an array of a sequence of
-monotonic increasing time instants, having the same number of positions of the "coordinates" member. The value of a time instant is a JSON string using Z (e.g., 1985-04-12T23:20:50.52Z)
+monotonic increasing time instants, having the same number of positions of the `"coordinates"` member. The value of a time instant is a JSON string using Z (e.g., 1985-04-12T23:20:50.52Z)
 encoded by https://www.ietf.org/rfc/rfc3339.txt[IETF RFC 3339], an Internet profile of the https://www.iso.org/iso-8601-date-and-time-format.html[ISO 8601] standard
 for representation of dates and times using the Gregorian calendar, or a numeric value of milliseconds since midnight (00:00 a.m.) on January 1, 1970 in UTC (e.g., 1465621816590).
 [NOTE]

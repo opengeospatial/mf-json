@@ -3,7 +3,7 @@
 |*Requirement 2.19* |
 http://www.opengis.net/spec/movingfeatures/json/1.0/req/prism/tgeometry/complex +
 A TemporalComplexGeometry object SHALL have at least two mandatory members of `"type"` and `"prisms"`.
-The value of the `"type"` member SHALL be a "MovingGeometryCollection" string.
+The value of the `"type"` member SHALL be a `"MovingGeometryCollection"` string.
 The value of the `"prisms"` member SHALL be a JSON array of a set of TemporalPrimitiveGeometry instances,
 having at least one element in the array.
 |*Requirement 2.20* |
