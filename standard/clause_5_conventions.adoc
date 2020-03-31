@@ -1,6 +1,5 @@
 == Conventions
-This sections provides details and examples for any conventions used in the document.
-Examples of conventions are symbols, abbreviations, or special notes regarding how to read the document.
+This section provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, or special notes regarding how to read the document.
 
 === Identifiers
 The normative provisions in this specification are denoted by the URI
@@ -15,8 +14,7 @@ All examples in this document are informative only.
 
 The notation of JSON in this document is based on the specification of [RFC 7159].
 
-The ordering of the members of any JSON object must be considered irrelevant. Some examples use a JavaScript single line comment (//) and an ellipsis (...) as placeholder notation for a specific JSON instance.
-Whitespace is used in the examples inside this document to help illustrate the data structures, but is not required. Unquoted whitespace is not significant in JSON.
+The ordering of the members of any JSON object must be considered irrelevant. Some examples use a JavaScript single line comment (//) and an ellipsis (...) as placeholder notation for a specific JSON instance. Whitespace is used in the examples inside this document to help illustrate the data structures, but is not required. Unquoted whitespace is not significant in JSON.
 
 === UML notation
 

@@ -1,48 +1,51 @@
 === MF-JSON Prism Encoding
-This clause specifies the format of MF-JSON Prism to implement the package of Prism Geometry defined in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008] (<<mf-isoprism>>).
-The package contains five types used to describe the prism of a moving geometric object: *MF_PrismGeometry*, *MF_RigidTemporalGeometry*, *MF_LocalGeometry*,
-*MF_TemporalOrientation*, and *MF_RotationMatrix*. The type *MF_PrismGeometry* represents the movement of an object through geographic space.
-*MF_RigidTemporalGeometry* specializes *MF_PrismGeometry*, which in turn specializes *MF_TemporalGeometry* for the case of an object
-that moves without deformation, where the object’s basic shape is immutable and may be translated or rotated over time.
-The type *MF_LocalGeometry* is a geometric object to define the local geometry of the moving object in a engineering coordinate reference system (usually 3D).
-The engineering coordinate reference system is accessible through the Coordinate Reference System association inherited from GM_Object.
-The remaining types support description of the possible rotation of such an object.
+This clause specifies the format of MF-JSON Prism to implement the package of Prism Geometry defined in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008] (<<mf-isoprism>>). The package contains five types used to describe the prism of a moving geometric object: *MF_PrismGeometry*, *MF_RigidTemporalGeometry*, *MF_LocalGeometry*, *MF_TemporalOrientation*, and *MF_RotationMatrix*. The type *MF_PrismGeometry* represents the movement of an object through geographic space. *MF_RigidTemporalGeometry* specializes *MF_PrismGeometry*, which in turn specializes *MF_TemporalGeometry* for the case of an object that moves without deformation, where the object’s basic shape is immutable and may be translated or rotated over time. The type *MF_LocalGeometry* is a geometric object to define the local geometry of the moving object in a engineering coordinate reference system (usually 3D). The engineering coordinate reference system is accessible through the Coordinate Reference System association inherited from GM_Object. The remaining types support description of the possible rotation of such an object.
 
 [#mf-isoprism,reftext='{figure-caption} {counter:figure-num}']
 .Types of the package of Prism Geomety in ISO 19141:2008
 image::mf-isoprism.png[mf-isoprism, pdfwidth=80%, width=80%, align="center"]
 
-The MF-JSON Prism encoding can represent the movement of *MF_PrismGeometry* and *MF_RigidTemporalGeometry* of a feature
-which may be 0D, 1D, 2D, 3D geometric primitives, or their aggregations.
-MF-JSON Prism reserves the following members as foreign members in a GeoJSON Feature object that represents a moving feature:
+The MF-JSON Prism encoding can represent the movement of *MF_PrismGeometry* and *MF_RigidTemporalGeometry* of a feature which may be 0D, 1D, 2D, 3D geometric primitives, or their aggregations. MF-JSON Prism reserves the following members as foreign members in a GeoJSON Feature object that represents a moving feature:
 
- * The `"temporalGeometry"` member describes a movement of a moving feature.
- * The `"temporalProperties"` member describes a set of dynamic non-spatial attributes and their time-dependent values of a moving feature.
- * The `"time"` member describes the life time of a moving feature.
- * The `"trs"` member describes a Temporal Coordinate Reference System object referred by time-expression to indicate the time of positions or attributes' values.
+ * The `"temporalGeometry"` member describes a movement of a moving feature;
+
+ * The `"temporalProperties"` member describes a set of dynamic non-spatial attributes and their time-dependent values of a moving feature;
+
+ * The `"time"` member describes the life time of a moving feature;
+
+ * The `"trs"` member describes a Temporal Coordinate Reference System object referred by time-expression to indicate the time of positions or attributes' values; and
+
  * The `"crs"` member describes a Spatial Coordinate Reference System object which relates the positions of features in the real world.
 
 [NOTE]
 .Coordinate Reference System (CRS)
-The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees.
-However, a moving feature needs a temporal coordinate system and may require an engineering/parametric coordinate reference system to represent the movement
-of the feature's geometry (positions) in the case of an application request.
+The IETF GeoJSON format recommends a single coordinate reference system based on World Geodetic System 1984, with longitude and latitude units of decimal degrees. However, a moving feature needs a temporal coordinate system and may require an engineering/parametric coordinate reference system to represent the movement of the feature's geometry (positions) in the case of an application request.
 
-A MF-JSON Prism document may contain JSON objects that represent instances with the following types,
-as well as primitives types of JSON null, true, false, string, number, and array.
+A MF-JSON Prism document may contain JSON objects that represent instances with the following types, as well as primitives types of JSON null, true, false, string, number, and array.
 
 * TemporalGeometry object (see <<tgeometry>>)
+
 ** TemporalPrimitiveGeometry object (see <<tprimitive>>)
+
 ** TemporalComplexGeometry object (see <<tcomplex>>)
+
 * TemporalProperties object (see <<tproperties>>)
+
 ** ParametricValues object (see <<pvalues>>)
+
 * CoordinateReferenceSystem object (see <<crs>>)
+
 * MovingFeature object (see <<mfeature>>)
 * MovingFeatureCollection object (see <<mfeaturecollection>>)
+
 * LifeSpan object (see <<time>>)
+
 * BoundingBox object (see <<bbox>>)
+
 * Geometry object (see <<geometry>>)
+
 * Properties object (see <<properties>>)
+
 * MotionCurve object (see <<interpolation>>)
 
 The schema of MF-JSON Prism is depicted by a UML diagram as shown in <<mf-prism-uml>>.
@@ -51,8 +54,7 @@ The schema of MF-JSON Prism is depicted by a UML diagram as shown in <<mf-prism-
 .Class diagram for MF-JSON Prism
 image::mf-geojson-prism.png[mf-prism-uml, pdfwidth=100%, width=95%, align="center"]
 
-When a document combines two formats of MF-JSON Prism and MF-JSON Trajectory, MF-JSON Prism has priority to interpret the movement of a feature.
-A sample data of MF-JSON Prism is provided in <<sampleJSONPrism>>.
+When a document combines two formats of MF-JSON Prism and MF-JSON Trajectory, MF-JSON Prism has priority to interpret the movement of a feature. A sample data of MF-JSON Prism is provided in <<sampleJSONPrism>>.
 
 include::requirements/requirements_prism.adoc[]
 

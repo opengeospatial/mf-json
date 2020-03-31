@@ -4,10 +4,7 @@ A TemporalProperties object is a JSON array of ParametricValues objects that gro
 
 [#pvalues, reftext='7.2.2.1']
 ===== 7.2.2.1. ParametricValues Object
-A ParametricValues object is a JSON object to represent a collection of parametric values of dynamic non-spatial attributes that are ascertained at the same times.
-A parametric value may be a time-varying measure, a sequence of texts, or a sequence of images.
-Even though the parametric value may depends on the spatiotemporal location,
-MF-JSON Prism only considers the temporal dependencies of their changes of value.
+A ParametricValues object is a JSON object that represents a collection of parametric values of dynamic non-spatial attributes that are ascertained at the same times. A parametric value may be a time-varying measure, a sequence of texts, or a sequence of images. Even though the parametric value may depend on the spatiotemporal location, MF-JSON Prism only considers the temporal dependencies of their changes of value.
 
 [#pvaluesjson, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Examples of a ParametricValues object
@@ -32,12 +29,9 @@ MF-JSON Prism only considers the temporal dependencies of their changes of value
   ...
 }
 
-A ParametricValues object has one `"datetimes"` member and
-more than one member with the name latexmath:[@propertyN], where latexmath:[@propertyN]
-is any string defined by an application as a dynamic attribute.
-The value of the "latexmath:[@propertyN]" member is a JSON object that has the following fields:
+A ParametricValues object has one `"datetimes"` member and more than one member with the name latexmath:[@propertyN], where latexmath:[@propertyN] is any string defined by an application as a dynamic attribute. The value of the "latexmath:[@propertyN]" member is a JSON object that has the following fields:
 
-* `"type"`: The `"type"` member is mandatory and has a string as one of the followings:
+* `"type"`: The `"type"` member is mandatory and has a string as one of the following:
 
 [width="98%", cols="2,8a", options="header"]
 |=========
@@ -47,23 +41,14 @@ The value of the "latexmath:[@propertyN]" member is a JSON object that has the f
 | Image| The `"values"` member contains Base64 strings converted from images or URLs to address images.
 |=========
 
-* `"values"`: The `"values"` member is mandatory and
-has a JSON array whose element is a string (including null, true and false) or numeric value to represent sample values.
-The number of elements is the same as the `"datetimes"` ones.
-There is an one-to-one correspondence between the elements of `"values"` of a latexmath:[@propertyN] object
-and `"datetimes"` as a temporal sequence of pairs latexmath:[(v,t)],
-where latexmath:[v] is a value of measurement and latexmath:[t] is its sampling time.
+* `"values"`: The `"values"` member is mandatory and has a JSON array whose element is a string (including null, true, and false) or numeric value to represent sample values. The number of elements is the same as for the `"datetimes"` ones. There is an one-to-one correspondence between the elements of `"values"` of a latexmath:[@propertyN] object and `"datetimes"` as a temporal sequence of pairs latexmath:[(v,t)], where latexmath:[v] is a value of measurement and latexmath:[t] is its sampling time.
 
-* `"interpolation"`: The `"interpolation"` member is default and has a JSON string or a URL to describe an interpolation method.
-A dynamic attribute also needs an interpolation method to estimate its value at any time between two successive instants like the TemporalPrimitiveGeometry object.
-Given the same number of latexmath:[V=(v_0, v_1, v_2, ..., v_n)] in `"values"` and latexmath:[T=(t_0, t_1, t_2, ..., t_n)] in `"datetimes"`,
-this standard defines four predefined methods for a parametric value with time: `"Discrete"`, `"Step"`, `"Linear"`, and `"Regression"`.
-Each method interpolates (or extrapolates) from sample values as follows.
+* `"interpolation"`: The `"interpolation"` member is default and has a JSON string or a URL to describe an interpolation method. A dynamic attribute also needs an interpolation method to estimate its value at any time between two successive instants like the TemporalPrimitiveGeometry object. Given the same number of latexmath:[V=(v_0, v_1, v_2, ..., v_n)] in `"values"` and latexmath:[T=(t_0, t_1, t_2, ..., t_n)] in `"datetimes"`, this standard defines four predefined methods for a parametric value with time: `"Discrete"`, `"Step"`, `"Linear"`, and `"Regression"`. Each method interpolates (or extrapolates) from sample values as follows.
 
 [width="98%", cols="2,8a", options="header"]
 |=========
 | Names | Descriptions
-| Discrete| The sampling of the attribute occurs such that it is not possible to regard the series as continuous; Thus, there is no interpolated value if latexmath:[t] is not an element in `"datetimes"`.
+| Discrete| The sampling of the attribute occurs such that it is not possible to regard the series as continuous; thus, there is no interpolated value if latexmath:[t] is not an element in `"datetimes"`.
 | Step| The values are not connected at the end of a subinterval with two successive instants. The value just jumps from one value to the other at the end of a subinterval.
 | Linear | The values are essentially connected and a linear interpolation estimates the value of the property at the indicated instant during a subinterval.
 | Regression | The value of the attribute at the indicated instant is extrapolated from a simple linear regression model with the whole values corresponding to the all elements in `"datetimes"`.
@@ -79,13 +64,9 @@ The available interpolation method restricts according to `"type"` value as foll
 | Image| Discrete, Step
 |=========
 
-If the latexmath:[@propertyN] object has no member with the name `"interpolation"`, it is interpreted by `"Discrete"` as the default value.
-For a URL, this standard refers to the http://docs.opengeospatial.org/is/15-042r3/15-042r3.html#75[InterpolationCode Codelist] defined in http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[OGC TimeseriesML 1.0][OGC 15-042r3]
-between neighboring points in a timeseries, e.g., `"http://www.opengis.net/def/timeseries/InterpolationCode/Continuous"`, `"http://www.opengis.net/def/timeseries/InterpolationCode/Discontinuous"`, and etc.
+If the latexmath:[@propertyN] object has no member with the name `"interpolation"`, it is interpreted by `"Discrete"` as the default value. For a URL, this standard refers to the http://docs.opengeospatial.org/is/15-042r3/15-042r3.html#75[InterpolationCode Codelist] defined in http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[OGC TimeseriesML 1.0][OGC 15-042r3] between neighboring points in a timeseries, e.g., `"http://www.opengis.net/def/timeseries/InterpolationCode/Continuous"`, `"http://www.opengis.net/def/timeseries/InterpolationCode/Discontinuous"`, and etc.
 
-* `"form"`: The `"form"` member is optional and its value is a JSON string as a common code (3 characters) described in the Code List Rec 20
-by the UN Centre for Trade Facilitation and Electronic Business (UN/CEFACT)<<UNCODES>> or a URL specifying the unit of measurement.
-This member is applied only for a temporal property whose value type is `Measure`.
+* `"form"`: The `"form"` member is optional and its value is a JSON string as a common code (3 characters) described in the Code List Rec 20 by the UN Centre for Trade Facilitation and Electronic Business (UN/CEFACT)<<UNCODES>> or a URL specifying the unit of measurement. This member is applied only for a temporal property whose value type is `Measure`.
 
 * `"description"`: The `"description"` member is optional and its value is any string to describe a short description.
 

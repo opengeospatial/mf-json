@@ -1,7 +1,6 @@
 [#mfeaturecollection, reftext='7.2.5']
 ==== MovingFeatureCollection Object
-MovingFeatureCollection object is a JSON object with the following members as shown in <<mfeaturecollectionjson>>.
-It bundles a collection of moving features into a logical abstraction with a certain alias.
+MovingFeatureCollection object is a JSON object with the following members as shown in <<mfeaturecollectionjson>>. It bundles a collection of moving features into a logical abstraction with a certain alias.
 
 [#mfeaturecollectionjson, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Members of a MovingFeatureCollection object
@@ -17,18 +16,13 @@ It bundles a collection of moving features into a logical abstraction with a cer
 }
 
 * A MovingFeatureCollection object has a mandatory member with the name `"type"` whose value is the `"FeatureCollection"` string.
-* A MovingFeatureCollection object has a mandatory member with the name `"features"`.
-Its value is a JSON array and each element of the array is a Feature object as defined above (see <<mfeature>>).
-* A MovingFeatureCollection object has two default members with the name `"crs"` and `"trs"` like a Feature object.
-If a MovingFeatureCollection object has the value of the `"crs"` or `"trs"` member,
-its elements of `"features"` refers to the coordinate reference systems of the collection object, not features' reference systems.
-The `"crs"` and `"trs"` member is on the top-level object in a hierarchy of type MovingFeatureCollection, MovingFeature, TemporalGeometry/TemporalProperties orders.
-* A MovingFeatureCollection object has optional members with the name `"bbox"` and `"time"`
-for the spatial coordinate range and the temporal coordinate range of the life span to cover
-all element instances of the collection respectively.
-The value of `"bbox"` and `"time"` is a BoundingBox object and a LifeSpan object, respectively.
-They allow a JSON `null` value.
-* A MovingFeatureCollection object may optionally have a `"label"` member with a JSON string value to indicate an alias of the collection.
-It allows a JSON `null` value.
+
+* A MovingFeatureCollection object has a mandatory member with the name `"features"`. Its value is a JSON array and each element of the array is a Feature object as defined above (see <<mfeature>>).
+
+* A MovingFeatureCollection object has two default members with the name `"crs"` and `"trs"` like a Feature object. If a MovingFeatureCollection object has the value of the `"crs"` or `"trs"` member, its elements of `"features"` refers to the coordinate reference systems of the collection object, not features' reference systems. The `"crs"` and `"trs"` member is on the top-level object in a hierarchy of type MovingFeatureCollection, MovingFeature, TemporalGeometry/TemporalProperties orders.
+
+* A MovingFeatureCollection object has optional members with the name `"bbox"` and `"time"` for the spatial coordinate range and the temporal coordinate range of the life span to cover all element instances of the collection respectively. The value of `"bbox"` and `"time"` is a BoundingBox object and a LifeSpan object, respectively, and allow a JSON `null` value.
+
+* A MovingFeatureCollection object may optionally have a `"label"` member with a JSON string value to indicate an alias of the collection. It allows a JSON `null` value.
 
 include::requirements/requirement_featureCollection.adoc[]

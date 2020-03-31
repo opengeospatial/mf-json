@@ -1,8 +1,6 @@
 [#mfeature, reftext='7.2.4']
 ==== MovingFeature Object
-A MovingFeature object in a MF-JSON Prism document is a JSON object to represent
-a moving feature that is spatially and temporally bounded,
-and its position (continuously) changes over time with the members as shown in <<mfeaturejson>>.
+A MovingFeature object in a MF-JSON Prism document is a JSON object to represent a moving feature that is spatially and temporally bounded and its position (continuously) changes over time with the members as shown in <<mfeaturejson>>.
 
 [#mfeaturejson, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Members of a MovingFeature object
@@ -26,31 +24,23 @@ Due to the compatibility issue with GeoJSON, MF-JSON Prism uses the same keyword
 If a GeoJSON document has no foreign member defined in this specification,
 applications can interpret the data by the semantics of GeoJSON members and types.
 
-* A MovingFeature object has a mandatory member with the name `"temporalGeometry"`
-and its value is a TemporalGeometry object as defined above (see <<tgeometry>>).
-* A MovingFeature object has an optional member with the name `"temporalProperties"`
-as additional dynamic non-spatial attributes whose value varies over time.
-The `"temporalProperties"` member has a TemporalProperties object as defined in <<tproperties>> or a JSON `null` value.
-* A MovingFeature object has two default members with the name `"crs"` and `"trs"`
-for representing its spatial and temporal coordinate reference system respectively.
-The value of the `"crs"` and `"trs"` member is a CoordinateReferenceSystem (CRS) object (see <<crs>>).
-If a MovingFeature object has no `"crs"` and `"trs"`,
-the object refers to the default spatial and temporal CRS.
-The value expression of spatial and temporal coordinates of `"temporalGeometry"` and `"temporalProperties"`
-is obedient to these CRS objects.
-* A MovingFeature object can optionally have a `"time"` member for the temporal coordinate range
-to cover all of temporal geometries and temporal properties with a LifeSpan object (see <<time>>).
-* A MovingFeature object can optionally have a `"bbox"` member for the spatial coordinate range
-with a BoundingBox object (see <<bbox>>). It represents a spatial domain to cover
-a temporal geometry or a collection of temporal geometries.
-* A MovingFeature object has an optional member with the name `"geometry"` allowing a JSON `null` value,
-as the same semantics of GeoJSON (see <<geometry>>).
-* A MovingFeature object has an optional member with the name `"properties"` allowing a JSON `null` value,
-as the same semantics of GeoJSON (see <<properties>>). The properties member is an object (i.e., any JSON object or a JSON `null` value).
+* A MovingFeature object has a mandatory member with the name `"temporalGeometry"` and its value is a TemporalGeometry object as defined above (see <<tgeometry>>).
+
+* A MovingFeature object has an optional member with the name `"temporalProperties"` as additional dynamic non-spatial attributes whose value varies over time. The `"temporalProperties"` member has a TemporalProperties object as defined in <<tproperties>> or a JSON `null` value.
+
+* A MovingFeature object has two default members with the name `"crs"` and `"trs"` for representing its spatial and temporal coordinate reference system respectively. The value of the `"crs"` and `"trs"` member is a CoordinateReferenceSystem (CRS) object (see <<crs>>). If a MovingFeature object has no `"crs"` and `"trs"`, the object refers to the default spatial and temporal CRS. The value expression of spatial and temporal coordinates of `"temporalGeometry"` and `"temporalProperties"` is obedient to these CRS objects.
+
+* A MovingFeature object can optionally have a `"time"` member for the temporal coordinate range to cover all of temporal geometries and temporal properties with a LifeSpan object (see <<time>>).
+
+* A MovingFeature object can optionally have a `"bbox"` member for the spatial coordinate range with a BoundingBox object (see <<bbox>>). It represents a spatial domain to cover a temporal geometry or a collection of temporal geometries.
+
+* A MovingFeature object has an optional member with the name `"geometry"` allowing a JSON `null` value, per the same semantics of GeoJSON (see <<geometry>>).
+
+* A MovingFeature object has an optional member with the name `"properties"` allowing a JSON `null` value, per the same semantics of GeoJSON (see <<properties>>). The properties member is an object (i.e., any JSON object or a JSON `null` value).
+
 * A MovingFeature object has an optional member with the name `"id"` to represent a commonly used identifier and the value of this member is either a JSON string or number.
 
 [TIP]
-The difference from `"temporalProperties"` is that a `"properties"` member represents static attributes
-whose value is fixed for the life span of a moving feature.
+The difference from `"temporalProperties"` is that a `"properties"` member represents static attributes whose value is fixed for the life span of a moving feature.
 
 include::requirements/requirement_feature.adoc[]

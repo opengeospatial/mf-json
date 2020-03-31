@@ -151,8 +151,8 @@ The value of the `"base"` member SHALL be a JSON object having two members of `"
 The `"type"` member has a JSON string to represent a file format, and the `"href"` member has a web accessible URL to address a 3D model data.
 If the TemporalPrimitiveGeometry object has a member with the name `"base"`, the value of `"type"` in the TemporalPrimitiveGeometry object SHALL a `"MovingPoint"`.
 The value of the `"orientations"` member SHALL be a JSON array of a JSON object that has two members of `"scales"` and `"angles"`.
-The value of the `"scales"` member SHALL a JSON array value of numbers along the latexmath:[X], latexmath:[Y] and latexmath:[Z] axis in order.
-The value of the `"angles"` member SHALL a JSON array value of numbers of Euler angles along the latexmath:[X], latexmath:[Y] and latexmath:[Z] axis in order.
+The value of the `"scales"` member SHALL a JSON array value of numbers along the latexmath:[X], latexmath:[Y], and latexmath:[Z] axis in order.
+The value of the `"angles"` member SHALL a JSON array value of numbers of Euler angles along the latexmath:[X], latexmath:[Y], and latexmath:[Z] axis in order.
 The value of the `"angles"` member SHALL define according to the right-hand rule and unit is degree.
 The number of the element in array of the `"orientations"` value SHALL be the same as `"datetimes"`.
 The `"orientations"` member SHALL be accompanied with the `"base"` member.

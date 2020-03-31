@@ -3,25 +3,6 @@
 [[Bibliography]]
 = Bibliography
 
-////
-[NOTE]
-.Example Bibliography (Delete this note).
-===============================================
-The TC has approved Springer LNCS as the official document citation type.
-
-Springer LNCS is widely used in technical and computer science journals and other publications
-
-* For citations in the text please use square brackets and consecutive numbers: [1], [2], [3]
-
-– Actual References:
-
-[n] Journal: Author Surname, A.: Title. Publication Title. Volume number, Issue number, Pages Used (Year Published)
-
-[n] Web: Author Surname, A.: Title, http://Website-Url
-
-===============================================
-////
-
 ((( Example )))
 [#WGS84, reftext='[{counter:ref-num}]']
 [1] National Imagery and Mapping Agency, "Department of Defense World Geodetic System 1984: Its Definition and Relationships with Local Geodetic Systems", Third Edition, 1984.

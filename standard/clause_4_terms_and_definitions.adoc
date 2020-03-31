@@ -1,6 +1,5 @@
 == Terms and Definitions
-This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r8], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards.
-In particular, the word “SHALL” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r8], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “SHALL” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
 
 For the purposes of this document, the following additional terms and definitions apply.
 
@@ -28,8 +27,7 @@ coordinate system that is related to an object by a datum +
 1-dimensional geometric primitive, representing the continuous image of a line +
 [ ISO 19107:2003 ]
 
- NOTE: The boundary of a curve is the set of points at either end of the curve. If the curve is a cycle, the two ends are identical, and the curve (if topologically closed) is considered to not have a boundary.
- The first point is called the start point, and the last is the end point. Connectivity of the curve is guaranteed by the "continuous image of a line" clause. A topological theorem states that a continuous image of a connected set is connected.
+ NOTE: The boundary of a curve is the set of points at either end of the curve. If the curve is a cycle, the two ends are identical, and the curve (if topologically closed) is considered to not have a boundary. The first point is called the start point, and the last is the end point. Connectivity of the curve is guaranteed by the "continuous image of a line" clause. A topological theorem states that a continuous image of a connected set is connected.
 
 === *domain*
 well-defined set +
@@ -56,17 +54,16 @@ abstraction of real world phenomena +
 characteristic of a feature +
 [ ISO 19109:2015 ]
 
- Note: A feature attribute type has a name, a data type and a domain associated with it. A feature attribute instance has an attribute value taken from the domain of the feature attribute type.
+ Note: A feature attribute type has a name, a data type, and a domain associated with it. A feature attribute instance has an attribute value taken from the domain of the feature attribute type.
 
 === *feature collection; collection*
-a set of features from a dataset +
+a set of features from a dataset
 
- NOTE: In this specification, 'collection' is used as a synonym for 'feature collection'.
- This is done to make, for example, URI path expressions shorter and easier to understand for those that are not geo-experts.
+ NOTE: In this specification, 'collection' is used as a synonym for 'feature collection.'
+ This is done to make, for example, URI path expressions shorter and easier to understand for those who are not geo-experts.
 
 === *foliation*
-one parameter set of geometries such that each point in the prism of the set is in one and only one
-trajectory and in one and only one leaf +
+one parameter set of geometries such that each point in the prism of the set is in one and only one trajectory and in one and only one leaf +
 [ ISO 19141:2008 ]
 
 === *geometric object*
@@ -96,23 +93,19 @@ period during which something exists +
 === *motion*
 a change in position measured by distance and time
 
-
 === *moving feature*
-feature whose position changes over time +
+feature whose position changes over time
 
- NOTE: Its base representation uses a local origin and local coordinate vectors of a geometric object at a given reference time.
-
+ NOTE: The base representation for a moving feature uses a local origin and local coordinate vectors of a geometric object at a given reference time.
 
 === *one parameter set of geometries*
-function latexmath:[f] from an interval latexmath:[t \in][latexmath:[a, b]] such that latexmath:[f(t)] is a geometry and for each point latexmath:[P \in f(a)] there is a one
-parameter set of points (called the trajectory of latexmath:[P]) latexmath:[P(t)]: [latexmath:[a, b]] latexmath:[\rightarrow P(t)] such that latexmath:[P(t) \in f(t)] +
+function latexmath:[f] from an interval latexmath:[t \in][latexmath:[a, b]] such that latexmath:[f(t)] is a geometry and for each point latexmath:[P \in f(a)] there is a one parameter set of points (called the trajectory of latexmath:[P]) latexmath:[P(t)]: [latexmath:[a, b]] latexmath:[\rightarrow P(t)] such that latexmath:[P(t) \in f(t)] +
 [ ISO 19141:2008 ]
 
  EXAMPLE: A curve C with constructive parameter (variable) t is a one parameter set of points c(t).
 
 === *one parameter set of values*
 function latexmath:[f] from an interval latexmath:[t \in][latexmath:[a, b]] such that latexmath:[f(t)] is a measure value latexmath:[m] in a plane with coordinate latexmath:[(t, m)]
-
 
 === *parametric coordinate reference system*
 coordinate reference system based on a parametric datum +
@@ -143,7 +136,6 @@ coordinate reference system based on a temporal datum
 
 === *temporal datum*
 datum describing the relationship of a temporal coordinate system to an object
-
 
 === *temporal geometry*
 one parameter set of geometries in which the parameter is time

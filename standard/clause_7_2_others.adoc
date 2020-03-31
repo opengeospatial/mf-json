@@ -1,8 +1,6 @@
 [#time, reftext='7.2.6']
 ==== LifeSpan Object
-A LifeSpan object is a JSON array of two strings encoded by https://www.ietf.org/rfc/rfc3339.txt[IETF RFC 3339] (e.g., "2016-09-11T06:10:32Z")
-to represent a particular period [latexmath:[t_s, t_e]] and latexmath:[t_s \leq t_e].
-Namely, its expression of an element in the array refers to the default temporal CRS object, i.e., ISO8601.
+A LifeSpan object is a JSON array of two strings encoded by https://www.ietf.org/rfc/rfc3339.txt[IETF RFC 3339] (e.g., "2016-09-11T06:10:32Z") to represent a particular period [latexmath:[t_s, t_e]] and latexmath:[t_s \leq t_e]. Namely, its expression of an element in the array refers to the default temporal CRS object, i.e., ISO8601.
 
 [#timeExam, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: An example of LifeSpan object with ISO 8601:2004
@@ -14,10 +12,7 @@ include::requirements/requirement_lifespan.adoc[]
 
 [#bbox, reftext='7.2.7']
 ==== BoundingBox Object
-A BoundingBox object is a JSON array of length latexmath:[2*n] where latexmath:[n]
-is the number of dimensions represented in the spatial bounding box.
-The order of values follows the axes order of single position of longitude, latitude, and elevation.
-The expression of an element in the array refers to the default spatial CRS object, i.e., WGS84.
+A BoundingBox object is a JSON array of length latexmath:[2*n] where latexmath:[n] is the number of dimensions represented in the spatial bounding box. The order of values follows the axes order of single position of longitude, latitude, and elevation. The expression of an element in the array refers to the default spatial CRS object, i.e., WGS84.
 
 [#bboxExam, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: An example of BoundingBox object with WGS 84
@@ -29,12 +24,8 @@ include::requirements/requirement_bbox.adoc[]
 
 [#geometry, reftext='7.2.8']
 ==== Geometry Object
-A Geometry object is the same as a GeoJSON Geometry object defined in
-GeoJSON https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946].
-
+A Geometry object is the same as a GeoJSON Geometry object defined in GeoJSON https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946].
 
 [#properties, reftext='7.2.9']
 ==== Properties Object
-A Properties object is any JSON object or a JSON null value for
-the "properties" member in a GeoJSON Feature object defined in
-GeoJSON https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946].
+A Properties object is any JSON object or a JSON null value for the "properties" member in a GeoJSON Feature object defined in GeoJSON https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946].

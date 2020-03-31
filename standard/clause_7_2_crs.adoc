@@ -1,31 +1,19 @@
 [#crs, reftext='7.2.3']
 ==== CoordinateReferenceSystem Object
-A coordinate reference system (CRS) is usually comprised of two components: one coordinate system and one datum (reference frame).
-The IETF GeoJSON format recommends that the CRS for all GeoJSON coordinates is a geographic coordinate reference system,
-using the World Geodetic System 1984 (WGS 84)<<WGS84>> datum, with longitude and latitude units of decimal degrees.
-This is equivalent to the CRS identified by the http://www.epsg-registry.org/?display=entity&urn=urn:ogc:def:crs:EPSG::4326[EPSG:4326] with the axis Lat-Long.
-For a 3D coordinate with an altitude/elevation value, the value refers to distance above mean sea level (MSL or AMSL).
-However, a moving feature needs a temporal coordinate system and may be described by an engineering or parametric coordinates
-in a certain application, such as robot or vessel navigation.
-Therefore, MF-JSON Prism allows the `"crs"` member to describe an alternative CRS whose representation follows the way as described in GeoJSON-with-CRS<<GJSON2008>>.
-Also it defines the `"trs"` member to describe a temporal CRS against which time is measured. A temporal CRS is always 1D with a temporal datum (origin) and its time unit.
+A coordinate reference system (CRS) is usually comprised of two components: one coordinate system and one datum (reference frame). The IETF GeoJSON format requires that the CRS for all GeoJSON coordinates is a geographic coordinate reference system using the World Geodetic System 1984 (WGS 84)<<WGS84>> datum, with longitude and latitude units of decimal degrees. This is equivalent to the CRS identified by the http://www.epsg-registry.org/?display=entity&urn=urn:ogc:def:crs:EPSG::4326[EPSG:4326] with the axis Lat-Long. For a 3D coordinate with an altitude/elevation value, the value refers to distance above mean sea level (MSL or AMSL). However, a moving feature needs a temporal coordinate system and may be described by  engineering or parametric coordinates in certain applications, such as robot or vessel navigation. Therefore, MF-JSON Prism allows the `"crs"` member to describe an alternative CRS whose representation follows the way as described in GeoJSON-with-CRS<<GJSON2008>>. MF-JSON Prism also defines the `"trs"` member to describe a temporal CRS against which time is measured. A temporal CRS is always 1D with a temporal datum (origin) and its time unit.
 
-* A non-null CoordinateReferenceSystem (CRS) object is a JSON object
-with two mandatory members of the name `"type"` and `"properties"`.
+* A non-null CoordinateReferenceSystem (CRS) object is a JSON object with two mandatory members of the name `"type"` and `"properties"`.
+
 * The value of the `"type"` member is a JSON string as one of the string `"Name"` and `"Link"`, indicating the type of CRS object.
-* The value of the `"properties"` member is a JSON object with three optional members
-named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON `null` value.
+
+* The value of the `"properties"` member is a JSON object with three optional members named `"name"`, `"href"`, and `"type"` whose value is a JSON string or JSON `null` value.
+
 * CRS shall not change coordinate ordering.
 
 Depending on the value of `"type"`, there are three expressions: Named CRS, Linked CRS, and Default CRS.
 
 ===== 7.2.3.1. Named CRS
-A Named CRS object indicates a coordinate reference system by name.
-In this case, the value of its `"type"` member is the string `"Name"`.
-The value of its `"properties"` member is a JSON object containing a `"name"` member
-whose value is a string identifying a coordinate reference system (not JSON `null` value).
-The value of `"href"` and `"type"` is a JSON `null` value.
-This standard recommends an EPSG<<EPSG>> code as the value of `"name"`, such as "EPSG::4326."
+A Named CRS object indicates a coordinate reference system by name. In this case, the value of its `"type"` member is the string `"Name"`. The value of its `"properties"` member is a JSON object containing a `"name"` member whose value is a string identifying a coordinate reference system (not JSON `null` value). The value of `"href"` and `"type"` is a JSON `null` value. This standard recommends an EPSG<<EPSG>> code as the value of `"name"`, such as "EPSG::4326."
 
 [#namedcrs, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Example of a named CRS object
@@ -38,11 +26,7 @@ This standard recommends an EPSG<<EPSG>> code as the value of `"name"`, such as 
 }
 
 ===== 7.2.3.2. Linked CRS
-A linked CRS object has one required member: `"href"` and one optional member: `"type"`.
-The value of the required `"href"` member is a dereferenceable URI.
-The value of the optional `"type"` member is a string that hints at the format
-used to represent CRS parameters at the provided URI.
-Suggested values are: `"Proj4"`, `"OGCWKT"`, `"ESRIWKT"`, but others can be used.
+A linked CRS object has one required member `"href"` and one optional member `"type"`. The value of the required `"href"` member is a dereferenceable URI. The value of the optional `"type"` member is a string that hints at the format used to represent CRS parameters at the provided URI. Suggested values are: `"Proj4"`, `"OGCWKT"`, `"ESRIWKT"`, but others can be used.
 
 [#linkedcrs, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Example of a linked CRS object

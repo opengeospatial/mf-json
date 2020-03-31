@@ -1,15 +1,9 @@
-== Moving Features JSON Encodings (MF-JSON) Specification
+== Moving Features JSON Encodings
 
-This clause specifies the structure and content of JSON (JavaScript Object Notation) [https://www.ietf.org/rfc/rfc7159.txt[IETF RFC7159]]
-encoding implementation for the conceptual model of moving features described in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008].
-Moving Features JSON Encodings (MF-JSON) has two encoding formats: *MF-JSON Trajectory* for instances of the MF_TemporalGeometry type with linear interpolation and
-*MF-JSON Prism* that contains new members to describe instances of the MF_PrismGeometry (or MF_RigidTemporalGeometry) type in the ISO conceptual model.
-
+This clause specifies the structure and content of the JSON [https://www.ietf.org/rfc/rfc7159.txt[IETF RFC7159]] encoding implementation for the conceptual model of moving features described in http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008]. MF-JSON has two encoding formats: *MF-JSON Trajectory* for instances of the MF_TemporalGeometry type with linear interpolation and *MF-JSON Prism* that contains new members to describe instances of the MF_PrismGeometry (or MF_RigidTemporalGeometry) type in the ISO conceptual model.
 
 [IMPORTANT]
-An object in this specification is a JSON object.
-The JSON object is an unordered collection of zero or more name/value pairs, where a name is a string and a value can be a JSON `null`, `true`, `false`, string, number, array, or object.
-An array consists of elements where each element is a value as a JSON `null`, `true`, `false`, string, number, array, or object.
+An object in this specification is a JSON object. The JSON object is an unordered collection of zero or more name/value pairs, where a name is a string and a value can be a JSON `null`, `true`, `false`, string, number, array, or object. An array consists of elements where each element is a value as a JSON `null`, `true`, `false`, string, number, array, or object.
 
 In an MF-JSON object, there are three types of members: MANDATORY, OPTIONAL, and DEFAULT.
 [horizontal]
@@ -17,10 +11,6 @@ MANDATORY:: If an object member is *mandatory*, its value SHALL NOT be a JSON `n
 DEFAULT:: If an object member is *default*, the member is mandatory and has a default value defined in this specification when its pair (member/value) does not appear in a MF-JSON document.
 OPTIONAL:: If an object member is *optional*, its value allows a JSON `null` value. If the number has a JSON `null` value, its pair can be omitted from a MF-JSON document.
 
-<<<
-
 include::clause_7_1_trajectory.adoc[]
-
-<<<
 
 include::clause_7_2_prism.adoc[]

@@ -4,13 +4,7 @@
 
 [#sampleXML,reftext='{appendix-caption} B.{counter:appendix-num}']
 === Sample Data of OGC Moving Features XML and CSV encoding
-<<mf-ogc>> shows an example for linear trajectories of two moving points A and B.
-Each trajectory has the start time and the end time. Both points start to move at t=10sec and end at t=19sec. While the movement of B does not change, the movement of A is changed at t=15sec.
-<<mf-xml>> and <<mf-csv>> shows how to encode the trajectories shown in <<mf-ogc>> by using two OGC Moving Features encoding standards.
-However, XML and CSV encoding standards have limitation on the representation of prism geometries such as *MF_PrismGeometry* and *MF_RigidTemporalGeometry*.
-They describe the implementation of only a type of *MF_TemporalTrajectory* with linear interpolation of movement.
-This MF-JSON standard specifies how to encode the same information by using GeoJSON; Additionally, it defines new JSON members to support applications that need more power expression of
-the movement of a feature whose geometry may be 0D, 1D, 2D, 3D geometric primitives, or their aggregations and continuously changes over time with various temporal interpolation methods.
+<<mf-ogc>> shows an example for linear trajectories of two moving points A and B. Each trajectory has the start time and the end time. Both points start to move at t=10sec and end at t=19sec. While the movement of B does not change, the movement of A is changed at t=15sec. <<mf-xml>> and <<mf-csv>> shows how to encode the trajectories shown in <<mf-ogc>> by using two OGC Moving Features encoding standards. However, XML and CSV encoding standards have limitation on the representation of prism geometries such as *MF_PrismGeometry* and *MF_RigidTemporalGeometry*. They describe the implementation of only a type of *MF_TemporalTrajectory* with linear interpolation of movement. This MF-JSON standard specifies how to encode the same information by using GeoJSON; Additionally, it defines new JSON members to support applications that need more power expression of the movement of a feature whose geometry may be 0D, 1D, 2D, 3D geometric primitives, or their aggregations and continuously changes over time with various temporal interpolation methods.
 
 [#mf-ogc,reftext='{figure-caption} {counter:figure-num}']
 .Example for two linear trajectories

@@ -3,13 +3,7 @@
 :appendix-caption: Annex
 == Deformation of Rigid Body (Informative)
 
-If an application defines a wrong interpolation of motion, it brings unintended consequences.
-For example, the 2D triangle with a rigid body in <<deform>> has translational and rotational motion at the same time.
-It means when the application exports data with MF-JSON Prism, it needs to define the `"base"` and `"orientations"` member as well as `"interpolation"` for a temporal geometry.
-If the application exports data without `"base"` and `"orientations"` value like <<mf-deform>>,
-the intermediate positions of the moving feature are interpolated with the linear interpolation function,
-as shown in <<deform>>. Even though the object has a rigid body, its boundary is deformed.
-<<deform-complex>> also shows the same phenomena that even the 2D polygon becomes 0D point in the middle time.
+If an application defines a wrong interpolation of motion, it brings unintended consequences. For example, the 2D triangle with a rigid body in <<deform>> has translational and rotational motion at the same time. It means when the application exports data with MF-JSON Prism, the application needs to define the `"base"` and `"orientations"` member as well as `"interpolation"` for a temporal geometry. If the application exports data without `"base"` and `"orientations"` value like <<mf-deform>>, the intermediate positions of the moving feature are interpolated with the linear interpolation function, as shown in <<deform>>. Even though the object has a rigid body, its boundary is deformed. <<deform-complex>> also shows the same phenomena that even the 2D polygon becomes 0D point in the middle time.
 
 [#mf-deform, reftext='{example-caption} {counter:example-num}']
 .Example {example-num}: Example of a wrong encoding

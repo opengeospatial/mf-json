@@ -2,69 +2,33 @@
 The following normative documents contain provisions that, through reference in this text, constitute provisions of this document. For dated references, subsequent amendments to, or revisions of, any of these publications do not apply. For undated references, the latest edition of the normative document referred to applies.
 
 * OGC: https://portal.opengeospatial.org/files/?artifact_id=39049[OGC 18-005r4], _OGC Abstract Specifications - Topic 2 - Spatial referencing by coordinates_, version 5.0, 2019.
+
 * OGC: http://docs.opengeospatial.org/is/15-042r3/15-042r3.html[OGC 15-042r3], _TimeseriesML 1.0 – XML Encoding of the Timeseries Profile of Observations and Measurements_, version 1.0, 2016.
+
 * OGC: http://www.opengeospatial.org/standards/movingfeatures[OGC 14-083r2], _OGC Moving Features Encoding Part I: XML Core_, 2015.
+
 * OGC: http://www.opengeospatial.org/standards/movingfeatures[OGC 14-084r2], _OGC Moving Features Encoding Extension: Simple Comma Separated Values (CSV)_, 2015.
+
 * ISO: http://isotc.iso.org/livelink/livelink?func=ll&objId=4230456&objAction=browse&sort=subtype[ISO/IEC Directives], _Part 2. Rules for the structure and drafting of International Standards_
+
 * ISO: http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601:2004], _Data elements and interchange formats - Information interchange - Representation of dates and time_, 2004.
+
 * ISO: http://www.iso.org/iso/catalogue_detail?csnumber=59164[ISO 19101:2014], _Geographic information — Reference model — Part 1: Fundamentals_, 2014.
+
 * ISO: http://www.iso.org/iso/catalogue_detail?csnumber=26012[ISO 19107:2003], _Geographic Information - Spatial schema_, 2003.
+
 * ISO: http://www.iso.org/iso/catalogue_detail?csnumber=26012[ISO 19108:2002], _Geographic Information - Temporal schema_, 2002.
+
 * ISO: http://www.iso.org/iso/iso_catalogue/catalogue_tc/catalogue_detail.htm?csnumber=41445[ISO 19141:2008], _Geographic information - Schema for moving features_, 2008.
+
 * ISO/IEC: https://www.iso.org/standard/35343.html[ISO 11179-1:2004], _Information technology — Metadata registries (MDR) — Part 1: Framework_, 2004.
+
 * IETF: https://www.ietf.org/rfc/rfc3339.txt[IETF RFC 3339], _Date and Time on the Internet: Timestamps_, 2002.
+
 * IETF: https://www.ietf.org/rfc/rfc3986.txt[IETF RFC 3986], _Uniform Resource Identifier (URI): Generic Syntax_, 2005.
+
 * IETF: https://www.ietf.org/rfc/rfc7159.txt[IETF RFC 7159], _The JavaScript Object Notation (JSON) Data Interchange Format_, 2014.
+
 * IETF: https://www.ietf.org/rfc/rfc7464.txt[IETF RFC 7464], _JavaScript Object Notation (JSON) Text Sequences_, 2015.
+
 * IETF: https://www.ietf.org/rfc/rfc7946.txt[IETF RFC 7946], _The GeoJSON Format_, 2016.
-
-/////
-Additionally the following informative documents are addressed:
-
-* OGC: OGC 17-069, _OGC Web Feature Service 3.0: Part 1 - Core_, 2017.
-
-The following normative documents contain provisions that, through reference in this text, constitute provisions of this document. For dated references, subsequent amendments to, or revisions of, any of these publications do not apply. For undated references, the latest edition of the normative document referred to applies.
-
-[NOTE]
-====
-Insert References here. If there are no references, state “There are no normative references”.
-
-References are to follow the Springer LNCS style, with the exception that optional information may be appended to references: DOIs are added after the date and web resource references may include an access date at the end of the reference in parentheses. See examples from Springer and OGC below.
-
-Smith, T.F., Waterman, M.S.: Identification of Common Molecular Subsequences.
-J. Mol. Biol. 147, 195–197 (1981)
-
-May, P., Ehrlich, H.C., Steinke, T.: ZIB Structure Prediction Pipeline: Composing
-a Complex Biological Workflow through Web Services. In: Nagel, W.E., Walter,
-W.V., Lehner, W. (eds.) Euro-Par 2006. LNCS, vol. 4128, pp. 1148–1158. Springer,
-Heidelberg (2006)
-
-Foster, I., Kesselman, C.: The Grid: Blueprint for a New Computing Infrastructure.
-Morgan Kaufmann, San Francisco (1999)
-
-Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid Information Services
-for Distributed Resource Sharing. In: 10th IEEE International Symposium on High
-Performance Distributed Computing, pp. 181–184. IEEE Press, New York (2001)
-
-Foster, I., Kesselman, C., Nick, J., Tuecke, S.: The Physiology of the Grid: an Open
-Grid Services Architecture for Distributed Systems Integration. Technical report,
-Global Grid Forum (2002)
-
-National Center for Biotechnology Information, http://www.ncbi.nlm.nih.gov
-
-
-ISO / TC 211: ISO 19115-1:2014 Geographic information -- Metadata -- Part 1: Fundamentals (2014)
-
-ISO / TC 211: ISO 19157:2013 Geographic information -- Data quality (2013)
-
-ISO / TC 211: ISO 19139:2007 Geographic information -- Metadata -- XML schema implementation (2007)
-
-ISO / TC 211: ISO 19115-3: Geographic information -- Metadata -- Part 3: XML schemas (2016)
-
-OGC: OGC 15-097 OGC Geospatial User Feedback Standard. Conceptual Model (2016)
-
-OGC: OGC 12-019, OGC City Geography Markup Language (CityGML) Encoding Standard (2012)
-
-OGC: OGC 14-005r3, OGC IndoorGML (2014)
-====
-/////
