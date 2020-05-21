@@ -29,8 +29,8 @@
 |[big]*Open Geospatial Consortium*
 |Submission Date: 2019-07-30
 |Approval Date:   2020-02-22
-|Publication Date:   <yyyy-mm-dd>
-|External identifier of this OGC® document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
+|Publication Date:   2020-05-21
+|External identifier of this OGC® document: http://www.opengis.net/doc/IS/mf-json/1.0
 |Internal reference number of this OGC® document:    19-045r3
 |Version: 1.0
 |Category: OGC® Implementation Standard
