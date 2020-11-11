@@ -217,7 +217,7 @@
       "oneOf":[
         {
           "type": "string",
-          "enum": ["Discrete", "Step", "Linear", "Quadratic", "Cube"],
+          "enum": ["Discrete", "Step", "Linear", "Quadratic", "Cubic"],
           "default": "Linear"
         },
         {"type": "string", "format": "uri"}
