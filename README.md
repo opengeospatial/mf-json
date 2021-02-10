@@ -26,7 +26,7 @@ The Moving Features Standards Working Group (SWG) is the group at OGC responsibl
 of the standard.
 
 The Moving Features SWG currently has the following email list:
-   - moving-features.swg@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/moving-features.swg)
+   - moving-features.swg@lists.opengeospatial.org -- [sign up here](https://lists.ogc.org/mailman/listinfo/moving-features.swg)
    - Private List
    - Access controlled archives
    - Requires OGC membership and Observer Agreement to protect IPR (intellectual property rights)
